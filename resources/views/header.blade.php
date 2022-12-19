@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<header class="navbar navbar-expand-md navbar-light bg-white shadow-sm position-fixed">
     <div class="container">
         <main-logo-component></main-logo-component>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -9,9 +9,9 @@
             <nav-header-component></nav-header-component>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
+            <!-- <ul class="navbar-nav ms-auto"> -->
                 <!-- Authentication Links -->
-                @guest
+                <!-- @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -42,7 +42,8 @@
                         </div>
                     </li>
                 @endguest
-            </ul>
+            </ul> -->
         </div>
     </div>
 </header>
+<div class="header-substrate"></div>
