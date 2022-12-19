@@ -4,8 +4,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import './bootstrap';
-import { createApp } from 'vue';
+import "./bootstrap";
+import { createApp } from "vue";
+import "../css/app.css";
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -15,17 +16,17 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
-import FooterComponent from './components/FooterComponent.vue';
-app.component('footer-component', FooterComponent);
+import FooterComponent from "./components/FooterComponent.vue";
+app.component("footer-component", FooterComponent);
 
-import HeaderComponent from './components/HeaderComponent.vue';
-app.component('nav-header-component', HeaderComponent);
+import HeaderComponent from "./components/HeaderComponent.vue";
+app.component("nav-header-component", HeaderComponent);
 
-import MainLogoComponent from './components/MainLogoComponent.vue';
-app.component('main-logo-component', MainLogoComponent);
+// import MainLogoComponent from "./components/MainLogoComponent.vue";
+// app.component("main-logo-component", MainLogoComponent);
 
-import Mealcardomponent from './components/MealCardComponent.vue';
-app.component('meal-card', Mealcardomponent);
+import Mealcardomponent from "./components/MealCardComponent.vue";
+app.component("meal-card", Mealcardomponent);
 
 /**
  * The following block of code may be used to automatically register your
@@ -45,4 +46,4 @@ app.component('meal-card', Mealcardomponent);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.mount('#app');
+app.mount("#app");

@@ -1,0 +1,48 @@
+@import url("./font/stylesheet.css");
+/* @import url("./font/SofiaProMedium.woff2"); */
+
+@font-face {
+    font-family: "sofia-pro";
+    src: local("sofia-pro"), url("./font/SofiaProMedium.woff2") format("woff2");
+    font-style: normal;
+    font-display: "swap";
+    font-weight: 400;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+}
+* {
+    box-sizing: border-box;
+}
+#app {
+    font-family: sofia-pro, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin: 0;
+    /* margin-top: 60px; */
+}
+
+/* margin: 0; */
+
+.container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.header-substrate {
+    height: 80px;
+}
+
+header {
+    width: 100%;
+    padding: 0 !important;
+}
