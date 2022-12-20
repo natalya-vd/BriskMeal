@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::get('/catalog', function () {
     return view('catalog');
 })->name('catalog');
-Route::get('/recipe', function () {
+Route::get('/recipe/{id}', function () {
     return view('recipe');
 })->name('recipe');
 
