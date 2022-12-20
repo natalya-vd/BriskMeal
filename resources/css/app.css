@@ -1,6 +1,3 @@
-@import url("./font/stylesheet.css");
-/* @import url("./font/SofiaProMedium.woff2"); */
-
 @font-face {
     font-family: "sofia-pro";
     src: local("sofia-pro"), url("./font/SofiaProMedium.woff2") format("woff2");
