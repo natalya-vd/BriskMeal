@@ -1,7 +1,7 @@
 <template>
     <div class="mealCArd" >
       <a class="mealCArdLink" href="/meals/1">
-            card
+            <img class="cardPhoto" src="cardPhoto.jpg" >
         </a>
     </div>
 </template>
@@ -19,7 +19,6 @@
         background-color: silver;
         width: 300px;
         height: 300px;
-        margin-bottom: 10px;
     }
     .mealCArdLink{
         display:block;
