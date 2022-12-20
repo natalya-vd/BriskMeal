@@ -12,9 +12,11 @@ body {
     padding: 0;
     -webkit-font-smoothing: antialiased;
 }
+
 * {
     box-sizing: border-box;
 }
+
 #app {
     font-family: sofia-pro, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
