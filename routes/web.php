@@ -19,7 +19,10 @@ Route::get('/', function () {
 
 Route::get('/catalog', function () {
     return view('catalog');
-});
+})->name('catalog');
+Route::get('/recipe', function () {
+    return view('recipe');
+})->name('recipe');
 
 Auth::routes();
 
