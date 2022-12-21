@@ -1,0 +1,36 @@
+.bm-recipe {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(247, 247, 247);
+}
+
+.bm-recipe__wrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    min-height: min(88vh, calc(100vh - 140px));
+}
+
+.recipyInfoBlock {
+    flex-direction: column;
+    margin-bottom: 24px;
+    display: flex;
+}
+
+.recipyMainBlock {
+    width: 100%;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media only screen and (min-width: 1200px) {
+    .recipyInfoBlock {
+        flex-direction: row;
+    }
+
+    .recipyMainBlock {
+        width: 730px;
+        min-height: 460px;
+    }
+}

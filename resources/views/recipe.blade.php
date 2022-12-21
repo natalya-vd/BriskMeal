@@ -5,17 +5,17 @@
 @endsection
 
 @section('content')
-<div class="container" style="display:flex; flex-direction:column; background-color:rgb(247, 247, 247);">
+<div class="container bm-recipe">
     <div class="filtersBlock" style="width:100%;">
 
     </div>
-    <div class="mealsDesk" style="display:flex; width:100%; flex-direction:column; min-height: min(88vh, calc(100vh - 140px));">
+    <div class="mealsDesk bm-recipe__wrapper">
         <recipy-header></recipy-header>
-        <div class="recipyInfoBlock" style="margin-bottom:24px; display:flex;">
-            <div class="recipyMainBlock" style="margin-bottom:24px; display:flex; flex-direction:column;">    
+        <div class="recipyInfoBlock">
+            <div class="recipyMainBlock">
                 <recipy-main></recipy-main>
                 <recipy-description></recipy-description>
-            </div>    
+            </div>
             <recipy-nutrition></recipy-nutrition>
         </div>
         <recipy-ingredients></recipy-ingredients>
