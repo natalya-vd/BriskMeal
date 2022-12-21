@@ -22,8 +22,8 @@ app.component("footer-component", FooterComponent);
 import HeaderComponent from "./components/HeaderComponent.vue";
 app.component("nav-header-component", HeaderComponent);
 
-// import MainLogoComponent from "./components/MainLogoComponent.vue";
-// app.component("main-logo-component", MainLogoComponent);
+import MainLogoComponent from "./components/MainLogoComponent.vue";
+app.component("main-logo-component", MainLogoComponent);
 
 import Mealcardomponent from "./components/MealCardComponent.vue";
 app.component("meal-card", Mealcardomponent);

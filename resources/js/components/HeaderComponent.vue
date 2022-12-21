@@ -1,6 +1,5 @@
 <template>
     <div class="flex-item">
-        <MainLogoComponent />
         <div class="headerBlock">
             <nav class="header-navigation">
                 <a class="header-navigation-link" href="/catalog"
@@ -25,9 +24,8 @@
 </template>
 
 <script>
-import MainLogoComponent from "./MainLogoComponent.vue";
+
 export default {
-    components: { MainLogoComponent },
     mounted() {
         console.log("Header Component mounted.");
     },
