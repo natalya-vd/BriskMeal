@@ -28,6 +28,20 @@ app.component("main-logo-component", MainLogoComponent);
 import Mealcardomponent from "./components/MealCardComponent.vue";
 app.component("meal-card", Mealcardomponent);
 
+import RecipyPageHeader from "./components/RecipyPageHeader.vue";
+app.component("recipy-header", RecipyPageHeader);
+
+import RecipyPageNutrition from "./components/RecipyPageNutrition.vue";
+app.component("recipy-nutrition", RecipyPageNutrition);
+
+import RecipyPageDescription from "./components/RecipyPageDescription.vue";
+app.component("recipy-description", RecipyPageDescription);
+
+import RecipyPageIngredients from "./components/RecipyPageIngredients.vue";
+app.component("recipy-ingredients", RecipyPageIngredients);
+
+import RecipyPageMainComponent from "./components/RecipyPageMainComponent.vue";
+app.component("recipy-main", RecipyPageMainComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
