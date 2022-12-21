@@ -1,5 +1,5 @@
 <template>
-    <div class="container footerBlock" >
+    <div class="container recipyPageMainComponent" >
         RecipyPageMainComponent
     </div>
 </template>
@@ -13,7 +13,9 @@
 </script>
 
 <style scoped>
-    .footerBlock{
+    .recipyPageMainComponent{
         background-color: green;
+        min-height: 265px;
+        margin-bottom: 24px;
     }
 </style>

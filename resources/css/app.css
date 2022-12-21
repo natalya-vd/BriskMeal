@@ -49,8 +49,15 @@ header {
 .recipyInfoBlock{
     flex-direction: column;
 }
+.recipyMainBlock{
+    width:100%;
+}
 @media only screen and (min-width: 1200px){
     .recipyInfoBlock{
         flex-direction: row;
+    }
+    .recipyMainBlock{
+        width: 730px;
+        min-height: 460px;
     }
 }

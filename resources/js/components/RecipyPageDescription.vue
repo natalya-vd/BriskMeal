@@ -1,5 +1,5 @@
 <template>
-    <div class="container footerBlock" >
+    <div class="container recipyPageDescription" >
         RecipyPageDescription
     </div>
 </template>
@@ -13,8 +13,9 @@
 </script>
 
 <style scoped>
-    .footerBlock{
+    .recipyPageDescription{
         background-color: blue;
+        min-height: 150px;
     }
 
 </style>
