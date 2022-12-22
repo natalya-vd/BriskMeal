@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('recipes', function (Blueprint $table) {
             $table->foreignId('main_photo_id')
                 ->nullable()
-                ->constrained('photo');
+                ->constrained('photo_recipes');
         });
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class PreferencesSeeder extends Seeder
+class PhotoPreferencesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class PreferencesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('preferences')->insert($this->getData());
+        DB::table('photo_preferences')->insert($this->getData());
     }
 
     private function getData()
@@ -25,7 +25,9 @@ class PreferencesSeeder extends Seeder
 
         for ($i = 1; $i <= $count; $i++) {
             $data[] = [
-                "name" => fake()->sentence(rand(1, 3)),
+                "name" => fake()->sentence(rand(3, 10)),
+                "path" => '',
+                "preference_id" => rand(1, $count),
             ];
         }
 

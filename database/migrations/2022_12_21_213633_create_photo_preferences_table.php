@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('preferences', function (Blueprint $table) {
+        Schema::create('photo_preferences', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('path');
+            $table->foreignId('preference_id')
+                ->constrained('preferences');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('preferences');
+        Schema::dropIfExists('photo_preferences');
     }
 };
