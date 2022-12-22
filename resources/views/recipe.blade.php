@@ -6,11 +6,8 @@
 
 @section('content')
 <div class="container bm-recipe">
-    <div class="filtersBlock" style="width:100%;">
-
-    </div>
     <div class="mealsDesk bm-recipe__wrapper">
-        <recipy-header></recipy-header>
+        <recipy-title></recipy-title>
         <div class="recipyInfoBlock">
             <div class="recipyMainBlock">
                 <recipy-main></recipy-main>

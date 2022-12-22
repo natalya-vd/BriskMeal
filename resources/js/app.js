@@ -30,8 +30,8 @@ app.component("main-logo-component", MainLogoComponent);
 import Mealcardomponent from "./components/MealCardComponent.vue";
 app.component("meal-card", Mealcardomponent);
 
-import RecipyPageHeader from "./components/RecipyPageHeader.vue";
-app.component("recipy-header", RecipyPageHeader);
+import RecipyPageTitle from "./components/RecipyPageTitle.vue";
+app.component("recipy-title", RecipyPageTitle);
 
 import RecipyPageNutrition from "./components/RecipyPageNutrition.vue";
 app.component("recipy-nutrition", RecipyPageNutrition);

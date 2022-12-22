@@ -1,19 +1,19 @@
 <template>
-    <div class="container recipyPageHeader" >
-        RecipyPageHeader
+    <div class="container recipyPageTitle" >
+        RecipyPageTitle
     </div>
 </template>
 
 <script>
     export default {
         mounted() {
-            console.log('RecipyPageHeaderr Component mounted.')
+            console.log('RecipyPageTitle Component mounted.')
         }
     }
 </script>
 
 <style scoped>
-.recipyPageHeader{
+.recipyPageTitle{
     margin-bottom: 24px;
     background-color: pink;
     width: 100%;
@@ -21,7 +21,7 @@
 }
 
 @media only screen and (min-width: 1200px){
-    .recipyPageHeader{
+    .recipyPageTitle{
         width: 1100px;
         height: 70px;
         padding-right: 15px;
