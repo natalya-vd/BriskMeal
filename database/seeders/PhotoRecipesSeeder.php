@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class PhotoSeeder extends Seeder
+class PhotoRecipesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class PhotoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('photo')->insert($this->getData());
+        DB::table('photo_recipes')->insert($this->getData());
     }
 
     private function getData()

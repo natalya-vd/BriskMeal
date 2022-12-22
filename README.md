@@ -4,14 +4,15 @@
 
 -   Склонировать репозиторий `git clone git@github.com:natalya-vd/BriskMeal.git`
 -   В корне проекта создать файл `.env` (согласно примеру `.env.example`). Заполнить своими данными.
+-   Далее продолжить установку либо через OpenServer либо через docker
 
 ---
 
 ### Установка через OpenServer:
 
 -   Скачать Open Server Panel
--   Сгенерировать APP_KEY: `php artisan key:generate`
 -   Установить зависимости бэка: `composer install`
+-   Сгенерировать APP_KEY: `php artisan key:generate`
 -   Установить зависимости фронта: `npm i`
 -   Создать локально БД и засидить данными
 
