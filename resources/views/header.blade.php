@@ -2,10 +2,6 @@
     <div class="container">
         <main-logo-component></main-logo-component>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto">
-
-            </ul>
             <nav-header-component></nav-header-component>
 
             <!-- Right Side Of Navbar -->

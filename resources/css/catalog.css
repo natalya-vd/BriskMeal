@@ -1,0 +1,24 @@
+.bm-catalog {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(247, 247, 247);
+}
+
+.bm-catalog_filtersBlock{
+    width:100%;
+}
+
+.bm-catalog__list {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+ 
+    min-height: min(88vh, calc(100vh - 140px));
+}
+
+.bm-catalog_meal_card_place{
+    width: 386px;
+    height: 340px;
+    margin-bottom: 32px;
+    padding: 0 13px;
+}

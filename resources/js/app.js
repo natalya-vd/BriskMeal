@@ -7,6 +7,8 @@
 import "./bootstrap";
 import { createApp } from "vue";
 import "../css/app.css";
+import '../css/catalog.css';
+import '../css/recipe.css';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -22,12 +24,26 @@ app.component("footer-component", FooterComponent);
 import HeaderComponent from "./components/HeaderComponent.vue";
 app.component("nav-header-component", HeaderComponent);
 
-// import MainLogoComponent from "./components/MainLogoComponent.vue";
-// app.component("main-logo-component", MainLogoComponent);
+import MainLogoComponent from "./components/MainLogoComponent.vue";
+app.component("main-logo-component", MainLogoComponent);
 
 import Mealcardomponent from "./components/MealCardComponent.vue";
 app.component("meal-card", Mealcardomponent);
 
+import RecipyPageTitle from "./components/RecipyPageTitle.vue";
+app.component("recipy-title", RecipyPageTitle);
+
+import RecipyPageNutrition from "./components/RecipyPageNutrition.vue";
+app.component("recipy-nutrition", RecipyPageNutrition);
+
+import RecipyPageDescription from "./components/RecipyPageDescription.vue";
+app.component("recipy-description", RecipyPageDescription);
+
+import RecipyPageIngredients from "./components/RecipyPageIngredients.vue";
+app.component("recipy-ingredients", RecipyPageIngredients);
+
+import RecipyPageMainComponent from "./components/RecipyPageMainComponent.vue";
+app.component("recipy-main", RecipyPageMainComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
