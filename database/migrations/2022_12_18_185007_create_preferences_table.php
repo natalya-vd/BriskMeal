@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('preferences', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('color_text');
+            $table->string('color_background');
             $table->timestamps();
         });
     }
