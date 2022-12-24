@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\RecipeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/catalog', function () {
-    return view('catalog');
-})->name('catalog');
+Route::get('/catalog', [RecipeController::class, 'index'])
+    ->name('catalog');
 Route::get('/recipe/{id}', function () {
     return view('recipe');
 })->name('recipe');

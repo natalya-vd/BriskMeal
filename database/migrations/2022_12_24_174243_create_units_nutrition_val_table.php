@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('weekly_menu', function (Blueprint $table) {
+        Schema::create('units_nutrition_val', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('recipe_id')
-                ->constrained('recipes');
+            $table->foreignId('unit_id')
+                ->constrained('units');
+            $table->foreignId('nutrition_val_id')
+                ->constrained('nutrition_values');
+            $table->float('count');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('weekly_menu');
+        Schema::dropIfExists('units_nutrition_val');
     }
 };
