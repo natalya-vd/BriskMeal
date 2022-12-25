@@ -24,7 +24,6 @@
 </template>
 
 <script>
-
 export default {
     mounted() {
         console.log("Header Component mounted.");
@@ -59,10 +58,10 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* background-color: green; */
     height: 80px;
     padding: 12px 0;
     width: 100%;
+    z-index: 100;
 }
 
 .header-navigation {
@@ -170,7 +169,6 @@ export default {
     border-radius: 4px;
     padding-left: 24px;
     padding-right: 24px;
-    /* margin-bottom: 16px; */
     transition-property: color, background, border, box-shadow, opacity !important;
 }
 

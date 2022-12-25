@@ -6,6 +6,15 @@
     font-weight: 400;
 }
 
+@font-face {
+    font-family: "Source Sans Pro";
+    src: local("Source Sans Pro"),
+        url("./font/SourceSansPro-Regular.ttf") format("woff2");
+    font-style: normal;
+    font-display: "swap";
+    font-weight: 400;
+}
+
 html,
 body {
     margin: 0;
@@ -17,6 +26,13 @@ body {
     box-sizing: border-box;
 }
 
+a,
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+}
+
 #app {
     font-family: sofia-pro, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -24,14 +40,11 @@ body {
     text-align: center;
     color: #2c3e50;
     margin: 0;
-    /* margin-top: 60px; */
 }
-
-/* margin: 0; */
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1140px;
     margin: 0 auto;
     padding-left: 20px;
     padding-right: 20px;
@@ -42,6 +55,13 @@ body {
 }
 
 header {
-    width: 100%;
     padding: 0 !important;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    background-color: white;
+    box-shadow: 0 1px 0 0 rgb(77 65 51 / 5%);
+    z-index: 105;
 }
