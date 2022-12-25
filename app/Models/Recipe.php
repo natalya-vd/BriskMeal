@@ -32,4 +32,31 @@ class Recipe extends Model
     {
         return $this->belongsToMany(Preference::class, 'recipes_preferences', 'recipe_id', 'preference_id');
     }
+
+    public function ingredients()
+    {
+        return $this->belongsToMany(
+            Ingredient::class,
+            'recipes_ingredients',
+            'recipe_id',
+            'ingredient_id');
+    }
+
+    public function allergens()
+    {
+        return $this->belongsToMany(
+            Allergen::class,
+            'recipes_allergens',
+            'recipe_id',
+            'allergen_id');
+    }
+
+    public function nutritionValues()
+    {
+        return $this->belongsToMany(
+            NutritionValues::class,
+            'recipes_nutrition_val',
+            'recipe_id',
+            'nutrition_val_id');
+    }
 }
