@@ -1,6 +1,5 @@
 <template>
     <div class="mainLogoBlock">
-        <!-- <a class="navbar-brand" href="/"> MainLogo </a> -->
         <a class="navbar-brand" href="/catalog">
             <svg
                 name="Green Chef Logo"
@@ -75,9 +74,6 @@ export default {
     -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
-    /* width: 85px; */
-    padding: 13px 16px 0 0;
-    /* background-color: red; */
-    /* width: 20vw; */
+    padding: 2px 16px 0 0;
 }
 </style>
