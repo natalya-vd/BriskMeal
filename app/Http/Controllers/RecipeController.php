@@ -16,4 +16,9 @@ class RecipeController extends Controller
     {
         return view('catalog')->with('recipes', $builder->getRecipes());
     }
+
+    public function show(RecipesQueryBuilder $builder, $id)
+    {
+        return view('recipe')->with('recipe', $builder->getOneRecipe($id));
+    }
 }

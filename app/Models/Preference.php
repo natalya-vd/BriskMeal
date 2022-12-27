@@ -15,6 +15,8 @@ class Preference extends Model
         'color_background'
     ];
 
+    protected $hidden = ['pivot'];
+
     public function photo()
     {
         return $this->hasOne(PhotoPreference::class, 'preference_id', 'id');

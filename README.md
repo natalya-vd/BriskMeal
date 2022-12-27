@@ -35,4 +35,5 @@
 
 -   Поднять докер `./vendor/bin/sail up -d`
 -   Остановить докер `./vendor/bin/sail down`
+-   Сбросить БД и запустить сидеры: `./vendor/bin/sail artisan migrate:fresh --seed`
 -   Запустить миграции БД `./vendor/bin/sail artisan migrate`

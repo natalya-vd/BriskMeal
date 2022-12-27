@@ -13,12 +13,15 @@ class Allergen extends Model
         'name',
     ];
 
+    protected $hidden = ['pivot'];
+
     public function recipes()
     {
         return $this->belongsToMany(
             Recipe::class,
             'recipes_allergens',
             'allergen_id',
-            'recipe_id');
+            'recipe_id'
+        );
     }
 }

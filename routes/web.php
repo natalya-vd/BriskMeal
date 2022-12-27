@@ -20,9 +20,7 @@ Route::get('/', function () {
 });
 Route::get('/catalog', [RecipeController::class, 'index'])
     ->name('catalog');
-Route::get('/recipe/{id}', function () {
-    return view('recipe');
-})->name('recipe');
+Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
 
 Auth::routes();
 
