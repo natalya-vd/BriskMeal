@@ -5,7 +5,7 @@
                 <a class="header-navigation-link" href="/catalog"
                     ><span class="text-link">Weekly Menu</span></a
                 >
-                <a class="header-navigation-link" href="/catalog"
+                <a class="header-navigation-link" href="/plans"
                     ><span class="text-link">Our Plans</span></a
                 >
                 <a class="header-navigation-link" href="/catalog"
