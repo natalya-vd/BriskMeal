@@ -6,7 +6,6 @@ namespace App\Queries;
 
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Recipe;
-use App\Models\RecipeIngredient;
 
 final class RecipesQueryBuilder
 {
