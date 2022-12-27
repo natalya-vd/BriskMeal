@@ -15,11 +15,11 @@ class Unit extends Model
 
     public function ingredients()
     {
-        return $this->belongsToMany(
+        return $this->hasMany(
             Ingredient::class,
-            'units_ingredients',
             'unit_id',
-            'ingredient_id');
+            'id',
+        );
     }
 
     public function nutritionValues()
@@ -28,6 +28,7 @@ class Unit extends Model
             NutritionValues::class,
             'units_nutrition_val',
             'unit_id',
-            'nutrition_val_id');
+            'nutrition_val_id'
+        );
     }
 }

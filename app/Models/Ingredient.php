@@ -2,33 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Recipe;
 
 class Ingredient extends Model
 {
-    use HasFactory;
+    protected $table = 'ingredients';
 
     protected $fillable = [
         'name',
+        'unit_id'
     ];
 
-    public function recipes()
+    protected $hidden = ['pivot'];
+
+    public function recipeIngredient()
     {
-        return $this->belongsToMany(
-            Recipe::class,
-            'recipes_ingredients',
+        return $this->hasMany(
+            RecipeIngredient::class,
             'ingredient_id',
-            'recipe_id');
+            'id',
+        );
     }
 
-    public function units()
+    public function unit()
     {
-        return $this->belongsToMany(
-            Unit::class,
-            'units_ingredients',
-            'ingredient_id',
-            'unit_id');
+        return $this->belongsTo(Unit::class, 'unit_id', 'id');
     }
 }

@@ -22,10 +22,12 @@ class IngredientsSeeder extends Seeder
     {
         $data = [];
         $count = 20;
+        $count_unit = 5;
 
         for ($i = 1; $i <= $count; $i++) {
             $data[] = [
                 "name" => fake()->sentence(rand(1, 3)),
+                "unit_id" => rand(1, $count_unit),
             ];
         }
 

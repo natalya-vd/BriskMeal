@@ -14,7 +14,6 @@ class Recipe extends Model
         'description',
         'recipe_text',
         'price',
-        'main_photo_id'
     ];
 
     public function photo()
@@ -35,11 +34,20 @@ class Recipe extends Model
 
     public function ingredients()
     {
-        return $this->belongsToMany(
-            Ingredient::class,
-            'recipes_ingredients',
+        return $this->hasMany(
+            RecipeIngredient::class,
             'recipe_id',
-            'ingredient_id');
+            'id'
+        );
+    }
+
+    public function ingredientsForRecipe($id)
+    {
+        return $this->hasMany(
+            RecipeIngredient::class,
+            'recipe_id',
+            'id'
+        )->ingredientsWithCount($id);
     }
 
     public function allergens()
@@ -48,15 +56,25 @@ class Recipe extends Model
             Allergen::class,
             'recipes_allergens',
             'recipe_id',
-            'allergen_id');
+            'allergen_id'
+        );
     }
 
     public function nutritionValues()
     {
-        return $this->belongsToMany(
-            NutritionValues::class,
-            'recipes_nutrition_val',
+        return $this->hasMany(
+            RecipeNutritionVal::class,
             'recipe_id',
-            'nutrition_val_id');
+            'id'
+        );
+    }
+
+    public function nutritionValuesForRecipe($id)
+    {
+        return $this->hasMany(
+            RecipeNutritionVal::class,
+            'recipe_id',
+            'id'
+        )->nutritionValWithCount($id);
     }
 }

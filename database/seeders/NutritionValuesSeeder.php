@@ -20,15 +20,43 @@ class NutritionValuesSeeder extends Seeder
 
     private function getData()
     {
-        $data = [];
-        $count = 20;
-
-        for ($i = 1; $i <= $count; $i++) {
-            $data[] = [
-                "name" => fake()->sentence(rand(1, 2)),
-            ];
-        }
-
-        return $data;
+        return [
+            [
+                "name" => "Calories",
+                "unit_id" => 1,
+            ],
+            [
+                "name" => "Fat",
+                "unit_id" => 2,
+            ],
+            [
+                "name" => "Saturated Fat",
+                "unit_id" => 2,
+            ],
+            [
+                "name" => "Carbohydrate",
+                "unit_id" => 2,
+            ],
+            [
+                "name" => "Sugar",
+                "unit_id" => 2,
+            ],
+            [
+                "name" => "Dietary Fiber",
+                "unit_id" => 2,
+            ],
+            [
+                "name" => "Protein",
+                "unit_id" => 2,
+            ],
+            [
+                "name" => "Cholesterol",
+                "unit_id" => 3,
+            ],
+            [
+                "name" => "Sodium",
+                "unit_id" => 3,
+            ],
+        ];
     }
 }
