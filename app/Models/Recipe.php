@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Undefined;
 
 class Recipe extends Model
 {
@@ -32,7 +33,16 @@ class Recipe extends Model
         return $this->belongsToMany(Preference::class, 'recipes_preferences', 'recipe_id', 'preference_id');
     }
 
-    public function ingredients($id)
+    public function ingredients()
+    {
+        return $this->hasMany(
+            RecipeIngredient::class,
+            'recipe_id',
+            'id'
+        );
+    }
+
+    public function ingredientsForRecipe($id)
     {
         return $this->hasMany(
             RecipeIngredient::class,
@@ -53,11 +63,19 @@ class Recipe extends Model
 
     public function nutritionValues()
     {
-        return $this->belongsToMany(
-            NutritionValues::class,
-            'recipes_nutrition_val',
+        return $this->hasMany(
+            RecipeNutritionVal::class,
             'recipe_id',
-            'nutrition_val_id'
+            'id'
         );
+    }
+
+    public function nutritionValuesForRecipe($id)
+    {
+        return $this->hasMany(
+            RecipeNutritionVal::class,
+            'recipe_id',
+            'id'
+        )->nutritionValWithCount($id);
     }
 }

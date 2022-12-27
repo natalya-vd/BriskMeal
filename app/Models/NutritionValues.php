@@ -7,27 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class NutritionValues extends Model
 {
-    use HasFactory;
+    protected $table = 'nutrition_values';
 
     protected $fillable = [
         'name',
+        'unit_id'
     ];
 
-    public function recipes()
+    protected $hidden = ['pivot'];
+
+    public function recipeNutritionValues()
     {
-        return $this->belongsToMany(
-            Recipe::class,
-            'recipes_nutrition_val',
+        return $this->hasMany(
+            RecipeNutritionVal::class,
             'nutrition_val_id',
-            'recipe_id');
+            'id',
+        );
     }
 
-    public function units()
+    public function unit()
     {
-        return $this->belongsToMany(
-            Unit::class,
-            'units_nutrition_val',
-            'nutrition_val_id',
-            'unit_id');
+        return $this->belongsTo(Unit::class, 'unit_id', 'id');
     }
 }

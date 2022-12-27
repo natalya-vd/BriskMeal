@@ -33,6 +33,5 @@ class DatabaseSeeder extends Seeder
         $this->call(RecipesPreferencesSeeder::class);
         $this->call(WeeklyMenuSeeder::class);
         $this->call(PhotoPreferencesSeeder::class);
-        $this->call(UnitsNutritionValSeeder::class);
     }
 }
