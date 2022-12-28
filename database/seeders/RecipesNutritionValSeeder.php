@@ -23,14 +23,11 @@ class RecipesNutritionValSeeder extends Seeder
         $data = [];
         $count_recipe = 200;
         $count_nutrition_values = 20;
-        $count_unit = 5;
 
         for ($i = 1; $i <= $count_recipe; $i++) {
             $data[] = [
                 "recipe_id" => rand(1, $count_recipe),
                 "nutrition_val_id" => rand(1, $count_nutrition_values),
-                "unit_id" => rand(1, $count_unit),
-                "count" => fake()->randomFloat(2, 1, 2000),
             ];
         }
 
