@@ -51,6 +51,9 @@ app.component("time-meal-plan", TimeAndMealPlan);
 
 import PlansPage from "./components/PlansPage.vue";
 app.component("plans-page", PlansPage);
+
+import CartPage from "./components/CartPage.vue";
+app.component("cart-page", CartPage);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
