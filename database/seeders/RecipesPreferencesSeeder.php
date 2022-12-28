@@ -22,7 +22,7 @@ class RecipesPreferencesSeeder extends Seeder
     {
         $data = [];
         $count_recipe = 200;
-        $count_preference = 20;
+        $count_preference = 7;
 
         for ($i = 1; $i <= $count_recipe; $i++) {
             $data[] = [

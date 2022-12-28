@@ -21,7 +21,7 @@ class PhotoPreferencesSeeder extends Seeder
     private function getData()
     {
         $data = [];
-        $count = 20;
+        $count = 7;
 
         for ($i = 1; $i <= $count; $i++) {
             $data[] = [

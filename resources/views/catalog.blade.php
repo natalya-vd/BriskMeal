@@ -7,19 +7,23 @@
 @section('content')
 <div class="container bm-catalog">
     <div class="bm-catalog_filtersBlock">
-
+ 
     </div>
     <div class="mealsDesk bm-catalog__list">
-        @for ($i = 1; $i < 13; $i++)
+        @foreach ($recipes as $recipy)
             <div  class="bm-catalog_meal_card_place">
-                <meal-card 
-                    id={{$i}} 
-                    title='Creamy Chicken Alfredo' 
-                    ingredients='spaghetti squash noodles, peas, Parmesan cheese'
-                    time=35>
-                </meal-card>
+               
+
+                <meal-card  
+                    :id={{  $recipy['id'] }} 
+                    time={{ $recipy['cook_time'] }}
+                    title="{{ $recipy['name'] }}"
+                    ingredients='spaghetti squash noodles, peas, Parmesan cheese' 
+                    
+                    plans= "{{ json_encode(json_decode($recipy['preferences']))  }}"
+                    ></meal-card>  
             </div>
-        @endfor
+        @endforeach
     </div>
 </div>
 @endsection

@@ -8,21 +8,17 @@
         <a class="mealCArdInfo" :href="'/recipe/'+id+''">
             <div class="mealCArdInfoItem mealCArdInfoItemTitle">{{title}}</div>
             <div class="mealCArdInfoItem mealCArdInfoItemIngridients">{{ingredients}}</div>
-            <div class="mealCArdInfoItem mealCArdInfoItemTimePlace">
-                <span class="mealCArdInfoItemTime">{{time}} min </span>
-                <span class="keto">Keto</span>
-                <span class="glutenFree">Gluten-Free</span>
-            </div>
+            <time-meal-plan 
+                :time=time 
+                :plans=plans >
+            </time-meal-plan>
         </a>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['id', 'title', 'ingredients', 'time'],
-        mounted() {
-            console.log('MealCard Component mounted.')
-        }
+        props: ['id', 'time', 'title', 'ingredients','plans']
     }
 </script>
 
@@ -66,7 +62,6 @@
         display: flex;
         justify-content: flex-start;
     }
-
     .mealCArdInfoItemTitle{
         height: 24px;
         font-family: sofia-pro, "Helvetica Neue", Arial, sans-serif;
@@ -76,12 +71,7 @@
     }
     .mealCArdInfoItemIngridients{
         height: 76px;
-    }
-    .mealCArdInfoItemTimePlace{
-        height: 24px;
-    }
-    .mealCArdInfoItemTime{
-        margin-right: 12px;
+        text-align:left;
     }
     .glutenFree{
         padding: 0 8px 0 8px;
@@ -103,5 +93,4 @@
         white-space: nowrap;
         color: rgb(34, 34, 34);
     }
-
 </style>

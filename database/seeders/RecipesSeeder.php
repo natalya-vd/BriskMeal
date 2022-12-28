@@ -26,8 +26,8 @@ class RecipesSeeder extends Seeder
 
         for ($i = 1; $i <= $count; $i++) {
             $data[] = [
-                "name" => fake()->sentence(rand(3, 10)),
-                "cook_time" => fake()->time(),
+                "name" => fake()->text(38),
+                "cook_time" => rand(20, 90),
                 "description" => fake()->text(rand(700, 1700)),
                 "recipe_text" => fake()->text(rand(2000, 10000)),
                 "price" => $price_default,

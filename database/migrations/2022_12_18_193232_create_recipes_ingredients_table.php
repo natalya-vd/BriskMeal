@@ -19,6 +19,7 @@ return new class extends Migration
                 ->constrained('recipes');
             $table->foreignId('ingredient_id')
                 ->constrained('ingredients');
+            $table->float('count');
             $table->timestamps();
         });
     }

@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('weekly_menu', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->foreignId('recipe_id')
                 ->constrained('recipes');
-            $table->string('weekly');
             $table->timestamps();
         });
     }

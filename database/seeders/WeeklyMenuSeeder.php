@@ -25,8 +25,8 @@ class WeeklyMenuSeeder extends Seeder
 
         for ($i = 1; $i <= $count_recipe; $i++) {
             $data[] = [
+                "name" => fake()->sentence(rand(1, 1)),
                 "recipe_id" => rand(1, $count_recipe),
-                "weekly" => fake()->sentence(rand(1, 1)),
             ];
         }
 

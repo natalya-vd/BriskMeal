@@ -20,15 +20,42 @@ class PreferencesSeeder extends Seeder
 
     private function getData()
     {
-        $data = [];
-        $count = 20;
-
-        for ($i = 1; $i <= $count; $i++) {
-            $data[] = [
-                "name" => fake()->sentence(rand(1, 3)),
-            ];
-        }
-
-        return $data;
+        return [
+            [
+                "name" => "Keto",
+                "color_text" => "#222222",
+                "color_background" => "#e5a6b2"
+            ],
+            [
+                "name" => "Vegan",
+                "color_text" => "#ffffff",
+                "color_background" => "#28dc96"
+            ],
+            [
+                "name" => "Veggie",
+                "color_text" => "#ffffff",
+                "color_background" => "#a1c339"
+            ],
+            [
+                "name" => "Gluten-Free",
+                "color_text" => "#ffffff",
+                "color_background" => "#3d454b"
+            ],
+            [
+                "name" => "Fast & Fit",
+                "color_text" => "#ffffff",
+                "color_background" => "#3d454b"
+            ],
+            [
+                "name" => "Paleo",
+                "color_text" => "#ffffff",
+                "color_background" => "#3d454b"
+            ],
+            [
+                "name" => "Mediterranean",
+                "color_text" => "#ffffff",
+                "color_background" => "#3d454b"
+            ],
+        ];
     }
 }

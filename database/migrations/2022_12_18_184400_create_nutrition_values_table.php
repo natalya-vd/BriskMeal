@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('nutrition_values', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('unit_id')
+                ->constrained('units');
             $table->timestamps();
         });
     }

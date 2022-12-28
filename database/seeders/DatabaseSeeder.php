@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(RecipesSeeder::class);
         $this->call(PhotoRecipesSeeder::class);
+        $this->call(UnitsSeeder::class);
         $this->call(IngredientsSeeder::class);
         $this->call(AllergensSeeder::class);
         $this->call(NutritionValuesSeeder::class);
         $this->call(PreferencesSeeder::class);
-        $this->call(UnitsSeeder::class);
         $this->call(RecipesIngredientsSeeder::class);
         $this->call(RecipesAllergensSeeder::class);
         $this->call(RecipesNutritionValSeeder::class);

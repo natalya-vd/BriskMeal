@@ -10,8 +10,12 @@ class Preference extends Model
     protected $table = 'preferences';
 
     protected $fillable = [
-        'name'
+        'name',
+        'color_text',
+        'color_background'
     ];
+
+    protected $hidden = ['pivot'];
 
     public function photo()
     {

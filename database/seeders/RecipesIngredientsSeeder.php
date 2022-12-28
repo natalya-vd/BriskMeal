@@ -23,11 +23,13 @@ class RecipesIngredientsSeeder extends Seeder
         $data = [];
         $count_recipe = 200;
         $count_ingredient = 20;
+        $count_unit = 5;
 
         for ($i = 1; $i <= $count_recipe; $i++) {
             $data[] = [
                 "recipe_id" => rand(1, $count_recipe),
                 "ingredient_id" => rand(1, $count_ingredient),
+                "count" => fake()->randomFloat(2, 1, 2000),
             ];
         }
 
