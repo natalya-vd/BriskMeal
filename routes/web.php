@@ -24,6 +24,9 @@ Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
 Route::get('/plans', function () {
     return view('plans');
 })->name('plans');
+Route::get('/cart', function () {
+    return view('cart');
+})->name('cart');
 
 Auth::routes();
 
