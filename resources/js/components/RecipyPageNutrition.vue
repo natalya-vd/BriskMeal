@@ -1,68 +1,17 @@
 <template>
     <div class="Nutr-val">
-    <h3 class="Nutr-val1">Nutrition Values</h3>
-    
-        <div class="Nutr-val2">
-            <div class="Nutr-val3">
+        <h3 class="Nutr-val1">Nutrition Values</h3>
+        <div class="title">
+            Per serving
+        </div>
 
-            </div>
-            <strong>Per serving</strong>
+        <div v-for="(item, index) in getNutritionValues" :key="index" class="Nutr-val2">
+            <span class="Nutr-val3">
+                {{ item.nutrition_values }}
+            </span>
+            <span> {{`${item.count}${item.unit}`}}</span>
         </div>
-        <div class="Nutr-val2">
-            <small class="Nutr-val3">
-                <strong>Calories</strong>
-            </small>
-            <span>740kcal</span>
-        </div>
-        <div class="Nutr-val2">
-            <small class="Nutr-val3">
-                <strong>Fat</strong>
-            </small>
-            <span>55g</span>
-        </div>
-        <div class="Nutr-val2">
-            <small class="Nutr-val3">
-                <strong>Saturated Fat</strong>
-            </small>
-            <span>22g</span>
-        </div>
-        <div class="Nutr-val2">
-            <small class="Nutr-val3">
-                <strong>Carbohydrate</strong>
-            </small>
-            <span>21g</span>
-        </div>
-        <div class="Nutr-val2">
-            <small class="Nutr-val3">
-                <strong>Sugar</strong>
-            </small>
-            <span>8g</span>
-        </div>
-        <div class="Nutr-val2">
-            <small class="Nutr-val3">
-                <strong>Dietary Fiber</strong>
-            </small>
-            <span>5g</span>
-        </div>
-        <div class="Nutr-val2">
-            <small class="Nutr-val3">
-                <strong>Protein</strong>
-            </small>
-            <span>44g</span>
-        </div>
-        <div class="Nutr-val2">
-            <small class="Nutr-val3">
-                <strong>Cholesterol</strong>
-            </small>
-            <span>205mg</span>
-        </div>
-        <div class="Nutr-val2">
-            <small class="Nutr-val3">
-                <strong>Sodium</strong>
-            </small>
-            <span>1210mg</span>
-        </div>
-            <div class="Nutr-val4">
+
         <div class="Nutr-val5">
             <button aria-label="Additional nutritional information" tabindex="0"  class="Nutr-val6">
                 <svg class="Nutr-val7" width="16" height="16" viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"          >
@@ -75,48 +24,53 @@
                         </path>
                     </g>
                 </svg>
-                <div  class="Nutr-val7 ">
-
-                </div>
             </button>
             <small  class="Nutr-val8">Nutrition info may vary slightly by time of delivery. Please refer to FAQ page for more related information.</small>
         </div>
     </div>
-
-        </div>
-
-    
-    
 </template>
 
 <script>
 export default {
-    mounted() {
-        console.log("RecipyPageNutrition Component mounted.");
-    },
+    name: 'RecipyNutrition',
+
+    props: ['nutritionValues'],
+
+    computed: {
+        getNutritionValues() {
+            return JSON.parse(this.nutritionValues);
+        }
+    }
 };
 </script>
 
 <style scoped>
 .Nutr-val {
     display: flex;
+    flex-direction: column;
+    flex-basis: 30%;
     background-color: white;
-    flex-direction: column ;
-    padding: 0px;
     border-radius: 3px;
     box-shadow: rgb(0 0 0 / 10%) 0px 2px 3px 0px;
     position: relative;
-    height: 650px;
-    width: 320px;
-    margin-left: 12px;
-    padding-right: 12px;
-
+    height: 100%;
+    padding: 16px;
 }
 
 .Nutr-val1 {
     margin: 0px 0px 16px;
     text-transform: capitalize;
-    text-align: center;
+    text-align: start;
+    font-weight: 700;
+}
+
+.title {
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px 0;
+    border-bottom: 1px solid rgb(240, 242, 242);
+    font-size: 16px;
+    line-height: 24px;
 }
 
 .Nutr-val2 {
@@ -129,19 +83,12 @@ export default {
     border-bottom: 1px solid rgb(240, 242, 242);
 }
 
-.Nutr-val3 {
-    padding: 12px;
-}
-
-.Nutr-val4 {
-    margin-top: 24px;
-    color: rgb(125, 128, 127);
-}
-
 .Nutr-val5 {
     display: flex;
     -webkit-box-pack: center;
     justify-content: center;
+    margin-top: 24px;
+    color: rgb(125, 128, 127);
 }
 
 .Nutr-val6 {
@@ -160,7 +107,4 @@ export default {
 .Nutr-val8 {
     width: 85%;
 }
-
-
-
 </style>

@@ -4,7 +4,7 @@
             <div class="recipyPictureWrapper">
                 <img
                     class="recipyPicture"
-                    src="http://svoyapi.ru/brisk-meal/300/photo/1"
+                    :src="`http://svoyapi.ru/brisk-meal/300/photo/${id}`"
                     alt=""
                 />
             </div>
@@ -25,7 +25,7 @@
                                 fill-rule="evenodd"
                             ></path>
                         </svg>
-                        <span class="time">35 Min.</span>
+                        <span class="time">{{ time }} Min.</span>
                     </div>
                     <div class="energyInfo info">
                         <svg
@@ -42,11 +42,10 @@
                                 fill-rule="evenodd"
                             ></path>
                         </svg>
-                        <span class="energy">740kcal</span>
+                        <span class="energy">{{calories}}kcal</span>
                     </div>
                     <div class="planInfo info">
-                        <span class="planOne">Gluten Free</span
-                        ><span class="planTwo">Reto</span>
+                        <time-meal-plan :plans="plans" />
                     </div>
                 </div>
             </div>
@@ -55,10 +54,14 @@
 </template>
 
 <script>
+import TimeMealPlan from './TimeAndMealPlan.vue'
+
 export default {
-    mounted() {
-        console.log("RecipyPageMainComponent Component mounted.");
+    components: {
+        TimeMealPlan
     },
+
+    props: ['id', 'time', 'calories', 'plans'],
 };
 </script>
 
@@ -128,47 +131,5 @@ export default {
     box-sizing: content-box;
     cursor: inherit;
     margin-right: 4px;
-}
-
-.planOne {
-    height: 20px;
-    padding: 0px 8px;
-    text-align: center;
-    font-size: 12px;
-    font-family: "Source Sans Pro", sans-serif, Helvetica, Arial;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    border-radius: 2px;
-    background-color: rgb(61, 69, 75);
-    white-space: nowrap;
-    margin-right: 4px;
-    margin-bottom: 4px;
-    font-weight: bold;
-    text-transform: capitalize;
-    color: rgb(255, 255, 255);
-}
-
-.planTwo {
-    height: 20px;
-    padding: 0px 8px;
-    text-align: center;
-    font-size: 12px;
-    font-family: "Source Sans Pro", sans-serif, Helvetica, Arial;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    border-radius: 2px;
-    background-color: rgb(229, 166, 178);
-    white-space: nowrap;
-    margin-right: 4px;
-    margin-bottom: 4px;
-    font-weight: bold;
-    text-transform: capitalize;
-    color: rgb(34, 34, 34);
 }
 </style>

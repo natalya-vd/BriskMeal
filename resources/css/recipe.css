@@ -1,7 +1,6 @@
 .bm-recipe {
     display: flex;
     flex-direction: column;
-    background-color: rgb(247, 247, 247);
 }
 
 .bm-recipe__wrapper {
@@ -19,12 +18,15 @@
 
 .recipyMainBlock {
     width: 100%;
-    margin-bottom: 24px;
     display: flex;
     flex-direction: column;
 }
 
 @media only screen and (min-width: 1200px) {
+    .bm-recipe {
+        padding: 0;
+    }
+
     .recipyInfoBlock {
         flex-direction: row;
     }
