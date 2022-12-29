@@ -7,15 +7,15 @@
 @section('content')
 <div class="container bm-recipe">
     <div class="mealsDesk bm-recipe__wrapper">
-        <recipy-title></recipy-title>
+        <recipy-title title="{{$recipe['name']}}" ingredients="{{$recipe['ingredients']}}"></recipy-title>
         <div class="recipyInfoBlock">
             <div class="recipyMainBlock">
-                <recipy-main></recipy-main>
-                <recipy-description></recipy-description>
+                <recipy-main id="{{ $recipe['id'] }}" time="{{ $recipe['cook_time'] }}" plans="{{ $recipe['preferences'] }}" calories="{{ $recipe['calories'] }}"></recipy-main>
+                <recipy-description description="{{ $recipe['description'] }}"></recipy-description>
+                <recipy-ingredients ingredients="{{ $recipe['ingredients'] }}" allergens="{{ $recipe['allergens'] }}"></recipy-ingredients>
             </div>
-            <recipy-nutrition></recipy-nutrition>
+            <recipy-nutrition nutrition-values="{{ $recipe['nutrition_values'] }}"></recipy-nutrition>
         </div>
-        <recipy-ingredients></recipy-ingredients>
     </div>
 </div>
 @endsection

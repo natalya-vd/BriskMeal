@@ -48,11 +48,19 @@ final class RecipesQueryBuilder
         $preferences = $recipe->preferences()->get(['preferences.id', 'preferences.name', 'preferences.color_text', 'preferences.color_background']);
         $allergens = $recipe->allergens()->get(['name']);
 
-        $dataResponse[] = [
+        $calories = null;
+        foreach ($nutritionValues as $nutritionValue) {
+            if ($nutritionValue->nutrition_values === 'Calories') {
+                $calories = $nutritionValue->count;
+            }
+        }
+
+        $dataResponse = [
             'id' => $recipe->id,
             'name' => $recipe->name,
             'cook_time' => $recipe->cook_time,
             'description' => $recipe->description,
+            'calories' => $calories,
             'preferences' => json_encode($preferences, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
             'ingredients' => json_encode($ingredients, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
             'nutrition_values' => json_encode($nutritionValues, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
