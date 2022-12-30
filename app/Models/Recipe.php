@@ -77,4 +77,13 @@ class Recipe extends Model
             'id'
         )->nutritionValWithCount($id);
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany(
+            Order::class,
+            'orders_recipes',
+            'recipe_id',
+            'order_id');
+    }
 }
