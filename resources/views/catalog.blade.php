@@ -7,7 +7,7 @@
 @section('content')
 <div class="container bm-catalog">
     <div class="bm-catalog_filtersBlock">
-
+        <weeks-navigation active-weeks="{{$activeWeeks}}"></weeks-navigation>
     </div>
     <div class="mealsDesk bm-catalog__list">
         @foreach ($recipes as $recipy)

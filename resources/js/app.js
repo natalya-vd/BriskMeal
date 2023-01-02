@@ -50,6 +50,9 @@ app.component("plans-page", PlansPage);
 
 import CartPage from "./components/CartPage.vue";
 app.component("cart-page", CartPage);
+
+import WeeksNavigation from "./components/WeeksNavigation.vue";
+app.component("weeks-navigation", WeeksNavigation);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
