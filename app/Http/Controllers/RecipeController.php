@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Queries\RecipesQueryBuilder;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+use App\Queries\RecipesQueryBuilder;
+use App\Queries\WeekQueryBuilder;
 
 class RecipeController extends Controller
 {
@@ -12,9 +15,18 @@ class RecipeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(RecipesQueryBuilder $builder)
+    public function index(WeekQueryBuilder $builder, RecipesQueryBuilder $builder_recipes)
     {
-        return view('catalog')->with('recipes', $builder->getRecipes());
+        try {
+            $active_weeks = $builder->getActiveWeeks();
+            $first_active_week = $active_weeks->value('week_name');
+            $recipes_id = $builder->getRecipesByWeek($first_active_week);
+
+            return view('catalog')->with('recipes', $builder_recipes->getRecipesById($recipes_id))
+                ->with('activeWeeks', $active_weeks->toJson());
+        } catch (ModelNotFoundException $e) {
+            return back()->withError('error', $e->getMessage());
+        }
     }
 
     public function show(RecipesQueryBuilder $builder, $id)

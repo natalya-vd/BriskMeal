@@ -16,15 +16,16 @@ class Recipe extends Model
         'price',
     ];
 
+    protected $hidden = ['pivot'];
+
     public function photo()
     {
         return $this->hasMany(PhotoRecipe::class, 'recipe_id', 'id');
     }
 
-    // TODO: Здесь возможно по-другому будет...
-    public function weekly()
+    public function week()
     {
-        return $this->hasMany(WeeklyMenu::class, 'recipe_id', 'id');
+        return $this->belongsToMany(Week::class, 'recipes_weeks', 'recipe_id', 'week_id');
     }
 
     public function preferences()

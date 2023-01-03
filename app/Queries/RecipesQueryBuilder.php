@@ -16,17 +16,17 @@ final class RecipesQueryBuilder
         $this->model = Recipe::query();
     }
 
-    public function getRecipes()
+    public function getRecipesById($recipes_id)
     {
         $data = $this->model
+            ->whereIn('id', $recipes_id)
             ->with('preferences')
             ->with('ingredients')
-            ->limit(30)
             ->get(['id', 'name', 'cook_time']);
 
         $dataResponse = [];
         foreach ($data as $value) {
-            $preferences = $value->preferences()->get(['preferences.id', 'preferences.name', 'preferences.color_text', 'preferences.color_background']);
+            $preferences = $value->preferences()->get(['preferences.id', 'preferences.name', 'preferences.color_text', 'preferences.color_background'])->slice(0, 3);
             $ingredients = $value->ingredientsForRecipe($value->id)->get();
             $dataResponse[] = [
                 'id' => $value->id,

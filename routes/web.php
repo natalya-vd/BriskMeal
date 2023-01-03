@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\WeekController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,8 @@ Route::get('/', function () {
 });
 Route::get('/catalog', [RecipeController::class, 'index'])
     ->name('catalog');
+Route::get('/catalog/{week}', [WeekController::class, 'index'])
+    ->name('catalogWeek');
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
 Route::get('/plans', function () {
     return view('plans');

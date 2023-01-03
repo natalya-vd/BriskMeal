@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Queries\RecipesQueryBuilder;
+use App\Queries\WeekQueryBuilder;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(RecipesQueryBuilder::class);
+        $this->app->bind(WeekQueryBuilder::class);
     }
 
     /**
