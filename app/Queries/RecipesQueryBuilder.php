@@ -22,16 +22,20 @@ final class RecipesQueryBuilder
             ->whereIn('id', $recipes_id)
             ->with('preferences')
             ->with('ingredients')
+            ->with('photo')
             ->get(['id', 'name', 'cook_time']);
 
         $dataResponse = [];
         foreach ($data as $value) {
             $preferences = $value->preferences()->get(['preferences.id', 'preferences.name', 'preferences.color_text', 'preferences.color_background'])->slice(0, 3);
             $ingredients = $value->ingredientsForRecipe($value->id)->get();
+            $photo = $value->photo()->get(['id', 'name', 'path']);
+
             $dataResponse[] = [
                 'id' => $value->id,
                 'name' => $value->name,
                 'cook_time' => $value->cook_time,
+                'photo' => json_encode($photo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
                 'preferences' => json_encode($preferences, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
                 'ingredients' => json_encode($ingredients, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
             ];
@@ -47,6 +51,7 @@ final class RecipesQueryBuilder
         $nutritionValues = $recipe->nutritionValuesForRecipe($id)->get();
         $preferences = $recipe->preferences()->get(['preferences.id', 'preferences.name', 'preferences.color_text', 'preferences.color_background']);
         $allergens = $recipe->allergens()->get(['name']);
+        $photo = $recipe->photo()->get(['id', 'name', 'path']);
 
         $calories = null;
         foreach ($nutritionValues as $nutritionValue) {
@@ -60,6 +65,7 @@ final class RecipesQueryBuilder
             'name' => $recipe->name,
             'cook_time' => $recipe->cook_time,
             'description' => $recipe->description,
+            'photo' => json_encode($photo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
             'calories' => $calories,
             'preferences' => json_encode($preferences, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
             'ingredients' => json_encode($ingredients, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
