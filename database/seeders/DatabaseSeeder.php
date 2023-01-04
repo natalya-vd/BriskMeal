@@ -31,16 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RecipesAllergensSeeder::class);
         $this->call(RecipesNutritionValSeeder::class);
         $this->call(RecipesPreferencesSeeder::class);
-        $this->call(WeeklyMenuSeeder::class);
         $this->call(PhotoPreferencesSeeder::class);
-
-        /**
-         * Блоки "Заказы" и "Пользователи"
-         */
-        $this->call(UsersSeeder::class);
-        $this->call(OrderStatusesSeeder::class);
-        $this->call(OrdersSeeder::class);
-        $this->call(OrdersPreferencesSeeder::class);
-        $this->call(OrdersRecipesSeeder::class);
+        $this->call(WeeksSeeder::class);
+        $this->call(RecipesWeeksSeeder::class);
     }
 }

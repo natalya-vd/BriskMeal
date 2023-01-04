@@ -1,25 +1,39 @@
 <template>
     <div class="mealCArd" >
         <div class="mealCArdLinkBlock">
-         <a class="mealCArdLink" :href="'/recipe/'+id+''" :style="'background-image:url(http://svoyapi.ru/brisk-meal/300/photo/'+ id +');'">
-          
-         </a>
+            <a class="mealCArdLink" :href="`/recipe/${+id}`" :style="'background-image:url(http://svoyapi.ru/brisk-meal/300/photo/'+ id +');'">
+            </a>
         </div>
-        <a class="mealCArdInfo" :href="'/recipe/'+id+''">
+        <a class="mealCArdInfo" :href="`/recipe/${+id}`">
             <div class="mealCArdInfoItem mealCArdInfoItemTitle">{{title}}</div>
-            <div class="mealCArdInfoItem mealCArdInfoItemIngridients">{{ingredients}}</div>
-            <time-meal-plan 
-                :time=time 
-                :plans=plans >
-            </time-meal-plan>
+            <div class="mealCArdInfoItem mealCArdInfoItemIngridients">{{getIngredients}}</div>
+
+            <div class="mealCArdInfoItem mealCArdInfoItemTimePlace">
+                <span class="mealCArdInfoItemTime">{{time}} min </span>
+                <time-meal-plan :plans="plans" />
+            </div>
+
         </a>
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['id', 'time', 'title', 'ingredients','plans']
+import TimeMealPlan from './TimeAndMealPlan.vue'
+
+export default {
+    components: {
+        TimeMealPlan
+    },
+
+    props: ['id', 'time', 'title', 'ingredients','plans'],
+
+    computed: {
+        getIngredients() {
+            const ingredients = JSON.parse(this.ingredients)
+            return ingredients.map(item => item.ingredient).join(', ')
+        },
     }
+}
 </script>
 
 <style scoped>
@@ -55,7 +69,7 @@
         justify-content: flex-start;
         text-decoration: none;
         color: black;
-        
+
     }
     .mealCArdInfoItem{
         width: 100%;
@@ -73,24 +87,10 @@
         height: 76px;
         text-align:left;
     }
-    .glutenFree{
-        padding: 0 8px 0 8px;
-        margin: 0 8px 4px 0;
-        text-align: center;
-        font-family: "Source Sans Pro", sans-serif, Helvetica, Arial;
-        border-radius: 2px;
-        background-color: rgb(61, 69, 75);
-        white-space: nowrap;
-        color: rgb(255, 255, 255);
+    .mealCArdInfoItemTime{
+        margin-right: 12px;
     }
-    .keto{
-        padding: 0 8px 0 8px;
-        margin: 0 8px 4px 0;
-        text-align: center;
-        font-family: "Source Sans Pro", sans-serif, Helvetica, Arial;
-        border-radius: 2px;
-        background-color: rgb(229, 166, 178);
-        white-space: nowrap;
-        color: rgb(34, 34, 34);
+    .mealCArdInfoItemTimePlace{
+        height: 24px;
     }
 </style>

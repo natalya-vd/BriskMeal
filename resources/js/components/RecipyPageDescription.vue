@@ -1,51 +1,14 @@
 <template>
     <div class="recipyPageDescription">
-        <div class="descriptionToggle" v-if="isShown">
+        <div :class="{descriptionToggle: isShown, descriptionToggleCollapse: !isShown}">
             <div class="descriptionWrapper">
-                <div class="descriptionText">
+                <div :class="{descriptionText: isShown, descriptionTextCollapse: !isShown}">
                     <p>
-                        Our chefs took all of the creamy comfort of chicken
-                        Alfredo for this gluten-free dish you’ll love. In lieu
-                        of traditional carb-loaded noodles, tender roasted
-                        spaghetti squash, seasoned with Italian herbs, is tossed
-                        in a rich homemade sauce strewn with peas and Parmesan.
-                        Juicy chicken cutlets are fanned over the top for a
-                        savory, filling finish.
-                    </p>
-                    <p>
-                        <strong
-                            ><em
-                                >Chicken is fully cooked when internal
-                                temperature reaches 165°.</em
-                            ></strong
-                        >
+                        {{ description }}
                     </p>
                 </div>
             </div>
-        </div>
-        <div class="descriptionToggleCollapse" v-else>
-            <div class="descriptionWrapper">
-                <div class="descriptionTextCollapse">
-                    <p>
-                        Our chefs took all of the creamy comfort of chicken
-                        Alfredo for this gluten-free dish you’ll love. In lieu
-                        of traditional carb-loaded noodles, tender roasted
-                        spaghetti squash, seasoned with Italian herbs, is tossed
-                        in a rich homemade sauce strewn with peas and Parmesan.
-                        Juicy chicken cutlets are fanned over the top for a
-                        savory, filling finish.
-                    </p>
-                    <p>
-                        <strong
-                            ><em
-                                >Chicken is fully cooked when internal
-                                temperature reaches 165°.</em
-                            ></strong
-                        >
-                    </p>
-                </div>
-            </div>
-            <div class="collapsibleOverlay"></div>
+            <div :class="{collapsibleOverlay: !isShown}"></div>
         </div>
 
         <button class="toggleLink" @click="toggleDescription" v-if="isShown">
@@ -86,9 +49,10 @@
 
 <script>
 export default {
+    props: ['description'],
     data() {
         return {
-            isShown: true,
+            isShown: false,
         };
     },
     mounted() {
@@ -117,7 +81,7 @@ export default {
     margin-bottom: 24px;
 }
 .descriptionToggle {
-    height: 136px;
+    height: 100%;
     position: relative;
     overflow: hidden;
     transition: height 0.3s ease-in-out 0s;

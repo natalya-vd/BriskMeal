@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('weekly_menu', function (Blueprint $table) {
+        Schema::create('recipes_weeks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->foreignId('recipe_id')
                 ->constrained('recipes');
+            $table->foreignId('week_id')
+                ->constrained('weeks');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('weekly_menu');
+        Schema::dropIfExists('recipes_weeks');
     }
 };

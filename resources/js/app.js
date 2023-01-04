@@ -9,7 +9,6 @@ import { createApp } from "vue";
 import "../css/app.css";
 import "../css/catalog.css";
 import "../css/recipe.css";
-// import VueRouter from "vue-router";
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -46,11 +45,14 @@ app.component("recipy-ingredients", RecipyPageIngredients);
 import RecipyPageMainComponent from "./components/RecipyPageMainComponent.vue";
 app.component("recipy-main", RecipyPageMainComponent);
 
-import TimeAndMealPlan from "./components/TimeAndMealPlan.vue";
-app.component("time-meal-plan", TimeAndMealPlan);
-
 import PlansPage from "./components/PlansPage.vue";
 app.component("plans-page", PlansPage);
+
+import CartPage from "./components/CartPage.vue";
+app.component("cart-page", CartPage);
+
+import WeeksNavigation from "./components/WeeksNavigation.vue";
+app.component("weeks-navigation", WeeksNavigation);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
