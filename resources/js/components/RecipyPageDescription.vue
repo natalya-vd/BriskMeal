@@ -88,7 +88,7 @@
 export default {
     data() {
         return {
-            isShown: true,
+            isShown: false,
         };
     },
     mounted() {
@@ -97,7 +97,6 @@ export default {
 
     methods: {
         toggleDescription() {
-            console.log("click");
             this.isShown = !this.isShown;
         },
     },
