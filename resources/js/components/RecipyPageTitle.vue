@@ -2,10 +2,10 @@
     <div class="recipyPageTitle">
         <div class="recipyTitle">
             <div class="recipyColumn">
-                <h1 class="headTitle">Creamy Chicken Alfredo</h1>
+                <h1 class="headTitle">{{ title }}</h1>
                 <div class="secondTitle">
                     <h3>
-                        spaghetti squash noodles, peas, Parmesan cheese
+                        {{ getIngredients }}
                         <div class="blockCopyPrint">
                             <button
                                 class="copyTitle"
@@ -27,8 +27,8 @@
                                     ></path>
                                 </svg>
                             </button>
-                            <a href="/recipe/1" class="printTitle"
-                                ><svg
+                            <a href="/recipe/1" class="printTitle">
+                                <svg
                                     class="printSvg"
                                     width="24"
                                     height="24"
@@ -40,8 +40,9 @@
                                         d="m18 19v2c0 1.1045695-.8954305 2-2 2h-8c-1.1045695 0-2-.8954305-2-2v-2h-4c-1.1045695 0-2-.8954305-2-2v-9c0-1.1045695.8954305-2 2-2h4v-3c0-1.1045695.8954305-2 2-2h8c1.1045695 0 2 .8954305 2 2v3h4c1.1045695 0 2 .8954305 2 2v9c0 1.1045695-.8954305 2-2 2zm0-1.5h4c.2761424 0 .5-.2238576.5-.5v-9c0-.27614237-.2238576-.5-.5-.5h-20c-.27614237 0-.5.22385763-.5.5v9c0 .2761424.22385763.5.5.5h4v-4.5h12zm-1.5-11.5v-3c0-.27614237-.2238576-.5-.5-.5h-8c-.27614237 0-.5.22385763-.5.5v3zm-9 8.5v6.5c0 .2761424.22385763.5.5.5h8c.2761424 0 .5-.2238576.5-.5v-6.5zm12.25-3.5c-.4142136 0-.75-.3357864-.75-.75 0-.41421356.3357864-.75.75-.75s.75.33578644.75.75c0 .4142136-.3357864.75-.75.75z"
                                         fill="#42693D"
                                         fill-rule="evenodd"
-                                    ></path></svg
-                            ></a>
+                                    ></path>
+                                    </svg>
+                                </a>
                         </div>
                     </h3>
                 </div>
@@ -74,9 +75,19 @@
 
 <script>
 export default {
+    props: ['title', 'ingredients'],
+
     mounted() {
         console.log("RecipyPageTitle Component mounted.");
     },
+
+    computed: {
+        getIngredients() {
+            const ingredients = JSON.parse(this.ingredients)
+            return ingredients.map(item => item.ingredient).join(', ')
+        },
+    },
+
     methods: {
         copyToClipBoard() {
             const link = window.location.href;
