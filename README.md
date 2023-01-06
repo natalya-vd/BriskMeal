@@ -15,6 +15,7 @@
 -   Сгенерировать APP_KEY: `php artisan key:generate`
 -   Установить зависимости фронта: `npm i`
 -   Создать локально БД и засидить данными
+-   Создать символическую ссылку `php artisan storage:link`
 
 ### Команды при работе через OpenServer
 
@@ -30,6 +31,7 @@
 -   Опустить докер `docker-compose down`
 -   Поднять докер `./vendor/bin/sail up -d`
 -   Сгенерировать APP_KEY: `./vendor/bin/sail artisan key:generate`
+-   Создать символическую ссылку `./vendor/bin/sail artisan storage:link`
 
 ### Команды при работе через docker:
 

@@ -2,7 +2,7 @@
     <div class="mainLogoBlock">
         <a class="navbar-brand" href="/catalog">
             <svg
-                name="Green Chef Logo"
+                name="Brisk Meal Logo"
                 data-name="Layer 1"
                 viewBox="0 0 610.4 338.6"
             >

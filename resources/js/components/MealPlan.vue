@@ -1,6 +1,6 @@
 <template v-if=" isVisiblePreferences">
     <span v-for="value in getPreferences"
-        class="mealPlan keto"
+        class="mealPlan"
         :style="{color: value.color_text, 'background-color': value.color_background}"
     >
         {{value.name}}

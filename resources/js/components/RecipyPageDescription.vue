@@ -61,7 +61,6 @@ export default {
 
     methods: {
         toggleDescription() {
-            console.log("click");
             this.isShown = !this.isShown;
         },
     },
