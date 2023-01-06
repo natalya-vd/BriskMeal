@@ -19,8 +19,8 @@ return new class extends Migration
                 ->constrained('users');
             $table->integer('num_people');
             $table->integer('meals_week');
-            $table->foreignId('weekly_menu_id')
-                ->constrained('weekly_menu');
+            $table->foreignId('week_id')
+                ->constrained('weeks');
             $table->decimal('sum');
             $table->foreignId('order_status_id')
                 ->constrained('order_statuses');
