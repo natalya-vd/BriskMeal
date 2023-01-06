@@ -28,7 +28,7 @@ class OrdersSeeder extends Seeder
                 "user_id" => rand(1, 200),
                 "num_people" => rand(1, 6),
                 "meals_week" => rand(3, 4),
-                "weekly_menu_id" => rand(1, 10),
+                "week_id" => rand(1, 10),
                 "sum" => 200.00,
                 "order_status_id" => rand(1, 4),
             ];
