@@ -26,9 +26,12 @@ class RecipesWeeksSeeder extends Seeder
         $menu_count = 30;
 
         for ($i = 1; $i <= $weeks_count; $i++) {
-            for ($j = 1; $j <= $menu_count; $j++) {
+            $recipes_id_array = range(1, $recipes_count);
+            shuffle($recipes_id_array);
+            $recipe_id_week = array_slice($recipes_id_array, 0, $menu_count);
+            foreach ($recipe_id_week as $recipe_id) {
                 $data[] = [
-                    'recipe_id' => rand(1, $recipes_count),
+                    'recipe_id' => $recipe_id,
                     'week_id' => $i
                 ];
             }

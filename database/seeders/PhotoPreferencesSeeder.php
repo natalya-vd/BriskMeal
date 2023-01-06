@@ -20,17 +20,42 @@ class PhotoPreferencesSeeder extends Seeder
 
     private function getData()
     {
-        $data = [];
-        $count = 7;
-
-        for ($i = 1; $i <= $count; $i++) {
-            $data[] = [
-                "name" => fake()->sentence(rand(3, 10)),
-                "path" => '',
-                "preference_id" => rand(1, $count),
-            ];
-        }
-
-        return $data;
+        return [
+            [
+                "name" => "Keto",
+                "path" => 'seed/preferences/keto.svg',
+                "preference_id" => 1,
+            ],
+            [
+                "name" => "Vegan",
+                "path" => 'seed/preferences/vegan.svg',
+                "preference_id" => 2,
+            ],
+            [
+                "name" => "Veggie",
+                "path" => 'seed/preferences/vegetarian.svg',
+                "preference_id" => 3,
+            ],
+            [
+                "name" => "Gluten-Free",
+                "path" => 'seed/preferences/gluten-free.svg',
+                "preference_id" => 4,
+            ],
+            [
+                "name" => "Fast & Fit",
+                "path" => 'seed/preferences/fast-fit.svg',
+                "preference_id" => 5,
+            ],
+            [
+                "name" => "Paleo",
+                "path" => 'seed/preferences/keto.svg',
+                "preference_id" => 6,
+            ],
+            [
+                "name" => "Mediterranean",
+                "path" => 'seed/preferences/mediterranean.svg',
+                "preference_id" => 7,
+            ],
+        ];
     }
 }

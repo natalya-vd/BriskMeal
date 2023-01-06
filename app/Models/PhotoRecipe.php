@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoRecipe extends Model
 {
@@ -13,6 +14,15 @@ class PhotoRecipe extends Model
         'path',
         'recipe_id'
     ];
+
+    protected $attributes = ['full_path'];
+
+    protected $appends = ['full_path'];
+
+    public function getFullPathAttribute()
+    {
+        return Storage::disk('public')->url($this->path);
+    }
 
     public function recipe()
     {

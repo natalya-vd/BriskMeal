@@ -4,8 +4,8 @@
             <div class="recipyPictureWrapper">
                 <img
                     class="recipyPicture"
-                    :src="`http://svoyapi.ru/brisk-meal/300/photo/${id}`"
-                    alt=""
+                    :src="getPhoto.path"
+                    :alt="getPhoto.name"
                 />
             </div>
             <div class="recipyInfoWrapper">
@@ -45,7 +45,7 @@
                         <span class="energy">{{calories}}kcal</span>
                     </div>
                     <div class="planInfo info">
-                        <time-meal-plan :plans="plans" />
+                        <meal-plan :plans="plans" />
                     </div>
                 </div>
             </div>
@@ -54,14 +54,26 @@
 </template>
 
 <script>
-import TimeMealPlan from './TimeAndMealPlan.vue'
+import MealPlan from './MealPlan.vue'
 
 export default {
     components: {
-        TimeMealPlan
+        MealPlan
     },
 
-    props: ['id', 'time', 'calories', 'plans'],
+    props: ['id', 'time', 'calories', 'plans', 'photo'],
+
+    computed: {
+        getPhoto() {
+            const photo = JSON.parse(this.photo)
+
+            return {
+                id: photo[0].id,
+                name: photo[0].name,
+                path: photo[0].full_path
+            }
+        },
+    }
 };
 </script>
 
