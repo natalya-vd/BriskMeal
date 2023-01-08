@@ -33,12 +33,7 @@
                                 >
                                     <button
                                         class="preferencesButton"
-                                        @click="
-                                            choosenPreferences(
-                                                item.id,
-                                                item.name
-                                            )
-                                        "
+                                        @click="choosenPreferences(item.id)"
                                     >
                                         <div
                                             :class="{
@@ -165,18 +160,7 @@
                                                 class="planOfName"
                                             >
                                                 <span class="planOfNameText">{{
-                                                    choosenIds
-                                                        .map(
-                                                            (id) =>
-                                                                getData.preferences.find(
-                                                                    (
-                                                                        preference
-                                                                    ) =>
-                                                                        preference.id ===
-                                                                        id
-                                                                ).name
-                                                        )
-                                                        .join("")
+                                                    planOfName
                                                 }}</span>
                                             </div>
                                             <div v-else class="planOfName">
@@ -198,11 +182,8 @@
                                             </div>
                                             <div class="totalServings">
                                                 <span class="totalServingsText"
-                                                    >{{
-                                                        choosenMealsPerWeek.quantity *
-                                                        choosenQuantityPeople.quantity
-                                                    }}
-                                                    total servings</span
+                                                    >{{ totalServings }} total
+                                                    servings</span
                                                 >
                                             </div>
                                             <div class="separator"></div>
@@ -216,25 +197,10 @@
                                                 </div>
                                                 <div class="resultedPrice">
                                                     <div class="oldPrice">
-                                                        <h4>
-                                                            ${{
-                                                                (
-                                                                    choosenMealsPerWeek.quantity *
-                                                                    choosenQuantityPeople.quantity *
-                                                                    1.13
-                                                                ).toFixed(2)
-                                                            }}
-                                                        </h4>
+                                                        <h4>${{ oldPrice }}</h4>
                                                     </div>
                                                     <h4 class="discountPrice">
-                                                        ${{
-                                                            (
-                                                                choosenMealsPerWeek.quantity *
-                                                                choosenQuantityPeople.quantity *
-                                                                1.13 *
-                                                                0.5
-                                                            ).toFixed(2)
-                                                        }}
+                                                        ${{ discountPrice }}
                                                     </h4>
                                                 </div>
                                             </div>
@@ -243,14 +209,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="selectPlan" @click="selectedPlan">
+                        <div class="selectPlan">
                             <div class="selectPlanWrapper">
                                 <div class="buttonPlanWrapper">
-                                    <div class="buttonPlan">
+                                    <button
+                                        class="buttonPlan"
+                                        @click="selectedPlan"
+                                    >
                                         <span class="buttonPlanText"
                                             >Select This Plan</span
                                         >
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -278,15 +247,50 @@ export default {
                 { id: 3, quantity: 4 },
             ],
             choosenMealsPerWeek: { id: 1, quantity: 2 },
+            planOfName: "",
+            totalServings: 0,
+            oldPrice: 0,
+            discountPrice: 0,
         };
     },
 
-    props: ['dataResponse'],
+    props: ["dataResponse"],
 
     computed: {
         getData() {
-            return JSON.parse(this.dataResponse)
-        }
+            return JSON.parse(this.dataResponse);
+        },
+        totalServings() {
+            return (
+                this.choosenMealsPerWeek.quantity *
+                this.choosenQuantityPeople.quantity
+            );
+        },
+        oldPrice() {
+            return (
+                this.choosenMealsPerWeek.quantity *
+                this.choosenQuantityPeople.quantity *
+                1.13
+            ).toFixed(2);
+        },
+        discountPrice() {
+            return (
+                this.choosenMealsPerWeek.quantity *
+                this.choosenQuantityPeople.quantity *
+                1.13 *
+                0.5
+            ).toFixed(2);
+        },
+        planOfName() {
+            return this.choosenIds
+                .map(
+                    (id) =>
+                        this.preferences.find(
+                            (preference) => preference.id === id
+                        ).name
+                )
+                .join("");
+        },
     },
 
     methods: {
@@ -298,7 +302,6 @@ export default {
             } else {
                 this.choosenIds.push(id);
             }
-            console.log(this.choosenIds);
         },
 
         choosenQuantity(item) {
@@ -310,25 +313,29 @@ export default {
         },
 
         selectedPlan() {
-            console.log(
-                `The buyer has chosen preferences: ${this.choosenIds
-                    .map(
-                        (id) =>
-                            this.getData.preferences.find(
-                                (preference) => preference.id === id
-                            ).name
-                    )
-                    .join(", ")} on ${
-                    this.choosenMealsPerWeek.quantity
-                } meals for ${
-                    this.choosenQuantityPeople.quantity
-                } people per week for the total amount: ${(
-                    this.choosenMealsPerWeek.quantity *
-                    this.choosenQuantityPeople.quantity *
-                    1.13 *
-                    0.5
-                ).toFixed(2)}`
-            );
+            if (this.choosenIds.length !== 0) {
+                console.log(
+                    `The buyer has chosen preferences: ${this.choosenIds
+                        .map(
+                            (id) =>
+                                this.preferences.find(
+                                    (preference) => preference.id === id
+                                ).name
+                        )
+                        .join(", ")} on ${
+                        this.choosenMealsPerWeek.quantity
+                    } meals for ${
+                        this.choosenQuantityPeople.quantity
+                    } people per week for the total amount: ${(
+                        this.choosenMealsPerWeek.quantity *
+                        this.choosenQuantityPeople.quantity *
+                        1.13 *
+                        0.5
+                    ).toFixed(2)}`
+                );
+            } else {
+                console.log(`Please choose preferences`);
+            }
         },
     },
 };
