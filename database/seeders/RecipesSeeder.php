@@ -21,7 +21,6 @@ class RecipesSeeder extends Seeder
     private function getData()
     {
         $data = [];
-        $price_default = 200.00;
         $count = 200;
 
         for ($i = 1; $i <= $count; $i++) {
@@ -30,7 +29,6 @@ class RecipesSeeder extends Seeder
                 "cook_time" => rand(20, 90),
                 "description" => fake()->text(rand(700, 1700)),
                 "recipe_text" => fake()->text(rand(2000, 10000)),
-                "price" => $price_default,
             ];
         }
 

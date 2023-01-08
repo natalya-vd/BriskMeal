@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="container">
-    <plans-page></plans-page>
+    <plans-page data-response="{{$data}}"></plans-page>
 </div>
 @endsection
 
