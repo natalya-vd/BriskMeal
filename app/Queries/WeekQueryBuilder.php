@@ -42,4 +42,13 @@ final class WeekQueryBuilder
         return Week::where('active_week', true)
             ->get(['id', 'week_name', 'first_week_day', 'last_week_day']);
     }
+
+    public function getPriceRecipe()
+    {
+        // Цена рецепта берется для первой активной недели. Считаем, что для всех активных недель цена рецепта будет одинаковой.
+        $active_weeks = $this->getActiveWeeks();
+        $first_active_week = $active_weeks->value('week_name');
+
+        return $this->model->where('week_name', $first_active_week)->get(['price_recipe'])->value('price_recipe');
+    }
 }

@@ -27,7 +27,7 @@
                             </div>
                             <div class="preferencesBlock">
                                 <section
-                                    v-for="item in preferences"
+                                    v-for="item in getData.preferences"
                                     :key="item.id"
                                     class="preferencesChoosing"
                                 >
@@ -69,7 +69,7 @@
                                         </div>
                                         <object
                                             type="image/svg+xml"
-                                            :data="item.path"
+                                            :data="item.photo.full_path"
                                             width="48"
                                             height="48"
                                         ></object>
@@ -168,7 +168,7 @@
                                                     choosenIds
                                                         .map(
                                                             (id) =>
-                                                                preferences.find(
+                                                                getData.preferences.find(
                                                                     (
                                                                         preference
                                                                     ) =>
@@ -265,44 +265,6 @@
 export default {
     data() {
         return {
-            preferences: [
-                {
-                    id: 1,
-                    name: "Keto + Paleo",
-                    path: "/preferences_svg/Keto_Paleo.svg",
-                    price: 200,
-                },
-                {
-                    id: 2,
-                    name: "Vegetarian",
-                    path: "/preferences_svg/Vegetarian.svg",
-                    price: 200,
-                },
-                {
-                    id: 3,
-                    name: "Mediterranien",
-                    path: "/preferences_svg/Mediterranien.svg",
-                    price: 200,
-                },
-                {
-                    id: 4,
-                    name: "Fast & Fit",
-                    path: "/preferences_svg/Fast_&_Fit.svg",
-                    price: 200,
-                },
-                {
-                    id: 5,
-                    name: "Vegan",
-                    path: "/preferences_svg/Vegan.svg",
-                    price: 200,
-                },
-                {
-                    id: 6,
-                    name: "Glutten Free",
-                    path: "/preferences_svg/Glutten_Free.svg",
-                    price: 200,
-                },
-            ],
             choosenIds: [],
             quantityPeople: [
                 { id: 1, quantity: 2 },
@@ -319,8 +281,12 @@ export default {
         };
     },
 
-    mounted() {
-        console.log("PlansPage mounted.");
+    props: ['dataResponse'],
+
+    computed: {
+        getData() {
+            return JSON.parse(this.dataResponse)
+        }
     },
 
     methods: {
@@ -348,7 +314,7 @@ export default {
                 `The buyer has chosen preferences: ${this.choosenIds
                     .map(
                         (id) =>
-                            this.preferences.find(
+                            this.getData.preferences.find(
                                 (preference) => preference.id === id
                             ).name
                     )
