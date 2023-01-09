@@ -21,7 +21,7 @@ class RecipeController extends Controller
             $active_weeks = $builder->getActiveWeeks();
             $first_active_week = $active_weeks->value('week_name');
             $recipes_id = $builder->getRecipesByWeek($first_active_week);
-
+            dd($active_weeks);
             return view('catalog')->with('recipes', $builder_recipes->getRecipesById($recipes_id))
                 ->with('activeWeeks', $active_weeks->toJson());
         } catch (ModelNotFoundException $e) {
