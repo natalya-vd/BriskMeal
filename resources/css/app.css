@@ -21,6 +21,7 @@ body {
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
+    height: 100%;
 }
 
 * {
@@ -41,6 +42,7 @@ a:hover {
     text-align: center;
     color: #2c3e50;
     margin: 0;
+    height: 100%;
 }
 
 .container {
@@ -49,6 +51,7 @@ a:hover {
     margin: 0 auto;
     padding-left: 20px;
     padding-right: 20px;
+    flex: 1 0 auto;
 }
 
 .header-substrate {
@@ -65,4 +68,16 @@ header {
     background-color: white;
     box-shadow: 0 1px 0 0 rgb(77 65 51 / 5%);
     z-index: 105;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100% - 80px - 23px);
+}
+/* main {
+    flex: 1 0 auto;
+} */
+.footerBlock {
+    flex: 0 0 auto;
 }
