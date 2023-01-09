@@ -18,12 +18,11 @@ class RecipeController extends Controller
     public function index(WeekQueryBuilder $builder, RecipesQueryBuilder $builder_recipes)
     {
         try {
-            $active_weeks = $builder->getActiveWeeks();
             $first_active_week = $active_weeks->value('week_name');
             $recipes_id = $builder->getRecipesByWeek($first_active_week);
 
             return view('catalog')->with('recipes', $builder_recipes->getRecipesById($recipes_id))
-                ->with('activeWeeks', $active_weeks->toJson());
+                ->with('activeWeeks', $builder->getActiveWeeks()->toJson());
         } catch (ModelNotFoundException $e) {
             return back()->withError('error', $e->getMessage());
         }
