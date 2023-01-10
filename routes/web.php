@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\WeekController;
 use \App\Http\Controllers\CartController;
+use App\Http\Controllers\PreferenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +27,10 @@ Route::get('/catalog', [RecipeController::class, 'index'])
 Route::get('/catalog/{week}', [WeekController::class, 'index'])
     ->name('catalogWeek');
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
-Route::get('/plans', function () {
-    return view('plans');
-})->name('plans');
-/*Route::get('/cart', function () {
+Route::get('/plans', PreferenceController::class)->name('plans');
+Route::get('/cart', function () {
     return view('cart');
-})->name('cart');*/
+})->name('cart');
 
 
 /** Корзина (тестирование) */

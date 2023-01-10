@@ -14,6 +14,9 @@
                 <a class="header-navigation-link" href="/catalog"
                     ><span class="text-link">Gift Cards</span></a
                 >
+                <a class="header-navigation-link" href="/cart"
+                    ><span class="text-link">Your Cart</span></a
+                >
             </nav>
             <div class="registration-block">
                 <a href="/catalog" class="login"><span>Log In</span></a

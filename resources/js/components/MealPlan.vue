@@ -9,7 +9,7 @@
 
 <script>
     export default {
-        name: 'TimeMealPlan',
+        name: 'MealPlan',
 
         props: ['time', 'plans'],
 

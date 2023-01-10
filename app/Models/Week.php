@@ -13,7 +13,8 @@ class Week extends Model
         'week',
         'week_name',
         'first_week_day',
-        'last_week_day'
+        'last_week_day',
+        'price_recipe'
     ];
 
     protected $hidden = ['pivot'];
