@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\WeekController;
+use \App\Http\Controllers\CartController;
 use App\Http\Controllers\PreferenceController;
 
 /*
@@ -29,6 +31,22 @@ Route::get('/plans', PreferenceController::class)->name('plans');
 Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
+
+
+/** Корзина (тестирование) */
+
+Route::get('/catalog-test', [TestController::class, 'index'])
+    ->name('catalog-test');
+
+Route::get('/cart-test', [CartController::class, 'index'])
+    ->name('cart-test');
+
+Route::match(['get', 'post'],'/cart/add/{recipe}', [CartController::class, 'add'])
+    ->name('cart-add');
+
+Route::match(['get', 'post'], '/cart/del/{recipe}', [CartController::class, 'delete'])
+    ->name('cart-delete');
+
 
 Auth::routes();
 

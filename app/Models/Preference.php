@@ -26,4 +26,13 @@ class Preference extends Model
     {
         return $this->belongsToMany(Recipe::class, 'recipes_preferences', 'preference_id', 'recipe_id');
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany(
+            Order::class,
+            'orders_preferences',
+            'preference_id',
+            'order_id');
+    }
 }

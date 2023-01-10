@@ -34,5 +34,11 @@ class DatabaseSeeder extends Seeder
         $this->call(PhotoPreferencesSeeder::class);
         $this->call(WeeksSeeder::class);
         $this->call(RecipesWeeksSeeder::class);
+
+        $this->call(UsersSeeder::class);
+        $this->call(OrderStatusesSeeder::class);
+        $this->call(OrdersSeeder::class);
+        $this->call(OrdersPreferencesSeeder::class);
+        $this->call(OrdersRecipesSeeder::class);
     }
 }

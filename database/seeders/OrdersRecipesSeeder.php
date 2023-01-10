@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RecipesIngredientsSeeder extends Seeder
+class OrdersRecipesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,21 +15,19 @@ class RecipesIngredientsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('recipes_ingredients')->insert($this->getData());
+        DB::table('orders_recipes')->insert($this->getData());
     }
 
     private function getData()
     {
         $data = [];
+        $count_order = 200;
         $count_recipe = 200;
-        $count_ingredient = 20;
-        $count_unit = 5;
 
-        for ($i = 1; $i <= $count_recipe; $i++) {
+        for ($i = 1; $i <= $count_order; $i++) {
             $data[] = [
+                "order_id" => rand(1, $count_order),
                 "recipe_id" => rand(1, $count_recipe),
-                "ingredient_id" => rand(1, $count_ingredient),
-                "count" => fake()->randomFloat(2, 1, 2000),
             ];
         }
 
