@@ -87,4 +87,14 @@ class Recipe extends Model
             'recipe_id',
             'order_id');
     }
+
+    public function carts()
+    {
+        return $this->belongsToMany(
+            Cart::class,
+            'recipes_carts',
+            'recipe_id',
+            'cart_id'
+        )->withPivot('quantity');
+    }
 }
