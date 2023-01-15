@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('recipes_weeks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('recipe_id')
-                ->constrained('recipes');
+                ->constrained('recipes')
+                ->cascadeOnDelete();
             $table->foreignId('week_id')
-                ->constrained('weeks');
+                ->constrained('weeks')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

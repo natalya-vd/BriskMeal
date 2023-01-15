@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('recipes_allergens', function (Blueprint $table) {
             $table->id();
             $table->foreignId('recipe_id')
-                ->constrained('recipes');
+                ->constrained('recipes')
+                ->cascadeOnDelete();
             $table->foreignId('allergen_id')
-                ->constrained('allergens');
+                ->constrained('allergens')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

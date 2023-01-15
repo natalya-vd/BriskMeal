@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('path');
             $table->foreignId('preference_id')
-                ->constrained('preferences');
+                ->constrained('preferences')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

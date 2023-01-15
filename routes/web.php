@@ -8,6 +8,8 @@ use App\Http\Controllers\WeekController;
 use \App\Http\Controllers\CartController;
 use App\Http\Controllers\PreferenceController;
 
+use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,11 +43,24 @@ Route::get('/catalog-test', [TestController::class, 'index'])
 Route::get('/cart-test', [CartController::class, 'index'])
     ->name('cart-test');
 
-Route::match(['get', 'post'],'/cart/add/{recipe}', [CartController::class, 'add'])
+Route::match(['get', 'post'], '/cart/add/{recipe}', [CartController::class, 'add'])
     ->name('cart-add');
 
 Route::match(['get', 'post'], '/cart/del/{recipe}', [CartController::class, 'delete'])
     ->name('cart-delete');
+
+/** Админка */
+Route::name('admin.')
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/', function () {
+            return view('admin.pages.index');
+        })->name('home');
+
+        Route::resource('recipes', AdminRecipeController::class)->except([
+            'destroy', 'update', 'store', 'show'
+        ]);
+    });
 
 
 Auth::routes();
