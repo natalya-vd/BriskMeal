@@ -51,4 +51,10 @@ final class PreferenceQueryBuilder
 
         return $preferenceResponse;
     }
+
+    public function getListPreferences()
+    {
+        return $this->model
+            ->get(['id', 'name']);
+    }
 }

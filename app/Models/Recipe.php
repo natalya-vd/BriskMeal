@@ -13,7 +13,6 @@ class Recipe extends Model
         'cook_time',
         'description',
         'recipe_text',
-        'price',
     ];
 
     protected $hidden = ['pivot'];
@@ -30,7 +29,13 @@ class Recipe extends Model
 
     public function preferences()
     {
-        return $this->belongsToMany(Preference::class, 'recipes_preferences', 'recipe_id', 'preference_id');
+        return $this->belongsToMany(
+            Preference::class,
+            'recipes_preferences',
+            'recipe_id',
+            'preference_id'
+        )
+            ->withTimestamps();
     }
 
     public function ingredients()
@@ -58,7 +63,8 @@ class Recipe extends Model
             'recipes_allergens',
             'recipe_id',
             'allergen_id'
-        );
+        )
+            ->withTimestamps();
     }
 
     public function nutritionValues()
@@ -85,7 +91,8 @@ class Recipe extends Model
             Order::class,
             'orders_recipes',
             'recipe_id',
-            'order_id');
+            'order_id'
+        );
     }
 
     public function carts()

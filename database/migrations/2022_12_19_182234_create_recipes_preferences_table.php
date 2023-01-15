@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('recipes_preferences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('recipe_id')
-                ->constrained('recipes');
+                ->constrained('recipes')
+                ->cascadeOnDelete();
             $table->foreignId('preference_id')
-                ->constrained('preferences');
+                ->constrained('preferences')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

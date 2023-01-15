@@ -68,9 +68,9 @@ export default {
             const photo = JSON.parse(this.photo)
 
             return {
-                id: photo[0].id,
-                name: photo[0].name,
-                path: photo[0].full_path
+                id: photo[0]?.id ?? '',
+                name: photo[0]?.name ?? '',
+                path: photo[0]?.full_path ?? ''
             }
         },
     }

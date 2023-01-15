@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('recipes_nutrition_val', function (Blueprint $table) {
             $table->id();
             $table->foreignId('recipe_id')
-                ->constrained('recipes');
+                ->constrained('recipes')
+                ->cascadeOnDelete();
             $table->foreignId('nutrition_val_id')
-                ->constrained('nutrition_values');
+                ->constrained('nutrition_values')
+                ->cascadeOnDelete();
             $table->float('count');
             $table->timestamps();
         });

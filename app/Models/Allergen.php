@@ -22,6 +22,7 @@ class Allergen extends Model
             'recipes_allergens',
             'allergen_id',
             'recipe_id'
-        );
+        )
+            ->withTimestamps();
     }
 }

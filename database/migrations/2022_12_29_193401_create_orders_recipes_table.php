@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('orders_recipes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')
-                ->constrained('orders');
+                ->constrained('orders')
+                ->cascadeOnDelete();
             $table->foreignId('recipe_id')
-                ->constrained('recipes');
+                ->constrained('recipes')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Queries;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 use App\Models\Recipe;
 
 final class RecipesQueryBuilder
@@ -74,5 +77,172 @@ final class RecipesQueryBuilder
         ];
 
         return $dataResponse;
+    }
+
+    public function getOneRecipeAdmin($id)
+    {
+        $recipe = $this->model
+            ->with('preferences')
+            ->with('ingredients')
+            ->with('allergens')
+            ->with('nutritionValues')
+            ->find($id);
+
+        $ingredients_recipe = $recipe->ingredients()->with('ingredient')->get()->map(function ($item) {
+            return [
+                "item" => [
+                    "id" => $item->ingredient->id,
+                    "name" => $item->ingredient->name
+                ],
+                "count" => $item->count
+            ];
+        });
+        $nutrition_val_recipe = $recipe->nutritionValues()->with('nutritionVal')->get()->map(function ($item) {
+            return [
+                "item" => [
+                    "id" => $item->nutritionVal->id,
+                    "name" => $item->nutritionVal->name
+                ],
+                "count" => $item->count
+            ];
+        });
+
+        $recipeResponse = [
+            "id" => $recipe->id,
+            "name" => $recipe->name,
+            "cook_time" => $recipe->cook_time,
+            "description" => $recipe->description,
+            "recipe_text" => $recipe->recipe_text,
+            "preferences" => $recipe->preferences->map(function ($item) {
+                return $item->only(['id', 'name']);
+            })->all(),
+            "allergens" => $recipe->allergens->map(function ($item) {
+                return $item->only(['id', 'name']);
+            })->all(),
+            "ingredients" => $ingredients_recipe,
+            "nutrition_values" => $nutrition_val_recipe,
+
+        ];
+        return $recipeResponse;
+    }
+
+    public function getListRecipesWithPagination(): LengthAwarePaginator
+    {
+        $recipes = $this->model
+            ->with('preferences')
+            ->with('ingredients.ingredient')
+            ->with('photo')
+            ->with(['week' => function ($query) {
+                $query->where('active_week', true);
+            }])
+            ->paginate(config('pagination.admin.recipes'));
+
+        return $recipes;
+    }
+
+    public function create(array $data): Recipe|bool
+    {
+        $allergens_id = collect($data['allergens'])->pluck('id')->all();
+        $preferences_id = collect($data['preferences'])->pluck('id')->all();
+        $ingredients = collect($data['ingredients'])->map(function ($ingredients) {
+            return [
+                'count' => $ingredients['count'],
+                'ingredient_id' => $ingredients['item']['id']
+            ];
+        })->all();
+        $nutrition_values = collect($data['nutrition_values'])->map(function ($nutrition_value) {
+            return [
+                'count' => $nutrition_value['count'],
+                'nutrition_val_id' => $nutrition_value['item']['id']
+            ];
+        })->all();
+
+        $recipe = false;
+        DB::beginTransaction();
+        $recipe = Recipe::create($data);
+
+        if ($recipe) {
+            $recipe->allergens()->attach($allergens_id);
+            $recipe->preferences()->attach($preferences_id);
+            $recipe->ingredients()->createMany($ingredients);
+            $recipe->nutritionValues()->createMany($nutrition_values);
+        }
+        DB::commit();
+
+        return $recipe;
+    }
+
+    public function update(Recipe $recipe, array $data): bool
+    {
+        $recipe_update = false;
+        $recipeModel = $recipe->fill($data);
+
+        $allergens_id = collect($data['allergens'])->pluck('id')->all();
+
+        $preferences_id = collect($data['preferences'])->pluck('id')->all();
+
+        $ingredients_id_delete = $recipeModel->ingredients->isNotEmpty() ? $recipeModel->ingredients
+            ->map(function ($item) {
+                return $item->ingredient_id;
+            })
+            ->diff(
+                collect($data['ingredients'])->pluck('item')
+                    ->pluck('id')
+            ) : collect([]);
+
+        $nutrition_values_id_delete = $recipeModel->nutritionValues->isNotEmpty() ? $recipeModel->nutritionValues
+            ->map(function ($item) {
+                return $item->nutrition_val_id;
+            })
+            ->diff(
+                collect($data['nutrition_values'])->pluck('item')
+                    ->pluck('id')
+            ) : collect([]);
+
+        DB::beginTransaction();
+        //Удаляем ingredients из БД
+        if (!$ingredients_id_delete->isEmpty()) {
+            foreach ($ingredients_id_delete->all() as $item) {
+                $recipeModel->ingredients()->where('ingredient_id', $item)->first()->delete();
+            }
+        }
+        // Обновляем или создаем ingredients в БД
+        foreach ($data['ingredients'] as $item) {
+            $recipeModel->ingredients()->updateOrCreate(
+                ['ingredient_id' => $item['item']['id']],
+                ['count' => $item['count']]
+            );
+        }
+
+        // Удаляем Nutrition values из БД
+        if (!$nutrition_values_id_delete->isEmpty()) {
+            foreach ($nutrition_values_id_delete->all() as $item) {
+                $recipeModel->nutritionValues()->where('nutrition_val_id', $item)->first()->delete();
+            }
+        }
+        // Обновляем или создаем Nutrition values в БД
+        foreach ($data['nutrition_values'] as $item) {
+            $recipeModel->nutritionValues()->updateOrCreate(
+                ['nutrition_val_id' => $item['item']['id']],
+                ['count' => $item['count']]
+            );
+        }
+
+        // Обновляем/удаляем/создаем allergens в БД
+        $recipeModel->allergens()->sync($allergens_id);
+
+        // Обновляем/удаляем/создаем preferences в БД
+        $recipeModel->preferences()->sync($preferences_id);
+
+        // Обновляем данные в БД в таблице recipes
+        $recipe_update = $recipeModel->save();
+        DB::commit();
+
+        return $recipe_update;
+    }
+
+    public function delete(Recipe $recipe)
+    {
+        return $recipe->delete();
     }
 }

@@ -1,0 +1,102 @@
+/* Badges */
+
+/*Badge outlined variations*/
+@each $color, $value in $theme-colors {
+    .badge-outline-#{$color} {
+        @include badge-outline-variations($value);
+    }
+}
+
+// Base class
+//
+// Requires one of the contextual, color modifier classes for `color` and
+// `background-color`.
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0 8px;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 20px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    // Empty badges collapse automatically
+    &:empty {
+        display: none;
+    }
+}
+
+  // Quick fix for badges in buttons
+.btn .badge {
+    position: relative;
+    top: -1px;
+}
+
+.badge-secondary {
+    color: $white;
+    background-color: $secondary;
+
+    svg {
+        fill: $secondary;
+    }
+
+    &_outline {
+        color: $secondary;
+        border: 1px solid $secondary;
+        background-color: $white;
+
+        &:hover,
+        &:focus {
+            outline: none;
+            background-color: rgba($secondary, 0.1);
+        }
+    }
+}
+
+.badge-primary {
+    color: $white;
+    background-color: $primary;
+
+    svg {
+        fill: $primary;
+    }
+
+    &_outline {
+        color: $primary;
+        border: 1px solid $primary;
+        background-color: $white;
+
+        &:hover,
+        &:focus {
+            outline: none;
+            background-color: rgba($primary, 0.1);
+        }
+    }
+}
+
+.badge-success {
+    color: $white;
+    background-color: $success;
+
+    svg {
+        fill: $success;
+    }
+
+    &_outline {
+        color: $success;
+        border: 1px solid $success;
+        background-color: $white;
+
+        &:hover,
+        &:focus {
+            outline: none;
+            background-color: rgba($success, 0.1);
+        }
+    }
+}
