@@ -1,6 +1,9 @@
 <template>
 <main class="admin">
     <div class="admin-container my-5 px-3">
+        <h1 class="mb-4">
+            Create new recipe
+        </h1>
         <form class="row" @submit.prevent="formSubmit">
             <div class="col-md-12 grid-margin stretch-card mb-3">
                 <div class="card border-0">
@@ -119,7 +122,8 @@ import BmSelect from '../../components/BmSelect.vue'
 import BmMultiSelect from '../../components/BmMultiSelect.vue'
 import BmTextarea from '../../components/BmTextarea.vue'
 import BmSelectWithCount from '../../components/BmSelectWithCount.vue'
-import {createRecipe} from '../../api/api.js'
+import {createResource} from '../../api/api.js'
+import {ADMIN_RECIPES, routes} from '../../api/endpoints.js'
 import router from '../../router'
 
 export default {
@@ -170,10 +174,10 @@ export default {
     methods: {
         async formSubmit() {
             try {
-                const data = await createRecipe(this.formData)
+                const data = await createResource({ endpoint: ADMIN_RECIPES, resource: this.formData})
 
                 if(data.status === 200) {
-                    router.navigate('/admin/recipes');
+                    router.navigate(routes.recipe.index);
                 }
             } catch(e) {
                 console.error(e)

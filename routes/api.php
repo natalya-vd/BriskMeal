@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
+use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,14 @@ Route::name('admin.')
     ->prefix('admin')
     ->group(function () {
         Route::get('/recipes', [AdminRecipeController::class, 'list'])->name('recipes.list');
-        Route::post('/recipes', [AdminRecipeController::class, 'store'])->name('recipes.store');
-        Route::put('/recipes/{recipe}', [AdminRecipeController::class, 'update'])->name('recipes.update');
-        Route::delete('/recipes/{recipe}', [AdminRecipeController::class, 'destroy'])->name('recipes.destroy');
+        Route::apiResource('recipes', AdminRecipeController::class)->only([
+            'destroy', 'update', 'store'
+        ]);
+
+        Route::get('/allergens', [AdminAllergenController::class, 'list'])->name('allergens.list');
+        Route::apiResource('allergens', AdminAllergenController::class)->only([
+            'destroy', 'update', 'store'
+        ]);
     });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
