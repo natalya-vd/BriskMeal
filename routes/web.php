@@ -9,6 +9,7 @@ use \App\Http\Controllers\CartController;
 use App\Http\Controllers\PreferenceController;
 
 use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
+use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,24 @@ Route::name('admin.')
         })->name('home');
 
         Route::resource('recipes', AdminRecipeController::class)->except([
+            'destroy', 'update', 'store', 'show'
+        ]);
+        Route::resource('allergens', AdminAllergenController::class)->except([
+            'destroy', 'update', 'store', 'show'
+        ]);
+        Route::resource('ingredients', AdminRecipeController::class)->except([
+            'destroy', 'update', 'store', 'show'
+        ]);
+        Route::resource('nutrition-values', AdminRecipeController::class)->except([
+            'destroy', 'update', 'store', 'show'
+        ]);
+        Route::resource('preferences', AdminRecipeController::class)->except([
+            'destroy', 'update', 'store', 'show'
+        ]);
+        Route::resource('units', AdminRecipeController::class)->except([
+            'destroy', 'update', 'store', 'show'
+        ]);
+        Route::resource('weeks', AdminRecipeController::class)->except([
             'destroy', 'update', 'store', 'show'
         ]);
     });

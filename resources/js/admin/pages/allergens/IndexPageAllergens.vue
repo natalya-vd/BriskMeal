@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-end mb-3">
                         <a class="btn btn-outline-primary" :href="getPathCreate">
-                            Add recipe
+                            Add allergen
                         </a>
                     </div>
                     <div class="table-responsive">
@@ -13,38 +13,14 @@
                             <thead>
                                 <tr>
                                 <th>ID</th>
-                                <th>Photo</th>
                                 <th>Name</th>
-                                <th>Cook time</th>
-                                <th>Ingredients</th>
-                                <th>Preferences</th>
-                                <th>Active Weeks</th>
                                 <th class="title-action"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="item in getData" :key="item.id">
                                 <td class="align-middle">{{ item.id }}</td>
-                                <td class="align-middle">
-                                    <img v-if="item.photo.length > 0" class="image" :src="item.photo[0].full_path" width="70" height="70" />
-                                </td>
                                 <td class="align-middle">{{ item.name }}</td>
-                                <td class="align-middle">{{ item.cook_time }}</td>
-                                <td class="align-middle">
-                                    <ul v-if="item.ingredients.length > 0">
-                                        <li v-for="ingredient in item.ingredients" :key="ingredient.id">
-                                        {{ ingredient.ingredient.name }}
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td class="align-middle">
-                                    <meal-plan :plans="getPlans(item.preferences)" />
-                                </td>
-                                <td class="align-middle">
-                                    <div v-for="week in item.week" :key="week.id">
-                                    {{ week.week_name }}
-                                    </div>
-                                </td>
                                 <td class="align-middle">
                                     <div class="cell-action">
                                         <a :href="getPathEdit(item.id)" class="btn-action btn btn-primary">
@@ -76,15 +52,13 @@
 
 <script>
 import BmPagination from '../../components/BmPagination.vue'
-import MealPlan from '../../../components/MealPlan.vue'
 import {deleteResource, getListResource} from '../../api/api.js'
-import {ADMIN_RECIPES, routes} from '../../api/endpoints.js'
+import {ADMIN_ALLERGENS, routes} from '../../api/endpoints.js'
 
 export default {
-    name: 'IndexPageRecipes',
+    name: 'IndexPageAllergens',
 
     components: {
-        MealPlan,
         BmPagination
     },
 
@@ -120,26 +94,23 @@ export default {
             return pagination
         },
         getPathCreate() {
-            return `${routes.recipe.index}/create`
+            return `${routes.allergen.index}/create`
         }
     },
 
     methods: {
-        getPlans(preferences) {
-            return JSON.stringify(preferences)
-        },
         async onDelete(id) {
             try {
                 // TODO: Сюда бы еще лоадер на загрузку
-                await deleteResource({ endpoint: ADMIN_RECIPES, id})
-                const dataResponse = await getListResource(ADMIN_RECIPES)
+                await deleteResource({ endpoint: ADMIN_ALLERGENS , id})
+                const dataResponse = await getListResource(ADMIN_ALLERGENS)
                 this.data = dataResponse.data
             } catch(e) {
                 console.error(e)
             }
         },
         getPathEdit(id) {
-            return `${routes.recipe.index}/${id}/edit`
+            return `${routes.allergen.index}/${id}/edit`
         }
     },
 }

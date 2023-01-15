@@ -1,16 +1,14 @@
-import {ADMIN_RECIPES} from './endpoints.js'
-
-const getListRecipes = async () => {
-    return await axios.get(ADMIN_RECIPES)
+const getListResource = async (endpoint) => {
+    return await axios.get(endpoint)
 }
-const createRecipe = async (recipe) => {
-    return await axios.post(ADMIN_RECIPES, recipe)
+const createResource = async ({endpoint, resource}) => {
+    return await axios.post(endpoint, resource)
 }
-const deleteRecipe = async (id) => {
-    return await axios.delete(`${ADMIN_RECIPES}/${id}`)
+const deleteResource = async ({endpoint, id}) => {
+    return await axios.delete(`${endpoint}/${id}`)
 }
-const updateRecipe = async ({id, recipe}) => {
-    return await axios.put(`${ADMIN_RECIPES}/${id}`, recipe)
+const updateResource = async ({endpoint, id, resource}) => {
+    return await axios.put(`${endpoint}/${id}`, resource)
 }
 
-export {getListRecipes, createRecipe, deleteRecipe, updateRecipe}
+export {getListResource, createResource, deleteResource, updateResource}

@@ -2,7 +2,7 @@
 <main class="admin">
     <div class="admin-container my-5 px-3">
         <div class="d-flex justify-content-end mb-2">
-            <a href="/admin/recipes" class="button me-2 btn  btn-outline-primary">
+            <a :href="getPathBack" class="button me-2 btn  btn-outline-primary">
                 Don't save
             </a>
             <button type="submit" class="button me-2 btn btn-primary" @click="formSubmit(getRecipe.id)">
@@ -12,6 +12,10 @@
                 Delete
             </button>
         </div>
+
+        <h1 class="mb-4">
+            Edit recipe
+        </h1>
 
         <form class="row" @submit.prevent="formSubmit(getRecipe.id)">
             <div class="col-md-2 grid-margin stretch-card mb-3">
@@ -137,7 +141,8 @@ import BmSelect from '../../components/BmSelect.vue'
 import BmMultiSelect from '../../components/BmMultiSelect.vue'
 import BmTextarea from '../../components/BmTextarea.vue'
 import BmSelectWithCount from '../../components/BmSelectWithCount.vue'
-import {updateRecipe, deleteRecipe} from '../../api/api.js'
+import {updateResource, deleteResource} from '../../api/api.js'
+import {ADMIN_RECIPES, routes} from '../../api/endpoints.js'
 import router from '../../router'
 
 export default {
@@ -197,20 +202,23 @@ export default {
         getAllergensList() {
             return JSON.parse(this.dataResponse).allergens
         },
+        getPathBack(){
+            return routes.recipe.index
+        },
     },
 
     methods: {
         async onDelete(id) {
             try {
-                await deleteRecipe(id)
-                router.navigate('/admin/recipes');
+                await deleteResource({endpoint: ADMIN_RECIPES, id})
+                router.navigate(routes.recipe.index);
             } catch(e) {
                 console.error(e)
             }
         },
         async formSubmit(id) {
             try {
-                await updateRecipe({id, recipe: this.formData})
+                await updateResource({endpoint: ADMIN_RECIPES, id, resource: this.formData})
             } catch(e) {
                 console.error(e)
             }
