@@ -5,22 +5,77 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Recipe;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
-    public function index(Request $request)
+    private $cart;
+
+    public function __construct()
     {
-        $cart_id = $request->cookie('cart_id');
+        $this->getCart();
+    }
 
-        if (!empty($cart_id)) {
+    private function getCart()
+    {
+        $cart_id = \request()->cookie('cart_id');
+        //$cart_id = 1; // Для ручного изменения cart_id
 
-            $recipes = Cart::findOrFail($cart_id)->recipes;
-            return view('cart-test')->with('recipes', $recipes);
+        if (is_null($cart_id)) { /* TODO Возможно, позже нужно будет сменить проверку на empty() */
+            // если корзина еще не существует — создаем объект
+            $this->cart = Cart::create();
 
-        } else { /* TODO Как вариант, пустую корзину можно обработать на стороне шаблона */
+        } else {
+            try {
+                $this->cart = Cart::findOrFail($cart_id);
+            } catch (ModelNotFoundException $e) {
+                $this->cart = Cart::create();
+            }
+        }
+
+        // Самостоятельно помещаем в куки ключ `cart_id` со значением из $this->cart->id
+        Cookie::queue('cart_id', $this->cart->id, 2880);
+    }
+
+    public function index()
+    {
+        $recipes = $this->cart->recipes;
+
+        if (!is_null($recipes)) {
+            return view('cart-test', compact('recipes'));
+        } else {
             abort(404);
         }
+    }
+
+    public function add(Request $request, Recipe $recipe)
+    {
+        $quantity = $request->input('quantity') ?? 1;
+        $this->cart->increase($recipe->id, $quantity);
+
+        // выполняем редирект обратно на ту страницу,
+        // где была нажата кнопка «В корзину»
+        return back();
+    }
+
+    /**
+     * Увеличивает кол-во товара в корзине на единицу
+     */
+    public function plus(Recipe $recipe)
+    {
+        $this->cart->increase($recipe->id);
+        return redirect()->route('cart-test');
+    }
+
+    /**
+     * Уменьшает кол-во товара в корзине на единицу
+     */
+    public function minus(Recipe $recipe)
+    {
+        $this->cart->decrease($recipe->id);
+        return redirect()->route('cart-test');
     }
 
     public function checkout() // Оформление заказа
@@ -28,56 +83,9 @@ class CartController extends Controller
         //
     }
 
-    public function add(Request $request, Recipe $recipe)
+    public function remove(Recipe $recipe)
     {
-        $cart_id = $request->cookie('cart_id');
-        $quantity = $request->input('quantity') ?? 1;
-
-        if (is_null($cart_id)) { /* TODO Возможно, позже нужно будет сменить проверку на empty() */
-            // если корзина еще не существует — создаем объект
-            $cart = Cart::create();
-            // получаем идентификатор, чтобы записать в cookie
-            $cart_id = $cart->id;
-
-        } else {
-            // получаем объект корзины
-            $cart = Cart::findOrFail($cart_id);
-            // обновляем поле `updated_at`
-            $cart->touch();
-
-        }
-
-
-        if ($cart->recipes->contains($recipe)) {
-            // если такой товар есть в корзине — изменяем кол-во
-            $pivotRow = $cart->recipes()->where('recipe_id', $recipe->id)->first()->pivot;
-            $quantity = $pivotRow->quantity + $quantity;
-            $pivotRow->update(['quantity' => $quantity]);
-
-            // обновляем значение quantity в pivot в промежуточной таблице
-            $cart->recipes()->updateExistingPivot(
-                $recipe->id,
-                ['quantity' => $quantity]
-            );
-
-        } else {
-            // если такого товара нет в корзине — добавляем его
-            $cart->recipes()->attach($recipe->id, ['quantity' => $quantity]);
-        }
-
-        return back()->withCookie(cookie('cart_id', $cart_id, 2880));
-    }
-
-    public function delete(Request $request, Recipe $recipe)
-    {
-        $cart_id = $request->cookie('cart_id');
-        $cart = Cart::findOrFail($cart_id);
-
-        // удаляем товар из корзины (разрушаем связь)
-        $cart->recipes()->detach($recipe->id);
-        // обновляем поле `updated_at`
-        $cart->touch();
-
+        $this->cart->remove($recipe->id);
         return redirect()->route('cart-test');
     }
 }

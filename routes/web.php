@@ -47,8 +47,14 @@ Route::get('/cart-test', [CartController::class, 'index'])
 Route::match(['get', 'post'], '/cart/add/{recipe}', [CartController::class, 'add'])
     ->name('cart-add');
 
-Route::match(['get', 'post'], '/cart/del/{recipe}', [CartController::class, 'delete'])
-    ->name('cart-delete');
+Route::match(['get', 'post'], '/cart/remove/{recipe}', [CartController::class, 'remove'])
+    ->name('cart-remove');
+
+Route::match(['get', 'post'], '/cart/plus/{recipe}', [CartController::class, 'plus'])
+    ->name('cart-plus');
+
+Route::match(['get', 'post'], '/cart/minus/{recipe}', [CartController::class, 'minus'])
+    ->name('cart-minus');
 
 /** Админка */
 Route::name('admin.')
