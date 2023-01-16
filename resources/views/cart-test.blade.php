@@ -1,3 +1,4 @@
+<a href="{{ route('catalog-test') }}">Каталог</a>
 @if(count($recipes))
     @php
         $cartCost = 0;
@@ -13,10 +14,22 @@
             <p>Количество: {{ $recipe->pivot->quantity }}</p>
             <p>Стоимость: {{ ($recipe->price) * ($recipe->pivot->quantity) }}</p>
 
-            <form action="{{ route('cart-delete', $recipe) }}" method="post">
-                @csrf
-                <button type="submit">Удалить</button>
-            </form>
+            <div style="display: flex">
+                <form action="{{ route('cart-minus', $recipe) }}" method="post" style="margin-right: 3px">
+                    @csrf
+                    <button type="submit">-1</button>
+                </form>
+
+                <form action="{{ route('cart-plus', $recipe) }}" method="post" style="margin-right: 15px">
+                    @csrf
+                    <button type="submit">+1</button>
+                </form>
+
+                <form action="{{ route('cart-remove', $recipe) }}" method="post">
+                    @csrf
+                    <button type="submit">Удалить</button>
+                </form>
+            </div>
         </div>
         <hr>
     @endforeach
