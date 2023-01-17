@@ -11,6 +11,7 @@ use App\Http\Controllers\PreferenceController;
 use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
 use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
 use App\Http\Controllers\Admin\PreferenceController as AdminPreferenceController;
+use App\Http\Controllers\Admin\UnitController as AdminUnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,7 +75,7 @@ Route::name('admin.')
         Route::resource('preferences', AdminPreferenceController::class)->except([
             'destroy', 'update', 'store', 'show'
         ]);
-        Route::resource('units', AdminRecipeController::class)->except([
+        Route::resource('units', AdminUnitController::class)->except([
             'destroy', 'update', 'store', 'show'
         ]);
         Route::resource('weeks', AdminRecipeController::class)->except([

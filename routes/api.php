@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
 use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
 use App\Http\Controllers\Admin\PreferenceController as AdminPreferenceController;
+use App\Http\Controllers\Admin\UnitController as AdminUnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,11 @@ Route::name('admin.')
 
         Route::get('/preferences', [AdminPreferenceController::class, 'list'])->name('preferences.list');
         Route::apiResource('preferences', AdminPreferenceController::class)->only([
+            'destroy', 'update', 'store'
+        ]);
+
+        Route::get('/units', [AdminUnitController::class, 'list'])->name('units.list');
+        Route::apiResource('units', AdminUnitController::class)->only([
             'destroy', 'update', 'store'
         ]);
     });
