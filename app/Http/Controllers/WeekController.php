@@ -22,7 +22,7 @@ class WeekController extends Controller
             $recipes_id = $builder->getRecipesByWeek($week);
 
             return view('catalog')->with('recipes', $builder_recipes->getRecipesById($recipes_id))
-                ->with('activeWeeks', $builder->getActiveWeeks()->toJson());
+                ->with('activeWeeks', $builder->getActiveWeeks()->toJson())->with('week', $week);
         } catch (ModelNotFoundException $e) {
             return back()->withError('error', $e->getMessage());
         }
