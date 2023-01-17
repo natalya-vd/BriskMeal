@@ -6,6 +6,8 @@ namespace App\Queries;
 
 use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 use App\Models\Preference;
 
 final class PreferenceQueryBuilder
@@ -56,5 +58,32 @@ final class PreferenceQueryBuilder
     {
         return $this->model
             ->get(['id', 'name']);
+    }
+
+    public function getListPreferencesWithPagination(): LengthAwarePaginator
+    {
+        return $this->model
+            ->paginate(config('pagination.admin.preferences'));
+    }
+
+
+    public function getOnePreferenceAdmin(Preference $preference)
+    {
+        return $this->model->find($preference)->first();
+    }
+
+    public function create(array $data): Preference|bool
+    {
+        return Preference::create($data);
+    }
+
+    public function update(Preference $preference, array $data): bool
+    {
+        return $preference->fill($data)->save();
+    }
+
+    public function delete(Preference $preference)
+    {
+        return $preference->delete();
     }
 }

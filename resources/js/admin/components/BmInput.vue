@@ -1,6 +1,6 @@
 <template>
     <div class="input-wrapper">
-        <label v-if="label.length > 0" :for="inputId">{{ label }}</label>
+        <label v-if="label.length > 0" :for="inputId" class="fw-bold fs-5">{{ label }}<span v-if="required" class="text-danger">*</span></label>
         <input
             :value="modelValue"
             :type="type"
@@ -38,6 +38,10 @@ export default {
             default: 'text'
         },
         placeholder: String,
+        required: {
+            type: Boolean,
+            default: false
+        },
         propsValidate: {
             type: Boolean,
             default: false,

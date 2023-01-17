@@ -5,23 +5,23 @@
             <a :href="getPathBack" class="button me-2 btn  btn-outline-primary">
                 Don't save
             </a>
-            <button type="submit" class="button me-2 btn btn-primary" @click="formSubmit(getAllergen.id)">
+            <button type="submit" class="button me-2 btn btn-primary" @click="formSubmit(getPreference.id)">
                 Save
             </button>
-            <button type="button" class="button btn btn-danger" @click="onDelete(getAllergen.id)">
+            <button type="button" class="button btn btn-danger" @click="onDelete(getPreference.id)">
                 Delete
             </button>
         </div>
 
         <h1 class="mb-4">
-            Edit allergen
+            Edit preference
         </h1>
 
-        <form class="row" @submit.prevent="formSubmit(getAllergen.id)">
+        <form class="row" @submit.prevent="formSubmit(getPreference.id)">
             <div class="col-md-2 grid-margin stretch-card mb-3">
                 <div class="card ">
-                    <div class="card-body fw-bold fs-5">
-                        ID: {{ getAllergen.id }}
+                    <div class="card-body">
+                        ID: {{ getPreference.id }}
                     </div>
                 </div>
             </div>
@@ -35,9 +35,35 @@
                                 label="Name"
                                 input-id="name-recipe"
                                 placeholder="Name"
+                                required
                                 class="form-group col-md-6"
                             />
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 grid-margin stretch-card mb-3">
+                <div class="card border-0">
+                    <div class="card-body p-4">
+                        <bm-color-picker
+                            label="Color text"
+                            :color="formData.color_text"
+                            @update:color="updateColorText"
+                            required
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card mb-3">
+                <div class="card border-0">
+                    <div class="card-body p-4">
+                        <bm-color-picker
+                            label="Color background"
+                            :color="formData.color_background"
+                            @update:color="updateColorBackground"
+                            required
+                        />
                     </div>
                 </div>
             </div>
@@ -49,11 +75,11 @@
 <script>
 import BmInput from '../../components/BmInput.vue'
 import {updateResource, deleteResource} from '../../api/api.js'
-import {ADMIN_ALLERGENS, routes} from '../../api/endpoints.js'
+import {ADMIN_PREFERENCES, routes} from '../../api/endpoints.js'
 import router from '../../router'
 
 export default {
-    name: 'EditPageAllergens',
+    name: 'EditPagePreferences',
 
     components: {
         BmInput,
@@ -67,20 +93,24 @@ export default {
         return {
             formData: {
                 name: '',
+                color_text: '',
+                color_background: '',
             },
         }
     },
 
     created() {
-        this.formData.name = this.getAllergen.name
+        this.formData.name = this.getPreference.name
+        this.formData.color_text = this.getPreference.color_text
+        this.formData.color_background = this.getPreference.color_background
     },
 
     computed: {
-        getAllergen() {
+        getPreference() {
             return JSON.parse(this.dataResponse)
         },
         getPathBack(){
-            return routes.allergen.index
+            return routes.preferences.index
         }
     },
 
@@ -90,16 +120,22 @@ export default {
                 const result = confirm('Delete?')
 
                 if(result) {
-                    await deleteResource({endpoint: ADMIN_ALLERGENS, id})
-                    router.navigate(routes.allergen.index);
+                    await deleteResource({endpoint: ADMIN_PREFERENCES, id})
+                    router.navigate(routes.preferences.index)
                 }
             } catch(e) {
                 alert(e.response.data.message)
             }
         },
+        updateColorText(newColor) {
+            this.formData.color_text = newColor
+        },
+        updateColorBackground(newColor) {
+            this.formData.color_background = newColor
+        },
         async formSubmit(id) {
             try {
-                const response =  await updateResource({endpoint: ADMIN_ALLERGENS, id, resource: this.formData})
+                const response = await updateResource({endpoint: ADMIN_PREFERENCES, id, resource: this.formData})
 
                 if(response.status === 200) {
                     alert('Update success!')

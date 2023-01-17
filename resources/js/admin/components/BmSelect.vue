@@ -3,8 +3,8 @@
         class="input-box"
         v-click-outside="close"
     >
-        <span v-if="title.length > 0" class="input-title">
-            {{ title }}
+        <span v-if="title.length > 0" class="input-title fw-bold fs-5">
+            {{ title }}<span v-if="required" class="text-danger">*</span>
         </span>
         <div class="wrapper">
             <div class="input__wrapper">
@@ -89,6 +89,10 @@ export default {
         propId: {
             type: String,
             default: "id",
+        },
+        required: {
+            type: Boolean,
+            default: false
         },
         propsValidate: {
             type: Boolean,

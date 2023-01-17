@@ -2,14 +2,14 @@
     <main>
         <div class="admin-container my-5 px-3">
             <h1 class="mb-4 ms-4">
-                List allergens
+                List preferences
             </h1>
 
             <div class="card border-0 ">
                 <div class="card-body">
                     <div class="d-flex justify-content-end mb-3">
                         <a class="btn btn-outline-primary" :href="getPathCreate">
-                            Add allergen
+                            Add preferences
                         </a>
                     </div>
                     <div class="table-responsive">
@@ -18,13 +18,43 @@
                                 <tr>
                                 <th>ID</th>
                                 <th>Name</th>
+                                <th class="text-center">Color text</th>
+                                <th class="text-center">Color background</th>
                                 <th class="title-action"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="item in getData" :key="item.id">
-                                <td class="align-middle">{{ item.id }}</td>
-                                <td class="align-middle">{{ item.name }}</td>
+                                <td class="align-middle">
+                                    {{ item.id }}
+                                </td>
+                                <td class="align-middle">
+                                    {{ item.name }}
+                                </td>
+                                <td class="align-middle">
+                                    <div
+                                        :style="{
+                                            'background-color': item.color_text,}"
+                                        class="cell-color"
+                                    >
+                                        <span class="color__text">
+                                            {{ item.color_text }}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <div
+                                        :style="{
+                                            'background-color': item.color_background,
+                                            'color': item.color_text,
+                                            }"
+                                        class="cell-color"
+                                    >
+                                        <span>
+                                            {{ item.color_background }}
+                                        </span>
+                                    </div>
+                                </td>
                                 <td class="align-middle">
                                     <div class="cell-action">
                                         <a :href="getPathEdit(item.id)" class="btn-action btn btn-primary">
@@ -57,11 +87,11 @@
 <script>
 import BmPagination from '../../components/BmPagination.vue'
 import {deleteResource, getListResource} from '../../api/api.js'
-import {ADMIN_ALLERGENS, routes} from '../../api/endpoints.js'
+import {ADMIN_PREFERENCES, routes} from '../../api/endpoints.js'
 import router from '../../router'
 
 export default {
-    name: 'IndexPageAllergens',
+    name: 'IndexPagePreferences',
 
     components: {
         BmPagination
@@ -99,7 +129,7 @@ export default {
             return pagination
         },
         getPathCreate() {
-            return `${routes.allergen.index}/create`
+            return `${routes.preferences.index}/create`
         }
     },
 
@@ -109,10 +139,10 @@ export default {
                 const result = confirm('Delete?')
 
                 if(result) {
-                    await deleteResource({ endpoint: ADMIN_ALLERGENS , id})
-                    router.navigate(routes.allergen.index)
+                    await deleteResource({ endpoint: ADMIN_PREFERENCES , id})
+                    router.navigate(routes.preferences.index)
                     // TODO: Некорректно работает пагинация. Нужно ее полностью переделать на фронте иначи при запросах по АПИ приходят неверные УРЛ
-                    // const dataResponse = await getListResource(ADMIN_ALLERGENS)
+                    // const dataResponse = await getListResource(ADMIN_PREFERENCES)
                     // this.data = dataResponse.data
                 }
             } catch(e) {
@@ -120,13 +150,30 @@ export default {
             }
         },
         getPathEdit(id) {
-            return `${routes.allergen.index}/${id}/edit`
+            return `${routes.preferences.index}/${id}/edit`
         }
     },
 }
 </script>
 
 <style lang="scss" scoped>
+.cell-color {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 80px;
+    height: 30px;
+    border-radius: 6px;
+    box-shadow: 0 3px 5px -1px #0003, 0 5px 8px #00000024, 0 1px 14px #0000001f;
+}
+
+.color__text {
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+    mix-blend-mode: difference;
+}
+
 .title-action {
     width: 120px;
 }
