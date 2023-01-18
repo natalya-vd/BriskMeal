@@ -22,18 +22,12 @@ use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/catalog', [RecipeController::class, 'index'])
-    ->name('catalog');
-Route::get('/catalog/{week}', [WeekController::class, 'index'])
-    ->name('catalogWeek');
+Route::get('/', [RecipeController::class, 'welcome'])->name('welcome');
+Route::get('/catalog', [RecipeController::class, 'index'])->name('catalog');
+Route::get('/catalog/{week}', [WeekController::class, 'index'])->name('catalogWeek');
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
 Route::get('/plans', PreferenceController::class)->name('plans');
-Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
+Route::get('/cart', function () { return view('cart');})->name('cart');
 
 
 /** Корзина (тестирование) */
@@ -63,7 +57,6 @@ Route::name('admin.')
         Route::get('/', function () {
             return view('admin.pages.index');
         })->name('home');
-
         Route::resource('recipes', AdminRecipeController::class)->except([
             'destroy', 'update', 'store', 'show'
         ]);
@@ -86,7 +79,6 @@ Route::name('admin.')
             'destroy', 'update', 'store', 'show'
         ]);
     });
-
 
 Auth::routes();
 

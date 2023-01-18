@@ -53,6 +53,18 @@ app.component("cart-page", CartPage);
 
 import WeeksNavigation from "./components/WeeksNavigation.vue";
 app.component("weeks-navigation", WeeksNavigation);
+
+import Just3Steps from "./components/Just3Steps.vue";
+app.component("just-3-steps", Just3Steps);
+
+import WelcomeSliderComponent from "./components/WelcomeSliderComponent.vue";
+app.component("welcome-slider", WelcomeSliderComponent);
+
+import WelcomeCaruselle from "./components/WelcomeCaruselle.vue";
+app.component("welcome-caruselle", WelcomeCaruselle);
+
+import WelcomeFeelGreat from "./components/WelcomeFeelGreat.vue";
+app.component("welcome-feelgreat",WelcomeFeelGreat);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
