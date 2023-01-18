@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
 use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
 use App\Http\Controllers\Admin\PreferenceController as AdminPreferenceController;
 use App\Http\Controllers\Admin\UnitController as AdminUnitController;
+use App\Http\Controllers\Admin\IngredientController as AdminIngredientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,11 @@ Route::name('admin.')
 
         Route::get('/units', [AdminUnitController::class, 'list'])->name('units.list');
         Route::apiResource('units', AdminUnitController::class)->only([
+            'destroy', 'update', 'store'
+        ]);
+
+        Route::get('/ingredients', [AdminIngredientController::class, 'list'])->name('ingredients.list');
+        Route::apiResource('ingredients', AdminIngredientController::class)->only([
             'destroy', 'update', 'store'
         ]);
     });

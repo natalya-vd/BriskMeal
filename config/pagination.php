@@ -5,5 +5,6 @@ return [
         'allergens' => 40,
         'preferences' => 40,
         'units' => 40,
+        'ingredients' => 40,
     ],
 ];

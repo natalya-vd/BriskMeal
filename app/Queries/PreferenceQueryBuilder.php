@@ -69,7 +69,7 @@ final class PreferenceQueryBuilder
 
     public function getOnePreferenceAdmin(Preference $preference)
     {
-        return $this->model->find($preference)->first();
+        return $this->model->find($preference->id);
     }
 
     public function create(array $data): Preference|bool

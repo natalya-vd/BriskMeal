@@ -34,7 +34,7 @@ final class AllergenQueryBuilder
 
     public function getOneAllergenAdmin(Allergen $allergen)
     {
-        return $this->model->find($allergen)->first();
+        return $this->model->find($allergen->id);
     }
 
     public function create(array $data): Allergen|bool

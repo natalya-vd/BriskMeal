@@ -32,7 +32,7 @@ final class UnitQueryBuilder
 
     public function getOneUnitAdmin(Unit $unit)
     {
-        return $this->model->find($unit)->first();
+        return $this->model->find($unit->id);
     }
 
     public function create(array $data): Unit|bool

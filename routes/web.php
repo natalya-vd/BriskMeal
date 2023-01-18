@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
 use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
 use App\Http\Controllers\Admin\PreferenceController as AdminPreferenceController;
 use App\Http\Controllers\Admin\UnitController as AdminUnitController;
+use App\Http\Controllers\Admin\IngredientController as AdminIngredientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +67,7 @@ Route::name('admin.')
         Route::resource('allergens', AdminAllergenController::class)->except([
             'destroy', 'update', 'store', 'show'
         ]);
-        Route::resource('ingredients', AdminRecipeController::class)->except([
+        Route::resource('ingredients', AdminIngredientController::class)->except([
             'destroy', 'update', 'store', 'show'
         ]);
         Route::resource('nutrition-values', AdminRecipeController::class)->except([

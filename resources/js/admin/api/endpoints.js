@@ -2,6 +2,7 @@ const ADMIN_RECIPES = '/api/admin/recipes'
 const ADMIN_ALLERGENS = '/api/admin/allergens'
 const ADMIN_PREFERENCES = '/api/admin/preferences'
 const ADMIN_UNITS = '/api/admin/units'
+const ADMIN_INGREDIENTS = '/api/admin/ingredients'
 
 const routes = {
     recipe: {
@@ -16,6 +17,9 @@ const routes = {
     units: {
         index: '/admin/units',
     },
+    ingredient: {
+        index: '/admin/ingredients',
+    },
 }
 
 export {
@@ -23,5 +27,6 @@ export {
     ADMIN_ALLERGENS,
     ADMIN_PREFERENCES,
     ADMIN_UNITS,
+    ADMIN_INGREDIENTS,
     routes
 }
