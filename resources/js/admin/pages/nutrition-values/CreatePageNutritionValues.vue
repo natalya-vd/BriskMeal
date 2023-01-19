@@ -2,7 +2,7 @@
 <main class="admin">
     <div class="admin-container my-5 px-3">
         <h1 class="mb-4">
-            Create new ingredient
+            Create new nutrition values
         </h1>
         <form class="row" @submit.prevent="formSubmit">
             <div class="col-md-12 grid-margin stretch-card mb-3">
@@ -44,11 +44,11 @@
 import BmInput from '../../components/BmInput.vue'
 import BmSelect from '../../components/BmSelect.vue'
 import {createResource} from '../../api/api.js'
-import {ADMIN_INGREDIENTS, routes} from '../../api/endpoints.js'
+import {ADMIN_NUTRITION_VALUES, routes} from '../../api/endpoints.js'
 import router from '../../router'
 
 export default {
-    name: 'CreatePageIngredients',
+    name: 'CreatePageNutritionValues',
 
     components: {
         BmInput,
@@ -80,10 +80,10 @@ export default {
     methods: {
         async formSubmit() {
             try {
-                const data = await createResource({ endpoint: ADMIN_INGREDIENTS, resource: this.formData})
+                const data = await createResource({ endpoint: ADMIN_NUTRITION_VALUES, resource: this.formData})
 
                 if(data.status === 200) {
-                    router.navigate(routes.ingredient.index);
+                    router.navigate(routes.nutritionValue.index);
                 }
             } catch(e) {
                 if(e.response.status === 422) {

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
 use App\Http\Controllers\Admin\PreferenceController as AdminPreferenceController;
 use App\Http\Controllers\Admin\UnitController as AdminUnitController;
 use App\Http\Controllers\Admin\IngredientController as AdminIngredientController;
+use App\Http\Controllers\Admin\NutritionValuesController as AdminNutritionValuesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,11 @@ Route::name('admin.')
 
         Route::get('/ingredients', [AdminIngredientController::class, 'list'])->name('ingredients.list');
         Route::apiResource('ingredients', AdminIngredientController::class)->only([
+            'destroy', 'update', 'store'
+        ]);
+
+        Route::get('/nutrition-values', [AdminNutritionValuesController::class, 'list'])->name('nutrition-values.list');
+        Route::apiResource('nutrition-values', AdminNutritionValuesController::class)->only([
             'destroy', 'update', 'store'
         ]);
     });
