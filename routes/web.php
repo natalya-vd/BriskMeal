@@ -27,7 +27,14 @@ Route::get('/catalog', [RecipeController::class, 'index'])->name('catalog');
 Route::get('/catalog/{week}', [WeekController::class, 'index'])->name('catalogWeek');
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
 Route::get('/plans', PreferenceController::class)->name('plans');
-Route::get('/cart', function () { return view('cart');})->name('cart');
+
+Route::get('/cart', function () {
+    return view('cart');
+})->name('cart');
+Route::get('/order', function () {
+    return view('order');
+})->name('order');
+
 
 
 /** Корзина (тестирование) */

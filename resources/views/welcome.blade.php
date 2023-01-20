@@ -6,7 +6,7 @@
 
 @section('content')
 <div class=" bm-catalog">
-    <div style="background-color:red;height:400px;width:100%;"></div>
+    <welcome-top></welcome-top>
     <just-3-steps></just-3-steps>
     <welcome-slider recepies="{{ json_encode($recipes) }}"></welcome-slider>
     <welcome-feelgreat></welcome-feelgreat>

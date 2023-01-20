@@ -65,6 +65,9 @@ app.component("welcome-caruselle", WelcomeCaruselle);
 
 import WelcomeFeelGreat from "./components/WelcomeFeelGreat.vue";
 app.component("welcome-feelgreat",WelcomeFeelGreat);
+
+import WelcomeTopComponent from "./components/WelcomeTopComponent.vue";
+app.component("welcome-top",WelcomeTopComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

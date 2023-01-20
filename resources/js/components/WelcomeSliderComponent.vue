@@ -17,6 +17,9 @@
             getAllergens() {
                 return JSON.parse(this.recepies);
             }
+        },
+        mounted() {
+            console.log(JSON.parse(this.getAllergens.photo))
         }
     }
 </script>

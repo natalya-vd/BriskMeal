@@ -5,6 +5,13 @@
                 <h2>Feel Great About Your Food</h2>
                 <h3>It's right in the name: Green Chef is all about eating and living green. We are a USDA certified organic company. We work with farmers to source sustainable, delicious ingredients</h3>
                 <div class="feelgreatJoinBtnPlace"><a href="/plans"> Join Now</a></div>
+                <div class="feelgreatJoinSighns">
+                    <img class="sign"  alt="saca" src="https://images.ctfassets.net/4frik3v39clf/7aGq7V1LkUFa8qEqewEg7l/9dd12d653d9805ebd2bd45f47022fccf/ccof-organic.svg"/>
+                    <img class="sign"  alt="csasc" src="https://images.ctfassets.net/4frik3v39clf/75xdvbWDKkGGuhFOKoVHyi/c12f58753966365c6260aade5f2832cc/usda-organic.svg"/>
+                    <div class="certifiedBox">
+                        <div class="certified">GREEN CHEF IS A CERTIFIED ORGANIC COMPANY</div> 
+                    </div>
+                </div>
             </div>        
         </div>
     </div>
@@ -29,7 +36,7 @@
     }
     .feelgreatInfoBox{
         margin-top: 56px;
-        margin-left: 0px;
+        margin-left:5px;
         height: 344px;
         min-width: 200px;
         display: flex;
@@ -72,4 +79,67 @@
         text-decoration: none;
         margin-bottom: 24px;
     }
+    h2{
+        color: #333333;
+        margin: 0 0 16px;
+        font-size: 32px;
+        line-height: 38px;
+        font-weight: bold;
+        text-align: left;
+    }
+    h3{
+        color: #333333;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: normal;
+        text-align: left;
+        margin-bottom: 32px;
+    }
+    .feelgreatJoinSighns{
+        width: 100%;
+        height: 84px;
+        display: flex;
+        justify-content: start;
+    }
+    .sign{
+        height: 60px;
+        min-width: 45px;
+        margin:12px;
+    }
+    .certifiedBox{
+        width: 185px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+    .certified{
+        width: 100%;
+        height: 48px;
+        text-align: center;
+        color: #222;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+@media only screen and (min-width: 1601px) and (max-width: 2500px) {
+    .feelgreatInfoBox{
+        margin-left: calc((2600px - 100vw)/3);
+    }
+}
+@media only screen and (min-width: 1301px) and (max-width: 1600px) {
+    .feelgreatInfoBox{
+        margin-left: calc((1600px - 100vw)/3 + 280px);
+    }
+}
+@media only screen and (min-width: 1101px) and (max-width: 1300px) {
+    .feelgreatInfoBox{
+        margin-left: calc((1300px - 100vw)/9 + 380px);
+    }
+}
+@media only screen  and (max-width: 1100px) {
+    .feelgreatInfoBox{
+        margin-left: 25%;
+    }
+}
 </style>
