@@ -16,7 +16,7 @@
 <body>
     <div id="app">
         @yield('header')
-        <main class="py-4">
+        <main >
             @yield('content')
         </main>
         @yield('footer')
