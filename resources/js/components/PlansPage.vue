@@ -371,7 +371,7 @@ export default {
     color: #4b4d4c;
     font-family: sofia-pro, "Helvetica Neue", Arial, sans-serif;
     text-transform: none;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 32px;
     margin: 0 0 12px;
@@ -383,7 +383,7 @@ export default {
     flex: 1 1 auto;
     box-sizing: border-box;
     width: auto;
-    padding: 32px 0;
+    padding: 32px 24px;
     box-shadow: 0 3px 5px 0 rgb(0 0 0 / 20%);
     border-radius: 15px;
     background-color: #ffffff;
@@ -407,10 +407,7 @@ export default {
 }
 
 .preferences {
-    width: 50%;
-    border-right: 1px dashed rgb(108, 108, 108);
-    padding-left: 32px;
-    padding-right: 32px;
+    width: 100%;
 }
 
 .preferencesTitle,
@@ -433,14 +430,15 @@ export default {
     height: 20px;
     color: rgb(220, 30, 30);
     font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
-    margin: 0px;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
 }
 
 .preferencesDescription {
-    margin-bottom: 36px;
+    padding-right: 8px;
+    padding-left: 8px;
+    margin-bottom: 24px;
 }
 
 .preferencesDescriptionText {
@@ -478,7 +476,6 @@ export default {
     border-color: rgb(34, 34, 34);
     background-color: rgb(247, 247, 247);
     transition: transform 0.5s ease 0s;
-    height: 115px;
 }
 
 .preferencesChoosing {
@@ -524,27 +521,16 @@ export default {
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    padding-bottom: 40px;
-    padding: 16px 0px;
+    padding: 8px 8px 16px;
 }
 
 .selectedBox {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    padding-top: 0;
-    padding-left: 0;
-    padding-right: 0;
-    flex-basis: 50%;
-    max-width: 50%;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    box-sizing: border-box;
+    margin-top: 0;
+    padding: 24px 8px 0;
 }
 
 .quantityWeekWrapper {
@@ -562,14 +548,14 @@ export default {
 .numberOfPeople,
 .mealsPerWeek {
     padding-bottom: 8px;
-    display: flex;
+    display: block;
     -webkit-box-align: center;
     align-items: center;
 }
 
 .numberOfPeopleText,
 .mealsPerWeekText {
-    width: 40%;
+    width: 100%;
     text-align: left;
     margin-top: 16px;
     margin-bottom: 16px;
@@ -814,8 +800,6 @@ export default {
     font-size: 16px;
     line-height: 20px;
     text-decoration: line-through;
-    font-size: 20px;
-    line-height: 24px;
 }
 
 .discountPrice {
@@ -825,8 +809,6 @@ export default {
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
-    font-size: 20px;
-    line-height: 24px;
 }
 
 .selectPlan {
@@ -842,7 +824,6 @@ export default {
     width: 100%;
     align-self: center;
     margin: auto;
-    width: 30%;
 }
 
 .buttonPlanWrapper {
@@ -894,5 +875,196 @@ export default {
     font-weight: 700;
     font-size: 16px;
     line-height: 24px;
+}
+
+@media only screen and (min-width: 0px) {
+    .gridContainer {
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-right: -7.5px;
+        margin-left: -7.5px;
+    }
+
+    .selectedBox {
+        -webkit-flex-basis: 100%;
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+        max-width: 100%;
+        padding-right: 7.5px;
+        padding-left: 7.5px;
+    }
+
+    .numberOfPeopleNumbers,
+    .mealsPerWeekNumbers {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .titlePlan {
+        margin-bottom: 24px;
+    }
+
+    .gridContainer {
+        width: 582px;
+        margin: 40px auto 40px;
+        padding: 32px;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .preferences {
+        width: 100%;
+    }
+
+    .preferencesButton {
+        height: 115px;
+    }
+
+    .selectedBox {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-flex-basis: 100%;
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+        max-width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .selectPlanWrapper {
+        width: 60%;
+    }
+
+    .preferencesTitle,
+    .selectedBoxTitle {
+        padding-bottom: 8px;
+    }
+
+    .preferencesDescription {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .someText {
+        padding: 16px 0px;
+    }
+
+    .quantityWeekWrapper {
+        min-width: 332px;
+    }
+
+    .numberOfPeople,
+    .mealsPerWeek {
+        display: inline;
+        width: 100%;
+    }
+
+    .numberOfPeopleNumbers,
+    .mealsPerWeekNumbers {
+        width: 100%;
+    }
+
+    .numberOfPeopleText,
+    .mealsPerWeekText {
+        width: 40%;
+    }
+
+    .oldPrice > h4,
+    .discountPrice {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .titlePlan {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    .gridContainer {
+        width: auto !important;
+        padding: 32px 0;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .preferences {
+        width: 50%;
+        border-right: 1px dashed rgb(108, 108, 108);
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .selectedBox {
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: 0;
+        -webkit-flex-basis: 50%;
+        -ms-flex-preferred-size: 50%;
+        flex-basis: 50%;
+        max-width: 50%;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .selectPlanWrapper {
+        width: 30%;
+    }
+
+    .preferencesTitle,
+    .selectedBoxTitle {
+        padding-bottom: 16px;
+    }
+
+    .someText {
+        padding-bottom: 40px;
+    }
+
+    .numberOfPeople,
+    .mealsPerWeek {
+        display: flex;
+    }
+
+    .numberOfPeopleText,
+    .mealsPerWeekText {
+        width: 100%;
+    }
+
+    .oldPrice > h4,
+    .discountPrice {
+        font-size: 20px;
+        line-height: 24px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .preferencesName {
+        font-size: 14px;
+    }
 }
 </style>
