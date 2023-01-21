@@ -247,10 +247,6 @@ export default {
                 { id: 3, quantity: 4 },
             ],
             choosenMealsPerWeek: { id: 1, quantity: 2 },
-            planOfName: "",
-            totalServings: 0,
-            oldPrice: 0,
-            discountPrice: 0,
         };
     },
 
@@ -285,7 +281,7 @@ export default {
             return this.choosenIds
                 .map(
                     (id) =>
-                        this.preferences.find(
+                        this.getData.preferences.find(
                             (preference) => preference.id === id
                         ).name
                 )
@@ -318,7 +314,7 @@ export default {
                     `The buyer has chosen preferences: ${this.choosenIds
                         .map(
                             (id) =>
-                                this.preferences.find(
+                                this.getData.preferences.find(
                                     (preference) => preference.id === id
                                 ).name
                         )

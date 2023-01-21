@@ -79,12 +79,6 @@ export default {
             this.formValidation.phone = !x[2]
                 ? x[1]
                 : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
-            console.log(
-                x[1].length === 3 && x[2].length === 3 && x[3].length === 4
-                    ? true
-                    : false
-            );
-
             return x[1].length === 3 && x[2].length === 3 && x[3].length === 4
                 ? true
                 : false;
