@@ -103,7 +103,7 @@ export default {
         },
         propId: {
             type: String,
-            default: "",
+            default: "id",
         },
         required: {
             type: Boolean,

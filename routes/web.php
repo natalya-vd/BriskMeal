@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\PreferenceController as AdminPreferenceController
 use App\Http\Controllers\Admin\UnitController as AdminUnitController;
 use App\Http\Controllers\Admin\IngredientController as AdminIngredientController;
 use App\Http\Controllers\Admin\NutritionValuesController as AdminNutritionValuesController;
+use App\Http\Controllers\Admin\WeekController as AdminWeekController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,9 +81,9 @@ Route::name('admin.')
         Route::resource('units', AdminUnitController::class)->except([
             'destroy', 'update', 'store', 'show'
         ]);
-        Route::resource('weeks', AdminRecipeController::class)->except([
-            'destroy', 'update', 'store', 'show'
-        ]);
+
+        Route::get('weeks', [AdminWeekController::class, 'create'])->name('weeks.create');
+        Route::get('weeks/recipes', [AdminWeekController::class, 'index'])->name('weeks.index');
     });
 
 

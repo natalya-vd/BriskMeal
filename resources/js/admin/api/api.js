@@ -11,4 +11,14 @@ const updateResource = async ({endpoint, id, resource}) => {
     return await axios.put(`${endpoint}/${id}`, resource)
 }
 
-export {getListResource, createResource, deleteResource, updateResource}
+const updateDataWeek = async ({endpoint, data}) => {
+    return await axios.put(`${endpoint}`, data)
+}
+
+export {
+    getListResource,
+    createResource,
+    deleteResource,
+    updateResource,
+    updateDataWeek
+}

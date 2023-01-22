@@ -79,6 +79,16 @@ final class RecipesQueryBuilder
         return $dataResponse;
     }
 
+    public function getRecipesByIdAdmin($recipes_id)
+    {
+        $data = $this->model
+            ->whereIn('id', $recipes_id)
+            ->with('preferences')
+            ->with('photo')
+            ->get(['id', 'name']);
+        return $data;
+    }
+
     public function getOneRecipeAdmin($id)
     {
         $recipe = $this->model
@@ -86,6 +96,7 @@ final class RecipesQueryBuilder
             ->with('ingredients')
             ->with('allergens')
             ->with('nutritionValues')
+            ->with('week')
             ->find($id);
 
         $ingredients_recipe = $recipe->ingredients()->with('ingredient')->get()->map(function ($item) {
@@ -121,6 +132,7 @@ final class RecipesQueryBuilder
             })->all(),
             "ingredients" => $ingredients_recipe,
             "nutrition_values" => $nutrition_val_recipe,
+            "weeks" => $recipe->week
 
         ];
         return $recipeResponse;
@@ -138,6 +150,11 @@ final class RecipesQueryBuilder
             ->paginate(config('pagination.admin.recipes'));
 
         return $recipes;
+    }
+
+    public function getRandRecipeId(int $limit)
+    {
+        return $this->model->inRandomOrder()->limit($limit)->get(['id']);
     }
 
     public function create(array $data): Recipe|bool
@@ -180,6 +197,8 @@ final class RecipesQueryBuilder
         $allergens_id = collect($data['allergens'])->pluck('id')->all();
 
         $preferences_id = collect($data['preferences'])->pluck('id')->all();
+
+        $weeks_id = collect($data['weeks'])->pluck('id')->all();
 
         $ingredients_id_delete = $recipeModel->ingredients->isNotEmpty() ? $recipeModel->ingredients
             ->map(function ($item) {
@@ -233,6 +252,9 @@ final class RecipesQueryBuilder
 
         // Обновляем/удаляем/создаем preferences в БД
         $recipeModel->preferences()->sync($preferences_id);
+
+        // Обновляем/удаляем/создаем запись из таблицы с назначением рецепта на неделю recipes_weeks
+        $recipeModel->week()->sync($weeks_id);
 
         // Обновляем данные в БД в таблице recipes
         $recipe_update = $recipeModel->save();

@@ -14,6 +14,7 @@ class Week extends Model
         'week_name',
         'first_week_day',
         'last_week_day',
+        'active_week',
         'price_recipe'
     ];
 
