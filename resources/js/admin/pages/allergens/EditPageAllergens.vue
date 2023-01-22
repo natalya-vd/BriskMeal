@@ -20,7 +20,7 @@
         <form class="row" @submit.prevent="formSubmit(getAllergen.id)">
             <div class="col-md-2 grid-margin stretch-card mb-3">
                 <div class="card ">
-                    <div class="card-body">
+                    <div class="card-body fw-bold fs-5">
                         ID: {{ getAllergen.id }}
                     </div>
                 </div>
@@ -87,17 +87,27 @@ export default {
     methods: {
         async onDelete(id) {
             try {
-                await deleteResource({endpoint: ADMIN_ALLERGENS, id})
-                router.navigate(routes.allergen.index);
+                const result = confirm('Delete?')
+
+                if(result) {
+                    await deleteResource({endpoint: ADMIN_ALLERGENS, id})
+                    router.navigate(routes.allergen.index);
+                }
             } catch(e) {
-                console.error(e)
+                alert(e.response.data.message)
             }
         },
         async formSubmit(id) {
             try {
-                await updateResource({endpoint: ADMIN_ALLERGENS, id, resource: this.formData})
+                const response =  await updateResource({endpoint: ADMIN_ALLERGENS, id, resource: this.formData})
+
+                if(response.status === 200) {
+                    alert('Update success!')
+                }
             } catch(e) {
-                console.error(e)
+                if(e.response.status === 422) {
+                    alert(e.response.data.message)
+                }
             }
         },
     }

@@ -3,8 +3,8 @@
         class="input-box"
         v-click-outside="close"
     >
-        <span v-if="title.length > 0" class="input-title">
-            {{ title }}
+        <span v-if="title.length > 0" class="input-title fw-bold fs-5 mb-3">
+            {{ title }}<span v-if="required" class="text-danger">*</span>
         </span>
         <div class="wrapper">
             <div class="input__wrapper">
@@ -103,7 +103,11 @@ export default {
         },
         propId: {
             type: String,
-            default: "",
+            default: "id",
+        },
+        required: {
+            type: Boolean,
+            default: false
         },
         propsValidate: {
             type: Boolean,
@@ -177,7 +181,7 @@ export default {
     position: relative;
 }
 .input-title {
-    margin: 0 0 10px;
+    display: block;
     font-size: 15px;
     line-height: 15px;
     color: #3d3d3d;

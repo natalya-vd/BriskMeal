@@ -1,6 +1,10 @@
 <template>
     <main>
         <div class="admin-container my-5 px-3">
+            <h1 class="mb-4 ms-4">
+                List allergens
+            </h1>
+
             <div class="card border-0 ">
                 <div class="card-body">
                     <div class="d-flex justify-content-end mb-3">
@@ -54,6 +58,7 @@
 import BmPagination from '../../components/BmPagination.vue'
 import {deleteResource, getListResource} from '../../api/api.js'
 import {ADMIN_ALLERGENS, routes} from '../../api/endpoints.js'
+import router from '../../router'
 
 export default {
     name: 'IndexPageAllergens',
@@ -101,12 +106,17 @@ export default {
     methods: {
         async onDelete(id) {
             try {
-                // TODO: Сюда бы еще лоадер на загрузку
-                await deleteResource({ endpoint: ADMIN_ALLERGENS , id})
-                const dataResponse = await getListResource(ADMIN_ALLERGENS)
-                this.data = dataResponse.data
+                const result = confirm('Delete?')
+
+                if(result) {
+                    await deleteResource({ endpoint: ADMIN_ALLERGENS , id})
+                    router.navigate(routes.allergen.index)
+                    // TODO: Некорректно работает пагинация. Нужно ее полностью переделать на фронте иначи при запросах по АПИ приходят неверные УРЛ
+                    // const dataResponse = await getListResource(ADMIN_ALLERGENS)
+                    // this.data = dataResponse.data
+                }
             } catch(e) {
-                console.error(e)
+                alert(e.response.data.message)
             }
         },
         getPathEdit(id) {
@@ -117,12 +127,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.image {
-    width: 70px;
-    height: 70px;
-    object-fit: cover;
-}
-
 .title-action {
     width: 120px;
 }

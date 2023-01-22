@@ -37,7 +37,7 @@
           transition-property: color;
           -webkit-transition-property: color;
 
-          i {
+          svg {
             color: inherit;
 
             &.menu-icon {
@@ -151,15 +151,6 @@
 
         .nav-item {
           padding: 0;
-          &::before {
-            content: '';
-            width: 5px;
-            height: 5px;
-            position: absolute;
-            margin-top: 16px;
-            border-radius: 50%;
-            background: #b2b2b2;
-          }
           .nav-link {
             color: $sidebar-light-submenu-color;
             padding: $sidebar-submenu-item-padding;

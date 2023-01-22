@@ -1,6 +1,10 @@
 <template>
     <main>
         <div class="admin-container my-5 px-3">
+            <h1 class="mb-4 ms-4">
+                List recipes
+            </h1>
+
             <div class="card border-0 ">
                 <div class="card-body">
                     <div class="d-flex justify-content-end mb-3">
@@ -79,6 +83,7 @@ import BmPagination from '../../components/BmPagination.vue'
 import MealPlan from '../../../components/MealPlan.vue'
 import {deleteResource, getListResource} from '../../api/api.js'
 import {ADMIN_RECIPES, routes} from '../../api/endpoints.js'
+import router from '../../router'
 
 export default {
     name: 'IndexPageRecipes',
@@ -130,12 +135,17 @@ export default {
         },
         async onDelete(id) {
             try {
-                // TODO: Сюда бы еще лоадер на загрузку
-                await deleteResource({ endpoint: ADMIN_RECIPES, id})
-                const dataResponse = await getListResource(ADMIN_RECIPES)
-                this.data = dataResponse.data
+                const result = confirm('Delete?')
+
+                if(result) {
+                    await deleteResource({ endpoint: ADMIN_RECIPES, id})
+                    router.navigate(routes.recipe.index)
+                    // TODO: Некорректно работает пагинация. Нужно ее полностью переделать на фронте иначи при запросах по АПИ приходят неверные УРЛ
+                    // const dataResponse = await getListResource(ADMIN_RECIPES)
+                    // this.data = dataResponse.data
+                }
             } catch(e) {
-                console.error(e)
+                alert(e.response.data.message)
             }
         },
         getPathEdit(id) {

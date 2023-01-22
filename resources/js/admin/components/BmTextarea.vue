@@ -1,6 +1,6 @@
 <template>
     <div class="input-wrapper">
-        <label :for="inputId">{{ label }}</label>
+        <label :for="inputId" class="fw-bold fs-5">{{ label }}<span v-if="required" class="text-danger">*</span></label>
         <textarea
             :value="modelValue"
             :class="[
@@ -33,6 +33,10 @@ export default {
         rows: {
             type: String,
             default: "5"
+        },
+        required: {
+            type: Boolean,
+            default: false
         },
         propsValidate: {
             type: Boolean,

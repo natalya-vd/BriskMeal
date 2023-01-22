@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
+use DB;
+use Log;
+
 use App\Queries\RecipesQueryBuilder;
 use App\Queries\WeekQueryBuilder;
 use App\Queries\PreferenceQueryBuilder;
@@ -37,5 +40,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrapFive();
+
+        //Запись запросов БД в laravel.log
+        DB::listen(function ($query) {
+            Log::info(
+                $query->sql,
+                $query->bindings,
+                $query->time
+            );
+        });
     }
 }

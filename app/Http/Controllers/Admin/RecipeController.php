@@ -13,6 +13,7 @@ use App\Queries\PreferenceQueryBuilder;
 use App\Queries\NutritionValuesQueryBuilder;
 use App\Queries\IngredientQueryBuilder;
 use App\Queries\AllergenQueryBuilder;
+use App\Queries\WeekQueryBuilder;
 use App\Models\Recipe;
 use App\Http\Requests\Admin\StoreRecipeRequest;
 
@@ -66,6 +67,7 @@ class RecipeController extends Controller
         NutritionValuesQueryBuilder $nutrition_val_builder,
         IngredientQueryBuilder $ingredient_builder,
         AllergenQueryBuilder $allergen_builder,
+        WeekQueryBuilder $week_builder,
         $id
     ) {
         $recipe = $builder->getOneRecipeAdmin($id);
@@ -79,7 +81,8 @@ class RecipeController extends Controller
             'preferences' => $preferences,
             'nutritionValues' => $nutrition_val,
             'ingredients' => $ingredients,
-            'allergens' => $allergens
+            'allergens' => $allergens,
+            'listWeeks' => $week_builder->getListWeeks()
         ];
 
         return view('admin.pages.recipes.edit')->with('data', json_encode($dataResponse, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));

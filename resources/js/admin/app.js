@@ -6,6 +6,7 @@
 
 import "./bootstrap";
 import { createApp } from "vue";
+import "vue3-colorpicker/style.css";
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin

@@ -40,6 +40,10 @@ class StoreRecipeRequest extends FormRequest
             "preferences.*.id" => "required|integer|exists:preferences,id",
             "preferences.*.name" => "required|string",
 
+            "weeks" => "array",
+            "weeks.*" => "array:id",
+            "weeks.*.id" => "required|integer|exists:weeks,id",
+
             "ingredients" => "array",
             "ingredients.*" => "array:count,item",
             "ingredients.*.count" => "required|numeric|min:0|not_in:0",
