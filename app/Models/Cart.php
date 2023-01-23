@@ -70,6 +70,7 @@ class Cart extends Model
 
     public function remove($id)
     {
+        //dd($id);
         // удаляем соответствующую запись из промежуточной таблицы
         $this->recipes()->detach($id);
         // обновляем поле `updated_at` таблицы `carts`

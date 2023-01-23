@@ -18,6 +18,12 @@ import "../css/recipe.css";
 
 const app = createApp({});
 
+/*import Posts from "./components/Posts.vue";
+app.component("posts", Posts);
+
+import CreatePost from "./components/CreatePost.vue";
+app.component("create-post", CreatePost);*/
+
 import FooterComponent from "./components/FooterComponent.vue";
 app.component("footer-component", FooterComponent);
 

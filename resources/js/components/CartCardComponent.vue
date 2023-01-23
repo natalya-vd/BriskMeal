@@ -4,24 +4,27 @@
             <img src="/card_image/card_1.jpg" alt="" class="cardImage" />
 
             <div class="recipyInfo">
-                <div class="recipyTitle" :title="cartItem.name_recipy">
+                <div class="recipyTitle" :title="cartItem.name">
                     <h4 class="recipyTitleText">
-                        {{ cartItem.name_recipy }}
+                        {{ cartItem.name }}
                     </h4>
                 </div>
                 <div class="recipyDescription">
                     <span class="recipyDescriptionText">{{
-                        cartItem.description_recipy
+                        cartItem.description
                     }}</span>
                     <div
                         class="recipyDescriptionOverlay"
-                        :title="cartItem.description_recipy"
+                        :title="cartItem.description"
                     ></div>
                 </div>
             </div>
+
+            <!-- TODO Разобраться с получением и расчетом цены -->
             <div class="priceQuantity">
-                <div class="pricePerOne">${{ cartItem.price }}</div>
+                <div class="pricePerOne">200$</div>
                 <div class="quantityThings">
+                    <!-- TODO Разобраться с получением кол-ва рецептов в корзине -->
                     <input
                         type="number"
                         class="quantityInput"
@@ -29,7 +32,7 @@
                     />
                 </div>
                 <div class="separatorCard" data-v-478eddff=""></div>
-                <div class="totalPriceCard">${{ totalPrice }}</div>
+                <div class="totalPriceCard">200$</div>
             </div>
             <div class="cross" @click="removeItem(cartItem)">
                 <svg viewBox="0 0 48 48" height="24" width="24">
