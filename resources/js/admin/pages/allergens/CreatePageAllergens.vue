@@ -13,6 +13,7 @@
                                 v-model="formData.name"
                                 label="Name"
                                 input-id="name-recipe"
+                                required
                                 placeholder="Name"
                                 class="form-group col-md-6"
                             />
@@ -61,7 +62,9 @@ export default {
                     router.navigate(routes.allergen.index);
                 }
             } catch(e) {
-                console.error(e)
+                if(e.response.status === 422) {
+                    alert(e.response.data.message)
+                }
             }
         },
     }

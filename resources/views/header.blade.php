@@ -1,7 +1,6 @@
 <header class="navbar navbar-expand-md navbar-light bg-white shadow-sm position-fixed">
     <div class="container">
         <main-logo-component></main-logo-component>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <nav-header-component></nav-header-component>
 
             <!-- Right Side Of Navbar -->
@@ -39,7 +38,6 @@
                     </li>
                 @endguest
             </ul> -->
-        </div>
     </div>
 </header>
 <div class="header-substrate"></div>

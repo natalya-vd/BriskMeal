@@ -5,6 +5,12 @@
                 <h1>MORE OPTIONS,<br/>  MORE FLAVOR</h1>
                 <h2>Now choose from all 30 weekly recipes - double the options! Plus, mix and match meals from different preferences in one weekly box: Keto + Paleo, Gluten Free, Fast & Fit, Mediterranean, Vegan and Vegetarian.</h2>
                 <a  href="/plans" >Get Started</a>
+                <div class="feelgreatJoinSighns">
+                    <img class="sign"  alt="csasc" src="https://images.ctfassets.net/4frik3v39clf/75xdvbWDKkGGuhFOKoVHyi/c12f58753966365c6260aade5f2832cc/usda-organic.svg"/>
+                    <div class="certifiedBox">
+                        <div class="certified">GREEN CHEF IS A CERTIFIED ORGANIC COMPANY</div> 
+                    </div>
+                </div>
            </div>
         </div>
     </div>
@@ -38,8 +44,7 @@
     .welcomeTopInfo{
         height: 98%;
         width: 50%;
-
-        background-color: grey;
+        text-align: left;
     }
      a {
         border-width: 2px;
@@ -65,10 +70,49 @@
         border-color: rgb(66, 105, 61);
         box-shadow: none;
         border-radius: 4px;
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 64px;
+        padding-right: 64px;
         transition-property: color, background, border, box-shadow, opacity !important;
         text-decoration: none;
         margin-bottom: 24px;
+    }
+    h1{
+        color: #333333;
+        font-size: 40px;
+        line-height: 50px;
+        font-weight: bold;
+    }
+    h2{
+        color: #333333;
+        font-size: 18px;
+        line-height: 24px;
+        margin-bottom: 24px;
+        font-weight: 400;
+    }
+     .feelgreatJoinSighns{
+        width: 100%;
+        height: 84px;
+        display: flex;
+        justify-content: start;
+    }
+    .sign{
+        height: 60px;
+        min-width: 45px;
+        margin:12px;
+    }
+    .certifiedBox{
+        width: 185px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+    .certified{
+        width: 100%;
+        height: 48px;
+        text-align: center;
+        color: #222;
+        font-weight: 500;
+        font-size: 14px;
     }
 </style>

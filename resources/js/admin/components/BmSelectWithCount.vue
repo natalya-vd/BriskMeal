@@ -1,7 +1,7 @@
 <template>
     <div >
-        <p v-if="title.length > 0" class="title">
-            {{ title }}
+        <p v-if="title.length > 0" class="title fw-bold fs-5 mb-3">
+            {{ title }}<span v-if="required" class="text-danger">*</span>
         </p>
         <button type="button" class="btn btn-outline-primary mb-3" @click="addSelectData">
             Add
@@ -77,6 +77,10 @@ export default {
             default: "id",
         },
         inputId: String,
+        required: {
+            type: Boolean,
+            default: false
+        },
     },
 
     emits: ['selected'],

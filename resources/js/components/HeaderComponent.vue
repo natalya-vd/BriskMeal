@@ -22,14 +22,55 @@
                 <a href="/catalog" class="login"><span>Log In</span></a
                 ><a href="/catalog" class="signup"><span>Sign up</span></a>
             </div>
+            <button
+                data-hamburger-menu="true"
+                class="hamburgerBtn"
+                aria-label="Menu"
+                @click="showSideBar"
+            >
+                <svg
+                    class="hamburgersvg"
+                    width="24"
+                    height="18"
+                    viewBox="0 0 20 15"
+                    preserveAspectRatio="xMidYMid meet"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M0 1c0-.552.455-1 .992-1h18.016c.548 0 .992.444.992 1 0 .552-.455 1-.992 1H.992A.993.993 0 0 1 0 1zm0 6.333c0-.552.455-1 .992-1h18.016c.548 0 .992.444.992 1 0 .553-.455 1-.992 1H.992a.993.993 0 0 1-.992-1zm0 6.334c0-.553.455-1 .992-1h18.016c.548 0 .992.444.992 1 0 .552-.455 1-.992 1H.992a.993.993 0 0 1-.992-1z"
+                        fill="#222222"
+                        fill-rule="evenodd"
+                    ></path>
+                </svg>
+            </button>
         </div>
+        <side-bar-component
+            :showSideBar="showSideBar"
+            :visiblilitySideBar="visiblilitySideBar"
+        ></side-bar-component>
     </div>
 </template>
 
 <script>
+import SideBarComponent from "./SideBarComponent.vue";
+
 export default {
+    components: {
+        SideBarComponent,
+    },
+    data() {
+        return {
+            visiblilitySideBar: false,
+        };
+    },
     mounted() {
         console.log("Header Component mounted.");
+    },
+
+    methods: {
+        showSideBar() {
+            this.visiblilitySideBar = !this.visiblilitySideBar;
+        },
     },
 };
 </script>
@@ -104,10 +145,16 @@ export default {
 }
 
 .registration-block {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style-type: none;
+    font-weight: 600;
+    display: none;
+}
+
+.hamburgerBtn {
+    margin-left: 16px;
+    cursor: pointer;
+    padding: 4px 0px;
+    border: 0px;
+    background: rgb(255, 255, 255);
 }
 
 .login {
@@ -178,5 +225,42 @@ export default {
 .signup:hover {
     background-color: rgb(42, 78, 42);
     border-color: rgb(42, 78, 42);
+}
+
+@media only screen and (min-width: 0px) {
+    .hamburgerBtn {
+        padding: 12px 0px;
+    }
+
+    .flex-item {
+        display: flex;
+        width: auto;
+        justify-content: space-between;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .flex-item {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .registration-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style-type: none;
+    }
+
+    .hamburgerBtn {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .header-navigation {
+        display: none;
+    }
 }
 </style>

@@ -13,6 +13,7 @@
                                 v-model="formData.name"
                                 label="Name"
                                 input-id="name-recipe"
+                                required
                                 placeholder="Name"
                                 class="form-group col-md-6"
                             />
@@ -20,6 +21,7 @@
                                 v-model="formData.cook_time"
                                 label="Cook time"
                                 input-id="cook_time"
+                                required
                                 placeholder="Cook time"
                                 type="number"
                                 class="form-group col-md-6"
@@ -27,6 +29,7 @@
                             <bm-textarea
                                 label="Description"
                                 input-id="description"
+                                required
                                 placeholder="Description"
                                 v-model="formData.description"
                                 class="form-group col-md-6"
@@ -34,6 +37,7 @@
                             <bm-textarea
                                 label="Recipe text"
                                 input-id="recipe_text"
+                                required
                                 placeholder="Recipe text"
                                 v-model="formData.recipe_text"
                                 class="form-group col-md-6"
@@ -180,7 +184,9 @@ export default {
                     router.navigate(routes.recipe.index);
                 }
             } catch(e) {
-                console.error(e)
+                if(e.response.status === 422) {
+                    alert(e.response.data.message)
+                }
             }
         },
         updateSelect(item, nameSelect) {

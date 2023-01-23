@@ -20,7 +20,7 @@
         <form class="row" @submit.prevent="formSubmit(getRecipe.id)">
             <div class="col-md-2 grid-margin stretch-card mb-3">
                 <div class="card ">
-                    <div class="card-body">
+                    <div class="card-body fw-bold fs-5">
                         ID: {{ getRecipe.id }}
                     </div>
                 </div>
@@ -60,6 +60,36 @@
                                 class="form-group col-md-6"
                             />
                             <div class="col-md-12">Photo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 grid-margin stretch-card mb-5">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <bm-multi-select
+                                    title="Weeks"
+                                    :data-dropdown="getWeeksList"
+                                    :select-prop="formData.weeks"
+                                    prop-name="week_name"
+                                    prop-id="id"
+                                    @selected="(item) => updateSelect(item, 'weeks')"
+                                />
+                            </div>
+                            <div class="col-md-6">
+                                <p class="fw-bold fs-5 mb-3">
+                                    Active weeks:
+                                </p>
+                                <ul v-if="getActiveWeeks.length > 0">
+                                    <li v-for="item in getActiveWeeks">
+                                        {{ item.week_name }}
+                                    </li>
+                                </ul>
+                                <div v-else>Not active weeks</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -171,6 +201,7 @@ export default {
                 preferences: [],
                 ingredients: [],
                 nutrition_values: [],
+                weeks: []
             },
         }
     },
@@ -184,6 +215,7 @@ export default {
         this.formData.preferences = this.getRecipe.preferences
         this.formData.ingredients = this.getRecipe.ingredients
         this.formData.nutrition_values = this.getRecipe.nutrition_values
+        this.formData.weeks = this.getRecipe.weeks
     },
 
     computed: {
@@ -202,6 +234,12 @@ export default {
         getAllergensList() {
             return JSON.parse(this.dataResponse).allergens
         },
+        getWeeksList() {
+            return JSON.parse(this.dataResponse).listWeeks
+        },
+        getActiveWeeks() {
+            return this.formData.weeks.filter(item => item.active_week)
+        },
         getPathBack(){
             return routes.recipe.index
         },
@@ -210,17 +248,31 @@ export default {
     methods: {
         async onDelete(id) {
             try {
-                await deleteResource({endpoint: ADMIN_RECIPES, id})
-                router.navigate(routes.recipe.index);
+                const result = confirm('Delete?')
+
+                if(result) {
+                    await deleteResource({endpoint: ADMIN_RECIPES, id})
+                    router.navigate(routes.recipe.index);
+                }
             } catch(e) {
-                console.error(e)
+                alert(e.response.data.message)
             }
         },
         async formSubmit(id) {
             try {
-                await updateResource({endpoint: ADMIN_RECIPES, id, resource: this.formData})
+                const data = {
+                    ...this.formData,
+                    weeks: this.formData.weeks.map(item => ({id: item.id}))
+                }
+                const response = await updateResource({endpoint: ADMIN_RECIPES, id, resource: data})
+
+                if(response.status === 200) {
+                    alert('Update success!')
+                }
             } catch(e) {
-                console.error(e)
+                if(e.response.status === 422) {
+                    alert(e.response.data.message)
+                }
             }
         },
         updateSelect(item, nameSelect) {

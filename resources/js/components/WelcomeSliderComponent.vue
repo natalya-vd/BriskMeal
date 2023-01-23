@@ -2,7 +2,7 @@
     <div class="container welcomeSliderBlock" >
         <h2>Next Week’s Menu</h2>
         <h3>Choose from 30 delicious and affordable recipes that change with every week</h3>
-        <welcome-caruselle></welcome-caruselle>
+        <welcome-caruselle :caruseldata="getSecondJSON" ></welcome-caruselle>
         <div class="welcomeSliderDungeon">
             <a href="/catalog" style="color: white;">See The Menu</a>
             <p>Simply select recipes after signing up</p>
@@ -14,12 +14,21 @@
     export default {
         props: ['recepies'],
         computed: {
-            getAllergens() {
+            getFirstJSON(){
                 return JSON.parse(this.recepies);
+            },
+            getSecondJSON(){
+                const caruseldata = [];
+                this.getFirstJSON.forEach(
+                    function( myEl ){
+                        let newEl = {
+                            name: myEl.name,
+                            photo: JSON.parse(myEl.photo)[0]
+                        };
+                        caruseldata.push(newEl);
+                });
+                return caruseldata
             }
-        },
-        mounted() {
-            console.log(JSON.parse(this.getAllergens.photo))
         }
     }
 </script>
