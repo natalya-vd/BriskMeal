@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,19 +23,20 @@ use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
 |
 */
 
+//Route::get('/', [PostController::class, 'index']);
+
 Route::get('/', [RecipeController::class, 'welcome'])->name('welcome');
 Route::get('/catalog', [RecipeController::class, 'index'])->name('catalog');
 Route::get('/catalog/{week}', [WeekController::class, 'index'])->name('catalogWeek');
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
 Route::get('/plans', PreferenceController::class)->name('plans');
 
-Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
+Route::get('/cart', [CartController::class, 'index'])
+    ->name('cart');
+
 Route::get('/order', function () {
     return view('order');
 })->name('order');
-
 
 
 /** Корзина (тестирование) */
@@ -45,11 +47,11 @@ Route::get('/catalog-test', [TestController::class, 'index'])
 Route::get('/cart-test', [CartController::class, 'index'])
     ->name('cart-test');
 
-Route::match(['get', 'post'], '/cart/add/{recipe}', [CartController::class, 'add'])
-    ->name('cart-add');
+/*Route::match(['get', 'post'], '/cart/add/{recipe}', [CartController::class, 'add'])
+    ->name('cart-add');*/
 
-Route::match(['get', 'post'], '/cart/remove/{recipe}', [CartController::class, 'remove'])
-    ->name('cart-remove');
+/*Route::match(['get', 'post'], '/cart/remove/{recipe}', [CartController::class, 'remove'])
+    ->name('cart-remove');*/
 
 Route::match(['get', 'post'], '/cart/plus/{recipe}', [CartController::class, 'plus'])
     ->name('cart-plus');

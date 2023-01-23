@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +18,16 @@ use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('/posts', [PostController::class, 'store']);
+Route::get('/posts', [PostController::class, 'get']);
+Route::delete('/posts/{id}', [PostController::class, 'delete']);
+
+/** Корзина */
+
+Route::match(['get', 'post'], '/cart/add', [CartController::class, 'add']);
+Route::delete('/cart/remove/{recipe}', [CartController::class, 'remove']);
+
 
 /** Админка */
 Route::name('admin.')

@@ -14,7 +14,10 @@
                 <recipy-description description="{{ $recipe['description'] }}"></recipy-description>
                 <recipy-ingredients ingredients="{{ $recipe['ingredients'] }}" allergens="{{ $recipe['allergens'] }}"></recipy-ingredients>
             </div>
-            <recipy-nutrition nutrition-values="{{ $recipe['nutrition_values'] }}"></recipy-nutrition>
+            <recipy-nutrition
+                nutrition-values="{{ $recipe['nutrition_values'] }}"
+                recipe-id="{{ $recipe['id'] }}">
+            </recipy-nutrition>
         </div>
     </div>
 </div>

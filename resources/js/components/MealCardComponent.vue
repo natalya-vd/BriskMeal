@@ -13,11 +13,21 @@
                 </div>
             </div>
         </a>
+        <button type="button"
+                style="background-color: #339900;
+                color: #FFFFFF;
+                border: none;"
+                onmouseover="this.style.backgroundColor='#336600'"
+                onmouseout="this.style.backgroundColor='#339900'"
+                @click="addToCart(id)">Add Cart
+        </button>
     </div>
 </template>
 
 <script>
 import MealPlan from './MealPlan.vue'
+import {createResource} from "../api/api";
+import {ADD_RECIPES} from "../api/endpoints";
 
 export default {
     components: {
@@ -25,6 +35,13 @@ export default {
     },
 
     props: ['id', 'time', 'title', 'ingredients', 'plans', 'photo'],
+
+    methods: {
+        async addToCart(recipe_id) {
+            const data = await createResource({endpoint: ADD_RECIPES, resource: {id: +recipe_id}})
+            console.log(data)
+        }
+    },
 
     computed: {
         getIngredients() {
@@ -40,6 +57,9 @@ export default {
                 path: photo[0].full_path
             }
         },
+        posts() {
+            return JSON.parse(this.dataResponse)
+        }
     }
 }
 </script>

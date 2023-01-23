@@ -15,5 +15,9 @@
         "sass": "^1.56.1",
         "vite": "^3.0.0",
         "vue": "^3.2.37"
+    },
+    "dependencies": {
+        "@jridgewell/sourcemap-codec": "^1.4.14",
+        "vuex": "^4.0.2"
     }
 }

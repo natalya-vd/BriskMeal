@@ -11,23 +11,16 @@
                     <div class="chosenPlansBorder">
                         <div class="borderWrapper">
                             <div class="planOfName">
-                                <span class="planOfNameText">Your Plans: </span
-                                ><span class="quantityPersonText">{{
-                                    plans.preferences
-                                }}</span>
+                                <span class="planOfNameText">Your Plans:</span>
+                                <span class="quantityPersonText">{{ plans.preferences }}</span>
                             </div>
                             <div class="planOfName">
-                                <span class="planOfNameText">Meals: </span
-                                ><span class="quantityPersonText">{{
-                                    plans.quantityMeals
-                                }}</span>
+                                <span class="planOfNameText">Meals:</span>
+                                <span class="quantityPersonText">{{ plans.quantityMeals }}</span>
                             </div>
                             <div class="planOfName">
-                                <span class="planOfNameText"
-                                    >People per week: </span
-                                ><span class="quantityPersonText">{{
-                                    plans.quantityPeople
-                                }}</span>
+                                <span class="planOfNameText">People per week:</span>
+                                <span class="quantityPersonText">{{ plans.quantityPeople }}</span>
                             </div>
                             <!-- <div class="quantityPerson">
                                 <span class="quantityPersonText"
@@ -49,7 +42,7 @@
             <!-- <cart-card-component :cart="cart" /> -->
 
             <div class="addRecipyWrapper">
-                <a href="/catalog" class="addRecipy"><span>Add Recipy</span></a>
+                <a href="/catalog" class="addRecipy"><span>Add More</span></a>
             </div>
             <div class="totalPrice">
                 <div class="totalPriceText">
@@ -68,6 +61,8 @@
 
 <script>
 import CartCardComponent from "./CartCardComponent.vue";
+import {deleteResource} from "../api/api";
+import {REMOVE_RECIPES} from "../api/endpoints";
 
 export default {
     name: "CartPage",
@@ -75,11 +70,13 @@ export default {
         CartCardComponent,
     },
 
-    props: ["data"],
+    props: [
+        "dataResponse"
+    ],
 
     data() {
         return {
-            cart: [
+            /*cart: [
                 {
                     id: 1,
                     name_recipy:
@@ -106,7 +103,7 @@ export default {
                     path: "/preferences_svg/Keto_Paleo.svg",
                     price: 200,
                 },
-            ],
+            ],*/
             plans: {
                 preferences: "Keto + Paleo",
                 quantityPeople: 3,
@@ -114,14 +111,26 @@ export default {
             },
         };
     },
+
     mounted() {
-        console.log(this.data);
+        console.log(JSON.parse(this.dataResponse))
+        //console.log(JSON.parse(this.quantity))
     },
+
     methods: {
-        removeItem(removedItem) {
-            this.cart = this.cart.filter((item) => item.id !== removedItem.id);
+        async removeItem(removedItem) {
+            const data = await deleteResource({endpoint: REMOVE_RECIPES, id: removedItem.id})
+            //this.cart = this.cart.filter((item) => item.id !== removedItem.id);
+            //console.log(removedItem.id);
         },
     },
+
+    computed: {
+        cart() {
+            console.log(JSON.parse(this.dataResponse))
+            return JSON.parse(this.dataResponse)
+        }
+    }
 };
 </script>
 <style scoped>
@@ -143,9 +152,11 @@ export default {
 .cartTitle {
     text-align: left;
 }
+
 .orderDelivery {
     color: rgb(70, 167, 72);
 }
+
 .orderDelivery:hover {
     border-color: transparent;
     color: rgb(66, 105, 61);
@@ -186,14 +197,14 @@ export default {
     height: 15px;
     left: 50%;
     top: 0px;
-    border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(255, 255, 255)
-        rgb(255, 255, 255);
+    border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(255, 255, 255) rgb(255, 255, 255);
     border-width: 1px;
     border-style: solid;
     border-top-right-radius: 4px;
     transform-origin: 0% 0%;
     transform: rotate(-45deg) translate(-50%, -50%);
 }
+
 .planOfName {
     width: 100%;
     display: flex;

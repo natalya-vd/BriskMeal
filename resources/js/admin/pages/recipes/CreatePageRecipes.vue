@@ -137,7 +137,7 @@ export default {
         BmSelectWithCount
     },
 
-    props: {
+    props: { // Приходят данные из blade-шаблона
         dataResponse: String
     },
 
@@ -156,7 +156,7 @@ export default {
         }
     },
 
-    computed: {
+    computed: { // Приходит JSON-строка
         getPreferencesList() {
             return JSON.parse(this.dataResponse).preferences
         },
