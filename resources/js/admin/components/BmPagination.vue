@@ -1,5 +1,5 @@
 <template>
-    <nav class="d-flex justify-items-center justify-content-between">
+    <div v-if="pagination.links.length > 3" class="d-flex justify-items-center justify-content-between">
         <div class="d-flex justify-content-between flex-fill d-sm-none">
             <ul class="pagination">
                 <li class="page-item">
@@ -49,7 +49,7 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </div>
 </template>
 
 <script>

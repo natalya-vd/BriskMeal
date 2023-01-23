@@ -65,11 +65,11 @@ class AllergenController extends Controller
      */
     public function store(StoreAllergenRequest $request, AllergenQueryBuilder $builder)
     {
-        $recipe = $request->validated();
+        $allergen = $request->validated();
 
-        $recipeOne = $builder->create($recipe);
+        $allergenOne = $builder->create($allergen);
 
-        if ($recipeOne) {
+        if ($allergenOne) {
             return response(__('messages.admin.allergen.create.success'));
         }
     }

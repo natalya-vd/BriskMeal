@@ -63,8 +63,15 @@ export default {
 </script>
 
 <style scoped>
+.cardCart {
+    display: flex;
+    width: 100%;
+}
+
 .cardBorder {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 12px;
     margin-bottom: 12px;
     border-color: rgb(204, 204, 204);
@@ -72,23 +79,18 @@ export default {
     border-width: 1px;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
-    height: 150px;
+    height: 100%;
     max-width: 700px;
 }
 
 .cardImage {
-    /* background-color: yellow; */
-    height: 100%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    width: 140px;
-    flex-shrink: 0;
-    object-fit: cover;
+    /* display: none; */
 }
 
 .recipyInfo {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: flex-start;
     margin-top: 5px;
 }
@@ -97,7 +99,7 @@ export default {
     display: flex;
     margin-left: 16px;
     text-align: left;
-    width: 325px;
+    width: 170px;
 }
 
 .recipyTitleText {
@@ -107,12 +109,13 @@ export default {
 }
 
 .recipyDescription {
-    margin-left: 16px;
-    text-align: left;
+    margin: 0px 16px;
+    /* text-align: left; */
     height: 95px;
     overflow: hidden;
     position: relative;
 }
+
 .recipyDescriptionText {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -133,8 +136,8 @@ export default {
 .priceQuantity {
     display: flex;
     justify-content: space-between;
-    min-width: 150px;
-    max-width: 150px;
+    min-width: 200px;
+    max-width: 200px;
     margin-top: 8px;
 }
 
@@ -166,5 +169,55 @@ export default {
 .cross {
     margin: 8px 10px;
     cursor: pointer;
+}
+
+@media only screen and (min-width: 0px) {
+}
+
+@media only screen and (min-width: 768px) {
+    .cardBorder {
+        flex-direction: row;
+        align-items: stretch;
+        height: 150px;
+    }
+
+    .cardImage {
+        display: block;
+        height: 100%;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        width: 140px;
+        margin-top: 0px;
+
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+
+    .recipyInfo {
+        align-items: stretch;
+    }
+
+    .recipyTitle {
+        width: 325px;
+    }
+
+    .recipyDescription {
+        text-align: left;
+    }
+
+    .priceQuantity {
+        min-width: 150px;
+        max-width: 150px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+}
+
+@media only screen and (max-width: 767px) {
+    .cardImage {
+        width: 200px;
+        margin-top: 14px;
+    }
 }
 </style>

@@ -56,11 +56,11 @@
                     <span>Total Price:</span>
                 </div>
                 <div class="resultedPrice">
-                    <h4 class="discountPrice">$6.49</h4>
+                    <span class="discountPrice">$6.49</span>
                 </div>
             </div>
             <div class="orderWrapper">
-                <a href="/catalog" class="order"><span>To Ordering</span></a>
+                <a href="/order" class="order"><span>To Ordering</span></a>
             </div>
         </div>
     </div>
@@ -248,6 +248,8 @@ export default {
 .addRecipyWrapper {
     display: flex;
     padding-top: 24px;
+    justify-content: center;
+    margin: 14px 14px;
 }
 
 .addRecipy,
@@ -264,7 +266,7 @@ export default {
     font-weight: 500;
     font-family: sofia-pro, "Helvetica Neue", Arial, sans-serif;
     font-size: 18px;
-    min-width: 100px;
+    width: 100%;
     text-decoration: none;
     text-transform: none;
     position: relative;
@@ -287,18 +289,16 @@ export default {
 
 .totalPrice {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     -webkit-box-align: center;
     align-items: center;
     padding-top: 24px;
-    padding-bottom: 50px;
+    padding-bottom: 24px;
     height: 100%;
 }
 
 .totalPriceText {
     text-align: center;
-    width: 10%;
-    border-bottom: 2px solid rgb(193, 26, 26);
     padding-bottom: 3px;
 }
 
@@ -306,7 +306,7 @@ export default {
     color: rgb(34, 34, 34);
     font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
     font-size: 16px;
-    margin: 0px;
+    margin: 0px 14px;
     font-weight: 700;
 }
 
@@ -317,8 +317,6 @@ export default {
     -webkit-box-pack: end;
     justify-content: flex-end;
     padding-bottom: 5px;
-
-    width: 10%;
     white-space: nowrap;
     border-bottom: 2px solid rgb(193, 26, 26);
 }
@@ -337,10 +335,56 @@ export default {
 .orderWrapper {
     display: flex;
     justify-content: flex-end;
+    margin: 14px 14px;
 }
 
 .order:hover {
     background-color: rgb(42, 78, 42);
     border-color: rgb(42, 78, 42);
+}
+
+@media only screen and (min-width: 0px) {
+    .cartComponent {
+        padding: 7px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .cartComponent {
+        padding: 14px;
+    }
+
+    .addRecipyWrapper {
+        justify-content: flex-start;
+        margin: 0;
+    }
+
+    .addRecipy,
+    .order {
+        width: 160px;
+    }
+
+    .orderWrapper {
+        margin: 0;
+    }
+
+    .totalPrice {
+        display: flex;
+        justify-content: flex-end;
+        -webkit-box-align: center;
+        align-items: center;
+        padding-top: 24px;
+        padding-bottom: 50px;
+        height: 100%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .cartComponent {
+        padding: 24px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
 }
 </style>

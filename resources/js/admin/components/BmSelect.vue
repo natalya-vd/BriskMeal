@@ -3,9 +3,9 @@
         class="input-box"
         v-click-outside="close"
     >
-        <span v-if="title.length > 0" class="input-title">
-            {{ title }}
-        </span>
+        <p v-if="title.length > 0" class="input-title fw-bold fs-5 mb-3">
+            {{ title }}<span v-if="required" class="text-danger">*</span>
+        </p>
         <div class="wrapper">
             <div class="input__wrapper">
                 <input
@@ -76,7 +76,8 @@ export default {
             default: "",
         },
         selectProp: {
-            type: Object
+            type: Object,
+            default: () => ({})
         },
         dataDropdown: {
             type: Array,
@@ -89,6 +90,10 @@ export default {
         propId: {
             type: String,
             default: "id",
+        },
+        required: {
+            type: Boolean,
+            default: false
         },
         propsValidate: {
             type: Boolean,
