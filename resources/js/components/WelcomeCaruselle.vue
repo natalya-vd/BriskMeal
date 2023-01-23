@@ -5,9 +5,10 @@
         </div>
         
         <TransitionGroup class="caruselleDesk" name="caruselleDesk" tag="ul">
-            <div v-for="item in items" class="caruselleCard" :key="item">
-              {{ item }}
-            </div>
+            <li v-for="item in this.myList" class="caruselleCard" :key="item" :data-key="item" :style="'background-image:url('+ item.photo.full_path +');'" >
+              
+              <div class="caruselleCardTitle">{{ item.photo.name }}</div>
+            </li>
         </TransitionGroup>
         <div class="manageBtns rightManageBtn">
             <div v-on:click="onRight" class="manageBtnItem"> &#5171; </div>
@@ -17,20 +18,23 @@
 
 <script>
     export default {
+        props: ['caruseldata'],
         data() {
             return {
-                    items: [
-                        1, 2, 3, 4, 5, 6     
-                   ]
+                page: 1
+            }
+        },
+         computed: {
+            myList(){
+                return this.caruseldata.splice(0, 5);;
             }
         },
         methods: {
             onLeft: function (event) {
-                this.items.splice (0,1);
-                this.items.splice(5, 0, 7);
+                
             },
             onRight: function (event) {
-                this.items.splice(4, 0, 5);
+    
             }
         }
     }
@@ -69,24 +73,44 @@
         overflow: hidden;
     }
     .caruselleDesk-move,
-    .caruselleDesk-enter-active,
-    .caruselleDesk-leave-active {
+    .caruselleDesk-move2 {
         transition: all 1s;
     }
-    .caruselleDesk-enter-from,
-    .caruselleDesk-leave-to {
-        transform: translateX(-204px);
+    .caruselleDesk-move {
+        transform: translateX(-1100px);
+    }
+     .caruselleDesk-move2 {
+        transform: translateX(-2200px);
     }
     .caruselleDesk-leave-active {
         position: absolute;
     }
     .caruselleCard{
         height: 100%;
-        min-width: 19.8%;
-        margin-right: 1%;
-       position: relative;
-       background-color: silver;
-       left: -20.4%;
+        width: 19.8%;
+        margin-right: 0.2%;
+        position: relative;
+        background-color: silver;
+        display: flex;
+        align-items: center;
+        justify-content:center;
+        font-size: 100px;
+        display: flex;
+        align-items: end;
+        background-size:   auto 100%;
+        background-position-x: center;
+       
+    }
+    .caruselleCardTitle{
+        width: 100%;
+        height: 35.29%;
+        color: white;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 600;
+        padding: 56px 12px 5px 12px;
+        text-align:center;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgb(34, 34, 34));
     }
     @media only screen  and (max-width:1200px) {
         .caruselleBlock{
