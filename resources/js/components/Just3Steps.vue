@@ -165,4 +165,36 @@
         min-width: 280px;
     }
 }
+@media only screen and (max-width: 350px) {
+    .just3steps{
+        max-height:700px;
+        min-height:600px;
+    }
+    .just3stepsItems{
+        flex-direction: column;
+        max-height: 660px;
+        min-height: 600px;
+    }
+    .just3stepsItem{
+        height: 33.33%;
+        width: 100%;
+        padding: 0 15px 0 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .just3stepsItemImage{
+        height: 100px;
+        width: 100%;
+    }
+    .just3stepsItemText{
+        width: 95%;
+        padding: 0 2.5%;
+        min-width: 250px;
+    }
+    .just3stepsItemTitle{
+        min-width: 250px;
+        font-size: 20px;
+    }
+}
 </style>

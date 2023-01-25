@@ -148,4 +148,25 @@
             line-height: 40px;
         }
     }
+    @media only screen and (max-width: 350px) {
+        .welcomeTopBack{
+            height: 460px;
+            padding-top:5px;
+        }
+        .welcomeTopInfo{
+            height: 98%;
+            width: 100%;
+            text-align: center;
+            padding: 0 3% 0 3%;
+        }
+        h1{
+            font-size: 26px;
+            line-height: 35px;
+        }
+        h2{
+            font-size: 16px;
+            line-height: 22px;
+            margin-bottom: 18px;
+        }
+    }
 </style>
