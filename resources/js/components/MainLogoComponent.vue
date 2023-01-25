@@ -56,7 +56,7 @@
 export default {
     name: "MainLogoComponent",
     mounted() {
-        console.log("MainLogo Component mounted.");
+        
     },
 };
 </script>

@@ -1,18 +1,18 @@
 <template>
     <div class="caruselleBlock" >
         <div class="manageBtns leftManageBtn">
-            <div v-if="isLeftBtnShowd" v-on:click="onLeft" class="manageBtnItem" style="background-color: grey; cursor: default;">	&#5176;</div>
-            <div v-else v-on:click="onLeft" class="manageBtnItem" style="background-color: rgb(66, 105, 61);">	&#5176;</div>
+            <div v-if="isLeftBtnShowd" class="manageBtnItem" style="background-color: grey; cursor: default;">	&#5176;</div>
+            <div v-else v-on:click="onLeft(this.page)" class="manageBtnItem" style="background-color: rgb(66, 105, 61);">	&#5176;</div>
         </div>
         <TransitionGroup class="caruselleDesk" name="caruselle" tag="ul" id="caruselleDesk" >
-            <li v-for="(item, index) in this.myList" class="caruselleCard" :key="item.photo.id" :data-key="item"  :data-index="index" :style="'background-image:url('+ item.photo.full_path +');'" >
+            <li v-for="(item, index) in this.myList" class="caruselleCard" :key="item.photo.id" :data-key="item.photo.id"   :style="'background-image:url('+ item.photo.full_path +');'" >
               <a :href="`/recipe/${item.photo.id}`" class="caruselleCardLink">
                 <div class="caruselleCardTitle">{{ item.photo.name }}</div>
               </a>  
             </li>
         </TransitionGroup>
         <div class="manageBtns rightManageBtn">
-            <div v-if="isRightBtnShowd" v-on:click="onRight" class="manageBtnItem" style="background-color: grey; cursor: default;"> &#5171; </div>
+            <div v-if="isRightBtnShowd" class="manageBtnItem" style="background-color: grey; cursor: default;"> &#5171; </div>
             <div v-else v-on:click="onRight" class="manageBtnItem" style="background-color: rgb(66, 105, 61);"> &#5171; </div>
         </div>
     </div>
@@ -28,18 +28,6 @@
             }
         },
          computed: {
-            myListCalc(){
-                if(this.page === 1){
-                    return this.caruseldata.slice(0, 5);
-                } else {
-                    if (this.page === 2){
-                        return this.caruseldata.slice(0, 7);
-                    }else {
-                        return this.caruseldata.slice(1, 8);
-                    }    
-                }
-                
-            },
             maxPage(){
                 return this.caruseldata.length - 5
             },
@@ -51,33 +39,19 @@
             }
         },
         methods: {
-            onLeft: function (event) {
-                this.page === 1 ? this.page = 1 :this.page -= 1;
-                if (this.page === 2){
-                    this.myList.push(this.caruseldata.slice(6, 7)[0]);
-                    this.moveToRight();
-                }else {
-                    this.myList.push(this.caruseldata.slice(7, 8)[0]);
+            onLeft(page) {
+                page === 1 ? this.page = 1 :this.page -= 1;
+                if (page > 1){
+                    this.myList.splice(0, 0, this.caruseldata.slice(page-2, page-1)[0]);
+                    this.myList.pop();
                 }    
-                console.log(this.myList);
-
-
             },
             onRight: function (event) {
                 this.page === this.maxPage ? this.page = this.maxPage :this.page += 1;
                 if(this.page < this.maxPage){ 
-                    this.myList.push(this.caruseldata.slice(this.page+4, this.page+5)[0]);
-                    this.myList.splice(0,1);
+                    this.myList.push(this.caruseldata.slice(this.page+5, this.page+6)[0]);
+                    this.myList.shift();
                 }  
-             //   console.log(this.myList);
-            },
-            moveToLeft: function (event) {
-                const elems = document.getElementById('caruselleDesk').childNodes;
-                             
-            },
-            backFromLeft: function (event) {
-                const elems = document.getElementById('caruselleDesk').childNodes;
-                
             }
         },
         mounted() {
@@ -118,15 +92,18 @@
         flex-flow: row nowrap;
         overflow: hidden;
     }
+    .caruselle-leave-active,
+    .caruselle-enter-active,
     .caruselle-active {
-        transition: all 5s ease;
-    }     
-
-    .moveToLeft{
-        transition: all 2s;
-        transform: translateX(-240px);
+        transition: all 0.5s;
+    }  
+       
+    .caruselle-enter-from {
+        transform: translate(-200px, 0);
     }
-
+    .caruselle-enter-from:last-child {
+        transform: translate(220px, 0);
+    }
     .caruselle-leave-active {
         position: absolute;
     }
@@ -144,7 +121,7 @@
         align-items: end;
         background-size:   auto 100%;
         background-position-x: center;
-        transition: all 3s easy;
+        transition: all 0.5s;
         display: inline-block;
     }
     .caruselleCardLink{

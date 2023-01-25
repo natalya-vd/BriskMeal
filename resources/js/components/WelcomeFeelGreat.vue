@@ -19,9 +19,7 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Welcome feelgreat Component mounted.')
-        }
+        
     }
 </script>
 

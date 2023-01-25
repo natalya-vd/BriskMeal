@@ -64,7 +64,7 @@ export default {
         };
     },
     mounted() {
-        console.log("Header Component mounted.");
+       
     },
 
     methods: {

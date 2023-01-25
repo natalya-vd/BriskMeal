@@ -5,23 +5,29 @@
             <div class="just3stepsItems">
                 <div class="just3stepsItem">
                     <div class="just3stepsItemImage" style="background-image: url(https://images.everyplate.com/f_auto,fl_lossy,q_auto,w_500/everyplate_contentful/5mIz4fhIwitKy0V8umaywu/69c0a4e2cbb83d875caac2098bef1faf/choose.png)"></div>
-                    <div class="just3stepsItemTitle">Choose</div>
-                    <div class="just3stepsItemText">
-                        Now you can mix and match recipes from different preferences in the same weekly order - with 30 options!
+                    <div class="just3stepsItemInfo">
+                        <div class="just3stepsItemTitle">Choose</div>
+                        <div class="just3stepsItemText">
+                            Now you can mix and match recipes from different preferences in the same weekly order - with 30 options!
+                        </div>
                     </div>
                 </div>
                 <div class="just3stepsItem">
                     <div class="just3stepsItemImage"  style="background-image: url(https://images.everyplate.com/f_auto,fl_lossy,q_auto,w_500/everyplate_contentful/4A5vCP38CuhG8V0z96ujxR/080e2418f71e036943944e54400b02e2/cook.png)" ></div>
-                    <div class="just3stepsItemTitle">Cook</div>
-                    <div class="just3stepsItemText">
-                        Our premium ingredients come pre-measured and prepped. Just follow our easy step-by-step instructions, photos included.
+                    <div class="just3stepsItemInfo">
+                        <div class="just3stepsItemTitle">Cook</div>
+                        <div class="just3stepsItemText">
+                            Our premium ingredients come pre-measured and prepped. Just follow our easy step-by-step instructions, photos included.
+                        </div>
                     </div>
                 </div>
                 <div class="just3stepsItem">
                     <div class="just3stepsItemImage"  style="background-image: url(https://images.everyplate.com/f_auto,fl_lossy,q_auto,w_500/everyplate_contentful/3wcDjw42UWylTUQveRyIdX/4663aab4e9d6e3fb1d15756c21914f54/enjoy.png)"></div>
-                    <div class="just3stepsItemTitle">Enjoy</div>
-                    <div class="just3stepsItemText">
-                        Our chef-curated recipes make it easier to try new flavors while keeping up with your lifestyle goals. 
+                    <div class="just3stepsItemInfo">
+                        <div class="just3stepsItemTitle">Enjoy</div>
+                        <div class="just3stepsItemText">
+                            Our chef-curated recipes make it easier to try new flavors while keeping up with your lifestyle goals. 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,13 +80,12 @@
         height: 100%;
         width: 33.33%;
         padding: 0 15px 0 15px;
-
         display: flex;
         flex-direction: column;
     }
     .just3stepsItemImage{
         height: 228px;
-        min-width: 326px;
+        width: 326px;
         background-size: contain;
         background-repeat: no-repeat;
         background-position-x: center;
@@ -105,4 +110,59 @@
         font-size: 15px;
         line-height: 24px;
     }
+    @media only screen and (max-width: 1100px) {
+        .just3stepsBlock{
+            width: 100%;
+        }
+    }
+    @media only screen and (max-width: 770px) {
+        .just3stepsItems{
+            flex-direction: column;
+            max-height: 438px;
+        }
+        .just3stepsItem{
+            height: 33.33%;
+            width: 100%;
+            padding: 0 15px 0 15px;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+        .just3stepsItemImage{
+            height: 100%;
+            width: 30%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position-x: center;
+        }
+        .just3stepsItemInfo{
+            height: 100%;
+            width: 70%;
+        }
+        .just3stepsItemText{
+            min-height: 50px;
+            width: 100%;
+            color: #222;
+            font-size: 12px;
+            line-height: 18px;
+            padding: 0 5% 0 5%;
+        }
+        .just3stepsItemTitle{
+            height: 30px;
+            width: 100%;
+            margin-top:1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            font-size: 22px;
+            line-height: 26px;
+            font-weight: bold;
+        }
+    }
+@media only screen and (max-width: 1200px) {
+    .just3stepsItemText{
+        padding: 0 5% 0 5%;
+        min-width: 280px;
+    }
+}
 </style>

@@ -19,7 +19,7 @@
 <script>
     export default {
         mounted() {
-            console.log('welcomeTop Component mounted.')
+            
         }
     }
 </script>
