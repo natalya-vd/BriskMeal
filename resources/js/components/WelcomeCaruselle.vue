@@ -4,8 +4,8 @@
             <div v-if="isLeftBtnShowd" v-on:click="onLeft" class="manageBtnItem" style="background-color: grey; cursor: default;">	&#5176;</div>
             <div v-else v-on:click="onLeft" class="manageBtnItem" style="background-color: rgb(66, 105, 61);">	&#5176;</div>
         </div>
-        <TransitionGroup class="caruselleDesk" name="caruselleDesk" tag="ul">
-            <li v-for="item in this.myList" class="caruselleCard" :key="item.photo.id" :data-key="item" :style="'background-image:url('+ item.photo.full_path +');'" >
+        <TransitionGroup class="caruselleDesk" name="caruselle" tag="ul" id="caruselleDesk" >
+            <li v-for="(item, index) in this.myList" class="caruselleCard" :key="item.photo.id" :data-key="item"  :data-index="index" :style="'background-image:url('+ item.photo.full_path +');'" >
               <a :href="`/recipe/${item.photo.id}`" class="caruselleCardLink">
                 <div class="caruselleCardTitle">{{ item.photo.name }}</div>
               </a>  
@@ -30,14 +30,18 @@
          computed: {
             myListCalc(){
                 if(this.page === 1){
-                    return this.caruseldata.splice(0, 5);
+                    return this.caruseldata.slice(0, 5);
                 } else {
-                    return this.caruseldata.splice(0, 10);
+                    if (this.page === 2){
+                        return this.caruseldata.slice(0, 7);
+                    }else {
+                        return this.caruseldata.slice(1, 8);
+                    }    
                 }
                 
             },
             maxPage(){
-                return Math.ceil(this.caruseldata.length/5)
+                return this.caruseldata.length - 5
             },
             isLeftBtnShowd(){
                 return this.page === 1 ? true : false
@@ -49,19 +53,35 @@
         methods: {
             onLeft: function (event) {
                 this.page === 1 ? this.page = 1 :this.page -= 1;
+                if (this.page === 2){
+                    this.myList.push(this.caruseldata.slice(6, 7)[0]);
+                    this.moveToRight();
+                }else {
+                    this.myList.push(this.caruseldata.slice(7, 8)[0]);
+                }    
+                console.log(this.myList);
+
+
             },
             onRight: function (event) {
                 this.page === this.maxPage ? this.page = this.maxPage :this.page += 1;
-                const testArr = this.caruseldata.slice(5,10);
-                for (let i=0; i<5; i++){
-                    this.myList.push(testArr[i]);              
-                }
-                console.log(this.myList);
+                if(this.page < this.maxPage){ 
+                    this.myList.push(this.caruseldata.slice(this.page+4, this.page+5)[0]);
+                    this.myList.splice(0,1);
+                }  
+             //   console.log(this.myList);
+            },
+            moveToLeft: function (event) {
+                const elems = document.getElementById('caruselleDesk').childNodes;
+                             
+            },
+            backFromLeft: function (event) {
+                const elems = document.getElementById('caruselleDesk').childNodes;
+                
             }
         },
         mounted() {
-           this.myList = this.caruseldata.slice(0, 5);
-           console.log(this.myList[0])
+           this.myList = this.caruseldata.slice(0, 6);
         }
     }
 </script>
@@ -98,17 +118,16 @@
         flex-flow: row nowrap;
         overflow: hidden;
     }
-    .caruselleDesk-move,
-    .caruselleDesk-move2 {
-       
-    }
-    .caruselleDesk-move {
-    
+    .caruselle-active {
+        transition: all 5s ease;
     }     
-    .caruselleDesk-move2 {
-        
+
+    .moveToLeft{
+        transition: all 2s;
+        transform: translateX(-240px);
     }
-    .caruselleDesk-leave-active {
+
+    .caruselle-leave-active {
         position: absolute;
     }
     .caruselleCard{
@@ -125,7 +144,8 @@
         align-items: end;
         background-size:   auto 100%;
         background-position-x: center;
-        display: block;
+        transition: all 3s easy;
+        display: inline-block;
     }
     .caruselleCardLink{
        width: 100%;

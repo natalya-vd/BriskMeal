@@ -8,7 +8,7 @@
                 <div class="feelgreatJoinSighns">
                     <img class="sign"  alt="csasc" src="https://images.ctfassets.net/4frik3v39clf/75xdvbWDKkGGuhFOKoVHyi/c12f58753966365c6260aade5f2832cc/usda-organic.svg"/>
                     <div class="certifiedBox">
-                        <div class="certified">GREEN CHEF IS A CERTIFIED ORGANIC COMPANY</div> 
+                        <div class="certified">BRISK MEAL IS A CERTIFIED ORGANIC COMPANY</div> 
                     </div>
                 </div>
            </div>
