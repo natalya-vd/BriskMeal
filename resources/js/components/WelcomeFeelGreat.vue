@@ -3,13 +3,13 @@
         <div class="container">
             <div class="feelgreatInfoBox">
                 <h2>Feel Great About Your Food</h2>
-                <h3>It's right in the name: Green Chef is all about eating and living green. We are a USDA certified organic company. We work with farmers to source sustainable, delicious ingredients</h3>
+                <h3>It's right in the name: BRISK MEAL is all about eating and living green. We are a USDA certified organic company. We work with farmers to source sustainable, delicious ingredients</h3>
                 <div class="feelgreatJoinBtnPlace"><a href="/plans"> Join Now</a></div>
                 <div class="feelgreatJoinSighns">
                     <img class="sign"  alt="saca" src="https://images.ctfassets.net/4frik3v39clf/7aGq7V1LkUFa8qEqewEg7l/9dd12d653d9805ebd2bd45f47022fccf/ccof-organic.svg"/>
                     <img class="sign"  alt="csasc" src="https://images.ctfassets.net/4frik3v39clf/75xdvbWDKkGGuhFOKoVHyi/c12f58753966365c6260aade5f2832cc/usda-organic.svg"/>
                     <div class="certifiedBox">
-                        <div class="certified">GREEN CHEF IS A CERTIFIED ORGANIC COMPANY</div> 
+                        <div class="certified">BRISK MEAL IS A CERTIFIED ORGANIC COMPANY</div> 
                     </div>
                 </div>
             </div>        
@@ -19,9 +19,7 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Welcome feelgreat Component mounted.')
-        }
+        
     }
 </script>
 

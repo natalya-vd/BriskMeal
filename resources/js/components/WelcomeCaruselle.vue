@@ -1,17 +1,19 @@
 <template>
     <div class="caruselleBlock" >
         <div class="manageBtns leftManageBtn">
-            <div v-on:click="onLeft" class="manageBtnItem">	&#5176;</div>
+            <div v-if="isLeftBtnShowd" class="manageBtnItem" style="background-color: grey; cursor: default;">	&#5176;</div>
+            <div v-else v-on:click="onLeft(this.page)" class="manageBtnItem" style="background-color: rgb(66, 105, 61);">	&#5176;</div>
         </div>
-        
-        <TransitionGroup class="caruselleDesk" name="caruselleDesk" tag="ul">
-            <li v-for="item in this.myList" class="caruselleCard" :key="item" :data-key="item" :style="'background-image:url('+ item.photo.full_path +');'" >
-              
-              <div class="caruselleCardTitle">{{ item.photo.name }}</div>
+        <TransitionGroup class="caruselleDesk" name="caruselle" tag="ul" id="caruselleDesk" >
+            <li v-for="(item, index) in this.myList" class="caruselleCard" :key="item.photo.id" :data-key="item.photo.id"   :style="'background-image:url('+ item.photo.full_path +');'" >
+              <a :href="`/recipe/${item.photo.id}`" class="caruselleCardLink">
+                <div class="caruselleCardTitle">{{ item.photo.name }}</div>
+              </a>  
             </li>
         </TransitionGroup>
         <div class="manageBtns rightManageBtn">
-            <div v-on:click="onRight" class="manageBtnItem"> &#5171; </div>
+            <div v-if="isRightBtnShowd" class="manageBtnItem" style="background-color: grey; cursor: default;"> &#5171; </div>
+            <div v-else v-on:click="onRight" class="manageBtnItem" style="background-color: rgb(66, 105, 61);"> &#5171; </div>
         </div>
     </div>
 </template>
@@ -21,21 +23,39 @@
         props: ['caruseldata'],
         data() {
             return {
-                page: 1
+                page: 1,
+                myList: []
             }
         },
          computed: {
-            myList(){
-                return this.caruseldata.splice(0, 5);;
+            maxPage(){
+                return this.caruseldata.length - 5
+            },
+            isLeftBtnShowd(){
+                return this.page === 1 ? true : false
+            },
+            isRightBtnShowd(){
+                return this.page === this.maxPage ? true : false
             }
         },
         methods: {
-            onLeft: function (event) {
-                
+            onLeft(page) {
+                page === 1 ? this.page = 1 :this.page -= 1;
+                if (page > 1){
+                    this.myList.splice(0, 0, this.caruseldata.slice(page-2, page-1)[0]);
+                    this.myList.pop();
+                }    
             },
             onRight: function (event) {
-    
+                this.page === this.maxPage ? this.page = this.maxPage :this.page += 1;
+                if(this.page < this.maxPage){ 
+                    this.myList.push(this.caruseldata.slice(this.page+5, this.page+6)[0]);
+                    this.myList.shift();
+                }  
             }
+        },
+        mounted() {
+           this.myList = this.caruseldata.slice(0, 6);
         }
     }
 </script>
@@ -57,13 +77,13 @@
     .manageBtnItem{
         width: 38px;
         height: 38px;
-        background-color: rgb(66, 105, 61);
         border-radius: 50%;
         color: white;
         font-size: 16px;
         font-weight: lighter;
         text-align: center;
         padding: 5px 8px 4px 8px;
+        cursor:  pointer;
     }
     .caruselleDesk{
         height: 100%;
@@ -72,22 +92,24 @@
         flex-flow: row nowrap;
         overflow: hidden;
     }
-    .caruselleDesk-move,
-    .caruselleDesk-move2 {
-        transition: all 1s;
+    .caruselle-leave-active,
+    .caruselle-enter-active,
+    .caruselle-active {
+        transition: all 0.5s;
+    }  
+       
+    .caruselle-enter-from {
+        transform: translate(-200px, 0);
     }
-    .caruselleDesk-move {
-        transform: translateX(-1100px);
+    .caruselle-enter-from:last-child {
+        transform: translate(220px, 0);
     }
-     .caruselleDesk-move2 {
-        transform: translateX(-2200px);
-    }
-    .caruselleDesk-leave-active {
+    .caruselle-leave-active {
         position: absolute;
     }
     .caruselleCard{
         height: 100%;
-        width: 19.8%;
+        min-width: 19.8%;
         margin-right: 0.2%;
         position: relative;
         background-color: silver;
@@ -99,7 +121,14 @@
         align-items: end;
         background-size:   auto 100%;
         background-position-x: center;
-       
+        transition: all 0.5s;
+        display: inline-block;
+    }
+    .caruselleCardLink{
+       width: 100%;
+       height: 100%;
+       display: flex;
+       align-items: end;
     }
     .caruselleCardTitle{
         width: 100%;
