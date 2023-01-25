@@ -76,4 +76,10 @@ export default {
 svg{
     height: 100%;
 }
+@media only screen and (max-width: 500px) {
+    .mainLogoBlock {
+        width: 90px;
+        padding: 2px 8px 0 0;
+    }
+}
 </style>
