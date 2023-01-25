@@ -88,8 +88,8 @@ export default {
     created() {
         this.formData.name = this.getIngredient.name
         this.formData.unit = {
-            id: this.getIngredient.unit.id,
-            name: this.getIngredient.unit.name,
+            id: this.getIngredient.unit?.id ?? '',
+            name: this.getIngredient.unit?.name ?? '',
         }
     },
 

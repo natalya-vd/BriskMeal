@@ -26,7 +26,7 @@
                                 <tr v-for="item in getData" :key="item.id">
                                 <td class="align-middle">{{ item.id }}</td>
                                 <td class="align-middle">{{ item.name }}</td>
-                                <td class="align-middle">{{ item.unit.name }}</td>
+                                <td class="align-middle">{{ item.unit?.name ?? '' }}</td>
                                 <td class="align-middle">
                                     <div class="cell-action">
                                         <a :href="getPathEdit(item.id)" class="btn-action btn btn-primary">

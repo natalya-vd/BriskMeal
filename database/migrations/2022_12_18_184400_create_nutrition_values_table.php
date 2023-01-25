@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('unit_id')
-                ->constrained('units');
+                ->nullable()
+                ->constrained('units')
+                ->nullOnDelete();
             $table->timestamps();
         });
     }
