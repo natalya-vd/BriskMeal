@@ -95,7 +95,7 @@ export default {
 
 .flex-item {
     display: flex;
-    width: 100%;
+    width: 80%;
 }
 
 .headerBlock {
@@ -104,7 +104,7 @@ export default {
     align-items: center;
     height: 80px;
     padding: 12px 0;
-    width: 100%;
+    width: 90%;
     z-index: 100;
 }
 
@@ -236,12 +236,13 @@ export default {
         display: flex;
         width: auto;
         justify-content: space-between;
+        margin-right: 20px;
     }
 }
 
 @media only screen and (min-width: 768px) {
     .flex-item {
-        width: 100%;
+        width: calc(100% - 110px) ;
     }
 }
 

@@ -115,4 +115,58 @@
         font-weight: 500;
         font-size: 14px;
     }
+    @media only screen and (max-width: 770px) {
+        .welcomeTopBack{
+            height: 460px;
+            width: 100%;
+            background-image: none;
+        }
+        .welcomeTopInfo{
+            height: 98%;
+            width: 100%;
+            text-align: center;
+            padding: 0 3% 0 3%;
+        }
+        h1{
+            font-size: 35px;
+            line-height: 42px;
+        }
+    }
+    @media only screen and (max-width: 500px) {
+        .welcomeTopBack{
+            height: 460px;
+            padding-top:10px;
+        }
+        .welcomeTopInfo{
+            height: 98%;
+            width: 100%;
+            text-align: center;
+            padding: 0 3% 0 3%;
+        }
+        h1{
+            font-size: 30px;
+            line-height: 40px;
+        }
+    }
+    @media only screen and (max-width: 350px) {
+        .welcomeTopBack{
+            height: 460px;
+            padding-top:5px;
+        }
+        .welcomeTopInfo{
+            height: 98%;
+            width: 100%;
+            text-align: center;
+            padding: 0 3% 0 3%;
+        }
+        h1{
+            font-size: 26px;
+            line-height: 35px;
+        }
+        h2{
+            font-size: 16px;
+            line-height: 22px;
+            margin-bottom: 18px;
+        }
+    }
 </style>

@@ -140,4 +140,64 @@
         margin-left: 25%;
     }
 }
+@media only screen and (max-width: 770px) {
+    .feelgreat{
+        background: url(https://www.everyplate.com/assets/everyplate/images/banners/bottombanner/footer-hero-bg-sm.jpg);
+        background-position-x: left;
+        background-position-y: top;
+        background-size:  100% auto;
+        height:800px;
+        width:100%;
+    }
+    .feelgreatInfoBox{
+        margin-top: 500px;
+        margin-left:5px;
+        height: 300px;
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+    }
+    .feelgreatJoinBtnPlace{
+        justify-content: center;
+    }
+    .feelgreatJoinSighns{
+        justify-content: center;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .feelgreatInfoBox{
+        margin-top: 380px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .feelgreat{
+        height:700px;
+    }
+    .feelgreatInfoBox{
+        margin-top: 350px;
+        height: 250px;
+    }
+}
+@media only screen and (max-width: 470px) {
+    .feelgreat{
+        height:700px;
+    }
+    .feelgreatInfoBox{
+        margin-top: 320px;
+        height: 380px;
+    }
+}
+@media only screen and (max-width: 380px) {
+    .feelgreat{
+        height:700px;
+    }
+    .feelgreatInfoBox{
+        margin-top: 300px;
+        height: 400px;
+    }
+    .certified{
+        font-weight: 400;
+        font-size: 12px;
+    }
+}
 </style>
