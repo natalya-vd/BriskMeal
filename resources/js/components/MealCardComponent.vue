@@ -13,14 +13,7 @@
                 </div>
             </div>
         </a>
-        <button type="button"
-                style="background-color: #339900;
-                color: #FFFFFF;
-                border: none;"
-                onmouseover="this.style.backgroundColor='#336600'"
-                onmouseout="this.style.backgroundColor='#339900'"
-                @click="addToCart(id)">Add Cart
-        </button>
+        <buy-button id="id"></buy-button>
     </div>
 </template>
 
@@ -33,16 +26,7 @@ export default {
     components: {
         MealPlan
     },
-
     props: ['id', 'time', 'title', 'ingredients', 'plans', 'photo'],
-
-    methods: {
-        async addToCart(recipe_id) {
-            const data = await createResource({endpoint: ADD_RECIPES, resource: {id: +recipe_id}})
-            console.log(data)
-        }
-    },
-
     computed: {
         getIngredients() {
             const ingredients = JSON.parse(this.ingredients)
@@ -73,6 +57,7 @@ export default {
         border-radius: 9px;
         box-shadow: rgb(50 0 0 / 20%) 0px 3px 5px 0px;
         overflow: hidden;
+        margin-bottom: 5px;
     }
 
     .mealCArdInfo{
