@@ -1,8 +1,13 @@
 <template>
-    <div class="container welcomeSliderBlock" >
+    <div class="container welcomeSliderBlock" id="welcomeSliderBlock">
         <h2>Next Week’s Menu</h2>
         <h3>Choose from 30 delicious and affordable recipes that change with every week</h3>
-        <welcome-caruselle :caruseldata="getSecondJSON" ></welcome-caruselle>
+        <template v-if="isSliderShowed">
+            <welcome-caruselle :caruseldata="getSecondJSON" ></welcome-caruselle>
+        </template>
+        <template v-else>
+            <welcome-tiles :caruseldata="getSecondJSON"></welcome-tiles>
+        </template>
         <div class="welcomeSliderDungeon">
             <a href="/catalog" style="color: white;">See The Menu</a>
             <p>Simply select recipes after signing up</p>
@@ -13,6 +18,9 @@
 <script>
     export default {
         props: ['recepies'],
+        data: () => ({
+            myWidth: 1,
+        }),
         computed: {
             getFirstJSON(){
                 return JSON.parse(this.recepies);
@@ -28,7 +36,23 @@
                         caruseldata.push(newEl);
                 });
                 return caruseldata
+            },
+            isSliderShowed(){
+                if (this.myWidth > 700){
+                    return true
+                }else {
+                    return false
+                } 
             }
+        },
+        methods: {
+            updateWidth() {
+                this.myWidth = window.innerWidth;
+            }
+        },
+        mounted() {
+            this.updateWidth();
+            window.addEventListener('resize', this.updateWidth);
         }
     }
 </script>
@@ -96,5 +120,11 @@
     transition-property: color, background, border, box-shadow, opacity !important;
     text-decoration: none;
     margin-bottom: 24px;
+}
+@media only screen  and (max-width:650px) {
+    .welcomeSliderBlock{
+        min-height: 564px;
+        height: auto;
+    }
 }
 </style>

@@ -77,6 +77,10 @@ app.component("welcome-feelgreat", WelcomeFeelGreat);
 
 import WelcomeTopComponent from "./components/WelcomeTopComponent.vue";
 app.component("welcome-top", WelcomeTopComponent);
+
+import WelcomeTilesComponent from "./components/WelcomeTiles.vue";
+app.component("welcome-tiles", WelcomeTilesComponent);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

@@ -96,8 +96,7 @@
     .caruselle-enter-active,
     .caruselle-active {
         transition: all 0.5s;
-    }  
-       
+    }
     .caruselle-enter-from {
         transform: translate(-200px, 0);
     }
