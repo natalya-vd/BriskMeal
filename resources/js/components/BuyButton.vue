@@ -1,6 +1,6 @@
 <template>
     <div class="buyBtnPlace" >
-        <div  v-if="showedAddBtn" class="buyBtn" v-on:click="changeSpinnerMode">
+        <div  v-if="showedAddBtn" class="buyBtn" v-on:click="addToCart(id)">
             <div v-if="showedSpinner" class="spinner-border" role="status">
                 <span class="sr-only"></span>
             </div>
@@ -18,6 +18,9 @@
 </template>
 
 <script>
+    import {createResource} from "../api/api";
+    import {ADD_RECIPES} from "../api/endpoints";
+
     export default {
     props: ['id'],
     data() {
@@ -34,7 +37,9 @@
     methods: {
         async addToCart(recipe_id) {
             const data = await createResource({endpoint: ADD_RECIPES, resource: {id: +recipe_id}})
-            console.log(data)
+            this.quantity += 1;
+            console.log(data);
+            console.log(this.id);
         },
         changeSpinnerMode(){
             this.showedSpinner = !this.showedSpinner;

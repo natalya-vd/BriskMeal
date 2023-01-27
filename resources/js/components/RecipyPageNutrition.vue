@@ -27,7 +27,7 @@
             </button>
             <small  class="Nutr-val8">Nutrition info may vary slightly by time of delivery. Please refer to FAQ page for more related information.</small>
         </div>
-        <buy-button id="id"></buy-button>
+        <buy-button :id="recipeId"></buy-button>
     </div>
 </template>
 
