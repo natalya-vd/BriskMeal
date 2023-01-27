@@ -27,19 +27,7 @@
             </button>
             <small  class="Nutr-val8">Nutrition info may vary slightly by time of delivery. Please refer to FAQ page for more related information.</small>
         </div>
-
-        <button type="button"
-                style="background-color: #339900;
-                margin-top: 50px;
-                padding: 10px 0;
-                color: #FFFFFF;
-                border: none;
-                border-radius: 5px;
-                font-size: 16px;"
-                onmouseover="this.style.backgroundColor='#336600'"
-                onmouseout="this.style.backgroundColor='#339900'"
-                @click="addToCart(recipeId)">Add Cart
-        </button>
+        <buy-button id="id"></buy-button>
     </div>
 </template>
 
