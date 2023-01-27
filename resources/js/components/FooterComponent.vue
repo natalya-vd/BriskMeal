@@ -1,7 +1,34 @@
 <template>
     <div class="container footerBlock" >
         <div class="footerBlockSection">
-            <div v-if="isTopFooterShowed">BigTopFooter</div>
+            <div v-if="isTopFooterShowed" class="footerTopBig">
+                <div class="footerInfoPlace">
+                    <div class="footerInfoPlaceItem">
+                        <h4>Brisk Meal</h4>
+                        <ul class="accordion-body">
+                            <li class="accordionLi fixPadding"><a href="/catalog">Weekly Menu</a></li>
+                            <li class="accordionLi fixPadding"><a href="/plans">Our Plans</a></li>
+                            <li class="accordionLi fixPadding"><a href="/catalog">Delivery Options</a></li>
+                            <li class="accordionLi fixPadding"><a href="/plans">How It Works</a></li>
+                            <li class="accordionLi fixPadding"><a href="/plans">Hero Discounts</a></li>
+                        </ul>
+                    </div>
+                    <div class="footerInfoPlaceItem">
+                        <h4>Help center</h4>
+                        <ul class="accordion-body">
+                            <li class="accordionLi fixPadding"><a href="/catalog">Help center and FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="downloadAppPlace">
+                    <h4>Download our app</h4>
+                    <p>Manage your deliveries from anywhere, anytime.</p>
+                    <div class="linksForDownload">
+                        <a href="/catalog" class="myLinks" style="background-image:url('https://cdn.hellofresh.com/us/cms/ER/badges/appstore-badge-en.png');"></a>
+                        <a href="/catalog" class="myLinks" style="background-image:url('https://cdn.hellofresh.com/us/cms/ER/badges/playstore-badge-en.png');"></a>
+                    </div>
+                </div>
+            </div>
             <div v-else>
                 <div class="downloadAppLinkPlace">
                     <a class="accordionLi downloadAppLink">Download our app</a>
@@ -118,7 +145,6 @@
         display: flex;
         flex-direction: column;
         padding: 0;
-        margin: 0;
     }
     .footerBlockSection, .downloadAppLinkPlace{
         width: 100%;
@@ -144,5 +170,54 @@
         font-size: 16px;
         line-height: 24px; 
     }
-
+    .footerTopBig{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 48px;
+    }
+    .downloadAppPlace, .footerInfoPlace{
+        height: 100%;
+        min-width: 35%;
+    }
+    .footerInfoPlace{
+        display: flex;
+    }
+    .footerInfoPlaceItem{
+        width: 137px;
+        height: 200px;
+    }
+    .downloadAppPlace{
+        width: 245px;
+        height: 200px;
+        text-align: left;
+    }
+    h4{
+        color: rgb(34, 34, 34);
+        margin: 0px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: left;
+        margin-bottom: 10px;
+    }
+    p{
+        font-size: 16px;
+    }
+    .fixPadding{
+        padding: 2px 0 2px 0;
+    }
+    .linksForDownload{
+        width: 100%;
+        height: 50%;
+        
+    }
+    .myLinks{
+        width: 126px;
+        height: 42px;
+        margin-bottom: 7px;
+        display: block;
+        background-size: 100% auto ;
+        background-repeat: no-repeat;
+    }
 </style>
