@@ -1,5 +1,5 @@
 <template>
-    <div class="cardCart">
+    <div class="cardCart" v-if="isCardShowed">
         <div class="cardBorder">
             <img src="/card_image/card_1.jpg" alt="" class="cardImage" />
 
@@ -46,22 +46,37 @@
 </template>
 
 <script>
+import {REMOVE_RECIPES} from "../api/endpoints";
+
 export default {
     name: "CartCardComponent",
     props: {
-        cartItem: Object,
-        removeItem: Function,
+        cartItem: Object
     },
     data() {
-        return { countRecipy: 1 };
+        return { 
+            countRecipy: 1,
+            isCardShowed: true
+         };
     },
-
-    created() {},
     computed: {
         totalPrice() {
             return this.cartItem.price * this.countRecipy;
-        },
+        }
     },
+    methods: {
+        async removeItem(removedItem) {
+            const headers = { 'Accept': 'application/json'};
+            fetch(`${REMOVE_RECIPES}/${removedItem.id}`, {
+			        method: 'DELETE', 
+			        headers: {...headers, 'Content-Type': 'application/json', 'Accept': 'application/json'},
+			        body: JSON.stringify( {id: this.id})
+		        }).then(()=>{this.changeSpinnerMode();})
+        },
+        changeSpinnerMode(){
+            this.isCardShowed = !this.isCardShowed;
+        }
+    }
 };
 </script>
 
