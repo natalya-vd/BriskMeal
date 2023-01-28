@@ -1,10 +1,10 @@
 <template>
     <div class="buyBtnPlace" >
-        <div  v-if="showedAddBtn" class="buyBtn" v-on:click="addToCart(id)">
-            <div v-if="showedSpinner" class="spinner-border" role="status">
+        <div  v-if="showedAddBtn" class="buyBtn">
+            <div v-if="showedSpinner" class="spinner-border" role="status" >
                 <span class="sr-only"></span>
             </div>
-            <div v-else class="addTocart">Add to Cart</div>
+            <div v-else class="addTocart" v-on:click="addToCart(id)">Add to Cart</div>
         </div>
         <div  v-else class="changeQ">
             <div class="manageQBlock">
@@ -18,8 +18,8 @@
 </template>
 
 <script>
-    import {createResource} from "../api/api";
-    import {ADD_RECIPES} from "../api/endpoints";
+    import {createResource, deleteResource} from "../api/api";
+    import {ADD_RECIPES, REMOVE_RECIPES} from "../api/endpoints";
 
     export default {
     props: ['id'],
@@ -36,20 +36,46 @@
     },
     methods: {
         async addToCart(recipe_id) {
-            const data = await createResource({endpoint: ADD_RECIPES, resource: {id: +recipe_id}})
-            this.quantity += 1;
-            console.log(data);
-            console.log(this.id);
+            const headers = { 'Accept': 'application/json'};
+            this.changeSpinnerMode();
+            fetch(`${ADD_RECIPES}`, {
+			        method: 'POST', 
+			        headers: {...headers, 'Content-Type': 'application/json', 'Accept': 'application/json'},
+			        body: JSON.stringify( {id: +recipe_id})
+		        }).then(response=>{console.log(response)}).then(()=>{ 
+                    this.quantity += 1;
+                    this.changeSpinnerMode();
+                })
+        },
+        async removeItem(removedItem) {
+            const headers = { 'Accept': 'application/json'};
+            this.changeSpinnerMode();
+            this.quantity -= 1;
+            fetch(`${REMOVE_RECIPES}/${this.id}`, {
+			        method: 'DELETE', 
+			        headers: {...headers, 'Content-Type': 'application/json', 'Accept': 'application/json'},
+			        body: JSON.stringify( {id: this.id})
+		        }).then(response=>{console.log(response)}).then(()=>{ 
+                    this.changeSpinnerMode();
+                })
+
+
+         //   const data = await deleteResource({endpoint: REMOVE_RECIPES, id: removedItem})
+            
+            
         },
         changeSpinnerMode(){
             this.showedSpinner = !this.showedSpinner;
-            this.quantity += 1;
         },
         addQ(){
             this.quantity += 1;
         },
         reduceQ(){
-            this.quantity -= 1;
+            if(this.quantity === 1){
+                this.removeItem(this.id);
+            }else{
+                this.quantity -= 1;
+            }
         }
     },
     }
