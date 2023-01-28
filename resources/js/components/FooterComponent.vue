@@ -148,6 +148,7 @@
         line-height: 20px;
     }
     .footerBlock{
+        width: 100%;
         display: flex;
         flex-direction: column;
         padding: 0;
@@ -175,6 +176,8 @@
         font-weight: 400;
         font-size: 16px;
         line-height: 24px; 
+        padding: 2px 0 2px 0;
+        width: 170px;
     }
     .footerTopBig{
         width: 100%;
