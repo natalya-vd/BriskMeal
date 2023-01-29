@@ -24,10 +24,10 @@ class WeekController extends Controller
         try {
             $active_weeks = $builder->getActiveWeeks();
             $first_active_week = $active_weeks->value('week_name');
-            $recipes_id = $builder->getRecipesByWeek($first_active_week);
+            $recipes = $builder->getRecipesByWeek($first_active_week);
 
             $data_response = [
-                'recipes' => $builder_recipes->getRecipesByIdAdmin($recipes_id),
+                'recipes' => $builder_recipes->getRecipesByIdAdmin($recipes['recipes_id']),
                 'currentWeek' => $active_weeks->first(),
                 'recipePriceWeek' => $builder->getPriceRecipeByWeek($first_active_week)->price_recipe,
                 'activeWeeks' => $active_weeks,
@@ -66,10 +66,10 @@ class WeekController extends Controller
         Week $week
     ) {
         try {
-            $recipes_id = $builder->getRecipesByWeek($week->week_name);
+            $recipes = $builder->getRecipesByWeek($week->week_name);
 
             $data_response = [
-                'recipes' => $builder_recipes->getRecipesByIdAdmin($recipes_id),
+                'recipes' => $builder_recipes->getRecipesByIdAdmin($recipes['recipes_id']),
                 'recipePriceWeek' => $builder->getPriceRecipeByWeek($week->week_name)->price_recipe,
             ];
 
