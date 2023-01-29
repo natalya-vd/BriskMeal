@@ -1,14 +1,24 @@
 <template>
     <div class="recipyPageDescription">
-        <div :class="{descriptionToggle: isShown, descriptionToggleCollapse: !isShown}">
+        <div
+            :class="{
+                descriptionToggle: isShown,
+                descriptionToggleCollapse: !isShown,
+            }"
+        >
             <div class="descriptionWrapper">
-                <div :class="{descriptionText: isShown, descriptionTextCollapse: !isShown}">
+                <div
+                    :class="{
+                        descriptionText: isShown,
+                        descriptionTextCollapse: !isShown,
+                    }"
+                >
                     <p>
                         {{ description }}
                     </p>
                 </div>
             </div>
-            <div :class="{collapsibleOverlay: !isShown}"></div>
+            <div :class="{ collapsibleOverlay: !isShown }"></div>
         </div>
 
         <button class="toggleLink" @click="toggleDescription" v-if="isShown">
@@ -49,7 +59,7 @@
 
 <script>
 export default {
-    props: ['description'],
+    props: ["description"],
     data() {
         return {
             isShown: false,
@@ -69,7 +79,6 @@ export default {
 
 <style scoped>
 .recipyPageDescription {
-    background-color: blue;
     display: flex;
     background-color: white;
     flex-direction: column;
@@ -77,7 +86,7 @@ export default {
     box-shadow: rgb(0 0 0 / 10%) 0px 2px 3px 0px;
     position: relative;
     padding: 24px 16px;
-    margin-bottom: 24px;
+    text-align: left;
 }
 .descriptionToggle {
     height: 100%;
@@ -142,5 +151,20 @@ export default {
     cursor: inherit;
     align-self: center;
     margin-left: 8px;
+}
+
+@media only screen and (min-width: 0px) {
+}
+
+@media only screen and (min-width: 768px) {
+}
+
+@media only screen and (min-width: 1200px) {
+    .recipyPageDescription {
+        margin-bottom: 24px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
 }
 </style>

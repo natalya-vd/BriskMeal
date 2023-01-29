@@ -97,15 +97,26 @@
                 packs to keep your meals cool and fresh.
             </p>
         </section>
+        <success-modal
+            :showModalSuccess="showModalSuccess"
+            :visiblilityModalSuccess="visiblilityModalSuccess"
+        ></success-modal>
     </div>
 </template>
 
 <script>
+import SuccessModal from "./SuccessModal.vue";
+
 export default {
     name: "OrderPageAside",
+    components: {
+        SuccessModal,
+    },
     props: {
         formValidation: Object,
         isFormValid: Function,
+        showModalSuccess: Function,
+        visiblilityModalSuccess: Boolean,
     },
     data() {
         return {
@@ -126,6 +137,9 @@ export default {
             return this.isFormValid() === true
                 ? !this.disabledBtn
                 : this.disabledBtn;
+        },
+        submitForm() {
+            this.showModalSuccess();
         },
     },
 };

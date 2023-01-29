@@ -23,9 +23,9 @@
 }
 
 @media only screen and (min-width: 1200px) {
-    .bm-recipe {
+    /* .bm-recipe {
         padding: 0;
-    }
+    } */
 
     .recipyInfoBlock {
         flex-direction: row;

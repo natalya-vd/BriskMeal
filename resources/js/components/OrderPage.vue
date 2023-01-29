@@ -17,11 +17,19 @@
                             <order-page-aside
                                 :formValidation="formValidation"
                                 :isFormValid="isFormValid"
+                                :showModalSuccess="showModalSuccess"
+                                :visiblilityModalSuccess="
+                                    visiblilityModalSuccess
+                                "
                             ></order-page-aside>
                         </div>
                     </div>
                 </div>
             </div>
+            <success-modal
+                :showModalSuccess="showModalSuccess"
+                :visiblilityModalSuccess="visiblilityModalSuccess"
+            ></success-modal>
         </div>
     </div>
 </template>
@@ -29,12 +37,14 @@
 <script>
 import OrderPageForm from "./OrderPageForm.vue";
 import OrderPageAside from "./OrderPageAside.vue";
+import SuccessModal from "./SuccessModal.vue";
 
 export default {
     name: "OrderPage",
     components: {
         OrderPageForm,
         OrderPageAside,
+        SuccessModal,
     },
     props: ["active_weeks"],
 
@@ -64,6 +74,7 @@ export default {
                     },
                 ],
             },
+            visiblilityModalSuccess: false,
         };
     },
     mounted() {
@@ -106,6 +117,9 @@ export default {
                 this.acceptNumber()
                 ? true
                 : false;
+        },
+        showModalSuccess() {
+            this.visiblilityModalSuccess = !this.visiblilityModalSuccess;
         },
     },
 

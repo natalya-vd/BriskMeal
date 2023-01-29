@@ -41,8 +41,8 @@
                                         fill="#42693D"
                                         fill-rule="evenodd"
                                     ></path>
-                                    </svg>
-                                </a>
+                                </svg>
+                            </a>
                         </div>
                     </h3>
                 </div>
@@ -75,7 +75,7 @@
 
 <script>
 export default {
-    props: ['title', 'ingredients'],
+    props: ["title", "ingredients"],
 
     mounted() {
         console.log("RecipyPageTitle Component mounted.");
@@ -83,8 +83,8 @@ export default {
 
     computed: {
         getIngredients() {
-            const ingredients = JSON.parse(this.ingredients)
-            return ingredients.map(item => item.ingredient).join(', ')
+            const ingredients = JSON.parse(this.ingredients);
+            return ingredients.map((item) => item.ingredient).join(", ");
         },
     },
 
@@ -100,9 +100,6 @@ export default {
 
 <style scoped>
 .recipyPageTitle {
-    margin-bottom: 24px;
-    width: 100%;
-    height: 140px;
     display: flex;
     height: 100%;
     width: 100%;
@@ -113,12 +110,12 @@ export default {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    box-sizing: border-box;
+    flex: 1 1 0px;
+    margin-bottom: 16px;
 }
 
 .recipyTitle {
-    flex-basis: 70%;
-    max-width: 70%;
+    flex: 1 1 0px;
 }
 
 .recipyColumn {
@@ -131,36 +128,33 @@ export default {
 }
 
 .headTitle {
-    font-size: 32px;
-    line-height: 38px;
     color: rgb(34, 34, 34);
     font-family: sofia-pro, "Helvetica Neue", Arial, sans-serif;
     text-transform: none;
+    font-size: 24px;
+    line-height: 32px;
     margin: 0px;
-    text-align: left;
     font-weight: 700;
+    text-align: left;
 }
 
 .secondTitle {
     display: flex;
-    flex-direction: row;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    align-items: center;
-    margin: 0px;
+    flex-direction: column;
 }
 
-h3 {
+.secondTitle > h3 {
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
     font-family: sofia-pro, "Helvetica Neue", Arial, sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 30px;
     color: #333;
     text-transform: none;
     font-weight: 700;
+    margin-bottom: 8px;
+    text-align: left;
 }
 
 .blockCopyPrint {
@@ -168,9 +162,10 @@ h3 {
     align-items: flex-end;
 }
 
-.copyTitle {
-    height: 32px;
-    width: 32px;
+.copyTitle,
+.printTitle {
+    height: 24px;
+    width: 24px;
     border: 1px solid rgb(66, 105, 61);
     border-radius: 50%;
     display: inline-block;
@@ -193,22 +188,11 @@ h3 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 18px;
-    width: 18px;
+    height: 14px;
+    width: 14px;
     cursor: pointer;
     vertical-align: middle;
     box-sizing: content-box;
-}
-
-.printTitle {
-    width: 32px;
-    height: 32px;
-    border: 1px solid rgb(66, 105, 61);
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-    margin-left: 8px;
-    vertical-align: middle;
 }
 
 .printTitle:hover {
@@ -220,8 +204,8 @@ h3 {
 }
 
 .printSvg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -230,20 +214,16 @@ h3 {
 }
 
 .recipyView {
-    flex-basis: 30%;
-    max-width: 30%;
-    padding-left: 15px;
+    flex: 1 1 0px;
 }
 
 .recipyViewLink {
-    padding: 12px;
+    padding: 0px;
     border-width: 2px;
     border-style: solid;
     cursor: pointer;
     opacity: 1;
     text-align: center;
-    padding-left: 20px;
-    padding-right: 20px;
     transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
@@ -295,11 +275,103 @@ h3 {
     fill: white;
 }
 
+@media only screen and (min-width: 0px) {
+    .recipyPageTitle {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .recipyTitle {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .recipyTitle {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .secondTitle {
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        align-items: center;
+        /* margin: 0px; */
+    }
+
+    .secondTitle > h3 {
+        margin: 0px;
+    }
+
+    .blockCopyPrint {
+        align-items: flex-start;
+    }
+
+    .recipyView {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .recipyViewLink {
+        padding: 12px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
 @media only screen and (min-width: 1200px) {
     .recipyPageTitle {
         margin-bottom: 24px;
-        flex-basis: 100%;
-        max-width: 100%;
+    }
+
+    .recipyTitle {
+        flex-basis: 70%;
+        max-width: 70%;
+    }
+
+    .headTitle {
+        font-size: 32px;
+        line-height: 38px;
+        font-weight: 700;
+    }
+
+    .secondTitle > h3 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .blockCopyPrint {
+        align-items: flex-end;
+    }
+
+    .copyTitle,
+    .printTitle {
+        height: 32px;
+        width: 32px;
+    }
+
+    .copySvg {
+        height: 18px;
+        width: 18px;
+    }
+
+    .printSvg {
+        height: 20px;
+        width: 20px;
+    }
+
+    .recipyView {
+        flex-basis: 30%;
+        max-width: 30%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .printTitle {
+        display: none;
     }
 }
 </style>
