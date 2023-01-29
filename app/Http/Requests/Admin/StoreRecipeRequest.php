@@ -30,6 +30,11 @@ class StoreRecipeRequest extends FormRequest
             "description" => "required|string",
             "recipe_text" => "required|string",
 
+            "photo" => "array",
+            "photo.*" => "array:id,name",
+            "photo.*.id" => "required|integer|exists:photo_recipes,id",
+            "photo.*.name" => "required|string",
+
             "allergens" => "array",
             "allergens.*" => "array:id,name",
             "allergens.*.id" => "required|integer|exists:allergens,id",

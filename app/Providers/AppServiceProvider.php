@@ -14,6 +14,9 @@ use App\Queries\PreferenceQueryBuilder;
 use App\Queries\NutritionValuesQueryBuilder;
 use App\Queries\IngredientQueryBuilder;
 use App\Queries\AllergenQueryBuilder;
+use App\Queries\UnitQueryBuilder;
+
+use App\Services\UploadFileService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,12 +27,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // QueryBuilders
         $this->app->bind(RecipesQueryBuilder::class);
         $this->app->bind(WeekQueryBuilder::class);
         $this->app->bind(PreferenceQueryBuilder::class);
         $this->app->bind(NutritionValuesQueryBuilder::class);
         $this->app->bind(IngredientQueryBuilder::class);
         $this->app->bind(AllergenQueryBuilder::class);
+        $this->app->bind(UnitQueryBuilder::class);
+
+        // Services
+        $this->app->bind(UploadFileService::class);
     }
 
     /**

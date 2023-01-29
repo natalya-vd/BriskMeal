@@ -15,8 +15,11 @@ return new class extends Migration
     {
         Schema::create('photo_recipes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')
+                ->default('');
             $table->string('path');
+            $table->string('path_thumbnail')
+                ->nullable();
             $table->foreignId('recipe_id')
                 ->constrained('recipes')
                 ->cascadeOnDelete();

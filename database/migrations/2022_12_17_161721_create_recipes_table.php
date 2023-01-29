@@ -19,6 +19,8 @@ return new class extends Migration
             $table->tinyInteger('cook_time');
             $table->text('description');
             $table->text('recipe_text');
+            $table->string('path_pdf')
+                ->nullable();
             $table->timestamps();
         });
     }

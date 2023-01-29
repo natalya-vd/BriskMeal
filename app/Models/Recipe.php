@@ -13,6 +13,7 @@ class Recipe extends Model
         'cook_time',
         'description',
         'recipe_text',
+        'path_pdf',
     ];
 
     protected $hidden = ['pivot'];

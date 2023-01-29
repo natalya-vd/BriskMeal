@@ -1,4 +1,6 @@
 const ADMIN_RECIPES = '/api/admin/recipes'
+const ADMIN_RECIPES_PHOTO = '/api/admin/recipes/photo'
+const ADMIN_RECIPES_FILE = '/api/admin/recipes/file'
 const ADMIN_ALLERGENS = '/api/admin/allergens'
 const ADMIN_PREFERENCES = '/api/admin/preferences'
 const ADMIN_UNITS = '/api/admin/units'
@@ -41,5 +43,7 @@ export {
     ADMIN_NUTRITION_VALUES,
     ADMIN_WEEKS_RECIPES,
     ADMIN_WEEKS,
+    ADMIN_RECIPES_PHOTO,
+    ADMIN_RECIPES_FILE,
     routes
 }

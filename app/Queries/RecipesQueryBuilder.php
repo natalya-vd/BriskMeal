@@ -97,6 +97,7 @@ final class RecipesQueryBuilder
             ->with('allergens')
             ->with('nutritionValues')
             ->with('week')
+            ->with('photo')
             ->find($id);
 
         $ingredients_recipe = $recipe->ingredients()->with('ingredient')->get()->map(function ($item) {
@@ -124,6 +125,8 @@ final class RecipesQueryBuilder
             "cook_time" => $recipe->cook_time,
             "description" => $recipe->description,
             "recipe_text" => $recipe->recipe_text,
+            "path_pdf" => $recipe->path_pdf,
+            "photo" => $recipe->photo,
             "preferences" => $recipe->preferences->map(function ($item) {
                 return $item->only(['id', 'name']);
             })->all(),
@@ -244,6 +247,14 @@ final class RecipesQueryBuilder
             $recipeModel->nutritionValues()->updateOrCreate(
                 ['nutrition_val_id' => $item['item']['id']],
                 ['count' => $item['count']]
+            );
+        }
+
+        // Обновляем name photo в БД
+        foreach ($data['photo'] as $item) {
+            $recipeModel->photo()->updateOrCreate(
+                ['id' => $item['id']],
+                ['name' => $item['name']]
             );
         }
 
