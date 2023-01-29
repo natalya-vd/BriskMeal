@@ -24,4 +24,14 @@ class Week extends Model
     {
         return $this->belongsToMany(Recipe::class, 'recipes_weeks', 'week_id', 'recipe_id');
     }
+
+    public function carts()
+    {
+        return $this->belongsToMany(
+            Cart::class,
+            'recipes_carts',
+            'week_id',
+            'cart_id'
+        );
+    }
 }

@@ -24,7 +24,11 @@ class Recipe extends Model
 
     public function week()
     {
-        return $this->belongsToMany(Week::class, 'recipes_weeks', 'recipe_id', 'week_id');
+        return $this->belongsToMany(
+            Week::class,
+            'recipes_weeks',
+            'recipe_id',
+            'week_id');
     }
 
     public function preferences()

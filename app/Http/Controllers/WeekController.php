@@ -19,10 +19,14 @@ class WeekController extends Controller
     public function index(WeekQueryBuilder $builder, RecipesQueryBuilder $builder_recipes, $week)
     {
         try {
-            $recipes_id = $builder->getRecipesByWeek($week);
+            $recipes = $builder->getRecipesByWeek($week);
 
-            return view('catalog')->with('recipes', $builder_recipes->getRecipesById($recipes_id))
-                ->with('activeWeeks', $builder->getActiveWeeks()->toJson())->with('week', $week);
+            $recipesData = ['items' => $builder_recipes->getRecipesById($recipes['recipes_id']), 'week_id' => $recipes['week_id']];
+
+            return view('catalog')
+                ->with('recipes', $recipesData)
+                ->with('activeWeeks', $builder->getActiveWeeks()->toJson())
+                ->with('week', $week);
         } catch (ModelNotFoundException $e) {
             return back()->withError('error', $e->getMessage());
         }

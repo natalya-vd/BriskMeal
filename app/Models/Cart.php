@@ -21,12 +21,38 @@ class Cart extends Model
         )->withPivot('quantity');
     }
 
+    public function weeks()
+    {
+        return $this->belongsToMany(
+            Week::class,
+            'recipes_carts',
+            'cart_id',
+            'week_id'
+        );
+    }
+
+    public function getAllRecipes($recipes)
+    {
+        $recipesAttributes = [];
+
+        foreach ($recipes as $key => $value) {
+            $recipesAttributes[$key]['recipes'] = $value->getAttributes();
+            $recipesAttributes[$key]['quantity'] = $value->pivot->quantity;
+        }
+
+        $data = [
+            'recipes' => $recipesAttributes
+        ];
+
+        return $data;
+    }
+
     /**
      * Увеличивает кол-во товара в корзине на величину $count
      */
-    public function increase($recipe_id, $count = 1)
+    public function increase($recipe_id, $week_id, $count = 1)
     {
-        $this->change($recipe_id, $count);
+        $this->change($recipe_id, $week_id, $count);
     }
 
     /**
@@ -40,11 +66,12 @@ class Cart extends Model
     /**
      * Добавляет/именяет количество товара $recipe_id в корзине на величину $count
      */
-    private function change($recipe_id, $count = 0)
+    private function change($recipe_id, $week_id, $count = 0)
     {
         if ($count == 0) {
             return;
         }
+
         // если товар есть в корзине — изменяем кол-во
         if ($this->recipes->contains($recipe_id)) {
 
@@ -54,14 +81,14 @@ class Cart extends Model
 
             if ($quantity > 0) {
                 // обновляем количество товара $recipe_id в корзине
-                $pivotRow->update(['quantity' => $quantity]);
+                $pivotRow->update(['quantity' => $quantity, 'week_id' => $week_id]);
             } else {
                 // кол-во равно нулю — удаляем товар из корзины
                 $pivotRow->delete();
             }
 
         } elseif ($count > 0) { // иначе — добавляем этот товар
-            $this->recipes()->attach($recipe_id, ['quantity' => $count]);
+            $this->recipes()->attach($recipe_id, ['quantity' => $count, 'week_id' => $week_id]);
         }
 
         // обновляем поле `updated_at` таблицы `carts`
@@ -70,7 +97,6 @@ class Cart extends Model
 
     public function remove($id)
     {
-        //dd($id);
         // удаляем соответствующую запись из промежуточной таблицы
         $this->recipes()->detach($id);
         // обновляем поле `updated_at` таблицы `carts`

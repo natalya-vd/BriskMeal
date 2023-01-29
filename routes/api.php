@@ -33,6 +33,11 @@ Route::delete('/posts/{id}', [PostController::class, 'delete']);
 Route::match(['get', 'post'], '/cart/add', [CartController::class, 'add']);
 Route::delete('/cart/remove/{recipe}', [CartController::class, 'remove']);
 
+Route::apiResource('recipes', AdminRecipeController::class)->only([
+    'destroy', 'update', 'store'
+]);
+
+
 
 /** Админка */
 Route::name('admin.')
