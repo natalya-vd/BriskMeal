@@ -47,7 +47,9 @@ final class NutritionValuesQueryBuilder
 
     public function update(NutritionValues $nutrition_value, array $data): bool
     {
-        return $nutrition_value->fill($data)->save();
+        $dataSave['name'] = $data['name'];
+        $dataSave['unit_id'] = $data['unit']['id'];
+        return $nutrition_value->fill($dataSave)->save();
     }
 
     public function delete(NutritionValues $nutrition_value)

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\UnitController as AdminUnitController;
 use App\Http\Controllers\Admin\IngredientController as AdminIngredientController;
 use App\Http\Controllers\Admin\NutritionValuesController as AdminNutritionValuesController;
 use App\Http\Controllers\Admin\WeekController as AdminWeekController;
+use App\Http\Controllers\Admin\FileController as AdminFileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,8 @@ Route::apiResource('recipes', AdminRecipeController::class)->only([
 
 
 /** Админка */
-Route::name('admin.')
+Route::middleware(['auth', 'is_admin'])
+    ->name('admin.')
     ->prefix('admin')
     ->group(function () {
         Route::get('/recipes', [AdminRecipeController::class, 'list'])->name('recipes.list');
@@ -76,6 +78,11 @@ Route::name('admin.')
         Route::get('weeks/recipes/{week}', [AdminWeekController::class, 'list'])->name('weeks.list');
         Route::post('weeks', [AdminWeekController::class, 'store'])->name('weeks.store');
         Route::put('weeks', [AdminWeekController::class, 'update'])->name('weeks.update');
+
+        Route::post('/recipes/photo', [AdminFileController::class, 'storeRecipesPhoto'])->name('recipes.store-photo');
+        Route::delete('/recipes/photo/{id}', [AdminFileController::class, 'destroyRecipesPhoto'])->name('recipes.destroy-photo');
+        Route::post('/recipes/file', [AdminFileController::class, 'storeRecipesFile'])->name('recipes.store-file');
+        Route::delete('/recipes/file/{recipe}', [AdminFileController::class, 'destroyRecipesFile'])->name('recipes.destroy-file');
     });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

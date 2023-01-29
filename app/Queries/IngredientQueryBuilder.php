@@ -47,7 +47,9 @@ final class IngredientQueryBuilder
 
     public function update(Ingredient $ingredient, array $data): bool
     {
-        return $ingredient->fill($data)->save();
+        $dataSave['name'] = $data['name'];
+        $dataSave['unit_id'] = $data['unit']['id'];
+        return $ingredient->fill($dataSave)->save();
     }
 
     public function delete(Ingredient $ingredient)

@@ -15,13 +15,18 @@ class PhotoRecipe extends Model
         'recipe_id'
     ];
 
-    protected $attributes = ['full_path'];
+    protected $attributes = ['full_path', 'full_path_thumbnail'];
 
-    protected $appends = ['full_path'];
+    protected $appends = ['full_path', 'full_path_thumbnail'];
 
     public function getFullPathAttribute()
     {
         return Storage::disk('public')->url($this->path);
+    }
+
+    public function getFullPathThumbnailAttribute()
+    {
+        return $this->path_thumbnail != null ? Storage::disk('public')->url($this->path_thumbnail) : null;
     }
 
     public function recipe()

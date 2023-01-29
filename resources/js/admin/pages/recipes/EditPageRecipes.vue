@@ -33,6 +33,7 @@
                             <bm-input
                                 v-model="formData.name"
                                 label="Name"
+                                required
                                 input-id="name-recipe"
                                 placeholder="Name"
                                 class="form-group col-md-6"
@@ -40,6 +41,7 @@
                             <bm-input
                                 v-model="formData.cook_time"
                                 label="Cook time"
+                                required
                                 input-id="cook_time"
                                 placeholder="Cook time"
                                 type="number"
@@ -49,6 +51,7 @@
                                 label="Description"
                                 input-id="description"
                                 placeholder="Description"
+                                required
                                 v-model="formData.description"
                                 class="form-group col-md-6"
                             />
@@ -56,10 +59,31 @@
                                 label="Recipe text"
                                 input-id="recipe_text"
                                 placeholder="Recipe text"
+                                required
                                 v-model="formData.recipe_text"
                                 class="form-group col-md-6"
                             />
-                            <div class="col-md-12">Photo</div>
+                            <div class="col-md-12 mb-4">
+                                <div class="card">
+                                    <bm-img-upload
+                                        class="card-body"
+                                        :photos="formData.photo"
+                                        @upload:photo="onUploadPhoto"
+                                        @delete:photo="onDeletePhoto"
+                                        @update:input="onUpdatePhotoName"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <bm-file-upload
+                                        class="card-body"
+                                        :path_file="formData.path_file"
+                                        @upload:file="onUploadFile"
+                                        @delete:file="onDeleteFile"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -171,8 +195,10 @@ import BmSelect from '../../components/BmSelect.vue'
 import BmMultiSelect from '../../components/BmMultiSelect.vue'
 import BmTextarea from '../../components/BmTextarea.vue'
 import BmSelectWithCount from '../../components/BmSelectWithCount.vue'
-import {updateResource, deleteResource} from '../../api/api.js'
-import {ADMIN_RECIPES, routes} from '../../api/endpoints.js'
+import BmImgUpload from '../../components/BmImgUpload.vue'
+import BmFileUpload from '../../components/BmFileUpload.vue'
+import {updateResource, deleteResource, createResource} from '../../api/api.js'
+import {ADMIN_RECIPES, ADMIN_RECIPES_PHOTO, ADMIN_RECIPES_FILE, routes} from '../../api/endpoints.js'
 import router from '../../router'
 
 export default {
@@ -183,7 +209,9 @@ export default {
         BmSelect,
         BmMultiSelect,
         BmTextarea,
-        BmSelectWithCount
+        BmSelectWithCount,
+        BmImgUpload,
+        BmFileUpload
     },
 
     props: {
@@ -197,11 +225,13 @@ export default {
                 cook_time: 0,
                 description: '',
                 recipe_text: '',
+                path_file: '',
                 allergens: [],
                 preferences: [],
                 ingredients: [],
                 nutrition_values: [],
-                weeks: []
+                weeks: [],
+                photo: []
             },
         }
     },
@@ -211,11 +241,13 @@ export default {
         this.formData.cook_time = this.getRecipe.cook_time
         this.formData.description = this.getRecipe.description
         this.formData.recipe_text = this.getRecipe.recipe_text
+        this.formData.path_file = this.getRecipe.path_pdf
         this.formData.allergens = this.getRecipe.allergens
         this.formData.preferences = this.getRecipe.preferences
         this.formData.ingredients = this.getRecipe.ingredients
         this.formData.nutrition_values = this.getRecipe.nutrition_values
         this.formData.weeks = this.getRecipe.weeks
+        this.formData.photo = this.getRecipe.photo
     },
 
     computed: {
@@ -260,10 +292,17 @@ export default {
         },
         async formSubmit(id) {
             try {
+                const photo = this.formData.photo.map(item => ({
+                    id: item.id,
+                    name: item.name,
+                }))
+
                 const data = {
                     ...this.formData,
-                    weeks: this.formData.weeks.map(item => ({id: item.id}))
+                    weeks: this.formData.weeks.map(item => ({id: item.id})),
+                    photo
                 }
+
                 const response = await updateResource({endpoint: ADMIN_RECIPES, id, resource: data})
 
                 if(response.status === 200) {
@@ -277,7 +316,64 @@ export default {
         },
         updateSelect(item, nameSelect) {
             this.formData[nameSelect] = item;
-        }
+        },
+        async onUploadPhoto(photo) {
+            try {
+                const formData = new FormData()
+
+                for(const [key, value] of Object.entries(photo)) {
+                    formData.append(`image[${key}]`, value)
+                }
+                formData.append('recipe_id', this.getRecipe.id)
+
+                const response = await createResource({endpoint: ADMIN_RECIPES_PHOTO, resource: formData})
+
+                if(response.status === 200) {
+                    this.formData.photo = response.data
+                }
+            } catch(e) {
+                if(e.response.status === 422) {
+                    alert(e.response.data.message)
+                }
+            }
+        },
+        async onDeletePhoto(id) {
+            const data = await deleteResource({endpoint: ADMIN_RECIPES_PHOTO, id})
+            if(data.status === 200) {
+                this.formData.photo = this.formData.photo.filter(item => item.id !== id)
+            }
+        },
+        onUpdatePhotoName({value, id}) {
+            this.formData.photo = this.formData.photo.map(item => {
+                return item.id === id
+                ? { ...item, name: value}
+                : item
+            })
+        },
+        async onUploadFile(file) {
+            try {
+                const formData = new FormData()
+
+                formData.append('recipe_id', this.getRecipe.id)
+                formData.append('file', file)
+
+                const response = await createResource({endpoint: ADMIN_RECIPES_FILE, resource: formData})
+
+                if(response.status === 200) {
+                    this.formData.path_file = response.data
+                }
+            } catch(e) {
+                if(e.response.status === 422) {
+                    alert(e.response.data.message)
+                }
+            }
+        },
+        async onDeleteFile() {
+            const data = await deleteResource({endpoint: ADMIN_RECIPES_FILE, id: this.getRecipe.id})
+            if(data.status === 200) {
+                this.formData.path_file = null
+            }
+        },
     }
 }
 </script>
