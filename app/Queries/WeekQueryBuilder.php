@@ -27,6 +27,10 @@ final class WeekQueryBuilder
             ->firstOrFail()
             ->recipe();
 
+        $week_id = $this->model
+            ->where('week_name', $week)
+            ->firstOrFail()->id;
+
         if (!$recipes) {
             throw new ModelNotFoundException('Неверно указана неделя');
         }
@@ -37,7 +41,7 @@ final class WeekQueryBuilder
             throw new ModelNotFoundException('Меню не сформировано');
         }
 
-        return $recipes_request;
+        return ['recipes_id' => $recipes_request, 'week_id' => $week_id];
     }
 
     public function getActiveWeeks()
