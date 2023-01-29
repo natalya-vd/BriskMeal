@@ -65,33 +65,41 @@ Route::match(['get', 'post'], '/cart/minus/{recipe}', [CartController::class, 'm
     ->name('cart-minus');
 
 /** Админка */
-Route::name('admin.')
+Route::middleware('auth')
+    ->name('admin.')
     ->prefix('admin')
     ->group(function () {
-        Route::get('/', function () {
-            return view('admin.pages.index');
-        })->name('home');
-        Route::resource('recipes', AdminRecipeController::class)->except([
-            'destroy', 'update', 'store', 'show'
-        ]);
-        Route::resource('allergens', AdminAllergenController::class)->except([
-            'destroy', 'update', 'store', 'show'
-        ]);
-        Route::resource('ingredients', AdminIngredientController::class)->except([
-            'destroy', 'update', 'store', 'show'
-        ]);
-        Route::resource('nutrition-values', AdminNutritionValuesController::class)->except([
-            'destroy', 'update', 'store', 'show'
-        ]);
-        Route::resource('preferences', AdminPreferenceController::class)->except([
-            'destroy', 'update', 'store', 'show'
-        ]);
-        Route::resource('units', AdminUnitController::class)->except([
-            'destroy', 'update', 'store', 'show'
-        ]);
+        Route::middleware('is_admin')
+            ->group(function () {
+                Route::get('/', function () {
+                    return view('admin.pages.index');
+                })->name('home');
+                Route::resource('recipes', AdminRecipeController::class)->except([
+                    'destroy', 'update', 'store', 'show'
+                ]);
+                Route::resource('allergens', AdminAllergenController::class)->except([
+                    'destroy', 'update', 'store', 'show'
+                ]);
+                Route::resource('ingredients', AdminIngredientController::class)->except([
+                    'destroy', 'update', 'store', 'show'
+                ]);
+                Route::resource('nutrition-values', AdminNutritionValuesController::class)->except([
+                    'destroy', 'update', 'store', 'show'
+                ]);
+                Route::resource('preferences', AdminPreferenceController::class)->except([
+                    'destroy', 'update', 'store', 'show'
+                ]);
+                Route::resource('units', AdminUnitController::class)->except([
+                    'destroy', 'update', 'store', 'show'
+                ]);
 
-        Route::get('weeks', [AdminWeekController::class, 'create'])->name('weeks.create');
-        Route::get('weeks/recipes', [AdminWeekController::class, 'index'])->name('weeks.index');
+                Route::get('weeks', [AdminWeekController::class, 'create'])->name('weeks.create');
+                Route::get('weeks/recipes', [AdminWeekController::class, 'index'])->name('weeks.index');
+            });
+
+        Route::get('/not-rights', function () {
+            return view('admin.pages.not-rights');
+        })->name('notRights');
     });
 
 Auth::routes();

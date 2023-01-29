@@ -7,6 +7,7 @@ namespace App\Queries;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Recipe;
 
@@ -125,7 +126,7 @@ final class RecipesQueryBuilder
             "cook_time" => $recipe->cook_time,
             "description" => $recipe->description,
             "recipe_text" => $recipe->recipe_text,
-            "path_pdf" => $recipe->path_pdf,
+            "path_pdf" => $recipe->path_pdf != null ? Storage::disk('public')->url($recipe->path_pdf) : null,
             "photo" => $recipe->photo,
             "preferences" => $recipe->preferences->map(function ($item) {
                 return $item->only(['id', 'name']);

@@ -36,7 +36,8 @@ Route::delete('/cart/remove/{recipe}', [CartController::class, 'remove']);
 
 
 /** Админка */
-Route::name('admin.')
+Route::middleware(['auth', 'is_admin'])
+    ->name('admin.')
     ->prefix('admin')
     ->group(function () {
         Route::get('/recipes', [AdminRecipeController::class, 'list'])->name('recipes.list');
