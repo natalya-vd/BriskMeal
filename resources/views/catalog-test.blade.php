@@ -7,7 +7,8 @@
         <form action="{{ route('cart-add', $recipe) }}" method="post">
         @csrf
         <!--<label for="input-quantity">Количество</label>-->
-            <input type="text" name="quantity" id="input-quantity" value="1" hidden>
+            <input type="text" name="quantity" id="input-quantity" value="1"
+                   >
             <button type="submit" class="buy" data-id="{{ $recipe->id }}">Добавить в корзину</button>
         </form>
     </div>

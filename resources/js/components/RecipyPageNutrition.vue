@@ -28,18 +28,16 @@
             <small  class="Nutr-val8">Nutrition info may vary slightly by time of delivery. Please refer to FAQ page for more related information.</small>
         </div>
 
-        <button type="button"
-                style="background-color: #339900;
-                margin-top: 50px;
-                padding: 10px 0;
-                color: #FFFFFF;
-                border: none;
-                border-radius: 5px;
-                font-size: 16px;"
-                onmouseover="this.style.backgroundColor='#336600'"
-                onmouseout="this.style.backgroundColor='#339900'"
-                @click="addToCart(recipeId)">Add Cart
-        </button>
+        <div class="cart-btn-group">
+            <div>
+                <button type="button" class="count-change-btn-minus">–</button>
+                <input type="text" class="input-count-recipe" name="quantity" id="input-quantity" value="1">
+                <button type="button" class="count-change-btn-plus">+</button>
+            </div>
+            <button type="button" class="btn-add-cart"
+                    @click="addToCart(recipeId)">Add Cart
+            </button>
+        </div>
     </div>
 </template>
 
@@ -55,7 +53,7 @@ export default {
     methods: {
         async addToCart(recipe_id) {
             const data = await createResource({endpoint: ADD_RECIPES, resource: {id: +recipe_id}})
-            console.log(data)
+            //console.log(data)
         }
     },
 
@@ -68,6 +66,55 @@ export default {
 </script>
 
 <style scoped>
+
+.btn-add-cart {
+    background-color: #339900;
+    padding: 10px 20px;
+    margin-left: 10px;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.btn-add-cart:hover {
+    background-color: #336600;
+}
+
+.input-count-recipe {
+    width: 30px;
+    padding: 10px 0;
+    text-align: center;
+    border: none;
+    font-size: 18px;
+}
+
+.cart-btn-group {
+    margin-top: 40px;
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.count-change-btn-minus {
+    border-radius: 5px 0 0 5px;
+}
+
+.count-change-btn-plus {
+    border-radius: 0 5px 5px 0;
+}
+
+.count-change-btn-minus,
+.count-change-btn-plus {
+    border: none;
+    color: #339900;
+    font-size: 18px;
+    background-color: #FFFFFF;
+    padding: 10px 15px;
+}
+
 .Nutr-val {
     display: flex;
     flex-direction: column;

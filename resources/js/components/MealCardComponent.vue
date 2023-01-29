@@ -13,6 +13,7 @@
                 </div>
             </div>
         </a>
+        {{ weekId }}
         <button type="button"
                 style="background-color: #339900;
                 color: #FFFFFF;
@@ -34,12 +35,11 @@ export default {
         MealPlan
     },
 
-    props: ['id', 'time', 'title', 'ingredients', 'plans', 'photo'],
+    props: ['id', 'time', 'title', 'ingredients', 'plans', 'photo', 'weekId'],
 
     methods: {
         async addToCart(recipe_id) {
-            const data = await createResource({endpoint: ADD_RECIPES, resource: {id: +recipe_id}})
-            console.log(data)
+            const data = await createResource({endpoint: ADD_RECIPES, resource: {id: +recipe_id, week_id: this.weekId}})
         }
     },
 

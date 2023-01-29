@@ -4,19 +4,22 @@
             <img src="/card_image/card_1.jpg" alt="" class="cardImage" />
 
             <div class="recipyInfo">
-                <div class="recipyTitle" :title="cartItem.name">
+                <div class="recipyTitle" :title="cartItem.recipes.name">
                     <h4 class="recipyTitleText">
-                        {{ cartItem.name }}
+                        {{ cartItem.recipes.name }}
                     </h4>
                 </div>
                 <div class="recipyDescription">
                     <span class="recipyDescriptionText">{{
-                        cartItem.description
+                        cartItem.recipes.description
                     }}</span>
                     <div
                         class="recipyDescriptionOverlay"
-                        :title="cartItem.description"
+                        :title="cartItem.recipes.description"
                     ></div>
+                    <div>
+                    {{ cartItem.recipes }}}
+                </div>
                 </div>
             </div>
 
@@ -28,7 +31,7 @@
                     <input
                         type="number"
                         class="quantityInput"
-                        v-model="countRecipy"
+                        v-model="cartItem.quantity"
                     />
                 </div>
                 <div class="separatorCard" data-v-478eddff=""></div>

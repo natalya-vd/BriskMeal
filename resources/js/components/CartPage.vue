@@ -70,14 +70,31 @@ export default {
         CartCardComponent,
     },
 
-    props: [
-        "dataResponse"
-    ],
+    props: {
+        dataResponse: String
+    },
+
+    /*data() {
+        return {
+            formData: {
+                name: '',
+                cook_time: 0,
+                description: '',
+                recipe_text: '',
+                quantity: 0,
+            },
+            plans: {
+                preferences: "Keto + Paleo",
+                quantityPeople: 3,
+                quantityMeals: 2,
+            },
+        };
+    }*/
 
     data() {
         return {
-            /*cart: [
-                {
+            cart: [
+                /*{
                     id: 1,
                     name_recipy:
                         "Unde eligendi eum quis officiaUnde eligendi eum quis officiaUnde eligendi eum quis officia",
@@ -85,25 +102,8 @@ export default {
                         "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate libero blanditiis impedit. Dolorum dolorem iste sed mollitia est ad itaque provident nisi voluptates reprehenderit, consequatur quidem placeat! Iusto, error explicabo. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate libero blanditiis impedit. Dolorum dolorem iste sed mollitia est ad itaque provident nisi voluptates reprehenderit, consequatur quidem placeat! Iusto, error explicabo. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate libero blanditiis impedit. Dolorum dolorem iste sed mollitia est ad itaque provident nisi voluptates reprehenderit, consequatur quidem placeat! Iusto, error explicabo.",
                     path: "/preferences_svg/Keto_Paleo.svg",
                     price: 100,
-                },
-                {
-                    id: 2,
-                    name_recipy: "Unde eligendi eum quis officia",
-                    description_recipy:
-                        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate libero blanditiis impedit. Dolorum dolorem iste sed mollitia est ad itaque provident nisi voluptates reprehenderit, consequatur quidem placeat! Iusto, error explicabo.",
-                    path: "/preferences_svg/Keto_Paleo.svg",
-                    price: 150,
-                },
-                {
-                    id: 3,
-                    name: "Mediterranien",
-                    name_recipy: "Unde eligendi eum quis officia",
-                    description_recipy:
-                        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate libero blanditiis impedit. Dolorum dolorem iste sed mollitia est ad itaque provident nisi voluptates reprehenderit, consequatur quidem placeat! Iusto, error explicabo.",
-                    path: "/preferences_svg/Keto_Paleo.svg",
-                    price: 200,
-                },
-            ],*/
+                },*/
+            ],
             plans: {
                 preferences: "Keto + Paleo",
                 quantityPeople: 3,
@@ -112,25 +112,19 @@ export default {
         };
     },
 
-    mounted() {
-        console.log(JSON.parse(this.dataResponse))
-        //console.log(JSON.parse(this.quantity))
+    created() {
+        this.cart = JSON.parse(this.dataResponse).recipes
+        console.log(this.cart)
     },
 
     methods: {
         async removeItem(removedItem) {
-            const data = await deleteResource({endpoint: REMOVE_RECIPES, id: removedItem.id})
+            const data = await deleteResource({endpoint: REMOVE_RECIPES, id: removedItem.recipes.id})
+            this.cart = this.cart.filter(item => item.recipes.id !== removedItem.recipes.id)
             //this.cart = this.cart.filter((item) => item.id !== removedItem.id);
-            //console.log(removedItem.id);
         },
     },
 
-    computed: {
-        cart() {
-            console.log(JSON.parse(this.dataResponse))
-            return JSON.parse(this.dataResponse)
-        }
-    }
 };
 </script>
 <style scoped>

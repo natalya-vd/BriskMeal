@@ -13,6 +13,7 @@
             <p>Цена: {{ $recipe->price }}</p>
             <p>Количество: {{ $recipe->pivot->quantity }}</p>
             <p>Стоимость: {{ ($recipe->price) * ($recipe->pivot->quantity) }}</p>
+            <p>@dd($recipe->pivot)</p>
 
             <div style="display: flex">
                 <form action="{{ route('cart-minus', $recipe) }}" method="post" style="margin-right: 3px">
