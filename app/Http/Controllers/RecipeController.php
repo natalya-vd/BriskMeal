@@ -20,10 +20,14 @@ class RecipeController extends Controller
         try {
             $active_weeks = $builder->getActiveWeeks();
             $first_active_week = $active_weeks->value('week_name');
-            $recipes_id = $builder->getRecipesByWeek($first_active_week);
+            $recipes = $builder->getRecipesByWeek($first_active_week);
 
-            return view('catalog')->with('recipes', $builder_recipes->getRecipesById($recipes_id))
-                ->with('activeWeeks', $active_weeks->toJson())->with('week', 0);
+            $recipesData = ['items' => $builder_recipes->getRecipesById($recipes['recipes_id']), 'week_id' => $recipes['week_id']];
+
+            return view('catalog')
+                ->with('recipes', $recipesData)
+                ->with('activeWeeks', $active_weeks->toJson())
+                ->with('week', 0);
         } catch (ModelNotFoundException $e) {
             return back()->withError('error', $e->getMessage());
         }
@@ -34,9 +38,9 @@ class RecipeController extends Controller
         try {
             $active_weeks = $builder->getActiveWeeks();
             $first_active_week = $active_weeks->value('week_name');
-            $recipes_id = $builder->getRecipesByWeek($first_active_week);
+            $recipes = $builder->getRecipesByWeek($first_active_week);
 
-            return view('welcome')->with('recipes', $builder_recipes->getRecipesById($recipes_id))
+            return view('welcome')->with('recipes', $builder_recipes->getRecipesById($recipes['recipes_id']))
                 ->with('activeWeeks', $active_weeks->toJson())->with('week', 0);
         } catch (ModelNotFoundException $e) {
             return back()->withError('error', $e->getMessage());

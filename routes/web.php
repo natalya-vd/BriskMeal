@@ -52,11 +52,11 @@ Route::get('/catalog-test', [TestController::class, 'index'])
 Route::get('/cart-test', [CartController::class, 'index'])
     ->name('cart-test');
 
-/*Route::match(['get', 'post'], '/cart/add/{recipe}', [CartController::class, 'add'])
-    ->name('cart-add');*/
+Route::match(['get', 'post'], '/cart/add/{recipe}', [CartController::class, 'add'])
+    ->name('cart-add');
 
-/*Route::match(['get', 'post'], '/cart/remove/{recipe}', [CartController::class, 'remove'])
-    ->name('cart-remove');*/
+Route::match(['get', 'post'], '/cart/remove/{recipe}', [CartController::class, 'remove'])
+    ->name('cart-remove');
 
 Route::match(['get', 'post'], '/cart/plus/{recipe}', [CartController::class, 'plus'])
     ->name('cart-plus');

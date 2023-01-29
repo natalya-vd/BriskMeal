@@ -26,7 +26,7 @@
                 </div>
             </div>
         </a>
-        <buy-button id="id"></buy-button>
+        <buy-button :id="id" ></buy-button>
     </div>
 </template>
 

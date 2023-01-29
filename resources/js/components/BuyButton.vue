@@ -2,9 +2,10 @@
     <div class="buyBtnPlace">
         <div v-if="showedAddBtn" class="buyBtn" v-on:click="changeSpinnerMode">
             <div v-if="showedSpinner" class="spinner-border" role="status">
+
                 <span class="sr-only"></span>
             </div>
-            <div v-else class="addTocart">Add to Cart</div>
+            <div v-else class="addTocart" v-on:click="addToCart(id)">Add to Cart</div>
         </div>
         <div v-else class="changeQ">
             <div class="manageQBlock">
@@ -18,8 +19,12 @@
 </template>
 
 <script>
-export default {
-    props: ["id"],
+
+    import {createResource, deleteResource} from "../api/api";
+    import {ADD_RECIPES, REMOVE_RECIPES} from "../api/endpoints";
+
+    export default {
+    props: ['id'],
     data() {
         return {
             showedSpinner: false,
@@ -33,22 +38,25 @@ export default {
     },
     methods: {
         async addToCart(recipe_id) {
+
             const data = await createResource({
                 endpoint: ADD_RECIPES,
                 resource: { id: +recipe_id },
             });
             console.log(data);
+
         },
         changeSpinnerMode() {
             this.showedSpinner = !this.showedSpinner;
-            this.quantity += 1;
         },
         addQ() {
             this.quantity += 1;
         },
+
         reduceQ() {
             this.quantity -= 1;
         },
+
     },
 };
 </script>

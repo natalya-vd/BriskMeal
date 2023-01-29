@@ -235,6 +235,7 @@ export default {
 </script>
 
 <style scoped>
+
 .accordion {
     --bs-accordion-border-color: white;
 }

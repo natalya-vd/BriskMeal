@@ -42,22 +42,22 @@ class CartController extends Controller
     public function index()
     {
         $recipes = $this->cart->recipes;
-        //dd($recipes);
 
         if (!is_null($recipes)) {
-            //return view('cart-test', compact('recipes'));
-            return view('cart', compact('recipes'))
-                ->with('data', json_encode($recipes, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+
+            $data = $this->cart->getAllRecipes($recipes);
+
+            return view('cart')->with('data', json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+            /*return view('cart-test', compact('recipes'));*/
         } else {
             abort(404);
         }
     }
 
-    public function add(Request $request)
+    public function add(Recipe $recipe, Request $request)
     {
-        //dd($request->id);
         $quantity = $request->input('quantity') ?? 1;
-        $this->cart->increase($request->id, $quantity);
+        $this->cart->increase($request->id, $request->week_id, $quantity);
 
         // выполняем редирект обратно на ту страницу,
         // где была нажата кнопка «В корзину»
@@ -91,9 +91,7 @@ class CartController extends Controller
 
     public function remove(Recipe $recipe, Request $request)
     {
-        //dd($recipe);
         $this->cart->remove($recipe->id);
-        //$this->cart->remove($recipe->id);
         return response()->json("Ok");
         //return redirect()->route('cart-test');
     }
