@@ -1,6 +1,6 @@
 <template>
     <div class="buyBtnPlace">
-        <div v-if="showedAddBtn" class="buyBtn" v-on:click="changeSpinnerMode">
+        <div v-if="showedAddBtn" class="buyBtn" >
             <div v-if="showedSpinner" class="spinner-border" role="status">
 
                 <span class="sr-only"></span>
@@ -46,8 +46,16 @@
                 this.changeSpinnerMode();
                 this.quantity += 1;
             });
-
-
+        },
+        async removeItem(removedItem) {
+            this.changeSpinnerMode();
+            this.quantity -= 1;
+            const data = await deleteResource({
+                endpoint: REMOVE_RECIPES, 
+                id: removedItem
+            }).then(()=>{
+                this.changeSpinnerMode();
+            });          
         },
         changeSpinnerMode() {
             this.showedSpinner = !this.showedSpinner;
@@ -55,9 +63,12 @@
         addQ() {
             this.quantity += 1;
         },
-
         reduceQ() {
-            this.quantity -= 1;
+            if(this.quantity === 1){
+                this.removeItem(this.id);
+            }else{
+                this.quantity -= 1;
+            }
         },
 
     },
