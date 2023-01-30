@@ -16,7 +16,8 @@
             </div>
             <recipy-nutrition
                 nutrition-values="{{ $recipe['nutrition_values'] }}"
-                recipe-id="{{ $recipe['id'] }}">
+                recipe-id="{{ $recipe['id'] }}"
+                weekid="{{ $week  }}">
             </recipy-nutrition>
         </div>
     </div>
