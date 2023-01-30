@@ -34,7 +34,7 @@
                 <div class="separatorCard" data-v-478eddff=""></div>
                 <div class="totalPriceCard">200$</div>
             </div>
-            <div class="cross" @click="removeItem(cartItem)">
+            <div class="cross" @click="removeItem()">
                 <svg viewBox="0 0 48 48" height="24" width="24">
                     <path
                         d="m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z"
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import {deleteResource} from "../api/api";
 import {REMOVE_RECIPES} from "../api/endpoints";
 
 export default {
@@ -63,14 +64,12 @@ export default {
         }
     },
     methods: {
-        async removeItem(removedItem) {
+        async removeItem() {
             const myID = this.cartItem.recipes.id;
-            const headers = { 'Accept': 'application/json'};
-            fetch(`${REMOVE_RECIPES}/${myID}`, {
-			        method: 'DELETE', 
-			        headers: {...headers, 'Content-Type': 'application/json', 'Accept': 'application/json'},
-			        body: JSON.stringify( {id: myID})
-		        }).then(()=>{this.changeSpinnerMode();})
+            const data = await deleteResource({
+                endpoint: REMOVE_RECIPES, 
+                id: myID
+            }).then(()=>{ this.changeSpinnerMode(); });
         },
         changeSpinnerMode(){
             this.isCardShowed = !this.isCardShowed;
