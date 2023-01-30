@@ -121,13 +121,12 @@ export default {
         async removeItem(removedItem) {
             const data = await deleteResource({endpoint: REMOVE_RECIPES, id: removedItem.id})
             //this.cart = this.cart.filter((item) => item.id !== removedItem.id);
-            //console.log(removedItem.id);
         },
     },
 
     computed: {
         cart() {
-            console.log(JSON.parse(this.dataResponse))
+            //console.log(JSON.parse(this.dataResponse))
             return JSON.parse(this.dataResponse).recipes
         }
     }

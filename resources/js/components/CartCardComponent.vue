@@ -6,16 +6,16 @@
             <div class="recipyInfo">
                 <div class="recipyTitle" :title="cartItem.name">
                     <h4 class="recipyTitleText">
-                        {{ cartItem.name }}
+                        {{ cartItem.recipes.name }}
                     </h4>
                 </div>
                 <div class="recipyDescription">
                     <span class="recipyDescriptionText">{{
-                        cartItem.description
+                        cartItem.recipes.description
                     }}</span>
                     <div
                         class="recipyDescriptionOverlay"
-                        :title="cartItem.description"
+                        :title="cartItem.recipes.description"
                     ></div>
                 </div>
             </div>
@@ -53,21 +53,21 @@ export default {
     name: "CartCardComponent",
     props:  ['cartItem', 'key'],
     data() {
-        return { 
-            countRecipy: 1,
+        return {
+            countRecipy: this.cartItem.quantity,
             isCardShowed: true
          };
     },
     computed: {
         totalPrice() {
-            return this.cartItem.price * this.countRecipy;
+            return this.cartItem.quantity * this.countRecipy;
         }
     },
     methods: {
         async removeItem() {
             const myID = this.cartItem.recipes.id;
             const data = await deleteResource({
-                endpoint: REMOVE_RECIPES, 
+                endpoint: REMOVE_RECIPES,
                 id: myID
             }).then(()=>{ this.changeSpinnerMode(); });
         },
