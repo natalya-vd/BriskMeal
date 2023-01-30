@@ -26,7 +26,7 @@
                 </div>
             </div>
         </a>
-        <buy-button :id="id" :weekId="week_id" ></buy-button>
+        <buy-button :id="id" :weekId="week" ></buy-button>
     </div>
 </template>
 
@@ -39,7 +39,7 @@ export default {
     components: {
         MealPlan,
     },
-    props: ['id', 'time', 'title', 'ingredients', 'plans', 'photo', 'week', 'weeks'],
+    props: ['id', 'time', 'title', 'ingredients', 'plans', 'photo', 'week'],
     computed: {
         getIngredients() {
             const ingredients = JSON.parse(this.ingredients);
@@ -53,11 +53,10 @@ export default {
                 name: photo[0].name,
                 path: photo[0].full_path,
             };
-        },
-        week_id() {
-            const activeWeeks = JSON.parse(this.weeks);
-            return activeWeeks.find(el => el.week_name === this.week).id   
-        },
+        }
+    },
+    mounted() {
+        console.log(this.week);
     }
 };
 </script>
