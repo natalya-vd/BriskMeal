@@ -13,7 +13,14 @@
 
         @foreach ($recipes['items'] as $recipy)
         <div class="bm-catalog_meal_card_place">
-            <meal-card id="{{ $recipy['id'] }}" time="{{ $recipy['cook_time'] }}" title="{{ $recipy['name'] }}" ingredients="{{$recipy['ingredients']}}" plans="{{ $recipy['preferences'] }}" photo="{{ $recipy['photo'] }}" week="{{ $recipes['week_id'] }}"></meal-card>
+            <meal-card id="{{ $recipy['id'] }}"
+                       time="{{ $recipy['cook_time'] }}"
+                       title="{{ $recipy['name'] }}"
+                       ingredients="{{$recipy['ingredients']}}"
+                       plans="{{ $recipy['preferences'] }}"
+                       photo="{{ $recipy['photo'] }}"
+                       week="{{ $recipes['week_id'] }}">
+            </meal-card>
         </div>
         @endforeach
     </div>

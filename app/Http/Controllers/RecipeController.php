@@ -10,45 +10,56 @@ use App\Queries\WeekQueryBuilder;
 
 class RecipeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(WeekQueryBuilder $builder, RecipesQueryBuilder $builder_recipes)
+    protected $active_weeks;
+    protected $first_active_week;
+    protected $recipes;
+
+    public function __construct(WeekQueryBuilder $builder)
+    {
+        $this->active_weeks = $builder->getActiveWeeks();
+        $this->first_active_week = $this->active_weeks->value('week_name');
+        $this->recipes = $builder->getRecipesByWeek($this->first_active_week);
+    }
+
+    public function index(RecipesQueryBuilder $builder_recipes)
     {
         try {
-            $active_weeks = $builder->getActiveWeeks();
-            $first_active_week = $active_weeks->value('week_name');
-            $recipes = $builder->getRecipesByWeek($first_active_week);
-
-            $recipesData = ['items' => $builder_recipes->getRecipesById($recipes['recipes_id']), 'week_id' => $recipes['week_id']];
+            $recipesData = [
+                'items' => $builder_recipes->getRecipesById($this->recipes['recipes_id']),
+                'week_id' => $this->recipes['week_id']];
 
             return view('catalog')
                 ->with('recipes', $recipesData)
-                ->with('activeWeeks', $active_weeks->toJson())
-                ->with('week', $first_active_week);
+                ->with('activeWeeks', $this->active_weeks->toJson())
+                ->with('week', $this->first_active_week);
         } catch (ModelNotFoundException $e) {
             return back()->withError('error', $e->getMessage());
         }
     }
 
-    public function welcome(WeekQueryBuilder $builder, RecipesQueryBuilder $builder_recipes)
+    public function welcome(RecipesQueryBuilder $builder_recipes)
     {
         try {
-            $active_weeks = $builder->getActiveWeeks();
-            $first_active_week = $active_weeks->value('week_name');
-            $recipes = $builder->getRecipesByWeek($first_active_week);
-
-            return view('welcome')->with('recipes', $builder_recipes->getRecipesById($recipes['recipes_id']))
-                ->with('activeWeeks', $active_weeks->toJson())->with('week', 0);
+            return view('welcome')
+                ->with('recipes', $builder_recipes->getRecipesById($this->recipes['recipes_id']))
+                ->with('activeWeeks', $this->active_weeks->toJson())
+                ->with('week', 0);
         } catch (ModelNotFoundException $e) {
             return back()->withError('error', $e->getMessage());
         }
     }
 
-    public function show(RecipesQueryBuilder $builder, $id)
+    public function show(RecipesQueryBuilder $recipesBuilder, $id)
     {
-        return view('recipe')->with('recipe', $builder->getOneRecipe($id));
+        try {
+            $week_id = ['week_id' => $this->recipes['week_id']];
+
+            return view('recipe')
+                ->with('week_id', $week_id)
+                ->with('recipe', $recipesBuilder->getOneRecipe($id));
+
+        } catch (ModelNotFoundException $e) {
+            return back()->withError('error', $e->getMessage());
+        }
     }
 }
