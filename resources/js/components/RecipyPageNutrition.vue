@@ -40,12 +40,12 @@ export default {
 
     props: ['nutritionValues', 'recipeId'],
 
-    methods: {
+    /*methods: {
         async addToCart(recipe_id) {
             const data = await createResource({endpoint: ADD_RECIPES, resource: {id: +recipe_id}})
             console.log(data)
         }
-    },
+    },*/
 
     computed: {
         getNutritionValues() {
