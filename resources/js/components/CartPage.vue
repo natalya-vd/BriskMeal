@@ -5,7 +5,7 @@
             Your Cart is empty.
             <a href="/catalog" class="orderDelivery">Order food delivery</a>
         </h3>
-        <div class="wrap" v-if="this.cart.length">
+        <div class="wrap" v-else>
             <div class="blockChosenPlans">
                 <div class="chosenPlansWrapper">
                     <div class="chosenPlansBorder">
@@ -113,7 +113,7 @@ export default {
     },
 
     mounted() {
-        console.log(JSON.parse(this.dataResponse))
+        console.log(JSON.parse(this.dataResponse).recipes)
         //console.log(JSON.parse(this.quantity))
     },
 
@@ -128,7 +128,7 @@ export default {
     computed: {
         cart() {
             console.log(JSON.parse(this.dataResponse))
-            return JSON.parse(this.dataResponse)
+            return JSON.parse(this.dataResponse).recipes
         }
     }
 };

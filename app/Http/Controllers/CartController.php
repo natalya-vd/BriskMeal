@@ -58,7 +58,7 @@ class CartController extends Controller
     {
         $quantity = $request->input('quantity') ?? 1;
         $this->cart->increase($request->id, $request->week_id, $quantity);
-
+        
         // выполняем редирект обратно на ту страницу,
         // где была нажата кнопка «В корзину»
 

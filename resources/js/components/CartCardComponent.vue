@@ -50,9 +50,7 @@ import {REMOVE_RECIPES} from "../api/endpoints";
 
 export default {
     name: "CartCardComponent",
-    props: {
-        cartItem: Object
-    },
+    props:  ['cartItem', 'key'],
     data() {
         return { 
             countRecipy: 1,
@@ -66,11 +64,12 @@ export default {
     },
     methods: {
         async removeItem(removedItem) {
+            const myID = this.cartItem.recipes.id;
             const headers = { 'Accept': 'application/json'};
-            fetch(`${REMOVE_RECIPES}/${removedItem.id}`, {
+            fetch(`${REMOVE_RECIPES}/${myID}`, {
 			        method: 'DELETE', 
 			        headers: {...headers, 'Content-Type': 'application/json', 'Accept': 'application/json'},
-			        body: JSON.stringify( {id: this.id})
+			        body: JSON.stringify( {id: myID})
 		        }).then(()=>{this.changeSpinnerMode();})
         },
         changeSpinnerMode(){

@@ -27,7 +27,7 @@ class RecipeController extends Controller
             return view('catalog')
                 ->with('recipes', $recipesData)
                 ->with('activeWeeks', $active_weeks->toJson())
-                ->with('week', 0);
+                ->with('week', $first_active_week);
         } catch (ModelNotFoundException $e) {
             return back()->withError('error', $e->getMessage());
         }

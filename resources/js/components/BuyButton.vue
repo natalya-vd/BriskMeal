@@ -1,6 +1,6 @@
 <template>
     <div class="buyBtnPlace">
-        <div v-if="showedAddBtn" class="buyBtn" v-on:click="changeSpinnerMode">
+        <div v-if="showedAddBtn" class="buyBtn" >
             <div v-if="showedSpinner" class="spinner-border" role="status">
 
                 <span class="sr-only"></span>
@@ -24,7 +24,7 @@
     import {ADD_RECIPES, REMOVE_RECIPES} from "../api/endpoints";
 
     export default {
-    props: ['id'],
+    props: ['id', 'weekId'],
     data() {
         return {
             showedSpinner: false,
@@ -38,13 +38,24 @@
     },
     methods: {
         async addToCart(recipe_id) {
-
-            const data = await createResource({
+            this.changeSpinnerMode();
+            const data = await createResource({ 
                 endpoint: ADD_RECIPES,
-                resource: { id: +recipe_id },
+                resource: { id: this.id, week_id: this.weekId },
+            }).then(()=>{
+                this.changeSpinnerMode();
+                this.quantity += 1;
             });
-            console.log(data);
-
+        },
+        async removeItem(removedItem) {
+            this.changeSpinnerMode();
+            this.quantity -= 1;
+            const data = await deleteResource({
+                endpoint: REMOVE_RECIPES, 
+                id: removedItem
+            }).then(()=>{
+                this.changeSpinnerMode();
+            });          
         },
         changeSpinnerMode() {
             this.showedSpinner = !this.showedSpinner;
@@ -52,9 +63,12 @@
         addQ() {
             this.quantity += 1;
         },
-
         reduceQ() {
-            this.quantity -= 1;
+            if(this.quantity === 1){
+                this.removeItem(this.id);
+            }else{
+                this.quantity -= 1;
+            }
         },
 
     },
