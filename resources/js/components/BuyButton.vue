@@ -24,7 +24,7 @@
     import {ADD_RECIPES, REMOVE_RECIPES} from "../api/endpoints";
 
     export default {
-    props: ['id'],
+    props: ['id', 'weekId'],
     data() {
         return {
             showedSpinner: false,
@@ -38,12 +38,15 @@
     },
     methods: {
         async addToCart(recipe_id) {
-
-            const data = await createResource({
+            this.changeSpinnerMode();
+            const data = await createResource({ 
                 endpoint: ADD_RECIPES,
-                resource: { id: +recipe_id },
+                resource: { id: this.id, week_id: this.weekId },
+            }).then(()=>{
+                this.changeSpinnerMode();
+                this.quantity += 1;
             });
-            console.log(data);
+
 
         },
         changeSpinnerMode() {
