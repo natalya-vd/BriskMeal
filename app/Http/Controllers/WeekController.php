@@ -16,13 +16,12 @@ class WeekController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(WeekQueryBuilder $builder, RecipesQueryBuilder $builder_recipes, $week)
+    public function index(WeekQueryBuilder $builder, RecipesQueryBuilder $builder_recipes, $week, Request $request)
     {
         try {
             $recipes = $builder->getRecipesByWeek($week);
-
+            $request->session()->put('week', $recipes['week_id']);
             $recipesData = ['items' => $builder_recipes->getRecipesById($recipes['recipes_id']), 'week_id' => $recipes['week_id']];
-
             return view('catalog')
                 ->with('recipes', $recipesData)
                 ->with('activeWeeks', $builder->getActiveWeeks()->toJson())
