@@ -27,7 +27,7 @@
             </button>
             <small  class="Nutr-val8">Nutrition info may vary slightly by time of delivery. Please refer to FAQ page for more related information.</small>
         </div>
-        <buy-button :id="recipeId" :weekId="weekid"></buy-button>
+        <buy-button :id="recipeId" :weekId="weekId"></buy-button>
     </div>
 </template>
 
@@ -38,20 +38,20 @@ import {ADD_RECIPES} from "../api/endpoints";
 export default {
     name: 'RecipyNutrition',
 
-    props: ['nutritionValues', 'recipeId', 'weekid'],
+    props: ['nutritionValues', 'recipeId', 'weekId'],
 
-    methods: {
+    /*methods: {
         async addToCart(recipe_id) {
             const data = await createResource({endpoint: ADD_RECIPES, resource: {id: +recipe_id}})
             console.log(data)
         }
-    },
+    },*/
 
     computed: {
         getNutritionValues() {
             return JSON.parse(this.nutritionValues);
         }
-    }
+    },
 };
 </script>
 
