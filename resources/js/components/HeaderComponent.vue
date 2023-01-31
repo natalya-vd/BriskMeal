@@ -14,14 +14,27 @@
                 <a class="header-navigation-link" href="/catalog"
                     ><span class="text-link">Gift Cards</span></a
                 >
-                <a class="header-navigation-link" href="/cart"
+                <a v-if="!isGuest(guest)" class="header-navigation-link" href="/cart"
                     ><span class="text-link">Your Cart</span></a
                 >
             </nav>
-            <div class="registration-block">
-                <a href="/catalog" class="login"><span>Log In</span></a
-                ><a href="/catalog" class="signup"><span>Sign up</span></a>
+            <div  class="registration-block">
+                <a v-if="isGuest(guest)" href="/login" class="login"><span>Log In</span></a
+                >
+                <a v-if="isGuest(guest)" href="/register" class="signup"><span>Sign up</span></a>
+                <div v-if="!isGuest(guest)" class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    <img class="profile me-4" src="/images/face28.jpg" alt="profile" />
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg-end">
+                    <button class="login" type="button" @click="onLogout">
+                        Logout
+                    </button>
+                </div>
             </div>
+            </div>
+
+
             <button
                 data-hamburger-menu="true"
                 class="hamburgerBtn"
@@ -53,24 +66,45 @@
 
 <script>
 import SideBarComponent from "./SideBarComponent.vue";
+import {isGuest} from "../helpers/common"
+import {logout} from '../api/api'
+import {LOGOUT} from '../api/endpoints'
+import router from '../router'
 
 export default {
     components: {
         SideBarComponent,
+    },
+    props: {
+        guest: {
+            type: String,
+            default: '1'
+        }
     },
     data() {
         return {
             visiblilitySideBar: false,
         };
     },
-    mounted() {
-       
+    setup() {
+        return {isGuest}
     },
 
     methods: {
         showSideBar() {
             this.visiblilitySideBar = !this.visiblilitySideBar;
         },
+        async onLogout() {
+            try {
+                const response = await logout(LOGOUT)
+                if(response.status === 204) {
+                    router.navigate('/')
+                }
+            } catch(e) {
+                // TODO: Тут бы модалку об ошибке
+                console.log(e.response.data.message)
+            }
+        }
     },
 };
 </script>
@@ -147,6 +181,11 @@ export default {
 .registration-block {
     font-weight: 600;
     display: none;
+}
+
+.profile {
+    width: 46px;
+    height: 46px;
 }
 
 .hamburgerBtn {

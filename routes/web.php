@@ -28,24 +28,27 @@ use App\Http\Controllers\Admin\WeekController as AdminWeekController;
 |
 */
 
+/** Страницы доступны всем */
 Route::get('/', [RecipeController::class, 'welcome'])->name('welcome');
 Route::get('/catalog', [RecipeController::class, 'index'])->name('catalog');
 Route::get('/catalog/{week}', [WeekController::class, 'index'])->name('catalogWeek');
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
 Route::get('/plans', PreferenceController::class)->name('plans');
-
-Route::get('/order', function () {
-    return view('order');
-})->name('order');
-
 Route::view('/faq', 'faq');
+
+/** Страницы для залогиненных пользователей */
+Route::middleware('auth')
+    ->group(function () {
+        Route::get('/cart', [CartController::class, 'index'])
+            ->name('cart');
+
+        Route::get('/order', function () {
+            return view('order');
+        })->name('order');
+    });
 
 
 /** Корзина */
-
-Route::get('/cart', [CartController::class, 'index'])
-    ->name('cart');
-
 /*Route::get('/catalog-test', [TestController::class, 'index'])
     ->name('catalog-test');
 
@@ -103,5 +106,3 @@ Route::middleware('auth')
     });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
