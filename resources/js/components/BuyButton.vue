@@ -1,6 +1,6 @@
 <template>
     <div class="buyBtnPlace">
-        <div v-if="showedAddBtn" class="buyBtn" >
+        <div v-if="showedAddBtn" class="buyBtn">
             <div v-if="showedSpinner" class="spinner-border" role="status">
 
                 <span class="sr-only"></span>
@@ -20,54 +20,84 @@
 
 <script>
 
-    import {createResource, deleteResource} from "../api/api";
-    import {ADD_RECIPES, REMOVE_RECIPES} from "../api/endpoints";
+import {
+    createResource,
+    updateResource
+} from "../api/api";
 
-    export default {
+import {
+    RECIPES_ADD,
+    RECIPES_PLUS,
+    RECIPES_MINUS
+} from "../api/endpoints";
+
+
+export default {
     props: ['id', 'weekId'],
+
     data() {
         return {
             showedSpinner: false,
             quantity: 0,
+            currentQuantity: 0,
         };
     },
+
     computed: {
         showedAddBtn() {
             return this.quantity > 0 ? false : true;
         },
     },
+
     methods: {
-        async addToCart(recipe_id) {
+
+        async addToCart() {
             this.changeSpinnerMode();
-            const data = await createResource({ 
-                endpoint: ADD_RECIPES,
-                resource: { id: this.id, week_id: this.weekId },
-            }).then(()=>{
+            const data = await createResource({
+                endpoint: RECIPES_ADD,
+                resource: {id: this.id, week_id: this.weekId},
+            }).then(() => {
                 this.changeSpinnerMode();
                 this.quantity += 1;
             });
         },
-        async removeItem(removedItem) {
-            this.changeSpinnerMode();
-            this.quantity -= 1;
-            const data = await deleteResource({
-                endpoint: REMOVE_RECIPES, 
-                id: removedItem
-            }).then(()=>{
-                this.changeSpinnerMode();
-            });          
-        },
+
         changeSpinnerMode() {
             this.showedSpinner = !this.showedSpinner;
         },
+
         addQ() {
             this.quantity += 1;
+            this.setQuantityMethod();
+            this.currentQuantity = this.quantity
         },
+
         reduceQ() {
-            if(this.quantity === 1){
-                this.removeItem(this.id);
-            }else{
-                this.quantity -= 1;
+            this.quantity -= 1;
+            this.setQuantityMethod();
+            this.currentQuantity = this.quantity
+        },
+
+        async setQuantityMethod() {
+            this.changeSpinnerMode();
+
+            if (this.quantity > this.currentQuantity) {
+                await updateResource({
+                    endpoint: RECIPES_PLUS,
+                    id: this.id,
+                    resource: {id: this.id, week_id: this.weekId},
+                }).then(() => {
+                    this.changeSpinnerMode();
+                });
+
+            } else if (this.quantity <= this.currentQuantity) {
+                await updateResource({
+                    endpoint: RECIPES_MINUS,
+                    id: this.id,
+                    resource: {id: this.id, week_id: this.weekId},
+                }).then(() => {
+                    this.changeSpinnerMode();
+                });
             }
         },
 
@@ -81,6 +111,7 @@
     height: 60px;
     padding: 10px 0px 10px 0px;
 }
+
 .buyBtn {
     margin-left: 10%;
     width: 80%;
@@ -92,6 +123,7 @@
     padding: 5px 0 5px 0;
     cursor: pointer;
 }
+
 .changeQ {
     margin-left: 10%;
     width: 80%;
@@ -99,14 +131,17 @@
     display: flex;
     justify-content: space-between;
 }
+
 .buyBtn:hover,
 .goTocart:hover {
     background-color: #336600;
 }
+
 .addTocart,
 .goTocart {
     font-size: 20px;
 }
+
 .manageQBlock {
     height: 100%;
     width: 53%;
@@ -116,6 +151,7 @@
     padding: 0;
     display: flex;
 }
+
 .goTocart {
     height: 100%;
     width: 43%;
@@ -128,6 +164,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .leftBtn,
 .rightBtn {
     height: 100%;
@@ -141,12 +178,15 @@
     justify-content: center;
     cursor: pointer;
 }
+
 .leftBtn {
     border-radius: 10px 0 0 10px;
 }
+
 .rightBtn {
     border-radius: 0 10px 10px 0;
 }
+
 .displayQ {
     height: 100%;
     width: 40%;
@@ -162,6 +202,7 @@
         width: 53%;
         font-size: 18px;
     }
+
     .manageQBlock {
         width: 43%;
     }

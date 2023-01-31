@@ -28,27 +28,25 @@ use App\Http\Controllers\Admin\WeekController as AdminWeekController;
 |
 */
 
-//Route::get('/', [PostController::class, 'index']);
-
 Route::get('/', [RecipeController::class, 'welcome'])->name('welcome');
 Route::get('/catalog', [RecipeController::class, 'index'])->name('catalog');
 Route::get('/catalog/{week}', [WeekController::class, 'index'])->name('catalogWeek');
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
 Route::get('/plans', PreferenceController::class)->name('plans');
 
-Route::view('/faq', 'faq');
-
-Route::get('/cart', [CartController::class, 'index'])
-    ->name('cart');
-
 Route::get('/order', function () {
     return view('order');
 })->name('order');
 
+Route::view('/faq', 'faq');
 
-/** Корзина (тестирование) */
 
-Route::get('/catalog-test', [TestController::class, 'index'])
+/** Корзина */
+
+Route::get('/cart', [CartController::class, 'index'])
+    ->name('cart');
+
+/*Route::get('/catalog-test', [TestController::class, 'index'])
     ->name('catalog-test');
 
 Route::get('/cart-test', [CartController::class, 'index'])
@@ -64,7 +62,7 @@ Route::match(['get', 'post'], '/cart/plus/{recipe}', [CartController::class, 'pl
     ->name('cart-plus');
 
 Route::match(['get', 'post'], '/cart/minus/{recipe}', [CartController::class, 'minus'])
-    ->name('cart-minus');
+    ->name('cart-minus');*/
 
 /** Админка */
 Route::middleware('auth')
