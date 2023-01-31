@@ -38,6 +38,8 @@ Route::get('/order', function () {
     return view('order');
 })->name('order');
 
+Route::view('/faq', 'faq');
+
 
 /** Корзина */
 

@@ -73,7 +73,7 @@ header {
 main {
     display: flex;
     flex-direction: column;
-    min-height: calc(100% - 80px - 23px);
+    min-height: calc(100% - 80px - 330px);
 }
 /* main {
     flex: 1 0 auto;
