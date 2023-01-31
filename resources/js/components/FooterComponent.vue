@@ -27,7 +27,7 @@
                         <h4>Help center</h4>
                         <ul class="accordion-body">
                             <li class="accordionLi fixPadding">
-                                <a href="/catalog">Help center and FAQ</a>
+                                <a href="/faq">Help center and FAQ</a>
                             </li>
                         </ul>
                     </div>
@@ -238,6 +238,7 @@ export default {
 
 .accordion {
     --bs-accordion-border-color: white;
+    width: 100%;
 }
 .accordion-button {
     font-weight: 700;

@@ -73,7 +73,7 @@ export default {
 .weekNavigationPanelDetail{
     content: "";
     position: relative;
-    bottom: 11px;
+    bottom: 15px;
     left: 50%;
     width: 15px;
     height: 15px;

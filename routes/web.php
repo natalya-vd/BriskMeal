@@ -36,6 +36,8 @@ Route::get('/catalog/{week}', [WeekController::class, 'index'])->name('catalogWe
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
 Route::get('/plans', PreferenceController::class)->name('plans');
 
+Route::view('/faq', 'faq');
+
 Route::get('/cart', [CartController::class, 'index'])
     ->name('cart');
 
