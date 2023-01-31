@@ -26,20 +26,22 @@
                 </div>
             </div>
         </a>
-        <buy-button :id="id" :weekId="week" ></buy-button>
+        <buy-button v-if="!isGuest(guest)" :id="id" :weekId="week" ></buy-button>
     </div>
 </template>
 
 <script>
 import MealPlan from "./MealPlan.vue";
-import { createResource } from "../api/api";
-import { ADD_RECIPES } from "../api/endpoints";
+import {isGuest} from "../helpers/common"
 
 export default {
     components: {
         MealPlan,
     },
-    props: ['id', 'time', 'title', 'ingredients', 'plans', 'photo', 'week'],
+    props: ['id', 'time', 'title', 'ingredients', 'plans', 'photo', 'week', 'guest'],
+    setup() {
+        return {isGuest}
+    },
     computed: {
         getIngredients() {
             const ingredients = JSON.parse(this.ingredients);

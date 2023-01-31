@@ -21,33 +21,26 @@ class UsersSeeder extends Seeder
 
     private function getData()
     {
-        $data = [];
-        $count = 200;
-
-        $data[] = [
-            "name" => 'admin',
-            "email" => 'admin@admin.ru',
-            "password" => Hash::make('12345'),
-            "remember_token" => fake()->windowsPlatformToken(),
-            "is_admin" => true
-        ];
-        $data[] = [
-            "name" => 'user',
-            "email" => 'user@user.ru',
-            "password" => Hash::make('12345'),
-            "remember_token" => fake()->windowsPlatformToken(),
-            "is_admin" => false
-        ];
-
-        for ($i = 1; $i <= $count; $i++) {
-            $data[] = [
-                "name" => fake()->text(5),
-                "email" => fake()->email(),
-                "password" => fake()->password(),
-                "remember_token" => fake()->windowsPlatformToken(),
+        $data = [
+            [
+                "name" => 'admin',
+                "email" => 'admin@admin.ru',
+                "password" => Hash::make('12345'),
+                "is_admin" => true
+            ],
+            [
+                "name" => 'user',
+                "email" => 'user@user.ru',
+                "password" => Hash::make('12345'),
                 "is_admin" => false
-            ];
-        }
+            ],
+            [
+                "name" => 'boss',
+                "email" => 'boss@boss.ru',
+                "password" => Hash::make('12345'),
+                "is_admin" => false
+            ]
+        ];
 
         return $data;
     }

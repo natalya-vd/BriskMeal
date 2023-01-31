@@ -36,13 +36,15 @@ Route::get('/catalog/{week}', [WeekController::class, 'index'])->name('catalogWe
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
 Route::get('/plans', PreferenceController::class)->name('plans');
 
-Route::get('/cart', [CartController::class, 'index'])
-    ->name('cart');
+Route::middleware('auth')
+    ->group(function () {
+        Route::get('/cart', [CartController::class, 'index'])
+            ->name('cart');
 
-Route::get('/order', function () {
-    return view('order');
-})->name('order');
-
+        Route::get('/order', function () {
+            return view('order');
+        })->name('order');
+    });
 
 /** Корзина (тестирование) */
 
@@ -103,5 +105,3 @@ Route::middleware('auth')
     });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

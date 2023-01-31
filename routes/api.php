@@ -5,6 +5,8 @@ use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Auth\LogoutController;
+
 use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
 use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
 use App\Http\Controllers\Admin\PreferenceController as AdminPreferenceController;
@@ -29,16 +31,18 @@ Route::post('/posts', [PostController::class, 'store']);
 Route::get('/posts', [PostController::class, 'get']);
 Route::delete('/posts/{id}', [PostController::class, 'delete']);
 
+/** Авторизация */
+Route::middleware('auth')
+    ->group(function () {
+        Route::post('/logout', [LogoutController::class, 'logoutApi']);
+    });
+
 /** Корзина */
-
-Route::match(['get', 'post'], '/cart/add', [CartController::class, 'add']);
-Route::delete('/cart/remove/{recipe}', [CartController::class, 'remove']);
-
-Route::apiResource('recipes', AdminRecipeController::class)->only([
-    'destroy', 'update', 'store'
-]);
-
-
+Route::middleware('auth')
+    ->group(function () {
+        Route::match(['get', 'post'], '/cart/add', [CartController::class, 'add']);
+        Route::delete('/cart/remove/{recipe}', [CartController::class, 'remove']);
+    });
 
 /** Админка */
 Route::middleware(['auth', 'is_admin'])

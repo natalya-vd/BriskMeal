@@ -27,18 +27,23 @@
             </button>
             <small  class="Nutr-val8">Nutrition info may vary slightly by time of delivery. Please refer to FAQ page for more related information.</small>
         </div>
-        <buy-button :id="recipeId" :weekId="weekId"></buy-button>
+        <buy-button v-if="!isGuest(guest)" :id="recipeId" :weekId="weekId"></buy-button>
     </div>
 </template>
 
 <script>
 import {createResource} from "../api/api";
 import {ADD_RECIPES} from "../api/endpoints";
+import {isGuest} from "../helpers/common"
 
 export default {
     name: 'RecipyNutrition',
 
-    props: ['nutritionValues', 'recipeId', 'weekId'],
+    props: ['nutritionValues', 'recipeId', 'weekId', 'guest'],
+
+    setup() {
+        return {isGuest}
+    },
 
     /*methods: {
         async addToCart(recipe_id) {
