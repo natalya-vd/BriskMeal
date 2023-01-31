@@ -22,24 +22,24 @@
                 </div>
                 <div class="mealCArdInfoItem mealCArdInfoItemTimePlace">
                     <span class="mealCArdInfoItemTime">{{ time }} min </span>
-                    <meal-plan :plans="plans" />
+                    <meal-plan :plans="plans"/>
                 </div>
             </div>
         </a>
-        <buy-button :id="id" :weekId="week" ></buy-button>
+        <buy-button :id="id" :weekId="week"></buy-button>
     </div>
 </template>
 
 <script>
 import MealPlan from "./MealPlan.vue";
-import { createResource } from "../api/api";
-import { ADD_RECIPES } from "../api/endpoints";
 
 export default {
     components: {
         MealPlan,
     },
+
     props: ['id', 'time', 'title', 'ingredients', 'plans', 'photo', 'week'],
+
     computed: {
         getIngredients() {
             const ingredients = JSON.parse(this.ingredients);
@@ -55,9 +55,6 @@ export default {
             };
         }
     },
-    mounted() {
-        console.log(this.week);
-    }
 };
 </script>
 
@@ -82,11 +79,13 @@ export default {
     text-decoration: none;
     color: black;
 }
+
 .mealCArdLinkBlock {
     width: 100%;
     height: 215px;
     background-color: rgb(207 215 222);
 }
+
 .meal-card__img {
     width: 100%;
     height: 100%;
@@ -102,6 +101,7 @@ export default {
     display: flex;
     justify-content: flex-start;
 }
+
 .mealCArdInfoItemTitle {
     line-height: 24px;
     font-size: 18px;
@@ -109,11 +109,13 @@ export default {
     margin: 0 0 4px;
     max-width: 100%;
 }
+
 .mealCArdInfoItemText {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
+
 .mealCArdInfoItemIngridients {
     min-height: 40px;
     margin: 8px 0 12px;
@@ -122,9 +124,11 @@ export default {
     line-height: 18px;
     text-align: left;
 }
+
 .mealCArdInfoItemTime {
     margin-right: 12px;
 }
+
 .mealCArdInfoItemTimePlace {
     height: 24px;
 }

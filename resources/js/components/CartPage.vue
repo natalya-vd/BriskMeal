@@ -62,7 +62,7 @@
 <script>
 import CartCardComponent from "./CartCardComponent.vue";
 import {deleteResource} from "../api/api";
-import {REMOVE_RECIPES} from "../api/endpoints";
+import {RECIPES_REMOVE} from "../api/endpoints";
 
 export default {
     name: "CartPage",
@@ -114,19 +114,17 @@ export default {
 
     mounted() {
         console.log(JSON.parse(this.dataResponse).recipes)
-        //console.log(JSON.parse(this.quantity))
     },
 
     methods: {
         async removeItem(removedItem) {
-            const data = await deleteResource({endpoint: REMOVE_RECIPES, id: removedItem.id})
+            const data = await deleteResource({endpoint: RECIPES_REMOVE, id: removedItem.id})
             //this.cart = this.cart.filter((item) => item.id !== removedItem.id);
         },
     },
 
     computed: {
         cart() {
-            //console.log(JSON.parse(this.dataResponse))
             return JSON.parse(this.dataResponse).recipes
         }
     }

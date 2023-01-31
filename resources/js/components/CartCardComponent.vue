@@ -1,7 +1,7 @@
 <template>
     <div class="cardCart" v-if="isCardShowed">
         <div class="cardBorder">
-            <img src="/card_image/card_1.jpg" alt="" class="cardImage" />
+            <img src="/card_image/card_1.jpg" alt="" class="cardImage"/>
 
             <div class="recipyInfo">
                 <div class="recipyTitle" :title="cartItem.name">
@@ -11,8 +11,8 @@
                 </div>
                 <div class="recipyDescription">
                     <span class="recipyDescriptionText">{{
-                        cartItem.recipes.description
-                    }}</span>
+                            cartItem.recipes.description
+                        }}</span>
                     <div
                         class="recipyDescriptionOverlay"
                         :title="cartItem.recipes.description"
@@ -47,16 +47,16 @@
 
 <script>
 import {deleteResource} from "../api/api";
-import {REMOVE_RECIPES} from "../api/endpoints";
+import {RECIPES_REMOVE} from "../api/endpoints";
 
 export default {
     name: "CartCardComponent",
-    props:  ['cartItem', 'key'],
+    props: ['cartItem', 'key'],
     data() {
         return {
             countRecipy: this.cartItem.quantity,
             isCardShowed: true
-         };
+        };
     },
     computed: {
         totalPrice() {
@@ -67,11 +67,13 @@ export default {
         async removeItem() {
             const myID = this.cartItem.recipes.id;
             const data = await deleteResource({
-                endpoint: REMOVE_RECIPES,
+                endpoint: RECIPES_REMOVE,
                 id: myID
-            }).then(()=>{ this.changeSpinnerMode(); });
+            }).then(() => {
+                this.changeSpinnerMode();
+            });
         },
-        changeSpinnerMode(){
+        changeSpinnerMode() {
             this.isCardShowed = !this.isCardShowed;
         }
     }

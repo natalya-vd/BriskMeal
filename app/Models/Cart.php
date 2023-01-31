@@ -58,9 +58,9 @@ class Cart extends Model
     /**
      * Уменьшает кол-во товара в корзине на величину $count
      */
-    public function decrease($id, $count = 1)
+    public function decrease($recipe_id, $week_id, $count = 1)
     {
-        $this->change($id, -1 * $count);
+        $this->change($recipe_id, $week_id, -1 * $count);
     }
 
     /**
