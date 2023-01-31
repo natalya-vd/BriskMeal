@@ -84,6 +84,8 @@ app.component("welcome-tiles", WelcomeTilesComponent);
 import BuyButton from "./components/BuyButton.vue";
 app.component("buy-button", BuyButton);
 
+import FAQComponent from "./components/FAQComponent.vue";
+app.component("faq-component", FAQComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

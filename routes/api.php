@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,21 +26,20 @@ use App\Http\Controllers\Admin\FileController as AdminFileController;
 |
 */
 
-Route::post('/posts', [PostController::class, 'store']);
-Route::get('/posts', [PostController::class, 'get']);
-Route::delete('/posts/{id}', [PostController::class, 'delete']);
-
 /** Авторизация */
 Route::middleware('auth')
     ->group(function () {
         Route::post('/logout', [LogoutController::class, 'logoutApi']);
     });
 
+
 /** Корзина */
 Route::middleware('auth')
     ->group(function () {
-        Route::match(['get', 'post'], '/cart/add', [CartController::class, 'add']);
+        Route::post('/cart/add', [CartController::class, 'add']);
         Route::delete('/cart/remove/{recipe}', [CartController::class, 'remove']);
+        Route::put('/cart/plus/{recipe}', [CartController::class, 'plus']);
+        Route::put('/cart/minus/{recipe}', [CartController::class, 'minus']);
     });
 
 /** Админка */

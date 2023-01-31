@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Recipe;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -58,7 +57,7 @@ class CartController extends Controller
     {
         $quantity = $request->input('quantity') ?? 1;
         $this->cart->increase($request->id, $request->week_id, $quantity);
-        
+
         // выполняем редирект обратно на ту страницу,
         // где была нажата кнопка «В корзину»
 
@@ -69,19 +68,21 @@ class CartController extends Controller
     /**
      * Увеличивает кол-во товара в корзине на единицу
      */
-    public function plus(Recipe $recipe)
+    public function plus(Recipe $recipe, Request $request)
     {
-        $this->cart->increase($recipe->id);
-        return redirect()->route('cart-test');
+        $this->cart->increase($request->id, $request->week_id);
+        return response()->json("Ok");
+        //return redirect()->route('cart-test');
     }
 
     /**
      * Уменьшает кол-во товара в корзине на единицу
      */
-    public function minus(Recipe $recipe)
+    public function minus(Recipe $recipe, Request $request)
     {
-        $this->cart->decrease($recipe->id);
-        return redirect()->route('cart-test');
+        $this->cart->decrease($request->id, $request->week_id);
+        return response()->json("Ok");
+        //return redirect()->route('cart-test');
     }
 
     public function checkout() // Оформление заказа

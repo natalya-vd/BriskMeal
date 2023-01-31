@@ -1,8 +1,15 @@
 // эндпоинты, роуты на бэке
 
-const POSTS = '/api/posts'
-const ADD_RECIPES = '/api/cart/add';
-const REMOVE_RECIPES = '/api/cart/remove';
+const RECIPES_ADD = '/api/cart/add';
+const RECIPES_REMOVE = '/api/cart/remove';
+const RECIPES_PLUS = '/api/cart/plus';
+const RECIPES_MINUS = '/api/cart/minus';
 const LOGOUT = 'api/logout'
 
-export {ADD_RECIPES, REMOVE_RECIPES, POSTS, LOGOUT}
+export {
+    RECIPES_ADD,
+    RECIPES_REMOVE,
+    RECIPES_PLUS,
+    RECIPES_MINUS,
+    LOGOUT
+}
