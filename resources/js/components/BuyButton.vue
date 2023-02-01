@@ -9,9 +9,9 @@
         </div>
         <div v-else class="changeQ">
             <div class="manageQBlock">
-                <div class="leftBtn" v-on:click="reduceQ">&#8211;</div>
-                <div class="displayQ">{{ quantity }}</div>
-                <div class="rightBtn" v-on:click="addQ">&#43;</div>
+                <div class="leftBtn" v-on:click="reduceQ" v-bind:class="{ notActive: isBtnsActive }">&#8211;</div>
+                <buy-button-input v-model.lazy="quantity" @retrive="inputDataSubmit"></buy-button-input>
+                <div class="rightBtn" v-on:click="addQ" v-bind:class="{ notActive: isBtnsActive }">&#43;</div>
             </div>
             <a href="/cart" class="goTocart">Go to Cart</a>
         </div>
@@ -33,13 +33,17 @@ import {
 
 
 export default {
-    props: ['id', 'weekId'],
+    props: [
+        'id', 
+        'weekId',
+    ],
 
     data() {
         return {
             showedSpinner: false,
             quantity: 0,
             currentQuantity: 0,
+            isBtnsActive: true
         };
     },
 
@@ -61,11 +65,16 @@ export default {
                 this.quantity += 1;
             });
         },
-
+        inputDataSubmit(quantity){
+            this.quantity = Number(quantity);
+            console.log(quantity);
+        },    
         changeSpinnerMode() {
             this.showedSpinner = !this.showedSpinner;
         },
-
+        changeBtnsActiveMode() {
+            this.isBtnsActive = !this.isBtnsActive;
+        },
         addQ() {
             this.quantity += 1;
             this.setQuantityMethod();
@@ -80,7 +89,7 @@ export default {
 
         async setQuantityMethod() {
             this.changeSpinnerMode();
-
+            this.changeBtnsActiveMode()
             if (this.quantity > this.currentQuantity) {
                 await updateResource({
                     endpoint: RECIPES_PLUS,
@@ -88,6 +97,7 @@ export default {
                     resource: {id: this.id, week_id: this.weekId},
                 }).then(() => {
                     this.changeSpinnerMode();
+                    this.changeBtnsActiveMode()
                 });
 
             } else if (this.quantity <= this.currentQuantity) {
@@ -97,6 +107,7 @@ export default {
                     resource: {id: this.id, week_id: this.weekId},
                 }).then(() => {
                     this.changeSpinnerMode();
+                    this.changeBtnsActiveMode()
                 });
             }
         },
@@ -133,12 +144,15 @@ export default {
 }
 
 .buyBtn:hover,
-.goTocart:hover {
+.goTocart:hover,
+.leftBtn:hover,
+.rightBtn:hover {
     background-color: #336600;
 }
 
 .addTocart,
-.goTocart {
+.goTocart
+ {
     font-size: 20px;
 }
 
@@ -169,14 +183,14 @@ export default {
 .rightBtn {
     height: 100%;
     width: 29%;
-    background-color: #339900;
+    background-color: #abd496;
     color: #ffffff;
     border: none;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    cursor: default;
 }
 
 .leftBtn {
@@ -193,8 +207,16 @@ export default {
     border: 1px solid #339900;
     color: black;
     display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
+}
+.notActive{
+    background-color: #339900;
+    cursor: pointer;
+}
+.notActive:hover {
+    background-color: #336600;
 }
 
 @media only screen and (max-width: 767px) {
