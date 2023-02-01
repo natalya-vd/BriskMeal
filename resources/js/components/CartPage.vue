@@ -32,14 +32,14 @@
                     </div>
                 </div>
             </div>
-            <!-- <template class="cart" v-for="" :key="item.id"></template> -->
+
             <cart-card-component
                 v-for="item in cart"
                 :key="item.id"
                 :cartItem="item"
-                :removeItem="removeItem"
+                @removecard="removeCardFromCart"
             />
-            <!-- <cart-card-component :cart="cart" /> -->
+
 
             <div class="addRecipyWrapper">
                 <a href="/catalog" class="addRecipy"><span>Add More</span></a>
@@ -65,68 +65,33 @@ import {deleteResource} from "../api/api";
 import {RECIPES_REMOVE} from "../api/endpoints";
 
 export default {
-    name: "CartPage",
+    props: [ "dataResponse" ],
     components: {
         CartCardComponent,
     },
-
-    props: [
-        "dataResponse"
-    ],
-
     data() {
         return {
-            /*cart: [
-                {
-                    id: 1,
-                    name_recipy:
-                        "Unde eligendi eum quis officiaUnde eligendi eum quis officiaUnde eligendi eum quis officia",
-                    description_recipy:
-                        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate libero blanditiis impedit. Dolorum dolorem iste sed mollitia est ad itaque provident nisi voluptates reprehenderit, consequatur quidem placeat! Iusto, error explicabo. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate libero blanditiis impedit. Dolorum dolorem iste sed mollitia est ad itaque provident nisi voluptates reprehenderit, consequatur quidem placeat! Iusto, error explicabo. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate libero blanditiis impedit. Dolorum dolorem iste sed mollitia est ad itaque provident nisi voluptates reprehenderit, consequatur quidem placeat! Iusto, error explicabo.",
-                    path: "/preferences_svg/Keto_Paleo.svg",
-                    price: 100,
-                },
-                {
-                    id: 2,
-                    name_recipy: "Unde eligendi eum quis officia",
-                    description_recipy:
-                        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate libero blanditiis impedit. Dolorum dolorem iste sed mollitia est ad itaque provident nisi voluptates reprehenderit, consequatur quidem placeat! Iusto, error explicabo.",
-                    path: "/preferences_svg/Keto_Paleo.svg",
-                    price: 150,
-                },
-                {
-                    id: 3,
-                    name: "Mediterranien",
-                    name_recipy: "Unde eligendi eum quis officia",
-                    description_recipy:
-                        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate libero blanditiis impedit. Dolorum dolorem iste sed mollitia est ad itaque provident nisi voluptates reprehenderit, consequatur quidem placeat! Iusto, error explicabo.",
-                    path: "/preferences_svg/Keto_Paleo.svg",
-                    price: 200,
-                },
-            ],*/
+            cart: [],
             plans: {
                 preferences: "Keto + Paleo",
                 quantityPeople: 3,
                 quantityMeals: 2,
-            },
-        };
-    },
-
-    mounted() {
-        console.log(JSON.parse(this.dataResponse).recipes)
-    },
-
-    methods: {
-        async removeItem(removedItem) {
-            const data = await deleteResource({endpoint: RECIPES_REMOVE, id: removedItem.id})
-            //this.cart = this.cart.filter((item) => item.id !== removedItem.id);
-        },
-    },
-
-    computed: {
-        cart() {
-            return JSON.parse(this.dataResponse).recipes
+            }
         }
+    },
+    methods: {
+        async removeCardFromCart(removedItem) {
+            const myID = removedItem.recipes.id;
+            const data = await deleteResource({
+                endpoint: RECIPES_REMOVE,
+                id: myID
+            }).then(() => {
+                this.cart = this.cart.filter((item) => item.recipes.id !== removedItem.recipes.id);
+            });
+        }
+    },
+    mounted() {
+        this.cart = JSON.parse(this.dataResponse).recipes;
     }
 };
 </script>
