@@ -7,7 +7,7 @@
 @section('content')
 <div class="container bm-recipe">
     <div class="mealsDesk bm-recipe__wrapper">
-        <recipy-title title="{{$recipe['name']}}" ingredients="{{$recipe['ingredients']}}"></recipy-title>
+        <recipy-title title="{{$recipe['name']}}" ingredients="{{$recipe['ingredients']}}" recipe-pdf="{{ $recipe['path_pdf'] }}"></recipy-title>
         <div class="recipyInfoBlock">
             <div class="recipyMainBlock">
                 <recipy-main id="{{ $recipe['id'] }}" time="{{ $recipe['cook_time'] }}" plans="{{ $recipe['preferences'] }}" calories="{{ $recipe['calories'] }}" photo="{{ $recipe['photo'] }}"></recipy-main>
