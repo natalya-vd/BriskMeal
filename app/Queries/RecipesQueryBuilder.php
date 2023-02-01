@@ -69,6 +69,7 @@ final class RecipesQueryBuilder
             'name' => $recipe->name,
             'cook_time' => $recipe->cook_time,
             'description' => $recipe->description,
+            "path_pdf" => $recipe->path_pdf != null ? Storage::disk('public')->url($recipe->path_pdf) : '',
             'photo' => json_encode($photo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
             'calories' => $calories,
             'preferences' => json_encode($preferences, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),

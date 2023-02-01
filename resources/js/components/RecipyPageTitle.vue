@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="recipyView">
-            <a href="" class="recipyViewLink">
+            <a :href="recipePdf" :class="['recipyViewLink', {'recipyViewLinkDisable': recipePdf.length === 0}]" target="_blank" v-on="getDisabledFunction">
                 <span class="linkText">View Recipe Card .PDF</span>
                 <svg
                     class="linkSvg"
@@ -75,17 +75,16 @@
 
 <script>
 export default {
-    props: ["title", "ingredients"],
-
-    mounted() {
-        console.log("RecipyPageTitle Component mounted.");
-    },
+    props: ["title", "ingredients", "recipePdf"],
 
     computed: {
         getIngredients() {
             const ingredients = JSON.parse(this.ingredients);
             return ingredients.map((item) => item.ingredient).join(", ");
         },
+        getDisabledFunction() {
+            return this.recipePdf.length === 0 ? { click: (e) => e.preventDefault(), focus: (e) => e.preventDefault() } : {}
+        }
     },
 
     methods: {
@@ -246,14 +245,32 @@ export default {
     background-color: transparent;
     border-color: rgb(66, 105, 61);
     vertical-align: bottom;
-    transition-property: color, background, border, box-shadow, opacity !important;
-    color: rgb(66, 105, 61) !important;
+    transition-property: color, background, border, box-shadow, opacity, fill !important;
+    color: rgb(66, 105, 61);
 }
 
+.recipyViewLink:focus,
 .recipyViewLink:hover {
     background-color: rgb(42, 78, 42);
     border-color: rgb(42, 78, 42);
-    color: white !important;
+    color: white;
+}
+
+.recipyViewLinkDisable,
+.recipyViewLinkDisable:focus,
+.recipyViewLinkDisable:hover {
+    cursor: default;
+    background-color: rgb(234 234 234);
+    border-color: rgb(234 234 234);
+    color: rgb(107 130 107);
+}
+
+.recipyViewLink:hover path {
+    fill: white;
+}
+.recipyViewLinkDisable path,
+.recipyViewLinkDisable:hover path {
+    fill: rgb(107 130 107);
 }
 
 .linkText {
@@ -269,10 +286,6 @@ export default {
     box-sizing: content-box;
     cursor: inherit;
     text-align: center; */
-}
-
-.recipyViewLink:hover path {
-    fill: white;
 }
 
 @media only screen and (min-width: 0px) {
