@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Queries\RecipesQueryBuilder;
