@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'num_people',
+        'meals_week'
     ];
 
     /**
@@ -41,4 +43,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function preferences()
+    {
+        return $this->belongsToMany(
+            Preference::class,
+            'preference_user',
+            'user_id',
+            'preference_id'
+        );
+    }
 }

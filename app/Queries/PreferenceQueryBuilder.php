@@ -19,7 +19,7 @@ final class PreferenceQueryBuilder
         $this->model = Preference::query();
     }
 
-    public function getPreferencesForPlans()
+    public function getPreferencesListForPlans()
     {
         $preference = $this->model
             ->with('photo')
