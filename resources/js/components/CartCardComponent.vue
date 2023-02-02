@@ -34,7 +34,7 @@
                 <div class="separatorCard" data-v-478eddff=""></div>
                 <div class="totalPriceCard">200$</div>
             </div>
-            <div class="cross" @click="removeItem()">
+            <div class="cross" @click="submitRemove">
                 <svg viewBox="0 0 48 48" height="24" width="24">
                     <path
                         d="m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z"
@@ -46,12 +46,10 @@
 </template>
 
 <script>
-import {deleteResource} from "../api/api";
-import {RECIPES_REMOVE} from "../api/endpoints";
-
 export default {
     name: "CartCardComponent",
     props: ['cartItem', 'key'],
+    emits: ['removecard'],
     data() {
         return {
             countRecipy: this.cartItem.quantity,
@@ -64,17 +62,8 @@ export default {
         }
     },
     methods: {
-        async removeItem() {
-            const myID = this.cartItem.recipes.id;
-            const data = await deleteResource({
-                endpoint: RECIPES_REMOVE,
-                id: myID
-            }).then(() => {
-                this.changeSpinnerMode();
-            });
-        },
-        changeSpinnerMode() {
-            this.isCardShowed = !this.isCardShowed;
+        submitRemove() {
+            this.$emit('removecard', this.cartItem);
         }
     }
 };

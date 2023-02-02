@@ -84,6 +84,9 @@ app.component("welcome-tiles", WelcomeTilesComponent);
 import BuyButton from "./components/BuyButton.vue";
 app.component("buy-button", BuyButton);
 
+import BuyButtonInput from "./components/BuyButtonInput.vue";
+app.component("buy-button-input", BuyButtonInput);
+
 import FAQComponent from "./components/FAQComponent.vue";
 app.component("faq-component", FAQComponent);
 /**
