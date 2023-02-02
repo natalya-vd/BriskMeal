@@ -40,7 +40,5 @@ class DatabaseSeeder extends Seeder
         $this->call(OrdersSeeder::class);
         $this->call(OrdersPreferencesSeeder::class);
         $this->call(OrdersRecipesSeeder::class);
-
-        $this->call(PostsSeeder::class);
     }
 }

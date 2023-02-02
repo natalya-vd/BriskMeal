@@ -23,7 +23,7 @@ class RecipeController extends Controller
 
     public function index(RecipesQueryBuilder $builder_recipes)
     {
-        dump(Auth::user()->id);
+        //dump(Auth::user()->id);
         try {
             $recipesData = [
                 'items' => $builder_recipes->getRecipesById($this->recipes['recipes_id']),
