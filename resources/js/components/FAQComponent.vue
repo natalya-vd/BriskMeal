@@ -1,29 +1,11 @@
 <template>
     <section class="container faqArea">
         <h1 class="text-center font-weight-bold">Frequently Asked Questions</h1>
-
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="What can we help you with?" aria-label="What can we help you with?" aria-describedby="button-addon2">
             <button class="btn btn-outline-secondary" type="button" id="button-addon2">&#128269;</button>
         </div>
-        <div v-if="currBlock===1" class="questionsBlock">
-            <h1>Block №1</h1>
-        </div>
-        <div v-if="currBlock===2" class="questionsBlock">
-            <h1>Block №2</h1>
-        </div>
-        <div v-if="currBlock===3" class="questionsBlock">
-            <h1>Block №3</h1>
-        </div>
-        <div v-if="currBlock===4" class="questionsBlock">
-            <h1>Block №4</h1>
-        </div>
-        <div v-if="currBlock===5" class="questionsBlock">
-            <h1>Block №5</h1>
-        </div>
-        <div v-if="currBlock===6" class="questionsBlock">
-            <h1>Block №6</h1>
-        </div>
+        <questions-block  v-for="item in questions"  :key="item.id" :currBlock="currBlock" :faqs="item.faqs" :item="item"></questions-block>
         <div class="faqBtnsDesk">
             <div class="faqBtnsCard" v-on:click="changeCurrBlock(1)">
                 <div>
@@ -118,7 +100,183 @@ export default {
     props: [ ],
     data() {
         return {
-            currBlock: 0
+            currBlock: 0,
+            questions: [
+                {id: 1,
+                title: "Food Safety and Covid-19 Updates",
+                faqs:[
+                    {id: 1,
+                    question: "What is a safe internal temperature for cooking meat and poultry?",
+                    answer: "Cook all raw beef, pork, lamb and veal steaks, chops, and roasts to a minimum internal temperature of 145 °F as measured with a food thermometer before removing meat from the heat source. For safety and quality, allow meat to rest for at least three-minutes before carving or consuming. Cook all raw ground beef, pork, lamb, and veal to an internal temperature of 160 °F. Cook all poultry (whole, pieces &amp; ground) to an internal temperature of 165 °F as measured with a food thermometer. (ask.usda.gov)"},
+                    {id: 2,
+                    question: "How do I know when my food is “done”?",
+                    answer: "The best way to know if your food is done cooking is to use a food thermometer. When your food reaches a safe internal temperature as measured by a food thermometer, it is done and ready to eat. (Partnership for Food Safety Education)"},
+                    {id: 3,
+                    question: "When and how should I wash my hands during the cooking process?",
+                    answer: "Handwashing is important to the overall cooking process and will help keep you healthy. Wash your hands with soap and water before you start cooking and after each time you touch uncooked or raw meats, poultry, seafood, flour or eggs during cooking."},
+                    {id: 4,
+                    question: "Do I need to wash any of the produce? How should fresh produce be washed before eating?",
+                    answer: "To ensure food safety, we recommend that you wash all fresh produce prior to consumption, including: fruits, vegetables, and herbs. Fresh produce typically comes straight from the farm, so rinsing or scrubbing your produce is advised. Gently rub produce 'skin', such as tomatoes, under cold running water. Scrub firm produce, such as carrots or onions, with a clean produce brush under running water."},
+                    {id: 5,
+                    question: "Should I wash meat or poultry before cooking?",
+                    answer: "Do not wash or rinse raw meat or poultry before you cook it. Washing can cause bacteria found on the surface of meat or poultry to be spread to ready-to-eat foods, kitchen utensils, and counter surfaces. This is called cross-contamination. Failure to clean these contaminated areas can lead to foodborne illness. Cooking (baking, broiling, boiling, and grilling) to the right temperature kills the bacteria, so washing food is not necessary. Using a food thermometer is the only sure way of knowing if your food has reached a high enough temperature to destroy foodborne bacteria."},
+                    {id: 6,
+                    question: "If I experienced a food safety issue with my box, ingredient(s), and/or specific meal-kit, what should I do?",
+                    answer: "At EveryPlate, the safety and quality of our ingredients is our highest priority. In the event that you experience a food safety issue or concern with your order, please reach out to our Customer Care team. You will be directed to a specialized team of food safety agents who provide dedicated support and assistance. To better aid our investigation process, we may ask for additional information regarding your order (i.e. recipe names, pictures, delivery and packaging information)."},
+                    {id: 7,
+                    question: "Will COVID-19 impact your food supply?",
+                    answer: "Our teams have prepared for a variety of scenarios and are working closely with our vast network of suppliers to minimize any disruptions to your service. Our food supply has not been impacted and we’re working hard to maintain safe and dependable service. If we anticipate any delays or changes to your upcoming order, we will notify you immediately through email."},
+                    {id: 8,
+                    question: "Are Green Chef employees offered paid sick leave?",
+                    answer: "Yes. The health and wellbeing of our employees and customers is our highest priority. As such, all of our employees are given paid sick leave. We’ve also enhanced our sick leave and attendance policies to support our hourly employees who may have been directly impacted, are feeling symptomatic and/or those who are mandated to self-quarantine. In addition, we’re providing added flexibility to working parents who are navigating school and daycare closures."},
+                    {id: 9,
+                    question: "Can COVID-19 be transmitted through food?",
+                    answer: "According to the Centers for Disease Control (CDC) “there is no evidence to support the spread of COVID-19 through food.” Additionally, “there is likely very low risk of spread from food products or packaging that are shipped over a period of days or weeks at ambient, refrigerated, or frozen temperatures.” Maintaining the safety and quality of our product and ensuring our customers’ well being is our highest priority. Rest assured that we would never do anything to put either of those at risk."},
+                    {id: 10,
+                    question: "What precautions are your delivery partners taking?",
+                    answer: "We are working very closely with our delivery partners to ensure the quality and safety of our product while in transit. According to the CDC, “there is likely very low risk of spread from food products or packaging that are shipped over a period of days or weeks at ambient, refrigerated, or frozen temperatures,” and there is no evidence to support the spread of COVID-19 through food. In addition, our delivery partners have been directed to follow strict hygiene protocols which include frequent hand washing and regularly disinfecting steering wheels and areas of the truck which are often touched. Drivers have also been advised to stay home if they are feeling sick or exhibit any symptoms of acute respiratory illness."},
+                    {id: 11,
+                    question: "Will my Green Chef service be disrupted?",
+                    answer: "Along with other food suppliers, we have been classified as “critical infrastructure” by the Department of Homeland Security and as an “essential business” by a number of state and local governments, so we are not impacted by the same closures as other businesses. We have a responsibility to provide fresh, healthy meals through no-contact deliveries, and we take that very seriously. Rest assured, we are working closely with our network of suppliers and partners to minimize any disruptions to your service."},
+                    {id: 12,
+                    question: "What would you do if an employee tests positive for COVID-19?",
+                    answer: "In the event that an employee tests positive for COVID-19, we immediately activate our response protocol, which includes an intensified cleaning of impacted areas and notification to employees. We take direct guidance from the FDA, CDC and local health department to ensure no contamination and always maintain the safety of our meal kits and employees. In addition, any employee who displays any symptoms of acute respiratory illness or has been exposed to validated cases of COVID-19 is not permitted on the premises for at least 14 days."}
+                    ]},
+                {id: 2,
+                title: "About Brisk Meal",
+                faqs:[
+                    {id: 1,
+                    question: "How does Green Chef work?",
+                    answer: "A Green Chef subscription can work for anyone! Here's how: "},
+                    {id: 2,
+                    question: "What's in the box?",
+                    answer: "Each carefully packed Green Chef box contains premium pre-measured ingredients and easy-to-follow recipes for balanced dishes. Many of the ingredients, from chopped veggies to homemade sauces, have been prepped for you, allowing you to save time without sacrificing flavor. Each recipe card and kit bag are color-coded, so when you’re ready to cook, you can easily find what you need. All of our packaging is made from recycled, reusable, and/or compostable materials."},
+                    {id: 3,
+                    question: "Are the packaging materials eco-friendly?",
+                    answer: "Yes! We’re constantly innovating to provide the most eco-friendly packaging available. All of our packaging is made from recyclable, reusable, and/or compostable materials - except where we can’t get around it for food safety reasons.  For example, our tofu is sent in vacuum-sealed plastic wrapping to ensure you get the freshest experience possible with the outstanding flavor that our chefs intended."}
+                ]},
+                {id: 3,
+                title: "Recipes & Ingredients",
+                faqs:[
+                    {id: 1,
+                    question: "Are all of your ingredients certified organic?",
+                    answer: "We are committed to delivering the best quality ingredients. We source organic fresh produce and eggs and our proteins are raised with high animal welfare standards. We also offer organic beef, chicken, and wild-caught seafood options. In the event that we cannot source an organic ingredient that meets our quality standards, we will let you know through labeling and in-box communications. In these cases, we focus on sourcing conventional options of the highest quality. All of our ingredients go through extensive screening to meet our high-integrity-ingredient standards."},
+                    {id: 2,
+                    question: "What does it mean to be certified organic?",
+                    answer: "Being a certified organic handler of fresh produce and eggs means that our ingredients come from certified suppliers that undergo annual compliance inspections, and we maintain a strict list of approved ingredients that meet organic guidelines . For consumers concerned about this level of traceability in their food, 'certified organic' offers that important assurance. Green Chef is the first certified organic handler in the Meal Kit category; ensuring the highest standards of food quality for select organic ingredients in our boxes, from the farm to your doorstep."},
+                    {id: 3,
+                    question: "Why choose organic?",
+                    answer: "We firmly believe that organic is better for our health and for the ecosystem. It’s important to us to help preserve bee populations, rebuild soil, not eat synthetic chemicals, and be stewards of animal welfare. We don't think certified organic is the only worthwhile system in the food industry, but we have sincere belief in its origins and rules."},
+                    {id: 4,
+                    question: "Do you support local, sustainable, and artisanal suppliers?",
+                    answer: "We absolutely do! At the heart of Green Chef is supporting local farmland, family farms, and craft economies. With each box you receive, you are helping dozens of suppliers that are benefitting from your choice. We work hard to partner with regional purveyors of high-integrity foods and are excited to help our suppliers thrive."},
+                    {id: 5,
+                    question: "How much will I be prepping? What cooking skills do I need?",
+                    answer: "You can expect many ingredients to be pre-prepped in your Green Chef box including all of our unique, chef-curated sauces, dressings, and spice blends, ready for you to use. There is some prep work involved in our recipes. Cooking skills that will come in handy include dicing, chopping, peeling, and grating. Detailed step-by-step instructions are included in each of our recipe cards with timing and visual cues to help you along the way! Also, our culinary team creates helpful chef’s tips for techniques that may require a little more cooking experience. Chef’s tips will help explain and guide your cooking experience to make it as easy as possible. If you're new to cooking, rest assured that our recipes have been tested by trained chefs and new chefs alike!"},
+                    {id: 6,
+                    question: "How long will the food stay fresh?",
+                    answer: "We work with our suppliers to source in-season ingredients just for you. Our produce does not spend much time on a shelf—we generally get our ingredients into your home in less time than a grocery store could. Since organic ingredients have no artificial preservatives they can sometimes have a shorter shelf life. However, with our insulated packaging used during transit and your standard refrigerator at home, ingredients will typically stay fresh for five days after arrival."},
+                    {id: 7,
+                    question: "How long will it take to make dinner?",
+                    answer: "Most recipes in our plans are ready in about 30 minutes. Each family recipe is designed with prep and hands-on cooking at the start. This frees up time while dinner finishes cooking in the oven or on the stove so you can help the kids with homework, sort the mail, teach the dog how to sit, whatever!"},
+                    {id: 8,
+                    question: "whWhat cooking equipment and ingredients do I need to have at home?",
+                    answer: "Here are some basic items we recommend that you have on hand for the best cooking experience: Pantry items: Salt, pepper, olive oil, high temperature cooking oil (such as vegetable, safflower, canola, avocado, or coconut) or ghee. Read more about which cooking oils to keep in your pantry. Tools and equipment frequently used: Pots and pans, ideally in a range of sizes and types such as non-stick and oven safe, chef’s knife, cooking spoon, spatula, strainer, peeler, measuring cup, tablespoon measure, sheet pan and aluminum foil. Tools and equipment occasionally used: Grill or grill pan, ladle, tongs, microplane zester, box grater, teaspoon measure, tablespoon and thermometer."},
+                    {id: 9,
+                    question: "What if my delivery is missing an ingredient?",
+                    answer: "Oh no! All of our boxes are packed by hand, and we're very sorry to hear we left something out. Please, contact  our Customer Care team and let us know what you’re missing."},
+                    {id: 10,
+                    question: "How can I change my menu?",
+                    answer: "We offer 3 different menus: Balanced Living, Keto + Paleo, Plant-Powered. Each menu has different recipes available every week. If you want to change your menu, you can do it very easily in "},
+                    {id: 11,
+                    question: "How can I check allergen information?",
+                    answer: "As of now, we do not have an option to customize your box for allergies. Depending on what your allergies are, we may have some options that will work for you. We offer meal choice on our Balanced Living, Plant-Powered, and Keto meal preferences, which allows you to choose from the recipe offerings each week. You can make changes to your plan overall or to a single order on the Your Plan section of your Green Chef account."}
+                ]},
+                {id: 4,
+                title: "Shipping & Delivery",
+                faqs:[
+                    {id: 1,
+                    question: "Where do you deliver?",
+                    answer: "Green Chef delivers almost everywhere in the continental United States. We are currently unable to deliver to Alaska and Hawaii. If we’re not yet in your neighborhood, you can begin the sign up process and we'll send you an email when we are able to join you in the kitchen."},
+                    {id: 2,
+                    question: "When will my box arrive?",
+                    answer: "Your box will arrive between 8 am and 8 pm local time on your scheduled delivery day. Boxes are delivered Monday through Saturday. You can choose which weekday you want your boxes delivered, depending on where you live."},
+                    {id: 3,
+                    question: "Do I need to be home to receive my box?",
+                    answer: "We do not require a signature for our boxes, so your Green Chef box will be waiting for you when you get home. Our insulated and refrigerated packaging will ensure your ingredients remain fresh until the end of the day it is delivered. Your box will be waiting for you at your front door, mailroom, or wherever you usually receive your packages. Want to track your package? You'll receive an email with tracking information when your box ships."},
+                    {id: 4,
+                    question: "What if my box is late?",
+                    answer: "Sometimes delivery delays beyond our control happen, like when a truck unexpectedly breaks down or gets stuck due to traffic or weather. Our packaging is designed to handle unexpected delays, and your ingredients should all arrive in great condition. However, if your box does not arrive cool to the touch and at a safe temperature of 40 degrees or below, please "}
+                ]},
+                {id: 5,
+                title: "Billing",
+                faqs:[
+                    {id: 1,
+                    question: "What payment methods are accepted?",
+                    answer: "At Green Chef we accept all major credit and debit cards including Visa, MasterCard, American Express, JCB, Discover, and Diners Club. We also accept PayPal. At this time we do not accept prepaid cards."},
+                    {id: 2,
+                    question: "How do I change payment method?",
+                    answer: "You can just click here. Then, update your payment information and select 'Save Changes'."},
+                    {id: 3,
+                    question: "When do I get charged?",
+                    answer: "You will always be charged 5 days prior to scheduled delivery. Please keep in mind that completion of the checkout confirms that you are entering into a weekly auto-renewing subscription service with Green Chef. However, you can always modify, pause, or cancel your delivery any time before 11:59 PM PST 5 days prior to your scheduled order."},
+                    {id: 4,
+                    question: "whWhat do I do if my card was declined for my next order?",
+                    answer: "If a recurring payment fails, you will receive an email alerting you of the error. To resolve this, simply update the payment method in your account by clicking here"},
+                    {id: 5,
+                    question: "I’m redeeming a free box. Why do I need to enter a payment method?",
+                    answer: "wWhile we offer flexible plans with no long term commitment, when signing up for Green Chef, you are enrolling in a weekly, auto-renewing service. You can pause and cancel deliveries at anytime."},
+                    {id: 6,
+                    question: "Why is my discount code not working?",
+                    answer: "First, make sure you have selected the right plan and your voucher has a valid date of expiry. If the issue persists, please reach out to our Customer Care team via the Contact Us link on the bottom of this page."},
+                    {id: 7,
+                    question: "How do I apply credit?",
+                    answer: "If you have an Green Chef credit on your account, it will automatically apply to your next scheduled delivery, excluding the shipping fee. Credits don't expire, so if you need to take a break, they'll be on your Green Chef account when you return."},
+                    {id: 8,
+                    question: "How much does the shipping cost?",
+                    answer: "At Green Chef we charge a flat fee of $9.99 per box for all shipping and handling. You'll see this fee added into the total cost of your box."},
+                    {id: 9,
+                    question: "How much do premium meals cost?",
+                    answer: "Each week, we like to come out with one premium meal for our customers to enjoy. By selecting this option, dinner gets upgraded with premium proteins and ingredients. Ranging between $6.99 and $9.99 more per serving, this elevated meal is so worth it!"},
+                    {id: 10,
+                    question: "Where can I see a summary of my billings?",
+                    answer: "You can find a summary of all billings in your Order Summary. To find it, On Web, just log into your account, open the menu in the top right corner and select 'Settings', then click on here"}
+                ]},
+                {id: 6,
+                title: "Managing My Subscription",
+                faqs:[
+                    {id: 1,
+                    question: "How do I choose / swap my meals?",
+                    answer: "With Green Chef, you can always change your meals! Every week, there are many different recipes you can choose from.  Please make sure to make your changes 5 days prior to delivery at 11:59 pm PST."},
+                    {id: 2,
+                    question: "Is there a minimum duration required for a subscription?",
+                    answer: "No. You can skip weeks, swap recipes, and cancel anytime before your weekly deadline - 5 days prior to delivery at 11:59 pm PST.  - only order what and when you want. No commitments."},
+                    {id: 3,
+                    question: "What is the deadline to modify my order or skip a week?",
+                    answer: "To change your number of servings, delivery day, address, email address, payment information, or password, visit our “Settings” page. You may skip and unskip weeks as you’d like without being charged for skipped weeks. All changes must be made 5 days prior to delivery at 11:59 pm PST."},
+                    {id: 4,
+                    question: "How do I pause / skip?",
+                    answer: "Orders can be skipped up to 5 days before your delivery is scheduled.  On Web, To skip a week navigate to 'My Menu' and select “Edit Delivery” below the menu options.  On app, navigate to the week you want to skip and click on the three dots at the top right corner. Then click on 'Skip Week' at the top right corner."},
+                    {id: 5,
+                    question: "Can I switch plan size?",
+                    answer: "Of course! You can change the Servings size or the number of Dinners per week. The deadline to change your plan is 5 days prior to your next scheduled delivery. "},
+                    {id: 6,
+                    question: "How do I cancel my plan?",
+                    answer: "You can skip as many as 4 weeks by selecting the “Skip Week” option on the specific week intended. This could be found under “My Menu,” and you are able to successfully make that change by the deadline of: 5 days prior to the delivery date at 11:59PM PST. "},
+                    {id: 7,
+                    question: "I cancelled my plan, but still was charged. Why?",
+                    answer: "Your first order is charged and created as soon as the order is placed. However, if you would like to cancel this, please call us at 888-236-7295. One of our expert Customer Care agents will be happy to assist you."},
+                    {id: 8,
+                    question: "wWhat if I don’t cook for 2 or 4 people?",
+                    answer: "If you cook for one, the Dinner for 2 Plan is an easy lunch solution. You’ll get dinner and lunch."},
+                    {id: 9,
+                    question: "How many meals are included in each delivery?",
+                    answer: "Green Chef has plans for 2, 4, or 6 servings. On a 2 servings plan, you can decide on receiving 3 or 4 meals per week. On a 4 servings plan, you can receive 2, 3 or 4 meals per week. On a 6 servings plan, you can receive 3 or 4 meals per week."},
+                    {id: 10,
+                    question: "How do I unsubscribe from Green Chef emails?",
+                    answer: "Just click "}
+                ]},
+            ]
         };
     },
     methods: {
@@ -161,7 +319,8 @@ export default {
     .questionsBlock{
         width: 100%;
         min-height: 100px;
-        background-color: silver;
+        background-color: white;
+        border-radius: 10px;
     }
     .web-ukuwzk{
         width: 98%;
