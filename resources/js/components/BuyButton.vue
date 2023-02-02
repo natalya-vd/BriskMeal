@@ -5,13 +5,13 @@
 
                 <span class="sr-only"></span>
             </div>
-            <div v-else class="addTocart" v-on:click="addToCart(id)">Add to Cart</div>
+            <div v-else class="addTocart" v-on:click="updaterCart(1)">Add to Cart</div>
         </div>
         <div v-else class="changeQ">
             <div class="manageQBlock">
-                <div class="leftBtn" v-on:click="remToCart" v-bind:class="{ notActive: isBtnsActive }">&#8211;</div>
+                <div class="leftBtn" v-on:click="updaterCart(quantity - 1)" v-bind:class="{ notActive: isBtnsActive }">&#8211;</div>
                 <buy-button-input v-model.lazy="quantity" @retrive="inputDataSubmit"></buy-button-input>
-                <div class="rightBtn" v-on:click="addToCart" v-bind:class="{ notActive: isBtnsActive }">&#43;</div>
+                <div class="rightBtn" v-on:click="updaterCart(quantity + 1)" v-bind:class="{ notActive: isBtnsActive }">&#43;</div>
             </div>
             <a href="/cart" class="goTocart">Go to Cart</a>
         </div>
@@ -19,25 +19,11 @@
 </template>
 
 <script>
-
-import {
-    createResource,
-    updateResource
-} from "../api/api";
-
-import {
-    RECIPES_ADD,
-    RECIPES_PLUS,
-    RECIPES_MINUS
-} from "../api/endpoints";
-
+import { createResource} from "../api/api";
+import { RECIPES_ADD } from "../api/endpoints";
 
 export default {
-    props: [
-        'id',
-        'weekId',
-    ],
-
+    props: [ 'id','weekId' ],
     data() {
         return {
             showedSpinner: false,
@@ -46,85 +32,35 @@ export default {
             isBtnsActive: true
         };
     },
-
     computed: {
         showedAddBtn() {
             return this.quantity > 0 ? false : true;
         },
     },
-
     methods: {
-
-        async addToCart() {
+        async updaterCart(newQuantity) {
             this.changeSpinnerMode();
+            this.changeBtnsActiveMode();
             const data = await createResource({
                 endpoint: RECIPES_ADD,
-                resource: {id: this.id, week_id: this.weekId, quantity: this.quantity + 1},
+                resource: {id: this.id, week_id: this.weekId, quantity: newQuantity},
             }).then(() => {
                 this.changeSpinnerMode();
-                this.quantity += 1;
+                this.quantity = newQuantity;
+                this.changeBtnsActiveMode();
             });
         },
-
-        async remToCart() {
-            this.changeSpinnerMode();
-            const data = await createResource({
-                endpoint: RECIPES_ADD,
-                resource: {id: this.id, week_id: this.weekId, quantity: this.quantity - 1},
-            }).then(() => {
-                this.changeSpinnerMode();
-                this.quantity -= 1;
-            });
-        },
-
         inputDataSubmit(quantity){
             this.quantity = Number(quantity);
-            console.log(quantity);
+            this.updaterCart(quantity);
         },
         changeSpinnerMode() {
             this.showedSpinner = !this.showedSpinner;
         },
         changeBtnsActiveMode() {
             this.isBtnsActive = !this.isBtnsActive;
-        },
-        addQ() {
-            this.quantity += 1;
-            this.setQuantityMethod();
-            this.currentQuantity = this.quantity
-        },
-
-        reduceQ() {
-            this.quantity -= 1;
-            this.setQuantityMethod();
-            this.currentQuantity = this.quantity
-        },
-
-        async setQuantityMethod() {
-            this.changeSpinnerMode();
-            this.changeBtnsActiveMode()
-            if (this.quantity > this.currentQuantity) {
-                await updateResource({
-                    endpoint: RECIPES_PLUS,
-                    id: this.id,
-                    resource: {id: this.id, week_id: this.weekId},
-                }).then(() => {
-                    this.changeSpinnerMode();
-                    this.changeBtnsActiveMode()
-                });
-
-            } else if (this.quantity <= this.currentQuantity) {
-                await updateResource({
-                    endpoint: RECIPES_MINUS,
-                    id: this.id,
-                    resource: {id: this.id, week_id: this.weekId},
-                }).then(() => {
-                    this.changeSpinnerMode();
-                    this.changeBtnsActiveMode()
-                });
-            }
-        },
-
-    },
+        }
+    }
 };
 </script>
 
