@@ -26,8 +26,6 @@ class OrdersSeeder extends Seeder
         for ($i = 1; $i <= $count; $i++) {
             $data[] = [
                 "user_id" => rand(1, 3),
-                "num_people" => rand(1, 6),
-                "meals_week" => rand(3, 4),
                 "week_id" => rand(1, 10),
                 "sum" => 200.00,
                 "order_status_id" => rand(1, 4),

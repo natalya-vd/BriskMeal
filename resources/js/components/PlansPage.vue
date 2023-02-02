@@ -27,7 +27,7 @@
                             </div>
                             <div class="preferencesBlock">
                                 <section
-                                    v-for="item in getData.preferences"
+                                    v-for="item in getData.listPreferences"
                                     :key="item.id"
                                     class="preferencesChoosing"
                                 >
@@ -279,6 +279,9 @@
 
 <script>
 import ErrorModal from "./ErrorModal.vue";
+import {createResource} from '../api/api'
+import {PLANS} from '../api/endpoints'
+import router from '../router'
 
 export default {
     components: {
@@ -305,9 +308,15 @@ export default {
 
     props: ["dataResponse"],
 
+    created() {
+        this.choosenIds = this.getData.plan_user?.preferences?.map(item => item.id) ?? []
+        this.choosenQuantityPeople = this.quantityPeople.find(item => item.quantity === this.getData.plan_user?.num_people) ?? { id: 1, quantity: 2 }
+        this.choosenMealsPerWeek = this.mealsPerWeek.find(item => item.quantity === this.getData.plan_user?.meals_week) ?? { id: 1, quantity: 2 }
+    },
+
     computed: {
         getData() {
-            console.log(this.dataResponse);
+            console.log(JSON.parse(this.dataResponse))
             return JSON.parse(this.dataResponse);
         },
         totalServings() {
@@ -335,7 +344,7 @@ export default {
             return this.choosenIds
                 .map(
                     (id) =>
-                        this.getData.preferences.find(
+                        this.getData.listPreferences.find(
                             (preference) => preference.id === id
                         ).name
                 )
@@ -362,27 +371,24 @@ export default {
             this.choosenMealsPerWeek = item;
         },
 
-        selectedPlan() {
+        async selectedPlan() {
             if (this.choosenIds.length !== 0) {
-                console.log(
-                    `The buyer has chosen preferences: ${this.choosenIds
-                        .map(
-                            (id) =>
-                                this.getData.preferences.find(
-                                    (preference) => preference.id === id
-                                ).name
-                        )
-                        .join(", ")} on ${
-                        this.choosenMealsPerWeek.quantity
-                    } meals for ${
-                        this.choosenQuantityPeople.quantity
-                    } people per week for the total amount: ${(
-                        this.choosenMealsPerWeek.quantity *
-                        this.choosenQuantityPeople.quantity *
-                        1.13 *
-                        0.5
-                    ).toFixed(2)}`
-                );
+                try {
+                    const plan = {
+                        "preferences": this.choosenIds,
+                        "num_people": this.choosenQuantityPeople.quantity,
+                        "meals_week": this.choosenMealsPerWeek.quantity
+                    }
+                    const response = await createResource({endpoint: PLANS, resource: plan})
+                    if(response.status === 200) {
+                        router.navigate('/catalog')
+                    }
+                } catch(e) {
+                    if(e.response.status === 401) {
+                        // TODO: Тут модалка с подобным текстом только на английском
+                        alert('Сначала авторизуйтесь или зарегистрируйтесь!')
+                    }
+                }
             } else {
                 console.log(`Please choose preferences`);
                 this.showModalError();
@@ -408,7 +414,6 @@ export default {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    background-color: #f7f7f7;
     min-height: 100px;
 }
 
