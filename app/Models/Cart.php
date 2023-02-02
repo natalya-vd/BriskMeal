@@ -68,16 +68,18 @@ class Cart extends Model
      */
     private function change($recipe_id, $week_id, $count = 0)
     {
-        if ($count == 0) {
+        /*if ($count == 0) {
             return;
-        }
+        }*/
 
         // если товар есть в корзине — изменяем кол-во
         if ($this->recipes->contains($recipe_id)) {
 
             // получаем объект строки таблицы `carts_recipes`
             $pivotRow = $this->recipes()->where('recipe_id', $recipe_id)->first()->pivot;
-            $quantity = $pivotRow->quantity + $count;
+            $quantity = $pivotRow->quantity;
+
+            $quantity = $count;
 
             if ($quantity > 0) {
                 // обновляем количество товара $recipe_id в корзине

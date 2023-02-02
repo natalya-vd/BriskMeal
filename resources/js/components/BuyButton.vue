@@ -9,9 +9,9 @@
         </div>
         <div v-else class="changeQ">
             <div class="manageQBlock">
-                <div class="leftBtn" v-on:click="reduceQ" v-bind:class="{ notActive: isBtnsActive }">&#8211;</div>
+                <div class="leftBtn" v-on:click="remToCart" v-bind:class="{ notActive: isBtnsActive }">&#8211;</div>
                 <buy-button-input v-model.lazy="quantity" @retrive="inputDataSubmit"></buy-button-input>
-                <div class="rightBtn" v-on:click="addQ" v-bind:class="{ notActive: isBtnsActive }">&#43;</div>
+                <div class="rightBtn" v-on:click="addToCart" v-bind:class="{ notActive: isBtnsActive }">&#43;</div>
             </div>
             <a href="/cart" class="goTocart">Go to Cart</a>
         </div>
@@ -34,7 +34,7 @@ import {
 
 export default {
     props: [
-        'id', 
+        'id',
         'weekId',
     ],
 
@@ -59,16 +59,28 @@ export default {
             this.changeSpinnerMode();
             const data = await createResource({
                 endpoint: RECIPES_ADD,
-                resource: {id: this.id, week_id: this.weekId},
+                resource: {id: this.id, week_id: this.weekId, quantity: this.quantity + 1},
             }).then(() => {
                 this.changeSpinnerMode();
                 this.quantity += 1;
             });
         },
+
+        async remToCart() {
+            this.changeSpinnerMode();
+            const data = await createResource({
+                endpoint: RECIPES_ADD,
+                resource: {id: this.id, week_id: this.weekId, quantity: this.quantity - 1},
+            }).then(() => {
+                this.changeSpinnerMode();
+                this.quantity -= 1;
+            });
+        },
+
         inputDataSubmit(quantity){
             this.quantity = Number(quantity);
             console.log(quantity);
-        },    
+        },
         changeSpinnerMode() {
             this.showedSpinner = !this.showedSpinner;
         },
