@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Queries\RecipesQueryBuilder;
 use App\Queries\WeekQueryBuilder;
+use Illuminate\Support\Facades\Auth;
 
 class RecipeController extends Controller
 {
@@ -23,6 +23,7 @@ class RecipeController extends Controller
 
     public function index(RecipesQueryBuilder $builder_recipes)
     {
+        dump(Auth::user()->id);
         try {
             $recipesData = [
                 'items' => $builder_recipes->getRecipesById($this->recipes['recipes_id']),
