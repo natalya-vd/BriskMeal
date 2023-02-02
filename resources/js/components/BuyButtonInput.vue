@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         submitInput(event) {
-            this.$emit('retrive', event.target.value);
+            this.$emit('retrive', Number(event.target.value));
         }
     }
 };
