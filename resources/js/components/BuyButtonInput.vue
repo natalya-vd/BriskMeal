@@ -1,5 +1,5 @@
 <template>
-    <input type="number" class="displayQ" :value="modelValue" :onchange="submitInput" v-on:keyup.13="submitInput" />
+    <input type="number" class="displayQ" :value="modelValue" :onchange="submitInput" v-on:keyup.13="submitInput" :disabled="disabled"/>
 </template>
 
 <script>
@@ -11,16 +11,14 @@ export default {
         modelValue: Number,
         modelModifiers: {
         default: () => ({})
-        }
+        },
+        disabled: Boolean
     },
   emits: ['update:modelValue', 'retrive'],
     data() {
         return {
     
         };
-    },
-    computed: {
-  
     },
     methods: {
         submitInput(event) {

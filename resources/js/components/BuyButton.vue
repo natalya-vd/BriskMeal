@@ -10,7 +10,7 @@
         <div v-else class="changeQ">
             <div class="manageQBlock">
                 <div class="leftBtn" v-on:click="updaterCart(quantity - 1)" v-bind:class="{ notActive: isBtnsActive }">&#8211;</div>
-                <buy-button-input v-model.lazy="quantity" @retrive="inputDataSubmit"></buy-button-input>
+                <buy-button-input v-model.lazy="quantity" @retrive="inputDataSubmit" :disabled="!isBtnsActive"></buy-button-input>
                 <div class="rightBtn" v-on:click="updaterCart(quantity + 1)" v-bind:class="{ notActive: isBtnsActive }">&#43;</div>
             </div>
             <a href="/cart" class="goTocart">Go to Cart</a>
