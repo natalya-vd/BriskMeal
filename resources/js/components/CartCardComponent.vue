@@ -24,12 +24,13 @@
             <div class="priceQuantity">
                 <div class="pricePerOne">200$</div>
                 <div class="quantityThings">
-                    <!-- TODO Разобраться с получением кол-ва рецептов в корзине -->
+                    <div class="leftBtn" v-on:click="updaterCart(countRecipy - 1)" v-bind:class="{ notActive: isBtnsActive }">&#8211;</div>
                     <input
                         type="number"
                         class="quantityInput"
                         v-model="countRecipy"
                     />
+                    <div class="rightBtn" v-on:click="updaterCart(countRecipy + 1)" v-bind:class="{ notActive: isBtnsActive }">&#43;</div>
                 </div>
                 <div class="separatorCard" data-v-478eddff=""></div>
                 <div class="totalPriceCard">200$</div>
@@ -46,6 +47,9 @@
 </template>
 
 <script>
+import { createResource} from "../api/api";
+import { RECIPES_ADD } from "../api/endpoints";
+
 export default {
     name: "CartCardComponent",
     props: ['cartItem', 'key'],
@@ -53,7 +57,8 @@ export default {
     data() {
         return {
             countRecipy: this.cartItem.quantity,
-            isCardShowed: true
+            isCardShowed: true,
+            isBtnsActive: true
         };
     },
     computed: {
@@ -64,7 +69,18 @@ export default {
     methods: {
         submitRemove() {
             this.$emit('removecard', this.cartItem);
+        },
+        async updaterCart(newQuantity) {
+            const data = await createResource({
+                endpoint: RECIPES_ADD,
+                resource: {id: this.cartItem.recipes.id, week_id: 5, quantity: newQuantity},
+            }).then(() => {
+                this.countRecipy = newQuantity;
+            });
         }
+    },
+    mounted() {
+        console.log(this.cartItem.recipes.id);
     }
 };
 </script>
@@ -154,12 +170,14 @@ export default {
 
 .quantityThings {
     border-right: 1px solid #fff;
+    display:flex;
 }
 
 .quantityInput {
     max-width: 40px;
     text-align: center;
     border: 1px solid rgb(204, 204, 204);
+    max-height: 30px;
 }
 
 .separatorCard {
