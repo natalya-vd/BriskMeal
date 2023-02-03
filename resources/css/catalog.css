@@ -1,7 +1,6 @@
 .bm-catalog {
     display: flex;
     flex-direction: column;
-    background-color: rgb(247, 247, 247);
 }
 
 .bm-catalog_filtersBlock {
