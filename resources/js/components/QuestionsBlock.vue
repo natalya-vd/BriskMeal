@@ -4,7 +4,7 @@
         <div v-for="faq in faqs"  :key="faq.id" class="accordion accordion-flush" >
             <div class="accordion-item">
                 <h2 class="accordion-header" :id="'heading'+faq.id">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="'#collapse'+faq.id" aria-expanded="true" aria-controls="collapseOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#collapse'+faq.id" aria-expanded="true" aria-controls="collapseOne">
                     {{ faq.question }}
                 </button>
                 </h2>
