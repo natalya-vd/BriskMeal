@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container bm-recipe">
+<div class="container bm-recipe pt-4">
     <div class="mealsDesk bm-recipe__wrapper">
         <recipy-title title="{{$recipe['name']}}" ingredients="{{$recipe['ingredients']}}" recipe-pdf="{{ $recipe['path_pdf'] }}"></recipy-title>
         <div class="recipyInfoBlock">
