@@ -81,3 +81,11 @@ main {
 .footerBlock {
     flex: 0 0 auto;
 }
+
+.swiper-pagination > .swiper-pagination-bullet {
+    background: var(--swiper-pagination-bullet-inactive-color, #fff);
+}
+
+.swiper-pagination > .swiper-pagination-bullet-active {
+    background: var(--swiper-pagination-color, var(--swiper-theme-color));
+}

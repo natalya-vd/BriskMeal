@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "@jridgewell/sourcemap-codec": "^1.4.14",
+        "swiper": "^9.0.2",
         "vue3-colorpicker": "^2.1.2",
         "vuex": "^4.0.2"
     }
