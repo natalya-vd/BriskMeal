@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="orderWrapper">
-                <a href="/order" class="order"><span>To Ordering</span></a>
+                <a href="/order/1" class="order"><span>To Ordering</span></a>
             </div>
         </div>
     </div>
@@ -64,6 +64,7 @@ import CartCardComponent from "./CartCardComponent.vue";
 import {deleteResource} from "../api/api";
 import {RECIPES_REMOVE} from "../api/endpoints";
 
+// TODO: поменять в ссылке на страницу оформления заказа. Прописать ИД корзины, которую оформляют. Сейчас хардкод.
 export default {
     props: [ "dataResponse" ],
     components: {

@@ -10,7 +10,6 @@
                                     :formValidation="formValidation"
                                     :acceptNumber="acceptNumber"
                                     :acceptZipCode="acceptZipCode"
-                                    :active_weeks="active_weeks"
                                     :acceptTextForm="acceptTextForm"
                                 ></order-page-form>
                             </div>
@@ -21,6 +20,8 @@
                                 :visiblilityModalSuccess="
                                     visiblilityModalSuccess
                                 "
+                                :plan="getPlan"
+                                :cartId="getCartId"
                             ></order-page-aside>
                         </div>
                     </div>
@@ -46,7 +47,7 @@ export default {
         OrderPageAside,
         SuccessModal,
     },
-    props: ["active_weeks"],
+    props: ["dataResponse"],
 
     data() {
         return {
@@ -59,29 +60,27 @@ export default {
                 region: "",
                 zip_code: "",
                 phone: "",
-                active_weeks: [
-                    {
-                        id: 1,
-                        week_name: "2023-W4",
-                        first_week_day: "2023-01-16",
-                        last_week_day: "2023-01-22",
-                    },
-                    {
-                        id: 5,
-                        week_name: "2023-W5",
-                        first_week_day: "2023-01-23",
-                        last_week_day: "2023-01-29",
-                    },
-                ],
+                active_weeks: [],
             },
             visiblilityModalSuccess: false,
         };
     },
-    mounted() {
-        console.log("Delivery Component mounted.");
-        // console.log(this.acceptNumber());
-        // console.log(this.acceptZipCode());
+    created() {
+        this.formValidation.active_weeks = [this.getWeek] //TODO: зачем в active_weeks массив не поняла...
     },
+
+    computed: {
+        getPlan() {
+            return JSON.parse(this.dataResponse).plan
+        },
+        getCartId() {
+            return JSON.parse(this.dataResponse).cart_id
+        },
+        getWeek() {
+            return JSON.parse(this.dataResponse).week
+        },
+    },
+
     methods: {
         acceptNumber() {
             let x = this.formValidation.phone
@@ -122,13 +121,6 @@ export default {
             this.visiblilityModalSuccess = !this.visiblilityModalSuccess;
         },
     },
-
-    // computed: {
-    //     getactive_weeks() {
-    //         // console.log(JSON.parse(this.active_weeks));
-    //         return JSON.parse(this.active_weeks);
-    //     },
-    // },
 };
 </script>
 

@@ -528,8 +528,7 @@
                         <path
                             fill="white"
                             d="M11.512.371a1.5 1.5 0 1 1 1.976 2.258l-8 7a1.5 1.5 0 0 1-2.049-.068l-3-3a1.5 1.5 0 1 1 2.122-2.122l2.007 2.008L11.512.371z"
-                        ></path></svg
-                ></span>
+                        ></path></svg></span>
                 <label for="box"
                     ><p class="subscribeText">
                         Receive offers and promotions via text message and
