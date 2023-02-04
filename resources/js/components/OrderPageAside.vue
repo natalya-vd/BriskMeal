@@ -106,6 +106,8 @@
 
 <script>
 import SuccessModal from "./SuccessModal.vue";
+import {createResource} from '../api/api'
+import {ORDER} from '../api/endpoints'
 
 export default {
     name: "OrderPageAside",
@@ -126,22 +128,27 @@ export default {
             disabledBtn: true,
         };
     },
-    mounted() {
-        console.log(this.plan);
-    },
     methods: {
-        submitForm() {
-            const data = {
-                cart_id: this.cartId
-            }
-
-            for(const [key, value] of Object.entries(this.formValidation)) {
-                if(key !== 'active_weeks') {
-                    data[key] = value
+        async submitForm() {
+            try {
+                const data = {
+                    cart_id: this.cartId,
                 }
+
+                for(const [key, value] of Object.entries(this.formValidation)) {
+                    if(key !== 'active_weeks') {
+                        data[key] = value
+                    }
+                }
+
+                const response = await createResource({endpoint: ORDER, resource: data})
+                if(response.status === 200) {
+                    this.showModalSuccess();
+                }
+            } catch(e) {
+                // TODO: тут бы модалку об ошибке
+                console.log(e)
             }
-            console.log(data)
-            this.showModalSuccess();
         },
     },
     computed: {

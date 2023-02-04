@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cart_id')
+                ->unique()
                 ->constrained('carts');
             $table->foreignId('status_id')
-                ->constrained('order_statuses')
-                ->default(1);
+                ->default(1)
+                ->constrained('order_statuses');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');
@@ -29,7 +30,7 @@ return new class extends Migration
             $table->string('region');
             $table->string('zip_code');
             $table->date('delivery_day');
-            $table->string('delivery_instructions');
+            $table->string('delivery_instructions')->nullable();
             $table->boolean('promotions')->default(false);
             $table->timestamps();
         });

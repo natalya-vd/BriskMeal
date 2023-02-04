@@ -60,26 +60,12 @@ export default {
                 region: "",
                 zip_code: "",
                 phone: "",
-                active_weeks: [
-                    {
-                        id: 1,
-                        week_name: "2023-W4",
-                        first_week_day: "2023-01-16",
-                        last_week_day: "2023-01-22",
-                    },
-                    {
-                        id: 5,
-                        week_name: "2023-W5",
-                        first_week_day: "2023-01-23",
-                        last_week_day: "2023-01-29",
-                    },
-                ],
+                active_weeks: [],
             },
             visiblilityModalSuccess: false,
         };
     },
     created() {
-        console.log(JSON.parse(this.dataResponse))
         this.formValidation.active_weeks = [this.getWeek] //TODO: зачем в active_weeks массив не поняла...
     },
 

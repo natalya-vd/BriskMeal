@@ -6,6 +6,7 @@ const RECIPES_PLUS = '/api/cart/plus';
 const RECIPES_MINUS = '/api/cart/minus';
 const LOGOUT = '/api/logout'
 const PLANS = '/api/plans'
+const ORDER = '/api/order'
 
 export {
     RECIPES_ADD,
@@ -13,5 +14,6 @@ export {
     RECIPES_PLUS,
     RECIPES_MINUS,
     LOGOUT,
-    PLANS
+    PLANS,
+    ORDER
 }
