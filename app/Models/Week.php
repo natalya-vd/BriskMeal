@@ -27,11 +27,10 @@ class Week extends Model
 
     public function carts()
     {
-        return $this->belongsToMany(
+        return $this->hasMany(
             Cart::class,
-            'recipes_carts',
             'week_id',
-            'cart_id'
+            'id'
         );
     }
 }

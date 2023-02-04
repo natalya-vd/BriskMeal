@@ -23,12 +23,16 @@ class Cart extends Model
 
     public function weeks()
     {
-        return $this->belongsToMany(
+        return $this->belongsTo(
             Week::class,
-            'recipes_carts',
-            'cart_id',
-            'week_id'
+            'week_id',
+            'id'
         );
+    }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'cart_id', 'id');
     }
 
     public function getAllRecipes($recipes)
@@ -88,7 +92,6 @@ class Cart extends Model
                 // кол-во равно нулю — удаляем товар из корзины
                 $pivotRow->delete();
             }
-
         } elseif ($count > 0) { // иначе — добавляем этот товар
             $this->recipes()->attach($recipe_id, ['quantity' => $count, 'week_id' => $week_id]);
         }

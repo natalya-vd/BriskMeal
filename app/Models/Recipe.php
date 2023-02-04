@@ -29,7 +29,8 @@ class Recipe extends Model
             Week::class,
             'recipes_weeks',
             'recipe_id',
-            'week_id');
+            'week_id'
+        );
     }
 
     public function preferences()
@@ -88,16 +89,6 @@ class Recipe extends Model
             'recipe_id',
             'id'
         )->nutritionValWithCount($id);
-    }
-
-    public function orders()
-    {
-        return $this->belongsToMany(
-            Order::class,
-            'orders_recipes',
-            'recipe_id',
-            'order_id'
-        );
     }
 
     public function carts()

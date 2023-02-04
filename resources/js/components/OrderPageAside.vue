@@ -6,9 +6,9 @@
                 <dl class="plansBlock">
                     <dt>
                         <div class="plans">
-                            <span class="plansName">Keto plan</span>
+                            <span class="plansName">{{ getPreferences }} plan</span>
                             <div>
-                                <span class="meals">4 recipes for 2 people</span
+                                <span class="meals">{{ plan.max_quantity_recipes }} recipes for {{ plan.num_people }} people</span
                                 ><a class="edit" href="/plans">Edit</a>
                             </div>
                         </div>
@@ -117,6 +117,8 @@ export default {
         isFormValid: Function,
         showModalSuccess: Function,
         visiblilityModalSuccess: Boolean,
+        plan: Object,
+        cartId: Number
     },
     data() {
         return {
@@ -125,11 +127,21 @@ export default {
         };
     },
     mounted() {
-        console.log("Delivery Component mounted.");
+        console.log(this.plan);
     },
     methods: {
         submitForm() {
-            console.log(this.formValidation);
+            const data = {
+                cart_id: this.cartId
+            }
+
+            for(const [key, value] of Object.entries(this.formValidation)) {
+                if(key !== 'active_weeks') {
+                    data[key] = value
+                }
+            }
+            console.log(data)
+            this.showModalSuccess();
         },
     },
     computed: {
@@ -138,9 +150,9 @@ export default {
                 ? !this.disabledBtn
                 : this.disabledBtn;
         },
-        submitForm() {
-            this.showModalSuccess();
-        },
+        getPreferences() {
+            return this.plan.preferences.map(item => item.name).join(', ')
+        }
     },
 };
 </script>
@@ -183,6 +195,7 @@ export default {
 .plans {
     display: flex;
     flex-direction: column;
+    text-align: start;
 }
 
 .plansName {
