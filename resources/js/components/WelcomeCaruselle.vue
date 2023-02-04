@@ -1,22 +1,5 @@
 <template>
     <div class="caruselleBlock">
-        <!-- <div class="manageBtns leftManageBtn">
-            <div
-                v-if="isLeftBtnShowd"
-                class="manageBtnItem"
-                style="background-color: grey; cursor: default"
-            >
-                &#5176;
-            </div>
-            <div
-                v-else
-                v-on:click="onLeft(this.page)"
-                class="manageBtnItem"
-                style="background-color: rgb(66, 105, 61)"
-            >
-                &#5176;
-            </div>
-        </div> -->
         <swiper
             :slidesPerView="5"
             :cssMode="true"
@@ -44,48 +27,12 @@
                 </a></swiper-slide
             >
         </swiper>
-        <!-- <TransitionGroup
-            class="caruselleDesk"
-            name="caruselle"
-            tag="ul"
-            id="caruselleDesk"
-        >
-            <li
-                v-for="(item, index) in this.myList"
-                class="caruselleCard"
-                :key="item.photo.id"
-                :data-key="item.photo.id"
-                :style="'background-image:url(' + item.photo.full_path + ');'"
-            >
-                <a :href="`/recipe/${item.photo.id}`" class="caruselleCardLink">
-                    <div class="caruselleCardTitle">{{ item.photo.name }}</div>
-                </a>
-            </li>
-        </TransitionGroup> -->
-        <!-- <div class="manageBtns rightManageBtn">
-            <div
-                v-if="isRightBtnShowd"
-                class="manageBtnItem"
-                style="background-color: grey; cursor: default"
-            >
-                &#5171;
-            </div>
-            <div
-                v-else
-                v-on:click="onRight"
-                class="manageBtnItem"
-                style="background-color: rgb(66, 105, 61)"
-            >
-                &#5171;
-            </div>
-        </div> -->
     </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from "swiper/vue";
 
-// Import Swiper styles
 import "swiper/css";
 
 import "swiper/css/navigation";
@@ -107,51 +54,6 @@ export default {
     },
 
     props: ["caruseldata"],
-    // data() {
-    //     return {
-    //         page: 1,
-    //         myList: [],
-    //     };
-    // },
-    // computed: {
-    //     maxPage() {
-    //         return this.caruseldata.length - 5;
-    //     },
-    //     isLeftBtnShowd() {
-    //         return this.page === 1 ? true : false;
-    //     },
-    //     isRightBtnShowd() {
-    //         return this.page === this.maxPage ? true : false;
-    //     },
-    // },
-    // methods: {
-    //     onLeft(page) {
-    //         page === 1 ? (this.page = 1) : (this.page -= 1);
-    //         if (page > 1) {
-    //             this.myList.splice(
-    //                 0,
-    //                 0,
-    //                 this.caruseldata.slice(page - 2, page - 1)[0]
-    //             );
-    //             this.myList.pop();
-    //         }
-    //     },
-    //     onRight: function (event) {
-    //         this.page === this.maxPage
-    //             ? (this.page = this.maxPage)
-    //             : (this.page += 1);
-    //         if (this.page < this.maxPage) {
-    //             this.myList.push(
-    //                 this.caruseldata.slice(this.page + 5, this.page + 6)[0]
-    //             );
-    //             this.myList.shift();
-    //         }
-    //     },
-    // },
-    mounted() {
-        // this.myList = this.caruseldata;
-        // console.log(this.caruseldata);
-    },
 };
 </script>
 
