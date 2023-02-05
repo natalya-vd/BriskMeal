@@ -25,7 +25,7 @@ class WeeksSeeder extends Seeder
         $year = '2023';
         $date = Carbon::now();
         $weeks_count = $date->isoWeeksInYear($year);
-        $price_recipe = 200.00;
+        $price_recipe = 2.49;
 
         for ($i = 1; $i <= $weeks_count; $i++) {
             $date->setISODate($year, $i);

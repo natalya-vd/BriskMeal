@@ -1,61 +1,69 @@
 <template>
     <div class="cartComponent">
-        <h2 class="cartTitle">Your Cart</h2>
-        <h3 v-if="!this.cart.length">
-            Your Cart is empty.
-            <a href="/catalog" class="orderDelivery">Order food delivery</a>
-        </h3>
-        <div class="wrap" v-else>
-            <div class="blockChosenPlans">
-                <div class="chosenPlansWrapper">
-                    <div class="chosenPlansBorder">
-                        <div class="borderWrapper">
-                            <div class="planOfName">
-                                <span class="planOfNameText">Your Plans:</span>
-                                <span class="quantityPersonText">{{ plans.preferences }}</span>
+        <div class="cartComponentShadow" v-if="!this.carts.length">
+            <h2 class="cartTitle">Your Carts</h2>
+            <p class="fw-bold fs-3">
+                Your Cart is empty.
+                <a href="/catalog" class="orderDelivery">Order food delivery</a>
+            </p>
+        </div>
+        <div v-else>
+            <h2 class="cartTitle">Your Carts</h2>
+            <div class="wrap">
+                <div class="blockChosenPlans mb-4">
+                    <div class="chosenPlansWrapper">
+                        <div class="chosenPlansBorder">
+                            <div class="borderWrapper">
+                                <div class="planOfName">
+                                    <span class="planOfNameText">Your Plans:</span>
+                                    <span class="quantityPersonText">{{ plans.preferences }}</span>
+                                </div>
+                                <div class="planOfName">
+                                    <span class="planOfNameText">Meals:</span>
+                                    <span class="quantityPersonText">{{ plans.quantityMeals }}</span>
+                                </div>
+                                <div class="planOfName">
+                                    <span class="planOfNameText">People per week:</span>
+                                    <span class="quantityPersonText">{{ plans.quantityPeople }}</span>
+                                </div>
+                                <!-- <div class="quantityPerson">
+                                    <span class="quantityPersonText"
+                                        >Keto + Paleo 2 meals for 2 people per
+                                        week</span
+                                    >
+                                </div> -->
                             </div>
-                            <div class="planOfName">
-                                <span class="planOfNameText">Meals:</span>
-                                <span class="quantityPersonText">{{ plans.quantityMeals }}</span>
-                            </div>
-                            <div class="planOfName">
-                                <span class="planOfNameText">People per week:</span>
-                                <span class="quantityPersonText">{{ plans.quantityPeople }}</span>
-                            </div>
-                            <!-- <div class="quantityPerson">
-                                <span class="quantityPersonText"
-                                    >Keto + Paleo 2 meals for 2 people per
-                                    week</span
-                                >
-                            </div> -->
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <cart-card-component
-                v-for="item in cart"
-                :key="item.id"
-                :cartItem="item"
-                @removecard="removeCardFromCart"
-            />
-
-
-            <div class="addRecipyWrapper">
-                <a href="/catalog" class="addRecipy"><span>Add More</span></a>
-            </div>
-            <div class="totalPrice">
-                <div class="totalPriceText">
-                    <span>Total Price:</span>
+                <div class="cartComponentShadow mb-4" v-for="cart in carts"
+                     :key="cart.cart_id">
+                    <div class="totalPrice">
+                        <div class="totalPriceText">
+                            <span>Total Price:</span>
+                        </div>
+                        <div class="resultedPrice">
+                            <span class="discountPrice">$6.49</span>
+                        </div>
+                    </div>
+                    <cart-card-component
+                        v-for="item in cart.recipes"
+                        :key="item.id"
+                        :cartItem="item"
+                        :price="cart.week_attributes.price_recipe"
+                        @removecard="removeCardFromCart"
+                    />
+                    <div class="orderWrapper">
+                        <a :href="`/order/${cart.cart_id}`" class="order"><span>To Ordering</span></a>
+                    </div>
                 </div>
-                <div class="resultedPrice">
-                    <span class="discountPrice">$6.49</span>
-                </div>
-            </div>
-            <div class="orderWrapper">
-                <a href="/order/1" class="order"><span>To Ordering</span></a>
             </div>
         </div>
+
+        <div class="addRecipyWrapper">
+            <a href="/catalog" class="addRecipy"><span>Add More</span></a>
+        </div>
+
     </div>
 </template>
 
@@ -64,20 +72,20 @@ import CartCardComponent from "./CartCardComponent.vue";
 import {deleteResource} from "../api/api";
 import {RECIPES_REMOVE} from "../api/endpoints";
 
-// TODO: поменять в ссылке на страницу оформления заказа. Прописать ИД корзины, которую оформляют. Сейчас хардкод.
 export default {
-    props: [ "dataResponse" ],
+    props: ["dataResponse"],
     components: {
         CartCardComponent,
     },
     data() {
         return {
-            cart: [],
+            carts: [],
             plans: {
                 preferences: "Keto + Paleo",
                 quantityPeople: 3,
                 quantityMeals: 2,
-            }
+            },
+            priceOrder: 0
         }
     },
     methods: {
@@ -87,29 +95,32 @@ export default {
                 endpoint: RECIPES_REMOVE,
                 id: myID
             }).then(() => {
-                this.cart = this.cart.filter((item) => item.recipes.id !== removedItem.recipes.id);
+                this.carts = this.carts.filter((item) => item.recipes.id !== removedItem.recipes.id);
             });
-        }
+        },
     },
     mounted() {
-        this.cart = JSON.parse(this.dataResponse).recipes;
-    }
+        this.carts = JSON.parse(this.dataResponse);
+    },
 };
 </script>
+
 <style scoped>
 .cartComponent {
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
-    box-sizing: border-box;
     width: auto;
-    padding: 32px 0;
-    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 20%);
-    border-radius: 15px;
-    background-color: #ffffff;
-    padding: 24px 24px;
     max-width: 1024px;
     margin: 0 auto;
+}
+
+.cartComponentShadow {
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 20%);
+    padding: 24px 24px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-sizing: border-box;
 }
 
 .cartTitle {
@@ -266,8 +277,8 @@ export default {
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    /*padding-top: 24px;
+    padding-bottom: 24px;*/
     height: 100%;
 }
 
@@ -329,8 +340,8 @@ export default {
     }
 
     .addRecipyWrapper {
-        justify-content: flex-start;
-        margin: 0;
+        justify-content: flex-end;
+        margin-right: 24px;
     }
 
     .addRecipy,
@@ -347,8 +358,8 @@ export default {
         justify-content: flex-end;
         -webkit-box-align: center;
         align-items: center;
-        padding-top: 24px;
-        padding-bottom: 50px;
+        /*padding-top: 24px;
+        padding-bottom: 50px;*/
         height: 100%;
     }
 }

@@ -4,25 +4,24 @@
             <img src="/card_image/card_1.jpg" alt="" class="cardImage"/>
 
             <div class="recipyInfo">
-                <div class="recipyTitle" :title="cartItem.name">
+                <div class="recipyTitle" :title="cartItem.recipe.name">
                     <h4 class="recipyTitleText">
-                        {{ cartItem.recipes.name }}
+                        {{ cartItem.recipe.name }}
                     </h4>
                 </div>
                 <div class="recipyDescription">
                     <span class="recipyDescriptionText">{{
-                            cartItem.recipes.description
+                            cartItem.recipe.description
                         }}</span>
                     <div
                         class="recipyDescriptionOverlay"
-                        :title="cartItem.recipes.description"
+                        :title="cartItem.recipe.description"
                     ></div>
                 </div>
             </div>
 
-            <!-- TODO Разобраться с получением и расчетом цены -->
             <div class="priceQuantity">
-                <div class="pricePerOne">200$</div>
+                <div class="pricePerOne">{{ price }}</div>
                 <div class="quantityThings">
                     <div class="leftBtn" v-on:click="updaterCart(countRecipy - 1)" v-bind:class="{ notActive: isBtnsActive }">&#8211;</div>
                     <input
@@ -33,7 +32,7 @@
                     <div class="rightBtn" v-on:click="updaterCart(countRecipy + 1)" v-bind:class="{ notActive: isBtnsActive }">&#43;</div>
                 </div>
                 <div class="separatorCard" data-v-478eddff=""></div>
-                <div class="totalPriceCard">200$</div>
+                <div class="totalPriceCard">{{ totalPrice }}$</div>
             </div>
             <div class="cross" @click="submitRemove">
                 <svg viewBox="0 0 48 48" height="24" width="24">
@@ -52,7 +51,7 @@ import { RECIPES_ADD } from "../api/endpoints";
 
 export default {
     name: "CartCardComponent",
-    props: ['cartItem', 'key'],
+    props: ['cartItem', 'price'],
     emits: ['removecard'],
     data() {
         return {
@@ -63,8 +62,8 @@ export default {
     },
     computed: {
         totalPrice() {
-            return this.cartItem.quantity * this.countRecipy;
-        }
+            return (this.price * this.countRecipy).toFixed(2);
+        },
     },
     methods: {
         submitRemove() {
@@ -73,15 +72,12 @@ export default {
         async updaterCart(newQuantity) {
             const data = await createResource({
                 endpoint: RECIPES_ADD,
-                resource: {id: this.cartItem.recipes.id, week_id: 5, quantity: newQuantity},
+                resource: {id: this.cartItem.recipe.id, week_id: 5, quantity: newQuantity},
             }).then(() => {
                 this.countRecipy = newQuantity;
             });
-        }
+        },
     },
-    mounted() {
-        console.log(this.cartItem.recipes.id);
-    }
 };
 </script>
 

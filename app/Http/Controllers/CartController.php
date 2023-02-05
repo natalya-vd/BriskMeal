@@ -3,97 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
-use App\Models\Recipe;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     private $cart;
 
-    public function __construct()
+    private function getCart(Request $request)
     {
-        $this->getCart();
-    }
+        $user_id = $request->user()->id;
+        $week_id = $request->week_id;
 
-    private function getCart()
-    {
-        $cart_id = \request()->cookie('cart_id');
-        //$cart_id = 1; // Для ручного изменения cart_id
+        $this->cart = Cart::where('is_ordered', false)
+            ->where('user_id', $user_id)
+            ->where('week_id', $week_id)
+            ->first();
 
-        if (is_null($cart_id)) { /* TODO Возможно, позже нужно будет сменить проверку на empty() */
-            // если корзина еще не существует — создаем объект
-            $this->cart = Cart::create();
-
-        } else {
-            try {
-                $this->cart = Cart::findOrFail($cart_id);
-            } catch (ModelNotFoundException $e) {
-                $this->cart = Cart::create();
-            }
+        if (is_null($this->cart)) {
+            $this->cart = Cart::create([
+                'user_id' => $request->user()->id,
+                'week_id' => $request->week_id,
+                'is_ordered' => 0,
+            ]);
         }
-
-        // Самостоятельно помещаем в куки ключ `cart_id` со значением из $this->cart->id
-        Cookie::queue('cart_id', $this->cart->id, 2880);
     }
 
-    public function index()
+    public function index(User $user, Cart $cart)
     {
-        $recipes = $this->cart->recipes;
+        $notOrderedCarts = $user->getNotOrderedCarts();
 
-        if (!is_null($recipes)) {
+        if (!is_null($notOrderedCarts)) {
 
-            $data = $this->cart->getAllRecipes($recipes);
-
+            $data = $cart->getCartContent($notOrderedCarts);
             return view('cart')->with('data', json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-            /*return view('cart-test', compact('recipes'));*/
+
         } else {
             abort(404);
         }
     }
 
-    public function add(Recipe $recipe, Request $request)
+    public function add(Request $request)
     {
+        $this->getCart($request);
+
         $quantity = $request->input('quantity') ?? 1;
-        $this->cart->increase($request->id, $request->week_id, $quantity);
-
-        // выполняем редирект обратно на ту страницу,
-        // где была нажата кнопка «В корзину»
+        $this->cart->increase($request->id, $this->cart->id, $quantity);
 
         return response()->json("Ok");
-        //return back();
-    }
-
-    /**
-     * Увеличивает кол-во товара в корзине на единицу
-     */
-    public function plus(Recipe $recipe, Request $request)
-    {
-        $this->cart->increase($request->id, $request->week_id);
-        return response()->json("Ok");
-        //return redirect()->route('cart-test');
-    }
-
-    /**
-     * Уменьшает кол-во товара в корзине на единицу
-     */
-    public function minus(Recipe $recipe, Request $request)
-    {
-        $this->cart->decrease($request->id, $request->week_id);
-        return response()->json("Ok");
-        //return redirect()->route('cart-test');
-    }
-
-    public function checkout() // Оформление заказа
-    {
-        //
-    }
-
-    public function remove(Recipe $recipe, Request $request)
-    {
-        $this->cart->remove($recipe->id);
-        return response()->json("Ok");
-        //return redirect()->route('cart-test');
     }
 }

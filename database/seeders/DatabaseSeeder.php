@@ -37,7 +37,5 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UsersSeeder::class);
         $this->call(OrderStatusesSeeder::class);
-
-        $this->call(PostsSeeder::class);
     }
 }
