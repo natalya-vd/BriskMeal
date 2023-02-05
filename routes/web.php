@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\WeekController;
-use \App\Http\Controllers\CartController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\PreferenceController;
 
 use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;

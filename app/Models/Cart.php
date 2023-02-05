@@ -7,9 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
+    use HasFactory;
+
     protected $table = 'carts';
 
-    use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'week_id',
+        'is_ordered',
+    ];
 
     public function recipes()
     {
@@ -23,85 +29,65 @@ class Cart extends Model
 
     public function weeks()
     {
-        return $this->belongsToMany(
+        return $this->belongsTo(
             Week::class,
-            'recipes_carts',
-            'cart_id',
-            'week_id'
+            'week_id',
+            'id'
         );
-    }
-
-    public function getAllRecipes($recipes)
-    {
-        $recipesAttributes = [];
-
-        foreach ($recipes as $key => $value) {
-            $recipesAttributes[$key]['recipes'] = $value->getAttributes();
-            $recipesAttributes[$key]['quantity'] = $value->pivot->quantity;
-        }
-
-        $data = [
-            'recipes' => $recipesAttributes
-        ];
-
-        return $data;
     }
 
     /**
      * Увеличивает кол-во товара в корзине на величину $count
      */
-    public function increase($recipe_id, $week_id, $count = 1)
+    public function increase($recipe_id, $cart_id, $count = 1)
     {
-        $this->change($recipe_id, $week_id, $count);
-    }
-
-    /**
-     * Уменьшает кол-во товара в корзине на величину $count
-     */
-    public function decrease($recipe_id, $week_id, $count = 1)
-    {
-        $this->change($recipe_id, $week_id, -1 * $count);
+        $this->change($recipe_id, $cart_id, $count);
     }
 
     /**
      * Добавляет/именяет количество товара $recipe_id в корзине на величину $count
      */
-    private function change($recipe_id, $week_id, $count = 0)
+    private function change($recipe_id, $cart_id, $count = 0)
     {
-        /*if ($count == 0) {
-            return;
-        }*/
-
         // если товар есть в корзине — изменяем кол-во
         if ($this->recipes->contains($recipe_id)) {
 
             // получаем объект строки таблицы `carts_recipes`
             $pivotRow = $this->recipes()->where('recipe_id', $recipe_id)->first()->pivot;
             $quantity = $pivotRow->quantity;
-
             $quantity = $count;
 
             if ($quantity > 0) {
                 // обновляем количество товара $recipe_id в корзине
-                $pivotRow->update(['quantity' => $quantity, 'week_id' => $week_id]);
+                $pivotRow->update(['recipe_id' => $recipe_id, 'cart_id' => $cart_id, 'quantity' => $quantity]);
             } else {
                 // кол-во равно нулю — удаляем товар из корзины
                 $pivotRow->delete();
             }
 
         } elseif ($count > 0) { // иначе — добавляем этот товар
-            $this->recipes()->attach($recipe_id, ['quantity' => $count, 'week_id' => $week_id]);
+            $this->recipes()->attach($recipe_id, ['cart_id' => $cart_id, 'quantity' => $count]);
         }
 
         // обновляем поле `updated_at` таблицы `carts`
         $this->touch();
     }
 
-    public function remove($id)
+    public function getCartContent($notOrderedCarts)
     {
-        // удаляем соответствующую запись из промежуточной таблицы
-        $this->recipes()->detach($id);
-        // обновляем поле `updated_at` таблицы `carts`
-        $this->touch();
+        $carts = [];
+
+        foreach ($notOrderedCarts as $key => $cart) {
+            $carts['cart_id'] = $cart->id;
+            $carts['week_attributes'] = $cart->weeks->getAttributes();
+            //$carts['recipes'] = $cart->recipes->toArray();
+
+            foreach ($cart->recipes as $key1 => $value1) {
+                $carts['recipes'][$key1]['recipe'] = $value1->getAttributes();
+                $carts['recipes'][$key1]['quantity']= $value1->pivot->quantity;
+            }
+        }
+
+        return $carts;
     }
 }
