@@ -49,7 +49,7 @@ final class UserQueryBuilder
             "preferences" => $preferenceResponse,
             "num_people" => $user->num_people,
             "meals_week" => $user->meals_week,
-            "max_quantity_recipes" => $user->num_people * $user->meals_week / 2
+            "max_quantity_recipes" => $user->num_people * $user->meals_week * 7 / 2
         ];
 
         return $dataResponse;
