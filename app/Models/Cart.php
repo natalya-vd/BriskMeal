@@ -78,13 +78,12 @@ class Cart extends Model
         $carts = [];
 
         foreach ($notOrderedCarts as $key => $cart) {
-            $carts['cart_id'] = $cart->id;
-            $carts['week_attributes'] = $cart->weeks->getAttributes();
-            //$carts['recipes'] = $cart->recipes->toArray();
+            $carts[$key]['cart_id'] = $cart->id;
+            $carts[$key]['week_attributes'] = $cart->weeks->getAttributes();
 
             foreach ($cart->recipes as $key1 => $value1) {
-                $carts['recipes'][$key1]['recipe'] = $value1->getAttributes();
-                $carts['recipes'][$key1]['quantity']= $value1->pivot->quantity;
+                $carts[$key]['recipes'][$key1]['recipe'] = $value1->getAttributes();
+                $carts[$key]['recipes'][$key1]['quantity']= $value1->pivot->quantity;
             }
         }
 
