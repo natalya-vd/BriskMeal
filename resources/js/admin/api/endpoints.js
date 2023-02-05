@@ -32,6 +32,9 @@ const routes = {
         index: '/admin/week',
         recipes: '/admin/week/recipes',
     },
+    orders: {
+        index: '/admin/orders'
+    }
 }
 
 export {

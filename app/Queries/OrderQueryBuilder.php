@@ -19,6 +19,33 @@ final class OrderQueryBuilder
         $this->model = Order::query();
     }
 
+    public function getListOrdersWithPagination(): LengthAwarePaginator
+    {
+        return $this->model
+            ->with('orderStatuses')
+            ->paginate(config('pagination.admin.orders'));
+    }
+
+    public function getOneOrder(int $id)
+    {
+        $order = $this->model
+            ->with('orderStatuses')
+            ->with('cart')
+            ->find($id);
+
+        $response = $order->getAttributes();
+
+        $recipes = $order->cart->recipes;
+        $response['recipes'] = $recipes->map(function ($item) {
+            $recipe = $item->getAttributes();
+            $recipe['quantity'] = $item->pivot->quantity;
+            return $recipe;
+        });
+        $response['status'] = $order->orderStatuses;
+
+        return $response;
+    }
+
     public function create(array $data): Order|bool
     {
         $orderOne = false;

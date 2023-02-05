@@ -7,5 +7,6 @@ return [
         'units' => 40,
         'ingredients' => 40,
         'nutrition_values' => 40,
+        'orders' => 40,
     ],
 ];
