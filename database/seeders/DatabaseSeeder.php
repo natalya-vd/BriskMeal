@@ -37,8 +37,5 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UsersSeeder::class);
         $this->call(OrderStatusesSeeder::class);
-        $this->call(OrdersSeeder::class);
-        $this->call(OrdersPreferencesSeeder::class);
-        $this->call(OrdersRecipesSeeder::class);
     }
 }

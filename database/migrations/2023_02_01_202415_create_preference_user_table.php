@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders_recipes', function (Blueprint $table) {
+        Schema::create('preference_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')
-                ->constrained('orders')
+            $table->foreignId('user_id')
+                ->constrained('users')
                 ->cascadeOnDelete();
-            $table->foreignId('recipe_id')
-                ->constrained('recipes')
+            $table->foreignId('preference_id')
+                ->constrained('preferences')
                 ->cascadeOnDelete();
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders_recipes');
+        Schema::dropIfExists('preferences_users');
     }
 };

@@ -36,6 +36,11 @@ class Cart extends Model
         );
     }
 
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'cart_id', 'id');
+    }
+
     /**
      * Увеличивает кол-во товара в корзине на величину $count
      */

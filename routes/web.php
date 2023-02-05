@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\WeekController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\PreferenceController;
+use \App\Http\Controllers\CartController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\OrderController;
 
 use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
 use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
@@ -32,7 +33,7 @@ Route::get('/', [RecipeController::class, 'welcome'])->name('welcome');
 Route::get('/catalog', [RecipeController::class, 'index'])->name('catalog');
 Route::get('/catalog/{week}', [WeekController::class, 'index'])->name('catalogWeek');
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
-Route::get('/plans', PreferenceController::class)->name('plans');
+Route::get('/plans', [PlanController::class, 'index'])->name('plans');
 Route::view('/faq', 'faq');
 
 /** Страницы для залогиненных пользователей */
@@ -41,9 +42,7 @@ Route::middleware('auth')
         Route::get('/cart', [CartController::class, 'index'])
             ->name('cart');
 
-        Route::get('/order', function () {
-            return view('order');
-        })->name('order');
+        Route::get('/order/{cart}', [OrderController::class, 'index'])->name('order');
     });
 
 

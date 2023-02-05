@@ -15,6 +15,7 @@ use App\Queries\NutritionValuesQueryBuilder;
 use App\Queries\IngredientQueryBuilder;
 use App\Queries\AllergenQueryBuilder;
 use App\Queries\UnitQueryBuilder;
+use App\Queries\OrderQueryBuilder;
 
 use App\Services\UploadFileService;
 
@@ -35,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IngredientQueryBuilder::class);
         $this->app->bind(AllergenQueryBuilder::class);
         $this->app->bind(UnitQueryBuilder::class);
+        $this->app->bind(OrderQueryBuilder::class);
 
         // Services
         $this->app->bind(UploadFileService::class);

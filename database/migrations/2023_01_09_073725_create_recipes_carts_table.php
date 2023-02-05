@@ -21,9 +21,6 @@ return new class extends Migration
             $table->foreignId('cart_id')
                 ->constrained('carts')
                 ->cascadeOnDelete();
-            /*$table->foreignId('week_id')
-                ->constrained('weeks')
-                ->cascadeOnDelete();*/
             $table->integer('quantity');
             $table->timestamps();
         });

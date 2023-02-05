@@ -6,9 +6,9 @@
                 <dl class="plansBlock">
                     <dt>
                         <div class="plans">
-                            <span class="plansName">Keto plan</span>
+                            <span class="plansName">{{ getPreferences }} plan</span>
                             <div>
-                                <span class="meals">4 recipes for 2 people</span
+                                <span class="meals">{{ plan.max_quantity_recipes }} recipes for {{ plan.num_people }} people</span
                                 ><a class="edit" href="/plans">Edit</a>
                             </div>
                         </div>
@@ -29,10 +29,15 @@
                         >
                     </dd>
                 </dl>
-                <div class="deliveryInfo">
+                <div
+                    v-if="this.formValidation.delivery_day.date"
+                    class="deliveryInfo"
+                >
                     <span class="deliveryInfoText"
-                        >Your first delivery arrives on Friday, January 27, 2023
-                        between 8:00 AM - 8:00 PM</span
+                        >Your first delivery arrives on
+                        {{ this.formValidation.delivery_day.date }} between
+                        <br />
+                        8:00 AM - 8:00 PM</span
                     >
                 </div>
             </section>
@@ -106,6 +111,8 @@
 
 <script>
 import SuccessModal from "./SuccessModal.vue";
+import {createResource} from '../api/api'
+import {ORDER} from '../api/endpoints'
 
 export default {
     name: "OrderPageAside",
@@ -117,6 +124,8 @@ export default {
         isFormValid: Function,
         showModalSuccess: Function,
         visiblilityModalSuccess: Boolean,
+        plan: Object,
+        cartId: Number
     },
     data() {
         return {
@@ -124,23 +133,41 @@ export default {
             disabledBtn: true,
         };
     },
-    mounted() {
-        console.log("Delivery Component mounted.");
-    },
+
     methods: {
-        submitForm() {
-            console.log(this.formValidation);
+        async submitForm() {
+            try {
+                const data = {
+                    cart_id: this.cartId,
+                }
+
+                for(const [key, value] of Object.entries(this.formValidation)) {
+                    if(key !== 'active_weeks') {
+                        data[key] = value
+                    }
+                }
+
+                const response = await createResource({endpoint: ORDER, resource: data})
+                if(response.status === 200) {
+                    this.showModalSuccess();
+                }
+            } catch(e) {
+                // TODO: тут бы модалку об ошибке
+                console.log(e)
+            }
         },
     },
+
     computed: {
         isDisabled() {
             return this.isFormValid() === true
                 ? !this.disabledBtn
                 : this.disabledBtn;
         },
-        submitForm() {
-            this.showModalSuccess();
-        },
+
+        getPreferences() {
+            return this.plan.preferences.map(item => item.name).join(', ')
+        }
     },
 };
 </script>
@@ -183,6 +210,7 @@ export default {
 .plans {
     display: flex;
     flex-direction: column;
+    text-align: start;
 }
 
 .plansName {

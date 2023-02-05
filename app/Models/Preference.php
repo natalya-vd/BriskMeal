@@ -27,13 +27,13 @@ class Preference extends Model
         return $this->belongsToMany(Recipe::class, 'recipes_preferences', 'preference_id', 'recipe_id')->withTimestamps();
     }
 
-    public function orders()
+    public function users()
     {
         return $this->belongsToMany(
-            Order::class,
-            'orders_preferences',
+            User::class,
+            'preference_user',
             'preference_id',
-            'order_id'
+            'user_id',
         );
     }
 }

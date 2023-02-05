@@ -244,11 +244,13 @@ export default {
     font-weight: 700;
     font-size: 16px;
     line-height: 24px;
+    color: rgb(51, 51, 51);
 }
 .accordion-button:not(.collapsed) {
     color: grey;
     background-color: white;
     box-shadow: none;
+    color: rgb(51, 51, 51);
 }
 .accordion-button:focus {
     box-shadow: none;
@@ -262,7 +264,6 @@ export default {
     border-radius: 50%;
 }
 .accordion-body {
-    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: start;

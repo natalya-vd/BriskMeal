@@ -81,3 +81,25 @@ main {
 .footerBlock {
     flex: 0 0 auto;
 }
+
+.swiper-pagination > .swiper-pagination-bullet {
+    background: var(--swiper-pagination-bullet-inactive-color, #fff);
+}
+
+.swiper-pagination > .swiper-pagination-bullet-active {
+    background: rgb(70, 167, 72);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    color: rgb(70, 167, 72) !important;
+    font-size: 20px !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    background: white;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+}

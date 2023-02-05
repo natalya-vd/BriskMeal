@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\OrderController;
 
 use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
 use App\Http\Controllers\Admin\AllergenController as AdminAllergenController;
@@ -33,13 +35,17 @@ Route::middleware('auth')
     });
 
 
-/** Корзина */
+/** Основной сайт */
 Route::middleware('auth')
     ->group(function () {
         Route::post('/cart/add', [CartController::class, 'add']);
         Route::delete('/cart/remove/{recipe}', [CartController::class, 'remove']);
         Route::put('/cart/plus/{recipe}', [CartController::class, 'plus']);
         Route::put('/cart/minus/{recipe}', [CartController::class, 'minus']);
+
+        Route::post('/plans', [PlanController::class, 'store'])->name('plans.store');
+
+        Route::post('/order', [OrderController::class, 'store'])->name('order.store');
     });
 
 /** Админка */

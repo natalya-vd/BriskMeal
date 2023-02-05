@@ -20,15 +20,16 @@ class OrderStatusesSeeder extends Seeder
 
     private function getData()
     {
-        $data = [];
-        $count = 4;
-
-        for ($i = 1; $i <= $count; $i++) {
-            $data[] = [
-                "name" => fake()->text(5),
-            ];
-        }
-
-        return $data;
+        return [
+            [
+                "name" => "Received",
+            ],
+            [
+                "name" => "In processing",
+            ],
+            [
+                "name" => "In delivery",
+            ],
+        ];
     }
 }

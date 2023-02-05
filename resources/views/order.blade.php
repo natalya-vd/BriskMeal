@@ -5,9 +5,7 @@
 @endsection
 
 @section('content')
-<order-page ></order-page>
+<order-page data-response="{{$data}}"></order-page>
 
 
 @endsection
-
-

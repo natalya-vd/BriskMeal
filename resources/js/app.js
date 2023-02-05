@@ -83,6 +83,10 @@ app.component("buy-button-input", BuyButtonInput);
 
 import FAQComponent from "./components/FAQComponent.vue";
 app.component("faq-component", FAQComponent);
+
+import QuestionsBlock from "./components/QuestionsBlock.vue";
+app.component("questions-block", QuestionsBlock);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

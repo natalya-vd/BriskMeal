@@ -72,7 +72,6 @@ import CartCardComponent from "./CartCardComponent.vue";
 import {deleteResource} from "../api/api";
 import {RECIPES_REMOVE} from "../api/endpoints";
 
-// TODO: поменять в ссылке на страницу оформления заказа. Прописать ИД корзины, которую оформляют. Сейчас хардкод.
 export default {
     props: ["dataResponse"],
     components: {

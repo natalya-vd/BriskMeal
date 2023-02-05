@@ -10,8 +10,9 @@
                                     :formValidation="formValidation"
                                     :acceptNumber="acceptNumber"
                                     :acceptZipCode="acceptZipCode"
-                                    :active_weeks="active_weeks"
                                     :acceptTextForm="acceptTextForm"
+                                    :blurEventHandler="blurEventHandler"
+                                    :bluredFields="bluredFields"
                                 ></order-page-form>
                             </div>
                             <order-page-aside
@@ -21,6 +22,8 @@
                                 :visiblilityModalSuccess="
                                     visiblilityModalSuccess
                                 "
+                                :plan="getPlan"
+                                :cartId="getCartId"
                             ></order-page-aside>
                         </div>
                     </div>
@@ -46,7 +49,7 @@ export default {
         OrderPageAside,
         SuccessModal,
     },
-    props: ["active_weeks"],
+    props: ["dataResponse"],
 
     data() {
         return {
@@ -59,29 +62,39 @@ export default {
                 region: "",
                 zip_code: "",
                 phone: "",
-                active_weeks: [
-                    {
-                        id: 1,
-                        week_name: "2023-W4",
-                        first_week_day: "2023-01-16",
-                        last_week_day: "2023-01-22",
-                    },
-                    {
-                        id: 5,
-                        week_name: "2023-W5",
-                        first_week_day: "2023-01-23",
-                        last_week_day: "2023-01-29",
-                    },
-                ],
+                active_weeks: [],
             },
             visiblilityModalSuccess: false,
+            bluredFields: {
+                firstName: false,
+                lastName: false,
+                address: false,
+                addressLine2: false,
+                city: false,
+                region: false,
+                zipCode: false,
+                phone: false,
+            },
         };
     },
-    mounted() {
-        console.log("Delivery Component mounted.");
-        // console.log(this.acceptNumber());
-        // console.log(this.acceptZipCode());
+
+    created() {
+        this.formValidation.active_weeks = [this.getWeek] //TODO: зачем в active_weeks массив не поняла...
+
     },
+
+    computed: {
+        getPlan() {
+            return JSON.parse(this.dataResponse).plan
+        },
+        getCartId() {
+            return JSON.parse(this.dataResponse).cart_id
+        },
+        getWeek() {
+            return JSON.parse(this.dataResponse).week
+        },
+    },
+
     methods: {
         acceptNumber() {
             let x = this.formValidation.phone
@@ -114,21 +127,21 @@ export default {
                 this.acceptTextForm(this.formValidation.city) &&
                 this.acceptTextForm(this.formValidation.region) &&
                 this.acceptZipCode() &&
-                this.acceptNumber()
+                this.acceptNumber() &&
+                this.formValidation.delivery_instruction !== "Select" &&
+                this.formValidation.delivery_day.date.length > 0
                 ? true
                 : false;
         },
         showModalSuccess() {
             this.visiblilityModalSuccess = !this.visiblilityModalSuccess;
         },
-    },
 
-    // computed: {
-    //     getactive_weeks() {
-    //         // console.log(JSON.parse(this.active_weeks));
-    //         return JSON.parse(this.active_weeks);
-    //     },
-    // },
+        blurEventHandler(e) {
+            console.log(e.target.value);
+            this.bluredFields[e.target.id] = true;
+        },
+    },
 };
 </script>
 
