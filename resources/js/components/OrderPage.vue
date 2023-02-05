@@ -12,6 +12,8 @@
                                     :acceptZipCode="acceptZipCode"
                                     :active_weeks="active_weeks"
                                     :acceptTextForm="acceptTextForm"
+                                    :blurEventHandler="blurEventHandler"
+                                    :bluredFields="bluredFields"
                                 ></order-page-form>
                             </div>
                             <order-page-aside
@@ -73,14 +75,27 @@ export default {
                         last_week_day: "2023-01-29",
                     },
                 ],
+                delivery_day: { id: 1, date: "" },
+                delivery_instruction: "Select",
             },
             visiblilityModalSuccess: false,
+            bluredFields: {
+                firstName: false,
+                lastName: false,
+                address: false,
+                addressLine2: false,
+                city: false,
+                region: false,
+                zipCode: false,
+                phone: false,
+            },
         };
     },
     mounted() {
         console.log("Delivery Component mounted.");
         // console.log(this.acceptNumber());
         // console.log(this.acceptZipCode());
+        // this.delivery_day.date =
     },
     methods: {
         acceptNumber() {
@@ -114,19 +129,26 @@ export default {
                 this.acceptTextForm(this.formValidation.city) &&
                 this.acceptTextForm(this.formValidation.region) &&
                 this.acceptZipCode() &&
-                this.acceptNumber()
+                this.acceptNumber() &&
+                this.formValidation.delivery_instruction !== "Select" &&
+                this.formValidation.delivery_day.date.length > 0
                 ? true
                 : false;
         },
         showModalSuccess() {
             this.visiblilityModalSuccess = !this.visiblilityModalSuccess;
         },
+
+        blurEventHandler(e) {
+            console.log(e.target.value);
+            this.bluredFields[e.target.id] = true;
+        },
     },
 
     // computed: {
-    //     getactive_weeks() {
-    //         // console.log(JSON.parse(this.active_weeks));
-    //         return JSON.parse(this.active_weeks);
+    //     getActiveWeeks() {
+    //         console.log(JSON.parse(this.activeWeeks));
+    //         return JSON.parse(this.activeWeeks);
     //     },
     // },
 };

@@ -12,22 +12,19 @@
                                     id="firstName"
                                     type="text"
                                     v-model="formValidation.first_name"
-                                    @input="
-                                        acceptTextForm(
-                                            formValidation.first_name
-                                        )
-                                    "
+                                    @blur="blurEventHandler"
                                     :class="{
-                                        errorInput: !formValidation.first_name,
+                                        errorInput:
+                                            bluredFields.firstName &&
+                                            !formValidation.first_name,
                                         inputValidate:
                                             formValidation.first_name,
                                     }"
                                 />
                                 <svg
                                     v-if="
-                                        !acceptTextForm(
-                                            formValidation.first_name
-                                        )
+                                        bluredFields.firstName &&
+                                        !formValidation.first_name
                                     "
                                     class="errorIcon"
                                     width="24"
@@ -56,7 +53,8 @@
                             </div>
                             <div
                                 v-if="
-                                    !acceptTextForm(formValidation.first_name)
+                                    bluredFields.firstName &&
+                                    !formValidation.first_name
                                 "
                                 class="errorText"
                             >
@@ -74,19 +72,18 @@
                                     id="lastName"
                                     type="text"
                                     v-model="formValidation.last_name"
-                                    @input="
-                                        acceptTextForm(formValidation.last_name)
-                                    "
+                                    @blur="blurEventHandler"
                                     :class="{
-                                        errorInput: !formValidation.last_name,
+                                        errorInput:
+                                            bluredFields.lastName &&
+                                            !formValidation.last_name,
                                         inputValidate: formValidation.last_name,
                                     }"
                                 />
                                 <svg
                                     v-if="
-                                        !acceptTextForm(
-                                            formValidation.last_name
-                                        )
+                                        bluredFields.lastName &&
+                                        !formValidation.last_name
                                     "
                                     class="errorIcon"
                                     width="24"
@@ -114,7 +111,10 @@
                                 </svg>
                             </div>
                             <div
-                                v-if="!acceptTextForm(formValidation.last_name)"
+                                v-if="
+                                    bluredFields.latName &&
+                                    !formValidation.last_name
+                                "
                                 class="errorText"
                             >
                                 Required
@@ -135,78 +135,18 @@
                                     id="address"
                                     type="text"
                                     v-model="formValidation.address"
-                                    @input="
-                                        acceptTextForm(formValidation.address)
-                                    "
+                                    @blur="blurEventHandler"
                                     :class="{
-                                        errorInput: !formValidation.address,
+                                        errorInput:
+                                            bluredFields.address &&
+                                            !formValidation.address,
                                         inputValidate: formValidation.address,
                                     }"
                                 />
                                 <svg
                                     v-if="
-                                        !acceptTextForm(formValidation.address)
-                                    "
-                                    class="errorIcon"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    preserveAspectRatio="xMidYMid meet"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <g
-                                        fill="none"
-                                        fill-rule="evenodd"
-                                        transform="translate(4 4)"
-                                    >
-                                        <circle
-                                            cx="8"
-                                            cy="8"
-                                            r="8"
-                                            fill="#DC1E1E"
-                                        ></circle>
-                                        <path
-                                            fill="#FFF"
-                                            d="M7.289 10.795a.944.944 0 0 1 .7-.295c.276 0 .513.098.712.295.2.197.299.435.299.715 0 .266-.1.498-.299.695a.978.978 0 0 1-.711.295.944.944 0 0 1-.701-.295A.962.962 0 0 1 7 11.51c0-.28.096-.518.289-.715zm1.305-1.443a1.12 1.12 0 0 1-.567.148c-.192 0-.37-.045-.536-.135a.6.6 0 0 1-.31-.417 316.96 316.96 0 0 1-.03-2.467c-.007-.84-.017-1.662-.031-2.467a.747.747 0 0 1 .33-.386 1.137 1.137 0 0 1 1.02-.013.683.683 0 0 1 .34.36c.014.806.025 1.628.032 2.467.007.84.017 1.662.03 2.467a.525.525 0 0 1-.278.443z"
-                                        ></path>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div
-                                v-if="!acceptTextForm(formValidation.address)"
-                                class="errorText"
-                            >
-                                Required
-                            </div>
-                        </label>
-                    </div>
-                </div>
-                <div class="gridElement">
-                    <div class="elementName">
-                        <label for="AddressLine2">
-                            <p>Address line 2 *</p>
-                            <div class="inputWrapper">
-                                <input
-                                    id="AddressLine2"
-                                    type="text"
-                                    v-model="formValidation.address_line_2"
-                                    @input="
-                                        acceptTextForm(
-                                            formValidation.address_line_2
-                                        )
-                                    "
-                                    :class="{
-                                        errorInput:
-                                            !formValidation.address_line_2,
-                                        inputValidate:
-                                            formValidation.address_line_2,
-                                    }"
-                                />
-                                <svg
-                                    v-if="
-                                        !acceptTextForm(
-                                            formValidation.address_line_2
-                                        )
+                                        bluredFields.address &&
+                                        !formValidation.address
                                     "
                                     class="errorIcon"
                                     width="24"
@@ -235,9 +175,68 @@
                             </div>
                             <div
                                 v-if="
-                                    !acceptTextForm(
-                                        formValidation.address_line_2
-                                    )
+                                    bluredFields.address &&
+                                    !formValidation.address
+                                "
+                                class="errorText"
+                            >
+                                Required
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="gridElement">
+                    <div class="elementName">
+                        <label for="AddressLine2">
+                            <p>Address line 2 *</p>
+                            <div class="inputWrapper">
+                                <input
+                                    id="addressLine2"
+                                    type="text"
+                                    v-model="formValidation.address_line_2"
+                                    @blur="blurEventHandler"
+                                    :class="{
+                                        errorInput:
+                                            bluredFields.addressLine2 &&
+                                            !formValidation.address_line_2,
+                                        inputValidate:
+                                            formValidation.address_line_2,
+                                    }"
+                                />
+                                <svg
+                                    v-if="
+                                        bluredFields.addressLine2 &&
+                                        !formValidation.address_line_2
+                                    "
+                                    class="errorIcon"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    preserveAspectRatio="xMidYMid meet"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <g
+                                        fill="none"
+                                        fill-rule="evenodd"
+                                        transform="translate(4 4)"
+                                    >
+                                        <circle
+                                            cx="8"
+                                            cy="8"
+                                            r="8"
+                                            fill="#DC1E1E"
+                                        ></circle>
+                                        <path
+                                            fill="#FFF"
+                                            d="M7.289 10.795a.944.944 0 0 1 .7-.295c.276 0 .513.098.712.295.2.197.299.435.299.715 0 .266-.1.498-.299.695a.978.978 0 0 1-.711.295.944.944 0 0 1-.701-.295A.962.962 0 0 1 7 11.51c0-.28.096-.518.289-.715zm1.305-1.443a1.12 1.12 0 0 1-.567.148c-.192 0-.37-.045-.536-.135a.6.6 0 0 1-.31-.417 316.96 316.96 0 0 1-.03-2.467c-.007-.84-.017-1.662-.031-2.467a.747.747 0 0 1 .33-.386 1.137 1.137 0 0 1 1.02-.013.683.683 0 0 1 .34.36c.014.806.025 1.628.032 2.467.007.84.017 1.662.03 2.467a.525.525 0 0 1-.278.443z"
+                                        ></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div
+                                v-if="
+                                    bluredFields.addressLine2 &&
+                                    !formValidation.address_line_2
                                 "
                                 class="errorText"
                             >
@@ -259,14 +258,19 @@
                                     id="city"
                                     type="text"
                                     v-model="formValidation.city"
-                                    @input="acceptTextForm(formValidation.city)"
+                                    @blur="blurEventHandler"
                                     :class="{
-                                        errorInput: !formValidation.city,
+                                        errorInput:
+                                            bluredFields.city &&
+                                            !formValidation.city,
                                         inputValidate: formValidation.city,
                                     }"
                                 />
                                 <svg
-                                    v-if="!acceptTextForm(formValidation.city)"
+                                    v-if="
+                                        bluredFields.city &&
+                                        !formValidation.city
+                                    "
                                     class="errorIcon"
                                     width="24"
                                     height="24"
@@ -293,7 +297,7 @@
                                 </svg>
                             </div>
                             <div
-                                v-if="!acceptTextForm(formValidation.city)"
+                                v-if="bluredFields.city && !formValidation.city"
                                 class="errorText"
                             >
                                 Required
@@ -312,72 +316,73 @@
                                     class="selectState"
                                     input="true"
                                     v-model="formValidation.region"
-                                    @input="
-                                        acceptTextForm(formValidation.region)
-                                    "
+                                    @blur="blurEventHandler"
                                     :class="{
-                                        errorInput: !formValidation.region,
+                                        errorInput:
+                                            bluredFields.region &&
+                                            !formValidation.region,
                                         inputValidate: formValidation.region,
                                     }"
                                 >
-                                    <option value="">Select</option>
-                                    <option value="AL">Alabama</option>
-                                    <option value="AK">Alaska</option>
-                                    <option value="AZ">Arizona</option>
-                                    <option value="AR">Arkansas</option>
-                                    <option value="CA">California</option>
-                                    <option value="CO">Colorado</option>
-                                    <option value="CT">Connecticut</option>
-                                    <option value="DE">Delaware</option>
-                                    <option value="DC">
-                                        District of Columbia
-                                    </option>
-                                    <option value="FL">Florida</option>
-                                    <option value="GA">Georgia</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="ID">Idaho</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="IN">Indiana</option>
-                                    <option value="IA">Iowa</option>
-                                    <option value="KS">Kansas</option>
-                                    <option value="KY">Kentucky</option>
-                                    <option value="LA">Louisiana</option>
-                                    <option value="ME">Maine</option>
-                                    <option value="MD">Maryland</option>
-                                    <option value="MA">Massachusetts</option>
-                                    <option value="MI">Michigan</option>
-                                    <option value="MN">Minnesota</option>
-                                    <option value="MS">Mississippi</option>
-                                    <option value="MO">Missouri</option>
-                                    <option value="MT">Montana</option>
-                                    <option value="NE">Nebraska</option>
-                                    <option value="NV">Nevada</option>
-                                    <option value="NH">New Hampshire</option>
-                                    <option value="NJ">New Jersey</option>
-                                    <option value="NM">New Mexico</option>
-                                    <option value="NY">New York</option>
-                                    <option value="NC">North Carolina</option>
-                                    <option value="ND">North Dakota</option>
-                                    <option value="OH">Ohio</option>
-                                    <option value="OK">Oklahoma</option>
-                                    <option value="OR">Oregon</option>
-                                    <option value="PA">Pennsylvania</option>
-                                    <option value="RI">Rhode Island</option>
-                                    <option value="SC">South Carolina</option>
-                                    <option value="SD">South Dakota</option>
-                                    <option value="TN">Tennessee</option>
-                                    <option value="TX">Texas</option>
-                                    <option value="UT">Utah</option>
-                                    <option value="VT">Vermont</option>
-                                    <option value="VA">Virginia</option>
-                                    <option value="WA">Washington</option>
-                                    <option value="WV">West Virginia</option>
-                                    <option value="WI">Wisconsin</option>
-                                    <option value="WY">Wyoming</option>
+                                    <option disabled value="">Select</option>
+                                    <option>Alabama</option>
+                                    <option>Alaska</option>
+                                    <option>Arizona</option>
+                                    <option>Arkansas</option>
+                                    <option>California</option>
+                                    <option>Colorado</option>
+                                    <option>Connecticut</option>
+                                    <option>Delaware</option>
+                                    <option>District of Columbia</option>
+                                    <option>Florida</option>
+                                    <option>Georgia</option>
+                                    <option>Hawaii</option>
+                                    <option>Idaho</option>
+                                    <option>Illinois</option>
+                                    <option>Indiana</option>
+                                    <option>Iowa</option>
+                                    <option>Kansas</option>
+                                    <option>Kentucky</option>
+                                    <option>Louisiana</option>
+                                    <option>Maine</option>
+                                    <option>Maryland</option>
+                                    <option>Massachusetts</option>
+                                    <option>Michigan</option>
+                                    <option>Minnesota</option>
+                                    <option>Mississippi</option>
+                                    <option>Missouri</option>
+                                    <option>Montana</option>
+                                    <option>Nebraska</option>
+                                    <option>Nevada</option>
+                                    <option>New Hampshire</option>
+                                    <option>New Jersey</option>
+                                    <option>New Mexico</option>
+                                    <option>New York</option>
+                                    <option>North Carolina</option>
+                                    <option>North Dakota</option>
+                                    <option>Ohio</option>
+                                    <option>Oklahoma</option>
+                                    <option>Oregon</option>
+                                    <option>Pennsylvania</option>
+                                    <option>Rhode Island</option>
+                                    <option>South Carolina</option>
+                                    <option>South Dakota</option>
+                                    <option>Tennessee</option>
+                                    <option>Texas</option>
+                                    <option>Utah</option>
+                                    <option>Vermont</option>
+                                    <option>Virginia</option>
+                                    <option>Washington</option>
+                                    <option>West Virginia</option>
+                                    <option>Wisconsin</option>
+                                    <option>Wyoming</option>
                                 </select>
                             </div>
                             <div
-                                v-if="!acceptTextForm(formValidation.region)"
+                                v-if="
+                                    bluredFields.region &&
+                                    !formValidation.region
+                                "
                                 class="errorText"
                             >
                                 Required
@@ -391,17 +396,22 @@
                             <p>ZIP code *</p>
                             <div class="inputWrapper">
                                 <input
-                                    id="zip"
+                                    id="zipCode"
                                     type="text"
                                     v-model="formValidation.zip_code"
                                     @input="acceptZipCode"
+                                    @blur="blurEventHandler"
                                     :class="{
-                                        errorInput: !acceptZipCode(),
+                                        errorInput:
+                                            bluredFields.zipCode &&
+                                            !acceptZipCode(),
                                         inputValidate: acceptZipCode(),
                                     }"
                                 />
                                 <svg
-                                    v-if="!acceptZipCode()"
+                                    v-if="
+                                        bluredFields.zipCode && !acceptZipCode()
+                                    "
                                     class="errorIcon"
                                     width="24"
                                     height="24"
@@ -452,7 +462,10 @@
                                     ></path>
                                 </svg>
                             </div>
-                            <div v-if="!acceptZipCode()" class="errorText">
+                            <div
+                                v-if="bluredFields.zipCode && !acceptZipCode()"
+                                class="errorText"
+                            >
                                 Required
                             </div>
                         </label>
@@ -469,13 +482,16 @@
                                     placeholder="(***)-***-**-**"
                                     v-model="formValidation.phone"
                                     @input="acceptNumber"
+                                    @blur="blurEventHandler"
                                     :class="{
-                                        errorInput: !acceptNumber(),
+                                        errorInput:
+                                            bluredFields.phone &&
+                                            !acceptNumber(),
                                         inputValidate: acceptNumber(),
                                     }"
                                 />
                                 <svg
-                                    v-if="!acceptNumber()"
+                                    v-if="bluredFields.phone && !acceptNumber()"
                                     class="errorIcon"
                                     width="24"
                                     height="24"
@@ -501,7 +517,10 @@
                                     </g>
                                 </svg>
                             </div>
-                            <div v-if="!formValidation.phone" class="errorText">
+                            <div
+                                v-if="bluredFields.phone && !acceptNumber()"
+                                class="errorText"
+                            >
                                 Required
                             </div>
                         </label>
@@ -568,6 +587,8 @@ export default {
         acceptNumber: Function,
         acceptZipCode: Function,
         acceptTextForm: Function,
+        blurEventHandler: Function,
+        bluredFields: Object,
         // activeWeeks: Object,
     },
 

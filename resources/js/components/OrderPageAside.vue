@@ -29,10 +29,15 @@
                         >
                     </dd>
                 </dl>
-                <div class="deliveryInfo">
+                <div
+                    v-if="this.formValidation.delivery_day.date"
+                    class="deliveryInfo"
+                >
                     <span class="deliveryInfoText"
-                        >Your first delivery arrives on Friday, January 27, 2023
-                        between 8:00 AM - 8:00 PM</span
+                        >Your first delivery arrives on
+                        {{ this.formValidation.delivery_day.date }} between
+                        <br />
+                        8:00 AM - 8:00 PM</span
                     >
                 </div>
             </section>
@@ -127,11 +132,7 @@ export default {
     mounted() {
         console.log("Delivery Component mounted.");
     },
-    methods: {
-        submitForm() {
-            console.log(this.formValidation);
-        },
-    },
+    methods: {},
     computed: {
         isDisabled() {
             return this.isFormValid() === true
@@ -140,6 +141,7 @@ export default {
         },
         submitForm() {
             this.showModalSuccess();
+            console.log(this.formValidation);
         },
     },
 };
