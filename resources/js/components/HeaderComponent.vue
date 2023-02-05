@@ -11,29 +11,43 @@
                 <a class="header-navigation-link" href="/faq"
                     ><span class="text-link">FAQs</span></a
                 >
-                <a class="header-navigation-link" href="/catalog"
+                <a class="header-navigation-link" href="/giftcard"
                     ><span class="text-link">Gift Cards</span></a
                 >
-                <a v-if="!isGuest(guest)" class="header-navigation-link" href="/cart"
+                <a
+                    v-if="!isGuest(guest)"
+                    class="header-navigation-link"
+                    href="/cart"
                     ><span class="text-link">Your Cart</span></a
                 >
             </nav>
-            <div  class="registration-block">
-                <a v-if="isGuest(guest)" href="/login" class="login"><span>Log In</span></a
+            <div class="registration-block">
+                <a v-if="isGuest(guest)" href="/login" class="login"
+                    ><span>Log In</span></a
                 >
-                <a v-if="isGuest(guest)" href="/register" class="signup"><span>Sign up</span></a>
+                <a v-if="isGuest(guest)" href="/register" class="signup"
+                    ><span>Sign up</span></a
+                >
                 <div v-if="!isGuest(guest)" class="dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                    <img class="profile me-4" src="/images/face28.jpg" alt="profile" />
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg-end">
-                    <button class="login" type="button" @click="onLogout">
-                        Logout
-                    </button>
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                    >
+                        <img
+                            class="profile me-4"
+                            src="/images/face28.jpg"
+                            alt="profile"
+                        />
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg-end">
+                        <button class="login" type="button" @click="onLogout">
+                            Logout
+                        </button>
+                    </div>
                 </div>
             </div>
-            </div>
-
 
             <button
                 data-hamburger-menu="true"
@@ -66,10 +80,10 @@
 
 <script>
 import SideBarComponent from "./SideBarComponent.vue";
-import {isGuest} from "../helpers/common"
-import {logout} from '../api/api'
-import {LOGOUT} from '../api/endpoints'
-import router from '../router'
+import { isGuest } from "../helpers/common";
+import { logout } from "../api/api";
+import { LOGOUT } from "../api/endpoints";
+import router from "../router";
 
 export default {
     components: {
@@ -78,8 +92,8 @@ export default {
     props: {
         guest: {
             type: String,
-            default: '1'
-        }
+            default: "1",
+        },
     },
     data() {
         return {
@@ -87,7 +101,7 @@ export default {
         };
     },
     setup() {
-        return {isGuest}
+        return { isGuest };
     },
 
     methods: {
@@ -96,15 +110,15 @@ export default {
         },
         async onLogout() {
             try {
-                const response = await logout(LOGOUT)
-                if(response.status === 204) {
-                    router.navigate('/')
+                const response = await logout(LOGOUT);
+                if (response.status === 204) {
+                    router.navigate("/");
                 }
-            } catch(e) {
+            } catch (e) {
                 // TODO: Тут бы модалку об ошибке
-                console.log(e.response.data.message)
+                console.log(e.response.data.message);
             }
-        }
+        },
     },
 };
 </script>
@@ -281,7 +295,7 @@ export default {
 
 @media only screen and (min-width: 768px) {
     .flex-item {
-        width: calc(100% - 110px) ;
+        width: calc(100% - 110px);
     }
 }
 

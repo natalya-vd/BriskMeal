@@ -35,6 +35,8 @@ Route::get('/catalog/{week}', [WeekController::class, 'index'])->name('catalogWe
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
 Route::get('/plans', [PlanController::class, 'index'])->name('plans');
 Route::view('/faq', 'faq');
+Route::view('/giftcard', 'giftcard');
+
 
 /** Страницы для залогиненных пользователей */
 Route::middleware('auth')

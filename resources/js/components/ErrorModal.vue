@@ -18,11 +18,15 @@
                     </svg>
                 </a>
             </div>
-            <h2 class="errorTitle">Error!</h2>
-            <h3 class="errorText">
-                Something went wrong.
-                <a href="/plans" class="errorDelivery">Please, try again</a>
-            </h3>
+            <slot name="title"><h2 class="errorTitle">Error!</h2></slot>
+            <slot name="text"
+                ><h3 class="errorText">
+                    Something went wrong.
+                    <a href="/catalog" class="errorDelivery"
+                        >Please, try again</a
+                    >
+                </h3></slot
+            >
         </section>
     </div>
 </template>
