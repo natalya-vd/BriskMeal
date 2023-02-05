@@ -6,9 +6,9 @@
                 <dl class="plansBlock">
                     <dt>
                         <div class="plans">
-                            <span class="plansName">{{ getPreferences }} plan</span>
+                            <span class="plansName">Keto plan</span>
                             <div>
-                                <span class="meals">{{ plan.max_quantity_recipes }} recipes for {{ plan.num_people }} people</span
+                                <span class="meals">4 recipes for 2 people</span
                                 ><a class="edit" href="/plans">Edit</a>
                             </div>
                         </div>
@@ -111,8 +111,6 @@
 
 <script>
 import SuccessModal from "./SuccessModal.vue";
-import {createResource} from '../api/api'
-import {ORDER} from '../api/endpoints'
 
 export default {
     name: "OrderPageAside",
@@ -124,8 +122,6 @@ export default {
         isFormValid: Function,
         showModalSuccess: Function,
         visiblilityModalSuccess: Boolean,
-        plan: Object,
-        cartId: Number
     },
     data() {
         return {
@@ -133,41 +129,20 @@ export default {
             disabledBtn: true,
         };
     },
-
-    methods: {
-        async submitForm() {
-            try {
-                const data = {
-                    cart_id: this.cartId,
-                }
-
-                for(const [key, value] of Object.entries(this.formValidation)) {
-                    if(key !== 'active_weeks') {
-                        data[key] = value
-                    }
-                }
-
-                const response = await createResource({endpoint: ORDER, resource: data})
-                if(response.status === 200) {
-                    this.showModalSuccess();
-                }
-            } catch(e) {
-                // TODO: тут бы модалку об ошибке
-                console.log(e)
-            }
-        },
+    mounted() {
+        console.log("Delivery Component mounted.");
     },
-
+    methods: {},
     computed: {
         isDisabled() {
             return this.isFormValid() === true
                 ? !this.disabledBtn
                 : this.disabledBtn;
         },
-
-        getPreferences() {
-            return this.plan.preferences.map(item => item.name).join(', ')
-        }
+        submitForm() {
+            this.showModalSuccess();
+            console.log(this.formValidation);
+        },
     },
 };
 </script>
@@ -210,7 +185,6 @@ export default {
 .plans {
     display: flex;
     flex-direction: column;
-    text-align: start;
 }
 
 .plansName {
