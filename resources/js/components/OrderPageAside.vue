@@ -29,10 +29,15 @@
                         >
                     </dd>
                 </dl>
-                <div class="deliveryInfo">
+                <div
+                    v-if="this.formValidation.delivery_day.date"
+                    class="deliveryInfo"
+                >
                     <span class="deliveryInfoText"
-                        >Your first delivery arrives on Friday, January 27, 2023
-                        between 8:00 AM - 8:00 PM</span
+                        >Your first delivery arrives on
+                        {{ this.formValidation.delivery_day.date }} between
+                        <br />
+                        8:00 AM - 8:00 PM</span
                     >
                 </div>
             </section>
@@ -128,6 +133,7 @@ export default {
             disabledBtn: true,
         };
     },
+
     methods: {
         async submitForm() {
             try {
@@ -151,12 +157,14 @@ export default {
             }
         },
     },
+
     computed: {
         isDisabled() {
             return this.isFormValid() === true
                 ? !this.disabledBtn
                 : this.disabledBtn;
         },
+
         getPreferences() {
             return this.plan.preferences.map(item => item.name).join(', ')
         }

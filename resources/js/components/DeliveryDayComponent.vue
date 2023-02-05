@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="choosingDay">
-                        <template v-for="item in deliveryDay" :key="item.id">
+                        <template v-for="item in deliveryDays" :key="item.id">
                             <input
                                 class="inputDay"
                                 type="radio"
@@ -49,7 +49,9 @@
                                     class="dayWeek"
                                     @click="onPickedDay(item)"
                                     :class="{
-                                        dayChecked: dayPicked.id === item.id,
+                                        dayChecked:
+                                            this.formValidation.delivery_day
+                                                .id === item.id,
                                     }"
                                 >
                                     {{ item.date }}
@@ -72,7 +74,9 @@
                                         data-input="address2Comment"
                                         data-input-error="false"
                                         class="selectState"
-                                        v-model="deliveryInstruction"
+                                        v-model="
+                                            formValidation.delivery_instruction
+                                        "
                                     >
                                         <option value="Select">Select</option>
                                         <option value="Leave at front door">
@@ -110,13 +114,13 @@ export default {
                 { id: 5, name: "Fri" },
                 { id: 6, name: "Sat" },
             ],
-            deliveryDay: [
+            deliveryDays: [
                 { id: 1, date: "" },
                 { id: 2, date: "" },
             ],
             weeklyPicked: { id: 0, name: "Sun" },
-            dayPicked: { id: 1, date: "" },
-            deliveryInstruction: "Select",
+            // delivery_day: { id: 1, date: "" },
+
             closestDay: new Date(
                 Date.parse(this.formValidation.active_weeks[0].last_week_day)
             ),
@@ -135,7 +139,7 @@ export default {
             this.getSecondDate();
         },
         onPickedDay(item) {
-            this.dayPicked = item;
+            this.formValidation.delivery_day = item;
         },
         getFirstDate() {
             let day = this.closestDay.getDate();
@@ -154,18 +158,18 @@ export default {
 
             if (month < 10) {
                 result = `${weeklyDay} 0${month}/${day}`;
-                this.deliveryDay[0].date = result;
+                this.deliveryDays[0].date = result;
             } else {
                 result = `${weeklyDay} ${month}/${day}`;
-                this.deliveryDay[0].date = result;
+                this.deliveryDays[0].date = result;
             }
             if (day > lastDayOfMonth) {
                 month = month + 1;
                 day = `0${day - lastDayOfMonth}`;
                 result = `${weeklyDay} 0${month}/${day}`;
-                this.deliveryDay[0].date = result;
+                this.deliveryDays[0].date = result;
             }
-            return this.deliveryDay;
+            return this.deliveryDays;
         },
         getSecondDate() {
             let day = this.closestDay.getDate() + 7;
@@ -184,18 +188,18 @@ export default {
 
             if (month < 10) {
                 result = `${weeklyDay} 0${month}/${day}`;
-                this.deliveryDay[1].date = result;
+                this.deliveryDays[1].date = result;
             } else {
                 result = `${weeklyDay} ${month}/${day}`;
-                this.deliveryDay[1].date = result;
+                this.deliveryDays[1].date = result;
             }
             if (day > lastDayOfMonth) {
                 month = month + 1;
                 day = `0${day - lastDayOfMonth}`;
                 result = `${weeklyDay} 0${month}/${day}`;
-                this.deliveryDay[1].date = result;
+                this.deliveryDays[1].date = result;
             }
-            return this.deliveryDay;
+            return this.deliveryDays;
         },
 
         getClosestDay() {
@@ -230,7 +234,7 @@ export default {
     updated() {},
 
     // computed() {
-    //     console.log(this.deliveryInstruction);
+    //     console.log(this.delivery_instruction);
     // },
 };
 </script>
