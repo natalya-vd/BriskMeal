@@ -29,6 +29,12 @@
                 </ul>
             </div>
         </li>
+        <li @class([ 'nav-item' , 'active'=> str_contains(Route::currentRouteName(), 'admin.orders') ])>
+            <a class="nav-link" href="{{ route('admin.orders.index') }}">
+                <i class="icon-grid menu-icon"></i>
+                <span class="menu-title">Orders</span>
+            </a>
+        </li>
         <li @class([ 'nav-item' , 'active'=> str_contains(Route::currentRouteName(), 'admin.allergens') ])>
             <a class="nav-link" href="{{ route('admin.allergens.index') }}">
                 <i class="icon-grid menu-icon"></i>

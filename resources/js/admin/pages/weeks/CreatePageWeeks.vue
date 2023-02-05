@@ -71,15 +71,6 @@
                                     <td class="align-middle">
                                         {{ item.recipe_count }}
                                     </td>
-                                    <!-- <td>
-                                        <input
-                                            v-model="item.active_week"
-                                            :value="true"
-                                            type="checkbox"
-                                            :checked="true"
-                                            @input="(event) => updateActiveWeek(event.target.checked, item)"
-                                        />
-                                    </td> -->
                                     <td class="align-middle">
                                         <input
                                             v-model="item.active_week"

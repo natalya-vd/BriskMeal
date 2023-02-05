@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\UnitController as AdminUnitController;
 use App\Http\Controllers\Admin\IngredientController as AdminIngredientController;
 use App\Http\Controllers\Admin\NutritionValuesController as AdminNutritionValuesController;
 use App\Http\Controllers\Admin\WeekController as AdminWeekController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,8 +97,11 @@ Route::middleware('auth')
                     'destroy', 'update', 'store', 'show'
                 ]);
 
-                Route::get('weeks', [AdminWeekController::class, 'create'])->name('weeks.create');
-                Route::get('weeks/recipes', [AdminWeekController::class, 'index'])->name('weeks.index');
+                Route::get('/weeks', [AdminWeekController::class, 'create'])->name('weeks.create');
+                Route::get('/weeks/recipes', [AdminWeekController::class, 'index'])->name('weeks.index');
+
+                Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
+                Route::get('/orders/{order}', [AdminOrderController::class, 'order'])->name('orders.order');
             });
 
         Route::get('/not-rights', function () {
