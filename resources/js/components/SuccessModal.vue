@@ -18,11 +18,15 @@
                     </svg>
                 </a>
             </div>
-            <h2 class="successTitle">Success!</h2>
-            <h3 class="successText">
-                Order successfully completed.
-                <a href="/catalog" class="successDelivery">Continue shopping</a>
-            </h3>
+            <slot name="title"><h2 class="successTitle">Success!</h2></slot>
+            <slot name="text"
+                ><h3 class="successText">
+                    Order successfully completed.
+                    <a href="/catalog" class="successDelivery"
+                        >Continue shopping</a
+                    >
+                </h3></slot
+            >
         </section>
     </div>
 </template>
@@ -38,7 +42,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .sideBar {
     position: fixed;
     inset: -10px 0px 0px;
