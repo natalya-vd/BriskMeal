@@ -392,12 +392,252 @@ class RecipesPreferencesSeeder extends Seeder
             [
                 "recipe_id" => 50,
                 "preference_id" => 3
+            ],
+            [
+                "recipe_id" => 51,
+                "preference_id" => 1
+            ],
+            [
+                "recipe_id" => 51,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 52,
+                "preference_id" => 7
+            ],
+            [
+                "recipe_id" => 52,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 53,
+                "preference_id" => 5
+            ],
+            [
+                "recipe_id" => 53,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 54,
+                "preference_id" => 2
+            ],
+            [
+                "recipe_id" => 55,
+                "preference_id" => 5
+            ],
+            [
+                "recipe_id" => 55,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 55,
+                "preference_id" => 3
+            ],
+            [
+                "recipe_id" => 59,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 60,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 61,
+                "preference_id" => 7
+            ],
+            [
+                "recipe_id" => 62,
+                "preference_id" => 2
+            ],
+            [
+                "recipe_id" => 63,
+                "preference_id" => 2
+            ],
+            [
+                "recipe_id" => 63,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 64,
+                "preference_id" => 2
+            ],
+            [
+                "recipe_id" => 65,
+                "preference_id" => 2
+            ],
+            [
+                "recipe_id" => 65,
+                "preference_id" => 7
+            ],
+            [
+                "recipe_id" => 66,
+                "preference_id" => 3
+            ],
+            [
+                "recipe_id" => 66,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 67,
+                "preference_id" => 3
+            ],
+            [
+                "recipe_id" => 67,
+                "preference_id" => 7
+            ],
+            [
+                "recipe_id" => 68,
+                "preference_id" => 3
+            ],
+            [
+                "recipe_id" => 69,
+                "preference_id" => 1
+            ],
+            [
+                "recipe_id" => 69,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 69,
+                "preference_id" => 5
+            ],
+            [
+                "recipe_id" => 70,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 70,
+                "preference_id" => 5
+            ],
+            [
+                "recipe_id" => 71,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 72,
+                "preference_id" => 1
+            ],
+            [
+                "recipe_id" => 72,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 72,
+                "preference_id" => 5
+            ],
+            [
+                "recipe_id" => 73,
+                "preference_id" => 1
+            ],
+            [
+                "recipe_id" => 73,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 73,
+                "preference_id" => 5
+            ],
+            [
+                "recipe_id" => 74,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 74,
+                "preference_id" => 1
+            ],
+            [
+                "recipe_id" => 74,
+                "preference_id" => 7
+            ],
+            [
+                "recipe_id" => 75,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 75,
+                "preference_id" => 1
+            ],
+            [
+                "recipe_id" => 75,
+                "preference_id" => 5
+            ],
+            [
+                "recipe_id" => 76,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 76,
+                "preference_id" => 1
+            ],
+            [
+                "recipe_id" => 77,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 78,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 79,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 79,
+                "preference_id" => 7
+            ],
+            [
+                "recipe_id" => 82,
+                "preference_id" => 2
+            ],
+            [
+                "recipe_id" => 82,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 83,
+                "preference_id" => 2
+            ],
+            [
+                "recipe_id" => 84,
+                "preference_id" => 2
+            ],
+            [
+                "recipe_id" => 85,
+                "preference_id" => 2
+            ],
+            [
+                "recipe_id" => 86,
+                "preference_id" => 3
+            ],
+            [
+                "recipe_id" => 87,
+                "preference_id" => 7
+            ],
+            [
+                "recipe_id" => 87,
+                "preference_id" => 3
+            ],
+            [
+                "recipe_id" => 88,
+                "preference_id" => 1
+            ],
+            [
+                "recipe_id" => 88,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 90,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 90,
+                "preference_id" => 7
             ]
         ];
         $count_recipe = 200;
         $count_preference = 7;
 
-        for ($i = 51; $i <= $count_recipe; $i++) {
+        for ($i = 91; $i <= $count_recipe; $i++) {
             $data[] = [
                 "recipe_id" => rand(1, $count_recipe),
                 "preference_id" => rand(1, $count_preference),
