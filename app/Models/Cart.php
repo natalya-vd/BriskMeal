@@ -89,6 +89,7 @@ class Cart extends Model
             foreach ($cart->recipes as $key1 => $value1) {
                 $carts[$key]['recipes'][$key1]['recipe'] = $value1->getAttributes();
                 $carts[$key]['recipes'][$key1]['quantity']= $value1->pivot->quantity;
+                $carts[$key]['recipes'][$key1]['photo']= $value1->photo->toArray()[0]['path'];
             }
         }
 
