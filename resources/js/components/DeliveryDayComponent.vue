@@ -49,9 +49,7 @@
                                     class="dayWeek"
                                     @click="onPickedDay(item)"
                                     :class="{
-                                        dayChecked:
-                                            this.formValidation.delivery_day
-                                                .id === item.id,
+                                        dayChecked: dayPicked.id === item.id,
                                     }"
                                 >
                                     {{ item.date }}
@@ -75,7 +73,7 @@
                                         data-input-error="false"
                                         class="selectState"
                                         v-model="
-                                            formValidation.delivery_instruction
+                                            formValidation.delivery_instructions
                                         "
                                     >
                                         <option value="Select">Select</option>
@@ -119,7 +117,7 @@ export default {
                 { id: 2, date: "" },
             ],
             weeklyPicked: { id: 0, name: "Sun" },
-            // delivery_day: { id: 1, date: "" },
+            dayPicked: { id: 1, date: "" },
 
             closestDay: new Date(
                 Date.parse(this.formValidation.active_weeks[0].last_week_day)
@@ -139,11 +137,15 @@ export default {
             this.getSecondDate();
         },
         onPickedDay(item) {
-            this.formValidation.delivery_day = item;
+            this.dayPicked = item;
+            this.getClosestDay();
+            this.getFirstDate();
+            this.getSecondDate();
         },
         getFirstDate() {
             let day = this.closestDay.getDate();
             let month = this.closestDay.getMonth() + 1;
+            let year = this.closestDay.getFullYear();
             const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
             const weeklyDay = days[this.closestDay.getDay()];
             const lastDayOfMonth = new Date(
@@ -159,14 +161,17 @@ export default {
             if (month < 10) {
                 result = `${weeklyDay} 0${month}/${day}`;
                 this.deliveryDays[0].date = result;
+                this.formValidation.delivery_day = `${year}-0${month}-${day}`;
             } else {
                 result = `${weeklyDay} ${month}/${day}`;
                 this.deliveryDays[0].date = result;
+                this.formValidation.delivery_day = `${year}-${month}-${day}`;
             }
             if (day > lastDayOfMonth) {
                 month = month + 1;
                 day = `0${day - lastDayOfMonth}`;
                 result = `${weeklyDay} 0${month}/${day}`;
+                this.formValidation.delivery_day = `${year}-0${month}-${day}`;
                 this.deliveryDays[0].date = result;
             }
             return this.deliveryDays;
@@ -174,6 +179,7 @@ export default {
         getSecondDate() {
             let day = this.closestDay.getDate() + 7;
             let month = this.closestDay.getMonth() + 1;
+            let year = this.closestDay.getFullYear();
             const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
             const weeklyDay = days[this.closestDay.getDay()];
             const lastDayOfMonth = new Date(
@@ -189,15 +195,18 @@ export default {
             if (month < 10) {
                 result = `${weeklyDay} 0${month}/${day}`;
                 this.deliveryDays[1].date = result;
+                this.formValidation.delivery_day = `${year}-0${month}-${day}`;
             } else {
                 result = `${weeklyDay} ${month}/${day}`;
                 this.deliveryDays[1].date = result;
+                this.formValidation.delivery_day = `${year}-${month}-${day}`;
             }
             if (day > lastDayOfMonth) {
                 month = month + 1;
                 day = `0${day - lastDayOfMonth}`;
                 result = `${weeklyDay} 0${month}/${day}`;
                 this.deliveryDays[1].date = result;
+                this.formValidation.delivery_day = `${year}-0${month}-${day}`;
             }
             return this.deliveryDays;
         },
