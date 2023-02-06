@@ -274,11 +274,216 @@ class RecipesSeeder extends Seeder
                 "cook_time" => 25,
                 "recipe_text" => "rvd",
                 "description" => "When it comes to making a truly top-notch taco, it’s important to infuse each element with flavor. Here, we take inspiration from the beloved backyard BBQ! We begin with roasted black beans, sweet potatoes, and corn seasoned with our barbecue spice blend, then tossed with tangy-sweet barbecue sauce. The veggie filling gets stuffed into steamy flour tortillas topped with melty sharp cheddar. Finally, a crunchy cabbage and carrot slaw, dressed with a creamy vegan chimichurri, adds a bright and cooling note."
+            ],
+            /*  50   */
+            [   "name" => "Blackened Barramundi with Dijonnaise",
+                "cook_time" => 30,
+                "recipe_text" => "rvd",
+                "description" => "Barramundi is the perfect fish to take on the bold flavors of the South. Here, the mild white fish is coated in blackening spices, then drizzled in paprika-spiced Creole Dijonnaise for tangy richness. A bevy of colorful sautéed veggies—including collards, bell pepper, tomato, and roasted red peppers—completes the meal."
+            ],
+            [   "name" => "Pork Tenderloin with Creamy Pistou",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "Our housemade basil pistou—a delicious blend of basil, sunflower seeds, aromatics, and tangy lemon juice—is used two ways in this fresh, flavorful meal. First, the pistou adds herby touches to fragrant jasmine rice mixed with chard, umami-packed sun-dried tomatoes, chewy-sweet dates, and briny feta cheese. The rest of the pistou is stirred into sour cream to make a creamy sauce for tender, juicy pork tenderloin seasoned with paprika, garlic, and oregano."
+            ],
+            [   "name" => "Spicy Coconut Curry Shrimp Soup",
+                "cook_time" => 25,
+                "recipe_text" => "r",
+                "description" => "This curry-style soup comes together in just 25 minutes, and it can be as spicy as you like. To start, you’ll season succulent shrimp in a rich spice blend (think paprika, turmeric, coriander, and cardamom) before cooking. Next, you’ll start the soup with aromatics, more curry spice, and as many crushed red pepper flakes as desired. Finally, you’ll simmer the soup with coconut milk until lightly creamy. It’s served with a base of simple jasmine rice to help cool things off. "
+            ],
+            [   "name" => "Portobello 'Steaks' with Truffle Sauce",
+                "cook_time" => 50,
+                "recipe_text" => "r",
+                "description" => "This vegan dinner practically screams decadence at every turn—not least because you’ll start with a fig jam crostini appetizer (or nibble on it while you cook with your plus-one!). Portobello “steaks” are marinated in umami-packed tamari sauce. They’re roasted and shingled over chive mashed potatoes, then served alongside roasted carrots with thyme. The “steaks” get even more luxurious flavor from truffle sauce—made creamy by coconut milk. You’re about to have two soulmates this Valentine’s Day: the one you cook with and the one you’ll eat. "
+            ],
+            [   "name" => "Hot Honey Edamame Salad",
+                "cook_time" => 10,
+                "recipe_text" => "r",
+                "description" => "For this sweet-meets-spicy salad, you’ll heat edamame in hot honey to create a delicious (and protein-packed) topping. A crisp mix of lettuce, cabbage, and carrots forms the base, which gets tossed with bell pepper, scallion, and pineapple. A sprinkling of sesame seeds and cashews adds some crunch, and ginger-lime vinaigrette lends a tangy touch."
+            ],
+            [   "name" => "Prosciutto & Fresh Mozzarella Wraps",
+                "cook_time" => 10,
+                "recipe_text" => "r",
+                "description" => "These 10-minute wraps are filled with flavor, and a bonus—any extra salad gets served on the side. The wraps are spread with creamy pesto, then layered with fresh mozzarella, prosciutto, and romaine dotted with fresh tomato and a balsamic vinaigrette. This wrap and salad combo is sure to be the envy of all your lunchmates."
+            ],
+            [   "name" => "Chicken & Bell Pepper Quesadillas",
+                "cook_time" => 35,
+                "recipe_text" => "r",
+                "description" => "For tonight’s menu, we’ve amped up the flavor on these quesadillas with our Southwest spice blend (think cumin, paprika, oregano, and garlic). Tender chicken and bell pepper are sandwiched between flour tortillas with a melty blend of cheeses. The warm quesadillas are drizzled with a spicy Cholula crema and served with a charred corn, tomato, and cotija salsa to ensure you’ll crave bite after bite."
+            ],
+            [   "name" => "Cheesy Italian Meatloaves",
+                "cook_time" => 35,
+                "recipe_text" => "r",
+                "description" => "These aren’t just any meatloaves. They’re extra-delicious thanks to Parmesan cheese, fresh garlic, and a dash of Italian seasoning mixed with the ground beef, plus a topping of melty mozzarella and tangy-sweet balsamic roasted red pepper sauce. Tender roasted broccoli adds a veggie boost to the meal, and buttery garlic-herb bread offers an irresistibly crispy accent on the side."
+            ],
+            [   "name" => "Pork with Cherry BBQ Sauce",
+                "cook_time" => 35,
+                "recipe_text" => "r",
+                "description" => "Here’s a flavor combination that’s worthy of a second helping: Dried cherries are simmered in our sweet and tangy barbecue sauce, then spooned over ancho-cumin-spiced pork tenderloins for tonight’s gluten-free dinner. Herb-roasted potatoes and a kale salad (tossed with cabbage and sunflower seeds) complete the dish."
+            ],
+            [   "name" => "Peruvian-Spiced Barramundi",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "White fish has a reputation for being mild in flavor, but these buttery barramundi fillets seasoned with our bold Peruvian spice blend pack in the flavors of chili powder, cumin, smoked paprika, and dried orange peel. In short, this white fish is anything but mild. Pan-sear and finish in the oven until the skin turns potato-chip crisp. Add beautiful color and crunch to your plate with tangy cabbage and red pepper slaw, and serve with zesty lime rice and a drizzle of chimichurri sauce for a delicious creamy contrast."
+            ],
+             /*  60   */
+            [   "name" => "Cheesy Artichoke Chicken Sandwiches",
+                "cook_time" => 25,
+                "recipe_text" => "r",
+                "description" => "Sandwiches often get relegated instantly to the lunch category, but this one is sure to make you rethink that designation. For the bread: Buttered ciabattas are toasted, slathered with a cheesy artichoke topping (artichoke hearts, cream cheese, and Parmesan), then returned to the oven to melt everything together. For the filling: The cheesy artichoke bread is stacked with seared chicken cutlets and basil pistou. On the side: There’s a kale salad with sweet dates and sunflower seeds for a light crunch. Lunch or dinner, these are sure to satisfy any sandwich craving."
+            ],
+            [   "name" => "Black Bean Flautas",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "Pan-frying the flautas in tonight’s Tex-Mex dinner gives the flour tortillas a crispy golden-brown exterior and delivers craveable crunchy contrast to the hearty spiced bean filling. Guacamole—one of our favorite plant-based condiments—is dolloped over the top for cooling creaminess in every bite. A kale salad piled on the side gets pops of sweet-smoky flavor from broiled corn and onion, completing the meal with a nutritious crunch."
+            ],
+            [   "name" => "Thai Fresh Pea & Peanut Curry",
+                "cook_time" => 25,
+                "recipe_text" => "r",
+                "description" => "Our dreamy ginger-lime peanut sauce brings on big Thai flavors in tonight’s vegan curry. It’s made with coconut milk for creaminess and a dash of Sriracha for heat, and acts as the perfect saucy addition to sautéed kale, bell pepper, and edamame. Served with fluffy, fragrant coconut-lime rice, the curry is topped with gingery fresh peas and peanuts for a crunchy boost."
+            ],
+            [   "name" => "Roasted Garlic & Fennel Flatbreads",
+                "cook_time" => 35,
+                "recipe_text" => "r",
+                "description" => "Why do our chefs love roasting garlic? The simple process softens the bold allium’s pungent flavor and allows its milder nutty undertones to shine. Here, you’ll mash roasted garlic and fold it in with coconut cream to make a rich, fragrant sauce. It’s slathered over toasty flatbreads and topped with tomato slices, fennel, and artichoke hearts for a creamy, crunchy, juicy blend of textures in every bite."
+            ],
+            [   "name" => "Maple Carrot Power Bowls",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "Think maple syrup is just for breakfast? These sweet and smoky carrots prove otherwise! Harissa-spiced carrots are coated with rich, sweet maple syrup, then cooked until fork-tender. They’re served over a mound of toasted pearl couscous topped with sautéed kale, dried cranberries, and a sprinkle of nutty nutritional yeast. It’s all finished with a drizzle of creamy herb miso-tahini sauce and a sprinkle of toasted walnuts."
+            ],
+            [   "name" => "Southwest Zucchini Boats",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "You’ll go overboard for these colorful zucchini boats brimming with Southwest flair. They’re filled with rice, corn, and black beans that are kicked up with our creamy chimichurri sauce. A sprinkling of cotija cheese on top gets roasted until melty to add richness. Enjoy these zucchini boats with the extra rice filling on the side and with a scattering of crunchy pepitas."
+            ],
+            [   "name" => "Blistered Tomato & Feta Cavatappi",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "Baked feta pasta was a TikTok sensation for good reason: al dente pasta with roasted tomatoes and salty feta is delicious! Here, we remix that combo on the stovetop, adding kale for a veggie boost and cream cheese for maximum lusciousness. The corkscrew-shaped cavatappi pasta adds a fun … twist!"
+            ],
+            [   "name" => "French Onion Mushroom Melts",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "There’s nothing quite like digging your spoon into French onion soup: the savory, sweet, nutty flavors are comfort in a bowl. Our chefs harnessed those flavors and put them in another comforting meal—the melt. You’ll sauté mushrooms and bell pepper in mushroom broth, then pile the veggies onto toasted baguettes. After topping the veggies with provolone and Swiss, you’ll pop the sandwiches into the oven until they’re melty and magnificent. On the side, sweet potato wedges add sweetness to the savory main attraction."
+            ],
+            [   "name" => "Southwest-Spiced Beef Taco Salad",
+                "cook_time" => 20,
+                "recipe_text" => "r",
+                "description" => "This flavor-packed salad features crisp romaine lettuce, cabbage, bell pepper, and juicy tomato tossed in a tangy, creamy dressing made with sour cream, agave, lime juice, chipotle powder, and chili powder. Top with saucy Southwest-spiced ground beef, sharp cheddar cheese, and toasted pepitas for the perfect finishing touch on this satisfying lunch or dinner."
+            ],
+            [   "name" => "Tamari Turkey Lettuce Wraps",
+                "cook_time" => 25,
+                "recipe_text" => "r",
+                "description" => "You’ll be savoring these Asian-style turkey lettuce wraps in a quick 25 minutes. Ground turkey, bell pepper, onions, and ginger are sautéed until tender, then simmered with garlic, tamari, and butter until rich and saucy. Pile this flavorful mix into crisp romaine leaves and finish with sliced scallion and toasted peanuts for crunch. There’s also an umami-rich sauce for dipping or drizzling made with honey, tamari, lime, and crushed red pepper flakes to deliver even more flavor to every bite."
+            ],
+            /*  70   */
+            [   "name" => "Steak & Creamy Parmesan Shrimp",
+                "cook_time" => 35,
+                "recipe_text" => "r",
+                "description" => "Savory is the name of the game when it comes to this surf ’n’ turf meal. First, you’ll roast broccoli and shallot seasoned with oregano and garlic, then use the same spice blend on the “turf” (aka bavette steaks) before searing. The shrimp, cooked in the same pan as the steaks, simmer in a creamy Parmesan sauce. You’ll serve the shrimp-topped steak with decadent garlic mashed potatoes on the side. "
+            ],
+            [   "name" => "Cuban Chicken with Chimichurri",
+                "cook_time" => 25,
+                "recipe_text" => "r",
+                "description" => "This Latin American–inspired meal gets a flavorful kick from our creamy chimichurri: a bright and tangy herb-based sauce made with parsley, garlic, avocado mayo, and a squeeze of lemon juice. Here, the sauce is drizzled over pan-seared chicken seasoned with an earthy Cuban spice blend (featuring cumin, oregano, and dried orange peel). Sautéed red bell pepper, snap peas, and cabbage make a colorful and delicious base for the chicken, while pepitas add a craveable crunch. Cotija rounds out the meal with a creamy-salty finishing touch. "
+            ],
+            [   "name" => "Shrimp Fra Diavolo",
+                "cook_time" => 25,
+                "recipe_text" => "r",
+                "description" => "Fra diavolo, the Italian-American dish, is traditionally made with pasta and seafood dressed in a spicy tomato sauce with garlic and fresh herbs. Our chefs took inspiration from those flavors to make this gluten-free version, with sautéed zucchini, onion, and roasted red peppers standing in for the pasta. To top off the bowls, there’s a caprese-inspired mix of fresh mozzarella, tomato, and basil pesto. Psst—if you like things spicy, stir in crushed red pepper flakes from your pantry at the end of cooking."
+            ],
+            [   "name" => "Pork with Lemon-Basil Sauce",
+                "cook_time" => 35,
+                "recipe_text" => "r",
+                "description" => "Pork tenderloins get the royal treatment in this elevated dish. Dusted in a smoky-sweet spice blend (featuring sweet and smoked paprika with dried orange peel), the tenderloins are pan-seared, then roasted to perfection. Our luxurious lemon-basil caper sauce is drizzled over the top for bright and tangy notes. Sautéed cauliflower with red bell pepper, feta cheese, and almonds completes the plate. "
+            ],
+            [   "name" => "Southwest Chicken Bowls",
+                "cook_time" => 20,
+                "recipe_text" => "r",
+                "description" => "This 20-minute bowl has all the flavors from your favorite fast-casual chain restaurant, but in a keto–friendly way. Chicken strips, seasoned with Southwest seasoning, are served with fajita-style veggies over a base of buttered cauliflower “rice” sautéed with cumin seeds. The real fun comes with all the toppings: spiced cilantro-lime crema, diced fresh tomato, toasted pepitas, and cheddar cheese. A drizzle of Cholula sauce adds just the right amount of heat."
+            ],
+            [   "name" => "Cheesy Dijon Pork Chops",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "If you like savory and tangy pairings, you’ll love the way our Swiss cheese and Dijon topping gives tonight’s juicy pork chops a rich, bright finish. The pan-seared pork is paired with roasted carrots finished with a dash of crushed red pepper flakes for a hint of heat. A side of buttery green beans studded with toasted almonds rounds out the hearty 30-minute meal."
+            ],
+            [   "name" => "Chicken with Spicy Apricot Pan Sauce",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "Pan sauces are an easy way to add so much flavor to any meal. Case in point: this delicious dish. Here, the pan sauce is made with apricot jam, tamari sauce, Sriracha, and a pinch of sugar for an elixir that’s all at once sweet, savory, and spicy, with a hint of umami. It’s spooned over sliced chicken set atop steamy, scallion-studded rice. On the side, there’s sautéed broccoli with sesame seeds, perfect for catching any runaway sauce."
+            ],
+            [   "name" => "Beef Tenderloin with Balsamic Sauce",
+                "cook_time" => 35,
+                "recipe_text" => "r",
+                "description" => "Every element of this luxurious dinner packs warming layers of flavor. Tangy dried-cherry balsamic sauce drapes seared beef tenderloin in silky richness. Maple syrup delivers a touch of sweetness to roasted Brussels sprouts. And nutty brown butter makes fork-tender potatoes especially satisfying. "
+            ],
+            [   "name" => "Chicken with Garlic Chard Rice",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "The secret ingredient to a great pan sauce for chicken is fond, the culinary term for the browned bits left in the pan after searing your cutlets. You’ll deglaze the fond with chicken stock, and add apricot jam for sweetness, a knob of butter for silkiness, and red pepper flakes for a kiss of heat. The resulting sauce quickly elevates this simple, comforting chicken dinner to an elegant meal with a delicious balance of flavors. Serve alongside fluffy rice tossed with savory sautéed chard and garlic, and garnish with chopped roasted almonds to add an enticing crunch."
+            ],
+            [   "name" => "Beef Cavatappi Skillet",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "Cavatappi’s twirly shape takes its name from the Italian word for “corkscrew.” Not only is it fun to eat, it’s also practical: The pasta’s many nooks and crannies cling onto creamy sauce and catch all the mix-ins (here, Italian-spiced beef, sweet peas, roasted red peppers, and lots of cheese). No more hunting through strands of spaghetti, then twirling with a fork and spoon—with cavatappi, you can easily curate bite after perfect bite. "
+            ],
+            /*  80   */
+            [   "name" => "Truffle Linguine with Chicken",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "For rich, earthy depth, our chefs added decadent truffle butter to the flavorful sauce in tonight’s rustic pasta bowls. Here, the creamy sauce—strewn with sautéed cremini mushrooms and green peas—coats al dente linguine noodles. It’s all topped with pan-seared chicken strips seasoned with a blend of fragrant dried herbs and red pepper."
+            ],
+            [   "name" => "Chimichurri White Bean Stuffed Peppers",
+                "cook_time" => 35,
+                "recipe_text" => "r",
+                "description" => "The best thing about stuffed peppers? All the different ways you can stuff them! Tonight, you’ll start the filling by simmering the beans in a savory broth, then season with a blend of chili, cumin, and paprika to impart smoky flavor before mashing for extra texture. The filling is piled into roasted pepper halves, sprinkled with cashew “Parmesan,” and served over a bed of kale rice with a drizzle of chimichurri sauce."
+            ],
+            [   "name" => "Creamy Mushroom Soup",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "Tonight’s mushroom soup is rich, creamy, and vegan! Our secret? Coconut milk—a versatile dairy-free alternative to cream that provides the silky richness in this comforting soup. Here, it simmers with cremini mushrooms, onion, carrots, and a flavorful mushroom broth until the flavors pleasantly meld. Crispy homemade croutons seasoned with cashew “Parmesan” and fresh parsley are so good, you’ll want one in every spoonful."
+            ],
+            [   "name" => "Black Bean & Mushroom Enchiladas",
+                "cook_time" => 45,
+                "recipe_text" => "r",
+                "description" => "Tonight’s vegan enchiladas are positively bursting with flavorful veggies. The hearty black bean and mushroom filling is seasoned with a smoky paprika-cumin blend, imparting bold and earthy notes. That’s rolled up into flour tortillas, then smothered in a richly spiced enchilada sauce and baked until warm and bubbly. The enchiladas are served under a sauté of corn, bell pepper, and tomato coated in creamy chimichurri sauce. An extra drizzle of the chimichurri adds a cooling finish."
+            ],
+            [   "name" => "Harissa Onion-Jam Tofu Sandwiches",
+                "cook_time" => 25,
+                "recipe_text" => "r",
+                "description" => "These vegan ciabatta sandwiches turn lunch into a white-napkin-level experience. Tofu is cut into thick slabs, rubbed with harissa seasoning, and dusted in cornstarch before being seared to a delicious golden brown. That golden tofu is piled onto toasted ciabattas alongside caramelized onion that’s been spiked with cider vinegar and enhanced with almonds and apricot jam. On the side, there’s a balsamic-dressed kale salad with apple slices and sunflower seeds. Pro tip: Add a bit of salad to your sandwiches for a flavor explosion."
+            ],
+            [   "name" => "Butternut Squash Chili",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "Adobo-seasoned tomatoes are the smoky-sweet undercurrent of tonight’s vegetarian chili. Rich in peppery flavors, they infuse warm earthiness into the pot of simmering butternut squash, black beans, roasted red peppers, and corn. A sprinkle of cheddar cheese and a dollop of cilantro-lime crema temper the heat, and homemade tortilla strips deliver a crispy finale."
+            ],
+            [   "name" => "Chickpea Salad Sandwiches",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "There’s a reason chickpeas are considered a superfood: They’re high in protein, chock-full of vitamins and minerals, and, most importantly, downright delicious. Here, we’ve mixed chickpeas with dried cranberries, walnuts, feta, and a bright, creamy lemon aïoli to make a surprisingly satisfying filling for pita sandwiches. Curry-spiced carrot fries with scallion make a savory side."
+            ],
+            [   "name" => "Steak & Butternut Squash Salad",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "Think salads are boring? Our chefs beg to differ! In tonight’s dinner, you’ll take hearty veggies and juicy ranch steaks and turn them into a veritable feast. First, butternut squash and fennel are roasted with our signature applewood-smoked sea salt. Once cooled, the veggies are tossed with lacinato kale and topped with sliced steak. Everything is garnished with toasted hazelnuts, nutty Parmesan, and a creamy sunflower basil pistou. Thought you knew salads? Think again. "
+            ],
+            [   "name" => "Tilapia Tacos with Cotija Street Corn",
+                "cook_time" => 30,
+                "recipe_text" => "r",
+                "description" => "There’s something about fish tacos that instantly transports you to a sunny beachside restaurant. Here, tilapia fillets are dusted with a flavorful paprika and orange spice blend, then roasted until tender and flaky. The savory fish is piled into tortillas, topped with zesty cabbage slaw for crunch, and drizzled with an herbaceous creamy chimichurri sauce. To complement the tacos, there’s a side of sautéed corn and scallion tossed with salty cotija cheese and a bright squeeze of lime juice, reminiscent of elotes (a beloved Mexican street food). "
+            ],
+            [   "name" => "Salmon with Caper Sauce",
+                "cook_time" => 35,
+                "recipe_text" => "r",
+                "description" => "Capers are a classic pairing for fish, and for good reason—the tangy pickled buds add briny, savory complexity to seafood. In tonight’s delectable dish, our luscious lemon-basil caper sauce is drizzled over flaky roasted salmon fillets. Spanish-style roasted potatoes add a smoky, peppery element to the plate, while sautéed kale with roasted red peppers, feta, and almonds lends earthy-sweet flavors on the side."
             ]
+
         ];
         $count = 200;
 
-        for ($i = 51; $i <= $count; $i++) {
+        for ($i = 91; $i <= $count; $i++) {
             $data[] = [
                 "name" => fake()->text(38),
                 "cook_time" => rand(20, 90),
