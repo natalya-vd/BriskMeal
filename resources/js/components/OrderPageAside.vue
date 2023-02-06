@@ -175,10 +175,6 @@ export default {
         getPreferences() {
             return this.plan.preferences.map((item) => item.name).join(", ");
         },
-        submitForm() {
-            this.showModalSuccess();
-            console.log(this.formValidation);
-        },
     },
 };
 </script>
