@@ -21,11 +21,16 @@ class PhotoRecipesSeeder extends Seeder
 
     private function getData()
     {
-        $data = [];
+        $data = [
+            [   "recipe_id" => 1,
+                "name" => "Parmesan-Crusted Chicken",
+                "path" => "seed/recipes/1.jpg"
+            ]
+        ];
         $count = 200;
         $photo = Storage::disk('public')->files('seed/recipes');
 
-        for ($i = 1; $i <= $count; $i++) {
+        for ($i = 2; $i <= $count; $i++) {
             $data[] = [
                 "name" => fake()->sentence(rand(2, 5)),
                 "path" => $photo[rand(0, array_key_last($photo))],
