@@ -34,12 +34,12 @@
                     </dd>
                 </dl>
                 <div
-                    v-if="this.formValidation.delivery_day.date"
+                    v-if="this.formValidation.delivery_day"
                     class="deliveryInfo"
                 >
                     <span class="deliveryInfoText"
                         >Your first delivery arrives on
-                        {{ this.formValidation.delivery_day.date }} between
+                        {{ this.formValidation.delivery_day }} between
                         <br />
                         8:00 AM - 8:00 PM</span
                     >

@@ -64,8 +64,8 @@ export default {
                 zip_code: "",
                 phone: "",
                 active_weeks: [],
-                delivery_day: { id: 1, date: "" },
-                delivery_instruction: "Select",
+                delivery_day: "",
+                delivery_instructions: "Select",
             },
             visiblilityModalSuccess: false,
             bluredFields: {
@@ -116,8 +116,8 @@ export default {
                 this.acceptTextForm(this.formValidation.region) &&
                 this.acceptZipCode() &&
                 this.acceptNumber() &&
-                this.formValidation.delivery_instruction !== "Select" &&
-                this.formValidation.delivery_day.date.length > 0
+                this.formValidation.delivery_instructions !== "Select" &&
+                this.formValidation.delivery_day.length > 0
                 ? true
                 : false;
         },
@@ -126,7 +126,6 @@ export default {
         },
 
         blurEventHandler(e) {
-            console.log(e.target.value);
             this.bluredFields[e.target.id] = true;
         },
     },
