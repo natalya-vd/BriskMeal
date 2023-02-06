@@ -10,7 +10,6 @@
                                     :formValidation="formValidation"
                                     :acceptNumber="acceptNumber"
                                     :acceptZipCode="acceptZipCode"
-                                    :active_weeks="active_weeks"
                                     :acceptTextForm="acceptTextForm"
                                     :blurEventHandler="blurEventHandler"
                                     :bluredFields="bluredFields"
@@ -23,6 +22,8 @@
                                 :visiblilityModalSuccess="
                                     visiblilityModalSuccess
                                 "
+                                :plan="getPlan"
+                                :cartId="getCartId"
                             ></order-page-aside>
                         </div>
                     </div>
@@ -48,7 +49,8 @@ export default {
         OrderPageAside,
         SuccessModal,
     },
-    props: ["active_weeks"],
+    props: ["dataResponse"],
+    // props: ["active_weeks"],
 
     data() {
         return {
@@ -61,20 +63,7 @@ export default {
                 region: "",
                 zip_code: "",
                 phone: "",
-                active_weeks: [
-                    {
-                        id: 1,
-                        week_name: "2023-W4",
-                        first_week_day: "2023-01-16",
-                        last_week_day: "2023-01-22",
-                    },
-                    {
-                        id: 5,
-                        week_name: "2023-W5",
-                        first_week_day: "2023-01-23",
-                        last_week_day: "2023-01-29",
-                    },
-                ],
+                active_weeks: [],
                 delivery_day: { id: 1, date: "" },
                 delivery_instruction: "Select",
             },
@@ -91,12 +80,9 @@ export default {
             },
         };
     },
-    mounted() {
-        console.log("Delivery Component mounted.");
-        // console.log(this.acceptNumber());
-        // console.log(this.acceptZipCode());
-        // this.delivery_day.date =
-    },
+    created() {
+        this.formValidation.active_weeks = [this.getWeek];
+    }, //TODO: зачем в active_weeks массив не поняла...
     methods: {
         acceptNumber() {
             let x = this.formValidation.phone
@@ -145,12 +131,17 @@ export default {
         },
     },
 
-    // computed: {
-    //     getActiveWeeks() {
-    //         console.log(JSON.parse(this.activeWeeks));
-    //         return JSON.parse(this.activeWeeks);
-    //     },
-    // },
+    computed: {
+        getPlan() {
+            return JSON.parse(this.dataResponse).plan;
+        },
+        getCartId() {
+            return JSON.parse(this.dataResponse).cart_id;
+        },
+        getWeek() {
+            return JSON.parse(this.dataResponse).week;
+        },
+    },
 };
 </script>
 
