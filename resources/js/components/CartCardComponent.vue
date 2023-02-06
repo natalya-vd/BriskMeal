@@ -1,7 +1,7 @@
 <template>
     <div class="cardCart" v-if="isCardShowed">
         <div class="cardBorder">
-            <img src="/card_image/card_1.jpg" alt="" class="cardImage"/>
+            <img :src="cartItem.photo" alt="" class="cardImage"/>
 
             <div class="recipyInfo">
                 <div class="recipyTitle" :title="cartItem.recipe.name">
