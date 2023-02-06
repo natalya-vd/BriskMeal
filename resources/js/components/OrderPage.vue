@@ -50,6 +50,7 @@ export default {
         SuccessModal,
     },
     props: ["dataResponse"],
+    // props: ["active_weeks"],
 
     data() {
         return {
@@ -63,6 +64,8 @@ export default {
                 zip_code: "",
                 phone: "",
                 active_weeks: [],
+                delivery_day: { id: 1, date: "" },
+                delivery_instruction: "Select",
             },
             visiblilityModalSuccess: false,
             bluredFields: {
@@ -77,24 +80,9 @@ export default {
             },
         };
     },
-
     created() {
-        this.formValidation.active_weeks = [this.getWeek] //TODO: зачем в active_weeks массив не поняла...
-
-    },
-
-    computed: {
-        getPlan() {
-            return JSON.parse(this.dataResponse).plan
-        },
-        getCartId() {
-            return JSON.parse(this.dataResponse).cart_id
-        },
-        getWeek() {
-            return JSON.parse(this.dataResponse).week
-        },
-    },
-
+        this.formValidation.active_weeks = [this.getWeek];
+    }, //TODO: зачем в active_weeks массив не поняла...
     methods: {
         acceptNumber() {
             let x = this.formValidation.phone
@@ -140,6 +128,18 @@ export default {
         blurEventHandler(e) {
             console.log(e.target.value);
             this.bluredFields[e.target.id] = true;
+        },
+    },
+
+    computed: {
+        getPlan() {
+            return JSON.parse(this.dataResponse).plan;
+        },
+        getCartId() {
+            return JSON.parse(this.dataResponse).cart_id;
+        },
+        getWeek() {
+            return JSON.parse(this.dataResponse).week;
         },
     },
 };
