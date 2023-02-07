@@ -10,28 +10,26 @@
         <div v-else>
             <h2 class="cartTitle">Your Carts</h2>
             <div class="wrap">
-                <div class="blockChosenPlans mb-4">
+                <div v-if="plans != null" class="blockChosenPlans mb-4">
                     <div class="chosenPlansWrapper">
                         <div class="chosenPlansBorder">
                             <div class="borderWrapper">
                                 <div class="planOfName">
                                     <span class="planOfNameText">Your Plans:</span>
-                                    <span class="quantityPersonText">{{ plans.preferences }}</span>
+                                    <span class="quantityPersonText">{{ getPreferencesUser }}</span>
                                 </div>
                                 <div class="planOfName">
                                     <span class="planOfNameText">Meals:</span>
-                                    <span class="quantityPersonText">{{ plans.quantityMeals }}</span>
+                                    <span class="quantityPersonText">{{ plans.meals_week }}</span>
                                 </div>
                                 <div class="planOfName">
                                     <span class="planOfNameText">People per week:</span>
-                                    <span class="quantityPersonText">{{ plans.quantityPeople }}</span>
+                                    <span class="quantityPersonText">{{ plans.num_people }}</span>
                                 </div>
-                                <!-- <div class="quantityPerson">
-                                    <span class="quantityPersonText"
-                                        >Keto + Paleo 2 meals for 2 people per
-                                        week</span
-                                    >
-                                </div> -->
+                                <div class="planOfName">
+                                    <span class="planOfNameText">Quantity recipes in cart:</span>
+                                    <span class="quantityPersonText quantityPersonText_red">{{ plans.max_quantity_recipes }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -54,7 +52,10 @@
                         @removecard="removeCardFromCart"
                     />
                     <div class="orderWrapper">
-                        <a :href="`/order/${cart.cart_id}`" class="order"><span>To Ordering</span></a>
+                        <span v-if="getCartsDisable[cart.cart_id].disable" class="errorQuantityRecipes me-3">
+                            Quantity recipes: {{ plans.max_quantity_recipes }}
+                        </span>
+                        <a :href="getPathOrder(cart.cart_id)" :class="['order', {'orderDisable': getCartsDisable[cart.cart_id].disable}]" v-on="getDisabledFunction(getCartsDisable[cart.cart_id].disable)">To Ordering</a>
                     </div>
                 </div>
             </div>
@@ -80,12 +81,30 @@ export default {
     data() {
         return {
             carts: [],
-            plans: {
-                preferences: "Keto + Paleo",
-                quantityPeople: 3,
-                quantityMeals: 2,
-            },
-            priceOrder: 0
+            plans: null,
+            priceOrder: 0,
+        }
+    },
+    created() {
+        this.carts = this.getData.carts;
+        this.plans = this.getData.plan_user;
+    },
+    computed: {
+        getData() {
+            return JSON.parse(this.dataResponse);
+        },
+        getPreferencesUser() {
+            return this.plans.preferences.map(item => item.name).join(', ')
+        },
+        getCartsDisable() {
+            const cartsDisable = {}
+            for(const value of this.carts) {
+                cartsDisable[value.cart_id] = {
+                    disable: this.isMaxQuantityRecipes(value.recipes)
+                }
+            }
+
+            return cartsDisable
         }
     },
     methods: {
@@ -98,9 +117,21 @@ export default {
                 this.carts = this.carts.filter((item) => item.recipes.id !== removedItem.recipes.id);
             });
         },
-    },
-    mounted() {
-        this.carts = JSON.parse(this.dataResponse);
+        getPathOrder(cartId) {
+            return this.plans != null ? `/order/${cartId}` : '/plans'
+        },
+        getQuantityRecipesInCart(recipes) {
+            return recipes.reduce((prev, current) => {
+                return prev + current.quantity
+            }, 0)
+        },
+        isMaxQuantityRecipes(recipes) {
+            const quantityRecipes = this.getQuantityRecipesInCart(recipes)
+            return this.plans != null && quantityRecipes !== this.plans?.max_quantity_recipes
+        },
+        getDisabledFunction(isDisable) {
+            return isDisable ? { click: (e) => e.preventDefault(), focus: (e) => e.preventDefault() } : {}
+        },
     },
 };
 </script>
@@ -209,6 +240,10 @@ export default {
     text-align: end;
 }
 
+.quantityPersonText_red {
+    color: rgb(193, 26, 26);
+}
+
 .totalServings {
     display: flex;
     -webkit-box-pack: justify;
@@ -272,6 +307,24 @@ export default {
     border-color: rgb(42, 78, 42);
 }
 
+.order:hover {
+    background-color: rgb(42, 78, 42);
+    border-color: rgb(42, 78, 42);
+}
+
+.orderDisable:focus,
+.orderDisable:hover,
+.orderDisable {
+    cursor: default;
+    background-color: rgb(234 234 234);
+    border-color: rgb(234 234 234);
+    color: rgb(107 130 107);
+}
+
+.errorQuantityRecipes {
+    color: rgb(193, 26, 26);
+}
+
 .totalPrice {
     display: flex;
     justify-content: center;
@@ -320,12 +373,8 @@ export default {
 .orderWrapper {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     margin: 14px 14px;
-}
-
-.order:hover {
-    background-color: rgb(42, 78, 42);
-    border-color: rgb(42, 78, 42);
 }
 
 @media only screen and (min-width: 0px) {
@@ -335,6 +384,10 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
+    .chosenPlansWrapper {
+        max-width: 450px;
+    }
+
     .cartComponent {
         padding: 14px;
     }
@@ -368,8 +421,5 @@ export default {
     .cartComponent {
         padding: 24px;
     }
-}
-
-@media only screen and (max-width: 768px) {
 }
 </style>

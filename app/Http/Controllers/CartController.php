@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\User;
+use App\Queries\UserQueryBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,15 +31,21 @@ class CartController extends Controller
         }
     }
 
-    public function index(User $user, Cart $cart)
-    {
+    public function index(
+        User $user,
+        Cart $cart,
+        UserQueryBuilder $builder_user,
+        Request $request
+    ) {
         $notOrderedCarts = $user->getNotOrderedCarts();
 
         if (!is_null($notOrderedCarts)) {
+            $data = [
+                'plan_user' => $builder_user->getPlanUser($request->user()),
+                'carts' => $cart->getCartContent($notOrderedCarts),
+            ];
 
-            $data = $cart->getCartContent($notOrderedCarts);
             return view('cart')->with('data', json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-
         } else {
             abort(404);
         }
