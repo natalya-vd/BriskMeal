@@ -41,6 +41,8 @@
 import OrderPageForm from "./OrderPageForm.vue";
 import OrderPageAside from "./OrderPageAside.vue";
 import SuccessModal from "./SuccessModal.vue";
+import router from '../router'
+import {routes} from '../api/endpoints'
 
 export default {
     name: "OrderPage",
@@ -50,7 +52,6 @@ export default {
         SuccessModal,
     },
     props: ["dataResponse"],
-    // props: ["active_weeks"],
 
     data() {
         return {
@@ -81,8 +82,11 @@ export default {
         };
     },
     created() {
+        if(this.getPlan == null) {
+            router.navigate(routes.plans)
+        }
         this.formValidation.active_weeks = [this.getWeek];
-    }, //TODO: зачем в active_weeks массив не поняла...
+    },
     methods: {
         acceptNumber() {
             let x = this.formValidation.phone

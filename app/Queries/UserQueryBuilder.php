@@ -21,7 +21,7 @@ final class UserQueryBuilder
     public function getPlanUser(User|null $user)
     {
         if (is_null($user) || $user->preferences->isEmpty() || is_null($user->num_people) || is_null($user->meals_week)) {
-            return [];
+            return null;
         }
 
         $keto_paleo = [
@@ -43,13 +43,13 @@ final class UserQueryBuilder
         }
         $keto_paleo['id'] = implode("+", $keto_paleo['id']);
         $keto_paleo['name'] = implode(" + ", $keto_paleo['name']);
-        $preferenceResponse = Arr::prepend($preferenceResponse, $keto_paleo);
+        $preferenceResponse = !empty($keto_paleo['id']) ? Arr::prepend($preferenceResponse, $keto_paleo) : $preferenceResponse;
 
         $dataResponse = [
             "preferences" => $preferenceResponse,
             "num_people" => $user->num_people,
             "meals_week" => $user->meals_week,
-            "max_quantity_recipes" => $user->num_people * $user->meals_week * 7 / 2
+            "max_quantity_recipes" => $user->num_people * $user->meals_week / 2
         ];
 
         return $dataResponse;

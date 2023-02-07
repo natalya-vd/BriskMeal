@@ -49,7 +49,7 @@ final class PreferenceQueryBuilder
         }
         $keto_paleo['id'] = implode("+", $keto_paleo['id']);
         $keto_paleo['name'] = implode(" + ", $keto_paleo['name']);
-        $preferenceResponse = Arr::prepend($preferenceResponse, $keto_paleo);
+        $preferenceResponse = !empty($keto_paleo['id']) ? Arr::prepend($preferenceResponse, $keto_paleo) : $preferenceResponse;
 
         return $preferenceResponse;
     }

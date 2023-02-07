@@ -8,6 +8,10 @@ const LOGOUT = '/api/logout'
 const PLANS = '/api/plans'
 const ORDER = '/api/order'
 
+const routes = {
+    plans: '/plans'
+}
+
 export {
     RECIPES_ADD,
     RECIPES_REMOVE,
@@ -15,5 +19,6 @@ export {
     RECIPES_MINUS,
     LOGOUT,
     PLANS,
-    ORDER
+    ORDER,
+    routes
 }
