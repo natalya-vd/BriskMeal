@@ -6,7 +6,7 @@
                 <h2>Now choose from all 30 weekly recipes - double the options! Plus, mix and match meals from different preferences in one weekly box: Keto + Paleo, Gluten Free, Fast & Fit, Mediterranean, Vegan and Vegetarian.</h2>
                 <a  href="/plans" >Get Started</a>
                 <div class="feelgreatJoinSighns">
-                    <img class="sign"  alt="csasc" src="https://images.ctfassets.net/4frik3v39clf/75xdvbWDKkGGuhFOKoVHyi/c12f58753966365c6260aade5f2832cc/usda-organic.svg"/>
+                    <img class="sign"  alt="csasc" src="images/usda-organic.svg"/>
                     <div class="certifiedBox">
                         <div class="certified">BRISK MEAL IS A CERTIFIED ORGANIC COMPANY</div> 
                     </div>
@@ -28,15 +28,15 @@
     .welcomeTop{
         height: 460px;
         margin: 0;
-        background-image: url(https://www.greenchef.com/assets/greenchef/images/banners/homepage/cg/merged-menu-banner-sm.jpg);
         background-position: bottom;
         background-repeat: no-repeat;
         background-size: cover;
+        background-image:url('images/merged-menu-banner-sm.jpg');
     }
     .welcomeTopBack{
         height: 100%;
         padding-top:50px;
-        background-image: url(https://www.greenchef.com/assets/greenchef/images/banners/homepage/cg/merged-menu-banner-lg.jpg);
+        background-image: url('images/merged-menu-banner-lg.jpg');
         background-position: bottom;
         background-repeat: no-repeat;
         background-size: cover;
