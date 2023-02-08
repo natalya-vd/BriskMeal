@@ -56,6 +56,11 @@ class PreferencesSeeder extends Seeder
                 "color_text" => "#ffffff",
                 "color_background" => "#3d454b"
             ],
+            [
+                "name" => "Protein Packed",
+                "color_text" => "#ffffff",
+                "color_background" => "#333333"
+            ]
         ];
     }
 }
