@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('status_id')
                 ->default(1)
                 ->constrained('order_statuses');
+            $table->decimal('total_price');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');

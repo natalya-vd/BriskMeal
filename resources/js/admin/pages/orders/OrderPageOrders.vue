@@ -1,10 +1,19 @@
 <template>
     <main>
         <div class="admin-container my-5 px-3">
-            <div class="col-md-2 grid-margin stretch-card mb-3">
-                <div class="card ">
-                    <div class="card-body fw-bold fs-5">
-                        Order ID: {{ getOrder.id }}
+            <div class="d-flex justify-content-between">
+                <div class="col-md-2 grid-margin stretch-card mb-3">
+                    <div class="card ">
+                        <div class="card-body fw-bold fs-5">
+                            Order ID: {{ getOrder.id }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 grid-margin stretch-card mb-3">
+                    <div class="card ">
+                        <div class="card-body fw-bold fs-5">
+                            Total price: {{ getOrder.total_price }}$
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,7 +80,6 @@ export default {
 
     computed: {
         getOrder() {
-            console.log(JSON.parse(this.dataResponse))
             return JSON.parse(this.dataResponse);
         },
     },

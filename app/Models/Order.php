@@ -22,6 +22,7 @@ class Order extends Model
         "delivery_day",
         "delivery_instructions",
         "promotions",
+        "total_price",
     ];
 
     public function cart()
