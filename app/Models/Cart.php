@@ -69,7 +69,6 @@ class Cart extends Model
                 // кол-во равно нулю — удаляем товар из корзины
                 $pivotRow->delete();
             }
-
         } elseif ($count > 0) { // иначе — добавляем этот товар
             $this->recipes()->attach($recipe_id, ['cart_id' => $cart_id, 'quantity' => $count]);
         }
@@ -88,11 +87,20 @@ class Cart extends Model
 
             foreach ($cart->recipes as $key1 => $value1) {
                 $carts[$key]['recipes'][$key1]['recipe'] = $value1->getAttributes();
-                $carts[$key]['recipes'][$key1]['quantity']= $value1->pivot->quantity;
-                $carts[$key]['recipes'][$key1]['photo']= $value1->photo->toArray()[0]['full_path'];
+                $carts[$key]['recipes'][$key1]['quantity'] = $value1->pivot->quantity;
+                $carts[$key]['recipes'][$key1]['photo'] = $value1->photo->toArray()[0]['full_path'];
             }
         }
 
         return $carts;
+    }
+
+    public function getTotalPriceCart()
+    {
+        $price_recipe = $this->weeks->price_recipe;
+        $recipes_quantity = $this->recipes->reduce(function ($carry, $item) {
+            return $carry + $item->pivot->quantity;
+        }, 0);
+        return $price_recipe * $recipes_quantity;
     }
 }
