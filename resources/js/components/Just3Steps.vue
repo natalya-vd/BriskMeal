@@ -4,7 +4,7 @@
             <div class="just3stepsTitle">Dinner's Just 3 Steps Away</div>
             <div class="just3stepsItems">
                 <div class="just3stepsItem">
-                    <div class="just3stepsItemImage" style="background-image: url(https://images.everyplate.com/f_auto,fl_lossy,q_auto,w_500/everyplate_contentful/5mIz4fhIwitKy0V8umaywu/69c0a4e2cbb83d875caac2098bef1faf/choose.png)"></div>
+                    <div class="just3stepsItemImage" style="background-image: url('images/choose.png')"></div>
                     <div class="just3stepsItemInfo">
                         <div class="just3stepsItemTitle">Choose</div>
                         <div class="just3stepsItemText">
@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="just3stepsItem">
-                    <div class="just3stepsItemImage"  style="background-image: url(https://images.everyplate.com/f_auto,fl_lossy,q_auto,w_500/everyplate_contentful/4A5vCP38CuhG8V0z96ujxR/080e2418f71e036943944e54400b02e2/cook.png)" ></div>
+                    <div class="just3stepsItemImage"  style="background-image: url('images/cook.png')" ></div>
                     <div class="just3stepsItemInfo">
                         <div class="just3stepsItemTitle">Cook</div>
                         <div class="just3stepsItemText">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="just3stepsItem">
-                    <div class="just3stepsItemImage"  style="background-image: url(https://images.everyplate.com/f_auto,fl_lossy,q_auto,w_500/everyplate_contentful/3wcDjw42UWylTUQveRyIdX/4663aab4e9d6e3fb1d15756c21914f54/enjoy.png)"></div>
+                    <div class="just3stepsItemImage"  style="background-image: url('images/enjoy.png')"></div>
                     <div class="just3stepsItemInfo">
                         <div class="just3stepsItemTitle">Enjoy</div>
                         <div class="just3stepsItemText">
