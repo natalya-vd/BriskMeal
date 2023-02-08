@@ -22,7 +22,7 @@ class RecipesWeeksSeeder extends Seeder
     {
         $data = [];
         $weeks_count = 10;
-        $recipes_count = 200;
+        $recipes_count = 100;
         $menu_count = 30;
 
         for ($i = 1; $i <= $weeks_count; $i++) {

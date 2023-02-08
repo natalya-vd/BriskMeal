@@ -21,7 +21,7 @@ class RecipesAllergensSeeder extends Seeder
     private function getData()
     {
         $data = [];
-        $count_recipe = 200;
+        $count_recipe = 100;
         $count_allergen = 20;
 
         for ($i = 1; $i <= $count_recipe; $i++) {
