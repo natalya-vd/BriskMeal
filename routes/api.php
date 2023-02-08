@@ -40,8 +40,6 @@ Route::middleware('auth')
     ->group(function () {
         Route::post('/cart/add', [CartController::class, 'add']);
         Route::delete('/cart/remove/{recipe}', [CartController::class, 'remove']);
-        Route::put('/cart/plus/{recipe}', [CartController::class, 'plus']);
-        Route::put('/cart/minus/{recipe}', [CartController::class, 'minus']);
 
         Route::post('/plans', [PlanController::class, 'store'])->name('plans.store');
 

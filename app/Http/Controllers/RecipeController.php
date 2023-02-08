@@ -26,7 +26,8 @@ class RecipeController extends Controller
         try {
             $recipesData = [
                 'items' => $builder_recipes->getRecipesById($this->recipes['recipes_id']),
-                'week_id' => $this->recipes['week_id']];
+                'week_id' => $this->recipes['week_id']
+            ];
 
             return view('catalog')
                 ->with('recipes', $recipesData)
