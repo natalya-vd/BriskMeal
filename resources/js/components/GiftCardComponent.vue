@@ -250,7 +250,7 @@
                                 @click="showModalSuccess"
                                 class="sendGiftCard"
                             >
-                                <span>Send gift card</span>
+                                <span>Buy a card</span>
                             </button>
                         </div>
                     </div>

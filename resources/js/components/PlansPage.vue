@@ -272,16 +272,33 @@
             <error-modal
                 :showModalError="showModalError"
                 :visiblilityModalError="visiblilityModalError"
-            ></error-modal>
+                ><template v-slot:title
+                    ><h2 class="errorTitle">Ooops...</h2> </template
+                ><template v-slot:text>
+                    <h3 v-if="errorResponse === false" class="errorText">
+                        Please
+                        <a href="/login" class="errorDelivery">login</a>
+                        or
+                        <a href="/register" class="errorDelivery">register</a>
+                        first!
+                    </h3>
+                    <h3 v-else-if="errorResponse === true" class="errorText">
+                        Be sure to select at least 1
+                        <a @click="showModalError" class="errorDelivery">
+                            preference option</a
+                        >
+                    </h3>
+                </template></error-modal
+            >
         </div>
     </div>
 </template>
 
 <script>
 import ErrorModal from "./ErrorModal.vue";
-import {createResource} from '../api/api'
-import {PLANS} from '../api/endpoints'
-import router from '../router'
+import { createResource } from "../api/api";
+import { PLANS } from "../api/endpoints";
+import router from "../router";
 
 export default {
     components: {
@@ -303,20 +320,26 @@ export default {
             ],
             choosenMealsPerWeek: { id: 1, quantity: 2 },
             visiblilityModalError: false,
+            errorResponse: false,
         };
     },
 
     props: ["dataResponse"],
 
     created() {
-        this.choosenIds = this.getData.plan_user?.preferences?.map(item => item.id) ?? []
-        this.choosenQuantityPeople = this.quantityPeople.find(item => item.quantity === this.getData.plan_user?.num_people) ?? { id: 1, quantity: 2 }
-        this.choosenMealsPerWeek = this.mealsPerWeek.find(item => item.quantity === this.getData.plan_user?.meals_week) ?? { id: 1, quantity: 2 }
+        this.choosenIds =
+            this.getData.plan_user?.preferences?.map((item) => item.id) ?? [];
+        this.choosenQuantityPeople = this.quantityPeople.find(
+            (item) => item.quantity === this.getData.plan_user?.num_people
+        ) ?? { id: 1, quantity: 2 };
+        this.choosenMealsPerWeek = this.mealsPerWeek.find(
+            (item) => item.quantity === this.getData.plan_user?.meals_week
+        ) ?? { id: 1, quantity: 2 };
     },
 
     computed: {
         getData() {
-            console.log(JSON.parse(this.dataResponse))
+            console.log(JSON.parse(this.dataResponse));
             return JSON.parse(this.dataResponse);
         },
         totalServings() {
@@ -375,21 +398,25 @@ export default {
             if (this.choosenIds.length !== 0) {
                 try {
                     const plan = {
-                        "preferences": this.choosenIds,
-                        "num_people": this.choosenQuantityPeople.quantity,
-                        "meals_week": this.choosenMealsPerWeek.quantity
+                        preferences: this.choosenIds,
+                        num_people: this.choosenQuantityPeople.quantity,
+                        meals_week: this.choosenMealsPerWeek.quantity,
+                    };
+                    const response = await createResource({
+                        endpoint: PLANS,
+                        resource: plan,
+                    });
+                    if (response.status === 200) {
+                        router.navigate("/catalog");
                     }
-                    const response = await createResource({endpoint: PLANS, resource: plan})
-                    if(response.status === 200) {
-                        router.navigate('/catalog')
-                    }
-                } catch(e) {
-                    if(e.response.status === 401) {
-                        // TODO: Тут модалка с подобным текстом только на английском
-                        alert('Сначала авторизуйтесь или зарегистрируйтесь!')
+                } catch (e) {
+                    if (e.response.status === 401) {
+                        this.errorResponse = false;
+                        this.showModalError();
                     }
                 }
             } else {
+                this.errorResponse = true;
                 console.log(`Please choose preferences`);
                 this.showModalError();
             }

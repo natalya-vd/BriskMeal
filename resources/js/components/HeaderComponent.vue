@@ -75,6 +75,10 @@
             :showSideBar="showSideBar"
             :visiblilitySideBar="visiblilitySideBar"
         ></side-bar-component>
+        <error-modal
+            :showModalError="showModalError"
+            :visiblilityModalError="visiblilityModalError"
+        ></error-modal>
     </div>
 </template>
 
@@ -84,16 +88,20 @@ import { isGuest } from "../helpers/common";
 import { logout } from "../api/api";
 import { LOGOUT } from "../api/endpoints";
 import router from "../router";
+import ErrorModal from "./ErrorModal.vue";
 
 export default {
     components: {
         SideBarComponent,
+        ErrorModal,
     },
     props: {
         guest: {
             type: String,
             default: "1",
         },
+        showModalError: Function,
+        visiblilityModalError: Boolean,
     },
     data() {
         return {
@@ -115,7 +123,7 @@ export default {
                     router.navigate("/");
                 }
             } catch (e) {
-                // TODO: Тут бы модалку об ошибке
+                this.showModalError();
                 console.log(e.response.data.message);
             }
         },

@@ -10,12 +10,7 @@
                     </p>
                     <div class="topInfoShareBtns">
                         <button @click="showModalSuccess" class="sendCardBtn">
-                            <span>Send gift card</span></button
-                        ><button
-                            onclick="window.location.href='/plans'"
-                            class="redeemCardBtn"
-                        >
-                            <span>Redeem gift</span>
+                            <span>Buy a card</span>
                         </button>
                     </div>
                 </div>
