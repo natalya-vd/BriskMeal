@@ -27,7 +27,7 @@ class PhotoRecipesSeeder extends Seeder
                 "path" => "seed/recipes/1.jpg"
             ]
         ];
-        $count = 200;
+        $count = 100;
         $photo = Storage::disk('public')->files('seed/recipes');
 
         for ($i = 2; $i <= $count; $i++) {

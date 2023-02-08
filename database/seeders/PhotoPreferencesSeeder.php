@@ -56,6 +56,11 @@ class PhotoPreferencesSeeder extends Seeder
                 "path" => 'seed/preferences/mediterranean.svg',
                 "preference_id" => 7,
             ],
+            [
+                "name" => "Protein Packed",
+                "path" => 'seed/preferences/protein.svg',
+                "preference_id" => 8,
+            ]
         ];
     }
 }

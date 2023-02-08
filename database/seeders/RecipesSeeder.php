@@ -20,7 +20,7 @@ class RecipesSeeder extends Seeder
 
     private function getData()
     {
-        $data = [
+        return [
             [   "name" => "Parmesan-Crusted Chicken",
                 "cook_time" => 30,
                 "recipe_text"=> "rvd",
@@ -478,20 +478,59 @@ class RecipesSeeder extends Seeder
                 "cook_time" => 35,
                 "recipe_text" => "r",
                 "description" => "Capers are a classic pairing for fish, and for good reason—the tangy pickled buds add briny, savory complexity to seafood. In tonight’s delectable dish, our luscious lemon-basil caper sauce is drizzled over flaky roasted salmon fillets. Spanish-style roasted potatoes add a smoky, peppery element to the plate, while sautéed kale with roasted red peppers, feta, and almonds lends earthy-sweet flavors on the side."
+            ],
+             /*  90   */
+            [   "name" => "Vegetable Beef Soup",
+                "cook_time" => 25,
+                "recipe_text" => "r",
+                "description" => "Warm up your week with tonight’s veggie-loaded from-scratch soup. It all starts with carrot, celery, onion, and beef seasoned simply with salt and pepper and cooked until tender. Green beans are stirred in before everything is simmered in a creamy tomato broth seasoned with Italian herbs. We suggest keeping a tasting spoon nearby to sample the soup as you go, seasoning with salt and pepper as needed to perfectly customize it to your taste preferences. Once it’s done to your liking, ladle the soup into bowls and top with nutty Parmesan cheese."
+            ],
+            [  "name" => "Curry-Spiced Sweet Potato Wraps",
+               "cook_time" => 35,
+               "recipe_text" => "r",
+               "description" => "These vegan wraps are bursting with big and bold flavors. Sweet potatoes and chickpeas are seasoned with curry powder and roasted until tender. Hearty kale is tossed with herbaceous schug sauce, then combined with roasted sweet potatoes and chickpeas to form a savory filling. Flour tortillas are spread with creamy curry hummus to ensure the filling stays in place, and a cabbage slaw with mangos and almonds makes a sweet side."
+            ],
+            [  "name" => "Chickpea & Red Pepper Bulgur Bowls",
+               "cook_time" => 30,
+               "recipe_text" => "r",
+               "description" => "Roasted red peppers pack sweet and savory notes into multiple layers of these bowls. First, they’re added to bulgur wheat for fluffy, flavorful grains. They’re also featured in hummus, which adds lusciousness and creaminess to the bowls. Roasted chickpeas (seasoned with paprika, garlic, and oregano) top a kale salad featuring tomato, Kalamata olives, scallion, and lemon dressing. A drizzle of schug sauce finishes off these bright, hearty bowls. Psst—don’t forget a squeeze of lemon juice for more tangy flavor on top."
+            ],
+            [  "name" => "Steak & Shrimp with Chive Sauce",
+               "cook_time" => 40,
+               "recipe_text" => "r",
+               "description" => "Surf&turf meets comfort food in this inventive, colorful keto-friendly twist on a steakhouse classic. Season bavette steaks and shrimp with salt and pepper, then sear separately to crispy perfection and top both with a creamy chive sauce enriched with umami-packed mushroom amino sauce and a tangy swirl of cream cheese. Two stellar sides accompany these saucy stars of land and sea: tender roasted broccoli and savory mashed butternut squash with sharp cheddar cheese."
+            ],
+            [  "name" => "Curried Coconut Turkey Soup",
+               "cook_time" => 25,
+               "recipe_text" => "r",
+               "description" => "This soup is packed with curry-style flavor from yellow curry powder, garam masala, and creamy coconut milk. Aromatic onions and ginger add depth to the soup, which is loaded with good-for-you zucchini and savory ground turkey. To finish, drizzle with sour cream, sprinkle with roasted cashews, and enjoy with toasted garlic pitas alongside for dunking."
+            ],
+            [  "name" => "Thai-Style Chicken & Bell Pepper Soup",
+               "cook_time" => 30,
+               "recipe_text" => "r",
+               "description" => "Our chefs took inspiration from Thai coconut chicken soup for tonight’s bowls. Pulling from traditional flavors, they layered bell pepper, shiitake mushrooms, citrusy aromatics, and a savory-meets-creamy broth, along with jasmine rice for extra heartiness. That all comes together in just 30 minutes with a garnish of scallion and black sesame seeds. Choose your biggest spoon—you’ll want to scoop up as much in one bite as possible."
+            ],
+            [  "name" => "Tropical Teriyaki Sockeye Salmon Bowls",
+               "cook_time" => 25,
+               "recipe_text" => "r",
+               "description" => "These umami-rich salmon bowls pack a tropical flavor punch that’s especially satisfying. Bake wild-caught sockeye salmon at high heat with gluten-free teriyaki sauce and a generous sprinkle of black and white sesame seeds for perfect fillets that are flaky on the inside and crisp on the outside. You’ll top this delicious dish with a creamy ginger-Sriracha aïoli for a touch of heat, and balance the richness with a colorful slaw, chopped mangos, and zippy pickled ginger."
+            ],
+            [  "name" => "Thai-Style Coconut Chicken Curry",
+               "cook_time" => 25,
+               "recipe_text" => "r",
+               "description" => "Our chefs took inspiration from a traditional Thai coconut chicken curry for these bowls that deliver deeply aromatic comfort. The dish comes together with rich coconut milk and savory chicken stock, along with bell pepper, onions, ginger, and chicken seasoned with rich curry spices. Garnishes of scallion, sesame seeds, and crushed red pepper flakes (for a touch of heat) deliver bits of crunch and color on top. "
+            ],
+            [  "name" => "Chicken with Creamy Bacon Sauce",
+               "cook_time" => 30,
+               "recipe_text" => "r",
+               "description" => "Creamy. Bacon. Sauce. Do those three words make your mouth water? You’re only human! This sauce is like a cashmere coat for chicken cutlets, so sumptuous it completely elevates the mild white meat. A generous side of sautéed green beans and mushrooms adds to the abundant feeling of this meal. A flurry of sliced almonds at the end lends a little something extra."
+            ],
+            [  "name" => "Greek Kale Salad With Pita Croutons",
+               "cook_time" => 10,
+               "recipe_text" => "r",
+               "description" => "What elevates this quick salad lunch? Crunchy pita croutons. You’ll toss a pita in the toaster and dice it once toasted. There’s also mozzarella marinated in a balsamic vinaigrette with oregano and garlic. That’s tossed on top of a kale salad with grape tomatoes, feta, and cucumber. Almonds and the croutons finish off this zingy Greek salad."
             ]
 
         ];
-        $count = 200;
-
-        for ($i = 91; $i <= $count; $i++) {
-            $data[] = [
-                "name" => fake()->text(38),
-                "cook_time" => rand(20, 90),
-                "description" => fake()->text(rand(700, 1700)),
-                "recipe_text" => fake()->text(rand(2000, 10000)),
-            ];
-        }
-
-        return $data;
     }
 }

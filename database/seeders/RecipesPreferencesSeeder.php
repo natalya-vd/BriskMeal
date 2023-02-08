@@ -20,7 +20,7 @@ class RecipesPreferencesSeeder extends Seeder
 
     private function getData()
     {
-        $data = [
+        return [
             [
                 "recipe_id" => 1,
                 "preference_id" => 4
@@ -632,18 +632,83 @@ class RecipesPreferencesSeeder extends Seeder
             [
                 "recipe_id" => 90,
                 "preference_id" => 7
+            ],
+            [
+                "recipe_id" => 91,
+                "preference_id" => 1
+            ],
+            [
+                "recipe_id" => 91,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 91,
+                "preference_id" => 5
+            ],
+            [
+                "recipe_id" => 92,
+                "preference_id" => 2
+            ],
+            [
+                "recipe_id" => 93,
+                "preference_id" => 2
+            ],
+            [
+                "recipe_id" => 93,
+                "preference_id" => 7
+            ],
+            [
+                "recipe_id" => 94,
+                "preference_id" => 1
+            ],
+            [
+                "recipe_id" => 94,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 95,
+                "preference_id" => 8
+            ],
+            [
+                "recipe_id" => 96,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 97,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 97,
+                "preference_id" => 5
+            ],
+            [
+                "recipe_id" => 98,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 98,
+                "preference_id" => 8
+            ],
+            [
+                "recipe_id" => 99,
+                "preference_id" => 1
+            ],
+            [
+                "recipe_id" => 99,
+                "preference_id" => 4
+            ],
+            [
+                "recipe_id" => 100,
+                "preference_id" => 3
+            ],
+            [
+                "recipe_id" => 100,
+                "preference_id" => 7
+            ],
+            [
+                "recipe_id" => 100,
+                "preference_id" => 5
             ]
-        ];
-        $count_recipe = 200;
-        $count_preference = 7;
-
-        for ($i = 91; $i <= $count_recipe; $i++) {
-            $data[] = [
-                "recipe_id" => rand(1, $count_recipe),
-                "preference_id" => rand(1, $count_preference),
-            ];
-        }
-
-        return $data;
+        ] ;  
     }
-}
+}    
