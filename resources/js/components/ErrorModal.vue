@@ -42,7 +42,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .sideBar {
     position: fixed;
     inset: -10px 0px 0px;

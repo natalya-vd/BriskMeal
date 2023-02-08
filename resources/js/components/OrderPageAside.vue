@@ -110,11 +110,25 @@
             :showModalSuccess="showModalSuccess"
             :visiblilityModalSuccess="visiblilityModalSuccess"
         ></success-modal>
+        <error-modal
+            :showModalError="showModalError"
+            :visiblilityModalError="visiblilityModalError"
+            ><template v-slot:title
+                ><h2 class="errorTitle">Ooops...</h2> </template
+            ><template v-slot:text>
+                <h3 class="errorText">
+                    Check if all fields are
+                    <a @click="showModalError" class="errorDelivery"> filled</a>
+                </h3>
+            </template></error-modal
+        >
     </div>
 </template>
 
 <script>
 import SuccessModal from "./SuccessModal.vue";
+import ErrorModal from "./ErrorModal.vue";
+
 import { createResource } from "../api/api";
 import { ORDER } from "../api/endpoints";
 
@@ -122,12 +136,15 @@ export default {
     name: "OrderPageAside",
     components: {
         SuccessModal,
+        ErrorModal,
     },
     props: {
         formValidation: Object,
         isFormValid: Function,
         showModalSuccess: Function,
         visiblilityModalSuccess: Boolean,
+        showModalError: Function,
+        visiblilityModalError: Boolean,
         plan: Object,
         cartId: Number,
     },
@@ -161,7 +178,7 @@ export default {
                     this.showModalSuccess();
                 }
             } catch (e) {
-                // TODO: тут бы модалку об ошибке
+                this.showModalError();
                 console.log(e);
             }
         },
