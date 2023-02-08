@@ -22,6 +22,8 @@
                                 :visiblilityModalSuccess="
                                     visiblilityModalSuccess
                                 "
+                                :showModalError="showModalError"
+                                :visiblilityModalError="visiblilityModalError"
                                 :plan="getPlan"
                                 :cartId="getCartId"
                             ></order-page-aside>
@@ -41,8 +43,8 @@
 import OrderPageForm from "./OrderPageForm.vue";
 import OrderPageAside from "./OrderPageAside.vue";
 import SuccessModal from "./SuccessModal.vue";
-import router from '../router'
-import {routes} from '../api/endpoints'
+import router from "../router";
+import { routes } from "../api/endpoints";
 
 export default {
     name: "OrderPage",
@@ -69,6 +71,7 @@ export default {
                 delivery_instructions: "Select",
             },
             visiblilityModalSuccess: false,
+            visiblilityModalError: false,
             bluredFields: {
                 firstName: false,
                 lastName: false,
@@ -82,8 +85,8 @@ export default {
         };
     },
     created() {
-        if(this.getPlan == null) {
-            router.navigate(routes.plans)
+        if (this.getPlan == null) {
+            router.navigate(routes.plans);
         }
         this.formValidation.active_weeks = [this.getWeek];
     },
@@ -128,7 +131,9 @@ export default {
         showModalSuccess() {
             this.visiblilityModalSuccess = !this.visiblilityModalSuccess;
         },
-
+        showModalError() {
+            this.visiblilityModalError = !this.visiblilityModalError;
+        },
         blurEventHandler(e) {
             this.bluredFields[e.target.id] = true;
         },
