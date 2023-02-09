@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Queries\RecipesQueryBuilder;
 use App\Queries\WeekQueryBuilder;
-use Illuminate\Support\Facades\Auth;
+
 
 class RecipeController extends Controller
 {

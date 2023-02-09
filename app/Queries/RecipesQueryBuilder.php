@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Queries;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
@@ -34,6 +35,15 @@ final class RecipesQueryBuilder
             $preferences = $value->preferences()->get(['preferences.id', 'preferences.name', 'preferences.color_text', 'preferences.color_background'])->slice(0, 3);
             $ingredients = $value->ingredientsForRecipe($value->id)->get();
             $photo = $value->photo()->get(['id', 'name', 'path']);
+            $currentUser = Auth::user();
+            $quantity = 0;
+
+            if ($currentUser) {
+                $cart = $value->carts()->where('user_id', $currentUser->id)->get();
+                if ($cart->isNotEmpty()) {
+                    $quantity = $cart[0]->pivot['quantity'];
+                }
+            }
 
             $dataResponse[] = [
                 'id' => $value->id,
@@ -41,7 +51,8 @@ final class RecipesQueryBuilder
                 'cook_time' => $value->cook_time,
                 'photo' => json_encode($photo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
                 'preferences' => json_encode($preferences, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
-                'ingredients' => json_encode($ingredients, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
+                'ingredients' => json_encode($ingredients, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
+                'quantity' => $quantity,
             ];
         }
 
@@ -56,6 +67,15 @@ final class RecipesQueryBuilder
         $preferences = $recipe->preferences()->get(['preferences.id', 'preferences.name', 'preferences.color_text', 'preferences.color_background']);
         $allergens = $recipe->allergens()->get(['name']);
         $photo = $recipe->photo()->get(['id', 'name', 'path']);
+        $currentUser = Auth::user();
+        $quantity = 0;
+
+        if ($currentUser) {
+            $cart = $recipe->carts()->where('user_id', $currentUser->id)->get();
+            if ($cart->isNotEmpty()) {
+                $quantity = $cart[0]->pivot['quantity'];
+            }
+        }
 
         $calories = null;
         foreach ($nutritionValues as $nutritionValue) {
@@ -76,6 +96,7 @@ final class RecipesQueryBuilder
             'ingredients' => json_encode($ingredients, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
             'nutrition_values' => json_encode($nutritionValues, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
             'allergens' => json_encode($allergens, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
+            'quantity' => $quantity,
         ];
 
         return $dataResponse;
