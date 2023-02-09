@@ -39,6 +39,7 @@ export default {
     },
     methods: {
         async updaterCart(newQuantity) {
+            
             this.changeSpinnerMode();
             this.changeBtnsActiveMode();
             const data = await createResource({

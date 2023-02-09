@@ -54,7 +54,6 @@ class CartController extends Controller
     public function add(Request $request)
     {
         $this->getCart($request);
-
         $quantity = $request->input('quantity') ?? 1;
         $this->cart->increase($request->id, $this->cart->id, $quantity);
 

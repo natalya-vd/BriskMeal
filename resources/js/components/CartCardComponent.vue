@@ -1,25 +1,20 @@
 <template>
     <div class="cardCart" v-if="isCardShowed">
         <div class="cardBorder">
-            <img :src="cartItem.photo" alt="" class="cardImage"/>
-
+            <img :src="photo" alt="" class="cardImage"/>
             <div class="recipyInfo">
-                <div class="recipyTitle" :title="cartItem.recipe.name">
+                <div class="recipyTitle">
                     <h4 class="recipyTitleText">
-                        {{ cartItem.recipe.name }}
+                        {{ name }}
                     </h4>
                 </div>
                 <div class="recipyDescription">
-                    <span class="recipyDescriptionText">{{
-                            cartItem.recipe.description
-                        }}</span>
-                    <div
-                        class="recipyDescriptionOverlay"
-                        :title="cartItem.recipe.description"
-                    ></div>
+                    <span class="recipyDescriptionText">
+                        {{ description }}
+                    </span>
+                    <div class="recipyDescriptionOverlay"></div>
                 </div>
             </div>
-
             <div class="priceQuantity">
                 <div class="pricePerOne">{{ price }}</div>
                 <div class="quantityThings">
@@ -51,11 +46,11 @@ import { RECIPES_ADD } from "../api/endpoints";
 
 export default {
     name: "CartCardComponent",
-    props: ['cartItem', 'price'],
+    props: [ 'price', 'name', 'photo', 'description', 'week', 'quantity', 'key', 'id'],
     emits: ['removecard'],
     data() {
         return {
-            countRecipy: this.cartItem.quantity,
+            countRecipy: this.quantity,
             isCardShowed: true,
             isBtnsActive: true
         };
@@ -63,21 +58,13 @@ export default {
     computed: {
         totalPrice() {
             return (this.price * this.countRecipy).toFixed(2);
-        },
+        }
     },
     methods: {
         submitRemove() {
-            this.$emit('removecard', this.cartItem);
-        },
-        async updaterCart(newQuantity) {
-            const data = await createResource({
-                endpoint: RECIPES_ADD,
-                resource: {id: this.cartItem.recipe.id, week_id: 5, quantity: newQuantity},
-            }).then(() => {
-                this.countRecipy = newQuantity;
-            });
-        },
-    },
+            this.$emit('removecard', {'week_id':this.week , 'id': this.id, 'quantity': 0});
+        }
+    }
 };
 </script>
 
