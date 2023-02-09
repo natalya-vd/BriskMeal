@@ -28,23 +28,26 @@
                 <a v-if="isGuest(guest)" href="/register" class="signup"
                     ><span>Sign up</span></a
                 >
-                <div v-if="!isGuest(guest)" class="dropdown">
-                    <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                    >
-                        <img
-                            class="profile me-4"
-                            src="/images/face28.jpg"
-                            alt="profile"
-                        />
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg-end">
-                        <button class="login" type="button" @click="onLogout">
-                            Logout
-                        </button>
+                <div v-if="!isGuest(guest)" class="d-flex align-items-center">
+                    <span class="me-4">{{ getUser.name }}</span>
+                    <div class="dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                        >
+                            <img
+                                class="profile me-4"
+                                src="/images/face28.jpg"
+                                alt="profile"
+                            />
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg-end">
+                            <button class="login text-start m-0 w-100" type="button" @click="onLogout">
+                                Logout
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,6 +77,8 @@
         <side-bar-component
             :showSideBar="showSideBar"
             :visiblilitySideBar="visiblilitySideBar"
+            :user="getUser"
+            @logout="onLogout"
         ></side-bar-component>
         <error-modal
             :showModalError="showModalError"
@@ -100,6 +105,10 @@ export default {
             type: String,
             default: "1",
         },
+        user: {
+            type: String,
+            default: null,
+        },
         showModalError: Function,
         visiblilityModalError: Boolean,
     },
@@ -111,7 +120,11 @@ export default {
     setup() {
         return { isGuest };
     },
-
+    computed: {
+        getUser() {
+            return this.user !== '' ? JSON.parse(this.user) : null
+        }
+    },
     methods: {
         showSideBar() {
             this.visiblilitySideBar = !this.visiblilitySideBar;

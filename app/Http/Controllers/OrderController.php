@@ -26,9 +26,13 @@ class OrderController extends Controller
         return view('order')->with('data', json_encode($dataResponse, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
 
-    public function store(StoreOrderRequest $request, OrderQueryBuilder $builder)
-    {
+    public function store(
+        StoreOrderRequest $request,
+        OrderQueryBuilder $builder,
+        Cart $cart
+    ) {
         $order = $request->validated();
+        $order['total_price'] = $cart->find($order['cart_id'])->getTotalPriceCart();
 
         $orderOne = $builder->create($order);
 

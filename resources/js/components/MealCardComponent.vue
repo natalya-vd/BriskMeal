@@ -11,22 +11,28 @@
                 />
             </div>
             <div class="meal-card__inner">
-                <div
-                    class="mealCArdInfoItem mealCArdInfoItemTitle"
-                    :title="title"
-                >
+
+                <div class="mealCArdInfoItem mealCArdInfoItemTitle" :title="title">
                     <span class="mealCArdInfoItemText">{{ title }}</span>
                 </div>
-                <div class="mealCArdInfoItem mealCArdInfoItemIngridients">
-                    {{ getIngredients }}
-                </div>
+
+                <div class="mealCArdInfoItem mealCArdInfoItemIngridients">{{ getIngredients }}</div>
+
                 <div class="mealCArdInfoItem mealCArdInfoItemTimePlace">
                     <span class="mealCArdInfoItemTime">{{ time }} min </span>
                     <meal-plan :plans="plans"/>
                 </div>
+
             </div>
         </a>
-        <buy-button v-if="!isGuest(guest)" :id="id" :weekId="week"></buy-button>
+
+        <buy-button
+            v-if="!isGuest(guest)"
+            :id="id"
+            :weekId="week"
+            :quantity-from-db="quantity">
+        </buy-button>
+
     </div>
 </template>
 
@@ -38,7 +44,17 @@ export default {
     components: {
         MealPlan,
     },
-    props: ['id', 'time', 'title', 'ingredients', 'plans', 'photo', 'week', 'guest'],
+    props: [
+        'id',
+        'time',
+        'title',
+        'ingredients',
+        'plans',
+        'photo',
+        'week',
+        'guest',
+        'quantity'
+    ],
     setup() {
         return {isGuest}
     },

@@ -2,16 +2,29 @@
     <div class="buyBtnPlace">
         <div v-if="showedAddBtn" class="buyBtn">
             <div v-if="showedSpinner" class="spinner-border" role="status">
-
                 <span class="sr-only"></span>
             </div>
             <div v-else class="addTocart" v-on:click="updaterCart(1)">Add to Cart</div>
         </div>
         <div v-else class="changeQ">
             <div class="manageQBlock">
-                <div class="leftBtn" v-on:click="updaterCart(quantity - 1)" v-bind:class="{ notActive: isBtnsActive }">&#8211;</div>
-                <buy-button-input v-model.lazy="quantity" @retrive="inputDataSubmit" :disabled="!isBtnsActive"></buy-button-input>
-                <div class="rightBtn" v-on:click="updaterCart(quantity + 1)" v-bind:class="{ notActive: isBtnsActive }">&#43;</div>
+
+                <div class="leftBtn"
+                     v-on:click="updaterCart(quantity - 1)"
+                     v-bind:class="{ notActive: isBtnsActive }">&#8211;
+                </div>
+
+                <buy-button-input
+                    v-model.lazy="quantity"
+                    @retrive="inputDataSubmit"
+                    :disabled="!isBtnsActive">
+                </buy-button-input>
+
+                <div class="rightBtn"
+                     v-on:click="updaterCart(quantity + 1)"
+                     v-bind:class="{ notActive: isBtnsActive }">&#43;
+                </div>
+
             </div>
             <a href="/cart" class="goTocart">Go to Cart</a>
         </div>
@@ -19,16 +32,16 @@
 </template>
 
 <script>
-import { createResource} from "../api/api";
-import { RECIPES_ADD } from "../api/endpoints";
+import {createResource} from "../api/api";
+import {RECIPES_ADD} from "../api/endpoints";
 
 export default {
-    props: [ 'id','weekId' ],
+    props: ['id', 'weekId', 'quantityFromDb'],
     data() {
         return {
             showedSpinner: false,
             quantity: 0,
-            currentQuantity: 0,
+            //currentQuantity: 0,
             isBtnsActive: true
         };
     },
@@ -51,7 +64,7 @@ export default {
                 this.changeBtnsActiveMode();
             });
         },
-        inputDataSubmit(quantity){
+        inputDataSubmit(quantity) {
             this.quantity = Number(quantity);
             this.updaterCart(quantity);
         },
@@ -61,6 +74,9 @@ export default {
         changeBtnsActiveMode() {
             this.isBtnsActive = !this.isBtnsActive;
         }
+    },
+    mounted() {
+        this.quantity = +this.quantityFromDb;
     }
 };
 </script>
@@ -100,8 +116,7 @@ export default {
 }
 
 .addTocart,
-.goTocart
- {
+.goTocart {
     font-size: 20px;
 }
 
@@ -160,10 +175,12 @@ export default {
     align-items: center;
     justify-content: center;
 }
-.notActive{
+
+.notActive {
     background-color: #339900;
     cursor: pointer;
 }
+
 .notActive:hover {
     background-color: #336600;
 }

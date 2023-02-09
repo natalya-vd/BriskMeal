@@ -6,7 +6,6 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Queries\UserQueryBuilder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
