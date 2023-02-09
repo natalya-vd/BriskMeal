@@ -92,6 +92,9 @@ app.component("giftcard-component", GiftCardComponent);
 
 import CartComponent from "./components/CartComponent.vue";
 app.component("cart-component", CartComponent);
+
+import CartCardComponent from "./components/CartCardComponent.vue";
+app.component("cart-card-component", CartCardComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

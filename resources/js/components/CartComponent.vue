@@ -1,58 +1,57 @@
 <template>
-    <div class="totalPrice">
-        <div class="weekLabel">
-            <h5>{{ this.cart.week_attributes.week_name }}</h5>
-        </div>
-        <div class="fullPriceBlock">
-            <div class="totalPriceText">
-                <span>Total Price:</span>
+    <div class="cartComponentShadow mb-4">
+        <div class="totalPrice">
+            <div class="weekLabel">
+                <h5>{{ this.cart.week_attributes.week_name }}</h5>
             </div>
-            <div class="resultedPrice">
-                <span class="discountPrice">{{ getAmountRecipesInCart }} $</span>
-            </div>
-        </div>
-    </div>
-    <cart-card-component
-        v-for="item in cart.recipes"
-        :quantity="item.quantity"
-        :key="item.recipe.id"
-        :id="item.recipe.id"
-        :name="item.recipe.name"
-        :photo="item.photo"
-        :description="item.recipe.description"
-        :price="cart.week_attributes.price_recipe"
-        :week="cart.week_attributes.id"
-        @removecard="removeCardFromCart"
-    />
-    <div class="cartFooter">
-        <div class="orderWrapper">
-            <span  class="errorQuantityRecipes me-3">
-                Quantity recipes: {{ getQuantityRecipesInCart }}
-            </span>
-            <div>
-                <div v-if=" isAddMoreShowed" class="addRecipyWrapper">
-                    <a href="/catalog" class="addRecipy"><span>Add More</span></a>
+            <div class="fullPriceBlock">
+                <div class="totalPriceText">
+                    <span>Total Price:</span>
                 </div>
-                <div v-else-if="isOrderingActive" class="addRecipyWrapper">
-                    <a :href="getPathOrder(cart.cart_id)" class="addRecipy">Place Order</a>
-                </div> 
-                <div v-else class="addRecipyWrapper">
-                    <a href="/plans" class="addRecipy">Change Plan</a>
-                </div>    
+                <div class="resultedPrice">
+                    <span class="discountPrice">{{ getAmountRecipesInCart.toFixed(2) }} $</span>
+                </div>
             </div>
         </div>
-    </div>    
+        <cart-card-component
+            v-for="item in cart.recipes"
+            :quantity="item.quantity"
+            :key="item.recipe.id"
+            :id="item.recipe.id"
+            :name="item.recipe.name"
+            :photo="item.photo"
+            :description="item.recipe.description"
+            :price="cart.week_attributes.price_recipe"
+            :week="cart.week_attributes.id"
+            @removecard="removeCardFromCart"
+        />
+        <div class="cartFooter">
+            <div class="orderWrapper">
+                <span  class="errorQuantityRecipes me-3">
+                    Quantity recipes: {{ getQuantityRecipesInCart }}
+                </span>
+                <div>
+                    <div v-if=" isAddMoreShowed" class="addRecipyWrapper">
+                        <a href="/catalog" class="addRecipy"><span>Add More</span></a>
+                    </div>
+                    <div v-else-if="isOrderingActive" class="addRecipyWrapper">
+                        <a :href="getPathOrder(cart.cart_id)" class="addRecipy">Place Order</a>
+                    </div> 
+                    <div v-else class="addRecipyWrapper">
+                        <a href="/plans" class="addRecipy">Change Plan</a>
+                    </div>    
+                </div>
+            </div>
+        </div> 
+    </div>       
 </template>
 
 <script>
-import CartCardComponent from "./CartCardComponent.vue";
 import {deleteResource, createResource} from "../api/api";
 import {RECIPES_REMOVE, RECIPES_ADD} from "../api/endpoints";
 export default {
     props: [ 'cart', 'maxquantityrecipes'],
-    components: {
-        CartCardComponent,
-    },
+    emits: ['removecardfromarray'],
     data() {
         return {
             carts: [],
@@ -86,16 +85,16 @@ export default {
     },
     methods: {
         async removeCardFromCart(item) {
-            console.log(item);
             const data = await createResource({
                 endpoint: RECIPES_ADD,
                 resource: {id: item.id, week_id: item.week_id, quantity: item.quantity}
-            }).then(() => { console.log("OK")
+            }).then(() => { 
+                this.$emit('removecardfromarray', {'week_id':item.week_id , 'id': item.id, 'quantity': 0});
             }).catch(()=> { console.log("Bad")});
          
         },
         getPathOrder(cartId) {
-            return this.plans != null ? `/order/${cartId}` : '/plans'
+            return `/order/${cartId}`
         }
     },
     mounted(){

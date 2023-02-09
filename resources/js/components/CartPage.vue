@@ -34,12 +34,13 @@
                         </div>
                     </div>
                 </div>
-                <cart-component class="cartComponentShadow mb-4" 
+                <cart-component  
                     v-for="cart in carts" 
                     :cart="cart" 
                     :key="cart.cart_id"
                     :maxquantityrecipes ="plans.max_quantity_recipes"
-                ></cart-component>
+                    @removecardfromarray="removecardfromarray"
+                />
             </div>
         </div>
     </div>
@@ -79,7 +80,6 @@ export default {
                     disable: this.isMaxQuantityRecipes(value.recipes)
                 }
             }
-
             return cartsDisable
         }
     },
@@ -107,7 +107,14 @@ export default {
         },
         getDisabledFunction(isDisable) {
             return isDisable ? { click: (e) => e.preventDefault(), focus: (e) => e.preventDefault() } : {}
-        }
+        },
+        removecardfromarray(item){
+            for (let i=0; i<this.carts.length; i++){
+                if(this.carts[i].week_attributes.week === item.week_id ){
+                    this.carts[i].recipes = this.carts[i].recipes.filter(recip => recip.recipe.id !== item.id);
+                }
+            };
+         }
     },
     mounted(){
         console.log(this.plans);
