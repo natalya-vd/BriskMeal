@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RecipeController;
@@ -48,25 +47,6 @@ Route::middleware('auth')
         Route::get('/order/{cart}', [OrderController::class, 'index'])->name('order');
     });
 
-
-/** Корзина */
-/*Route::get('/catalog-test', [TestController::class, 'index'])
-    ->name('catalog-test');
-
-Route::get('/cart-test', [CartController::class, 'index'])
-    ->name('cart-test');
-
-Route::match(['get', 'post'], '/cart/add/{recipe}', [CartController::class, 'add'])
-    ->name('cart-add');
-
-Route::match(['get', 'post'], '/cart/remove/{recipe}', [CartController::class, 'remove'])
-    ->name('cart-remove');
-
-Route::match(['get', 'post'], '/cart/plus/{recipe}', [CartController::class, 'plus'])
-    ->name('cart-plus');
-
-Route::match(['get', 'post'], '/cart/minus/{recipe}', [CartController::class, 'minus'])
-    ->name('cart-minus');*/
 
 /** Админка */
 Route::middleware('auth')
