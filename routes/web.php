@@ -32,7 +32,7 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 Route::get('/', [RecipeController::class, 'welcome'])->name('welcome');
 Route::get('/catalog', [RecipeController::class, 'index'])->name('catalog');
 Route::get('/catalog/{week}', [WeekController::class, 'index'])->name('catalogWeek');
-Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe');
+Route::get('/recipe/{id}/week/{week}', [RecipeController::class, 'show'])->name('recipe');
 Route::get('/plans', [PlanController::class, 'index'])->name('plans');
 Route::view('/faq', 'faq');
 Route::view('/giftcard', 'giftcard');
