@@ -1,36 +1,23 @@
 <template>
     <div class="cardCart" v-if="isCardShowed">
         <div class="cardBorder">
-            <img :src="cartItem.photo" alt="" class="cardImage"/>
-
+            <img :src="photo" alt="" class="cardImage"/>
             <div class="recipyInfo">
-                <div class="recipyTitle" :title="cartItem.recipe.name">
+                <div class="recipyTitle">
                     <h4 class="recipyTitleText">
-                        {{ cartItem.recipe.name }}
+                        {{ name }}
                     </h4>
                 </div>
                 <div class="recipyDescription">
-                    <span class="recipyDescriptionText">{{
-                            cartItem.recipe.description
-                        }}</span>
-                    <div
-                        class="recipyDescriptionOverlay"
-                        :title="cartItem.recipe.description"
-                    ></div>
+                    <span class="recipyDescriptionText">
+                        {{ description }}
+                    </span>
+                    <div class="recipyDescriptionOverlay"></div>
                 </div>
             </div>
-
             <div class="priceQuantity">
-                <div class="pricePerOne">{{ price }}</div>
-                <div class="quantityThings">
-                    <div class="leftBtn" v-on:click="updaterCart(countRecipy - 1)" v-bind:class="{ notActive: isBtnsActive }">&#8211;</div>
-                    <input
-                        type="number"
-                        class="quantityInput"
-                        v-model="countRecipy"
-                    />
-                    <div class="rightBtn" v-on:click="updaterCart(countRecipy + 1)" v-bind:class="{ notActive: isBtnsActive }">&#43;</div>
-                </div>
+                <div class="pricePerOne">{{ price }} &#36;</div>
+                <cart-card-btns   :inputquantity="inputquantity" :id="id" :week="week" @changecardinarray="changeQuantityInArr" />
                 <div class="separatorCard" data-v-478eddff=""></div>
                 <div class="totalPriceCard">{{ totalPrice }}$</div>
             </div>
@@ -51,33 +38,33 @@ import { RECIPES_ADD } from "../api/endpoints";
 
 export default {
     name: "CartCardComponent",
-    props: ['cartItem', 'price'],
-    emits: ['removecard'],
+    props: [ 'price', 'name', 'photo', 'description', 'week', 'quantity', 'id'],
+    emits: ['removecard', 'changequantity'],
     data() {
         return {
-            countRecipy: this.cartItem.quantity,
+            countRecipy: this.quantity,
             isCardShowed: true,
-            isBtnsActive: true
+            isBtnsActive: true,
+            inputquantity: 0
         };
     },
     computed: {
         totalPrice() {
             return (this.price * this.countRecipy).toFixed(2);
-        },
+        }
     },
     methods: {
         submitRemove() {
-            this.$emit('removecard', this.cartItem);
+            this.$emit('removecard', {'week_id':this.week , 'id': this.id, 'quantity': 0});
         },
-        async updaterCart(newQuantity) {
-            const data = await createResource({
-                endpoint: RECIPES_ADD,
-                resource: {id: this.cartItem.recipe.id, week_id: 5, quantity: newQuantity},
-            }).then(() => {
-                this.countRecipy = newQuantity;
-            });
-        },
+        changeQuantityInArr(item){
+            this.$emit('changequantity', item);
+            this.countRecipy = item.quantity;
+        }
     },
+    created() {
+        this.inputquantity = this.quantity;
+    }
 };
 </script>
 
@@ -162,18 +149,6 @@ export default {
 
 .pricePerOne {
     padding-top: 2px;
-}
-
-.quantityThings {
-    border-right: 1px solid #fff;
-    display:flex;
-}
-
-.quantityInput {
-    max-width: 40px;
-    text-align: center;
-    border: 1px solid rgb(204, 204, 204);
-    max-height: 30px;
 }
 
 .separatorCard {

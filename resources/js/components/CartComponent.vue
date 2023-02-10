@@ -1,138 +1,101 @@
 <template>
-    <div class="cartComponent">
-        <div class="cartComponentShadow" v-if="!this.carts.length">
-            <h2 class="cartTitle">Your Carts</h2>
-            <p class="fw-bold fs-3">
-                Your Cart is empty.
-                <a href="/catalog" class="orderDelivery">Order food delivery</a>
-            </p>
-        </div>
-        <div v-else>
-            <h2 class="cartTitle">Your Carts</h2>
-            <div class="wrap">
-                <div v-if="plans != null" class="blockChosenPlans mb-4">
-                    <div class="chosenPlansWrapper">
-                        <div class="chosenPlansBorder">
-                            <div class="borderWrapper">
-                                <div class="planOfName">
-                                    <span class="planOfNameText">Your Plans:</span>
-                                    <span class="quantityPersonText">{{ getPreferencesUser }}</span>
-                                </div>
-                                <div class="planOfName">
-                                    <span class="planOfNameText">Meals:</span>
-                                    <span class="quantityPersonText">{{ plans.meals_week }}</span>
-                                </div>
-                                <div class="planOfName">
-                                    <span class="planOfNameText">People per week:</span>
-                                    <span class="quantityPersonText">{{ plans.num_people }}</span>
-                                </div>
-                                <div class="planOfName">
-                                    <span class="planOfNameText">Quantity recipes in cart:</span>
-                                    <span class="quantityPersonText quantityPersonText_red">{{ plans.max_quantity_recipes }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="cartComponentShadow mb-4">
+        <div class="totalPrice">
+            <div class="weekLabel">
+                <h5>{{ this.cart.week_attributes.week_name }}</h5>
+            </div>
+            <div class="fullPriceBlock">
+                <div class="totalPriceText">
+                    <span>Total Price:</span>
                 </div>
-                <cart-component  
-                    v-for="cart in carts" 
-                    :cart="cart" 
-                    :key="cart.cart_id"
-                    :maxquantityrecipes ="plans.max_quantity_recipes"
-                    @removecardfromarray="removecardfromarray"
-                    @changecardinarray="changecardinarray"
-                />
+                <div class="resultedPrice">
+                    <span class="discountPrice">{{ getAmountRecipesInCart.toFixed(2) }} $</span>
+                </div>
             </div>
         </div>
-    </div>
+        <cart-card-component
+            v-for="item in cart.recipes"
+            :quantity="item.quantity"
+            :key="item.recipe.id"
+            :id="item.recipe.id"
+            :name="item.recipe.name"
+            :photo="item.photo"
+            :description="item.recipe.description"
+            :price="cart.week_attributes.price_recipe"
+            :week="cart.week_attributes.id"
+            @removecard="removeCardFromCart"
+            @changequantity="changeQuantityInCart"
+        />
+        <div class="cartFooter">
+            <div class="orderWrapper">
+                <span  class="errorQuantityRecipes me-3">
+                    Quantity recipes: {{ getQuantityRecipesInCart }}
+                </span>
+                <div>
+                    <div v-if=" isAddMoreShowed" class="addRecipyWrapper">
+                        <a href="/catalog" class="addRecipy"><span>Add More</span></a>
+                    </div>
+                    <div v-else-if="isOrderingActive" class="addRecipyWrapper">
+                        <a :href="getPathOrder(cart.cart_id)" class="addRecipy">Place Order</a>
+                    </div> 
+                    <div v-else class="addRecipyWrapper">
+                        <a href="/plans" class="addRecipy">Change Plan</a>
+                    </div>    
+                </div>
+            </div>
+        </div> 
+    </div>       
 </template>
 
 <script>
 import {deleteResource, createResource} from "../api/api";
 import {RECIPES_REMOVE, RECIPES_ADD} from "../api/endpoints";
-
 export default {
-    props: ["dataResponse"],
-    data() {
-        return {
-            carts: [],
-            plans: null
-        }
-    },
-    created() {
-        this.carts = this.getData.carts;
-        this.plans = this.getData.plan_user;
-    },
+    props: [ 'cart', 'maxquantityrecipes'],
+    emits: ['removecardfromarray', 'changecardinarray'],
     computed: {
-        getData() {
-            return JSON.parse(this.dataResponse);
+        getAmountRecipesInCart() {
+            return this.cart.recipes?.reduce((prev, current) => {
+                return prev + current.quantity*this.cart.week_attributes.price_recipe
+            }, 0)
         },
-        getPreferencesUser() {
-            return this.plans.preferences.map(item => item.name).join(', ')
+        getQuantityRecipesInCart() {
+            return this.cart.recipes?.reduce((prev, current) => {
+                return prev + current.quantity
+            }, 0)
         },
-        getCartsDisable() {
-            const cartsDisable = {}
-            for(const value of this.carts) {
-                cartsDisable[value.cart_id] = {
-                    disable: this.isMaxQuantityRecipes(value.recipes)
-                }
+        isAddMoreShowed(){
+            if (this.getQuantityRecipesInCart < this.maxquantityrecipes){
+                return true
+            } else {
+                return false
             }
-            return cartsDisable
+        },
+        isOrderingActive(){
+            if (this.getQuantityRecipesInCart === +this.maxquantityrecipes){
+                return true
+            } else {
+                return false
+            }
         }
     },
     methods: {
         async removeCardFromCart(item) {
-            console.log(item);
             const data = await createResource({
                 endpoint: RECIPES_ADD,
                 resource: {id: item.id, week_id: item.week_id, quantity: item.quantity}
-            }).then(() => { console.log("OK")
-            }).catch(()=> { console.log("Bad")});
+            }).then(() => { 
+                this.$emit('removecardfromarray', {'week_id':item.week_id , 'id': item.id, 'quantity': 0});
+            }).catch(
+                ()=> { console.log("Bad") }
+            );
          
         },
         getPathOrder(cartId) {
-            return this.plans != null ? `/order/${cartId}` : '/plans'
+            return `/order/${cartId}`
         },
-        getQuantityRecipesInCart(recipes) {
-            return recipes?.reduce((prev, current) => {
-                return prev + current.quantity
-            }, 0)
-        },
-        isMaxQuantityRecipes(recipes) {
-            const quantityRecipes = this.getQuantityRecipesInCart(recipes)
-            return this.plans != null && quantityRecipes !== this.plans?.max_quantity_recipes
-        },
-        getDisabledFunction(isDisable) {
-            return isDisable ? { click: (e) => e.preventDefault(), focus: (e) => e.preventDefault() } : {}
-        },
-        removecardfromarray(item){
-            for (let i=0; i<this.carts.length; i++){
-                if(this.carts[i].week_attributes.week === item.week_id ){
-                    this.carts[i].recipes = this.carts[i].recipes.filter(recip => recip.recipe.id !== item.id);
-                }
-            };
-        },
-        changecardinarray(item){
-            console.log(item);
-
-           for (let i=0; i<this.carts.length; i++){
-                for(let y=0; y<this.carts[i].recipes.length; y++){
-                    if(this.carts[i].recipes[y].recipe.id === item.id){
-                        this.carts[i].recipes[y].quantity = item.quantity;
-                    }
-                }
-            }
-
-          
-        }
-    },
-    mounted(){
-        console.log(this.plans);
-        console.log(this.carts);
-    },
-    watch: {
-        carts: function (newCarts, oldCarts) {
-            console.log(this.carts);
+        changeQuantityInCart(item){
+            this.$emit('changecardinarray', item);
         }
     }
 };
@@ -329,7 +292,7 @@ export default {
 
 .totalPrice {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     -webkit-box-align: center;
     align-items: center;
     /*padding-top: 24px;
@@ -379,6 +342,22 @@ export default {
     margin: 14px 14px;
 }
 
+.fullPriceBlock{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.weekLabel{
+    background-color: #339900;
+    border-radius: 5px;
+    color: white;
+    padding: 2px 10px;
+}
+.cartFooter{
+    display: flex;
+    justify-content: flex-end;
+}
+
 @media only screen and (min-width: 0px) {
     .cartComponent {
         padding: 7px;
@@ -410,7 +389,7 @@ export default {
 
     .totalPrice {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         -webkit-box-align: center;
         align-items: center;
         /*padding-top: 24px;
