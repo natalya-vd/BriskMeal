@@ -9,7 +9,6 @@
 </template>
 
 <script>
-
 export default {
     props: {
         modelValue: Number,
@@ -18,13 +17,7 @@ export default {
         },
         disabled: Boolean
     },
-
     emits: ['update:modelValue', 'retrive'],
-
-    data() {
-        return {};
-    },
-
     methods: {
         submitInput(event) {
             this.$emit('retrive', Number(event.target.value));
@@ -34,5 +27,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

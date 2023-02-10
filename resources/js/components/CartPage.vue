@@ -40,6 +40,7 @@
                     :key="cart.cart_id"
                     :maxquantityrecipes ="plans.max_quantity_recipes"
                     @removecardfromarray="removecardfromarray"
+                    @changecardinarray="changecardinarray"
                 />
             </div>
         </div>
@@ -47,15 +48,11 @@
 </template>
 
 <script>
-import CartCardComponent from "./CartCardComponent.vue";
 import {deleteResource, createResource} from "../api/api";
 import {RECIPES_REMOVE, RECIPES_ADD} from "../api/endpoints";
 
 export default {
     props: ["dataResponse"],
-    components: {
-        CartCardComponent,
-    },
     data() {
         return {
             carts: [],
@@ -114,7 +111,20 @@ export default {
                     this.carts[i].recipes = this.carts[i].recipes.filter(recip => recip.recipe.id !== item.id);
                 }
             };
-         }
+        },
+        changecardinarray(item){
+            console.log(item);
+
+           for (let i=0; i<this.carts.length; i++){
+                for(let y=0; y<this.carts[i].recipes.length; y++){
+                    if(this.carts[i].recipes[y].recipe.id === item.id){
+                        this.carts[i].recipes[y].quantity = item.quantity;
+                    }
+                }
+            }
+
+          
+        }
     },
     mounted(){
         console.log(this.plans);

@@ -24,6 +24,7 @@
             :price="cart.week_attributes.price_recipe"
             :week="cart.week_attributes.id"
             @removecard="removeCardFromCart"
+            @changequantity="changeQuantityInCart"
         />
         <div class="cartFooter">
             <div class="orderWrapper">
@@ -51,12 +52,7 @@ import {deleteResource, createResource} from "../api/api";
 import {RECIPES_REMOVE, RECIPES_ADD} from "../api/endpoints";
 export default {
     props: [ 'cart', 'maxquantityrecipes'],
-    emits: ['removecardfromarray'],
-    data() {
-        return {
-            carts: [],
-        }
-    }, 
+    emits: ['removecardfromarray', 'changecardinarray'],
     computed: {
         getAmountRecipesInCart() {
             return this.cart.recipes?.reduce((prev, current) => {
@@ -90,15 +86,17 @@ export default {
                 resource: {id: item.id, week_id: item.week_id, quantity: item.quantity}
             }).then(() => { 
                 this.$emit('removecardfromarray', {'week_id':item.week_id , 'id': item.id, 'quantity': 0});
-            }).catch(()=> { console.log("Bad")});
+            }).catch(
+                ()=> { console.log("Bad") }
+            );
          
         },
         getPathOrder(cartId) {
             return `/order/${cartId}`
+        },
+        changeQuantityInCart(item){
+            this.$emit('changecardinarray', item);
         }
-    },
-    mounted(){
-        console.log(this.maxquantityrecipes);
     }
 };
 </script>

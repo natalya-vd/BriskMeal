@@ -16,16 +16,8 @@
                 </div>
             </div>
             <div class="priceQuantity">
-                <div class="pricePerOne">{{ price }}</div>
-                <div class="quantityThings">
-                    <div class="leftBtn" v-on:click="updaterCart(countRecipy - 1)" v-bind:class="{ notActive: isBtnsActive }">&#8211;</div>
-                    <input
-                        type="number"
-                        class="quantityInput"
-                        v-model="countRecipy"
-                    />
-                    <div class="rightBtn" v-on:click="updaterCart(countRecipy + 1)" v-bind:class="{ notActive: isBtnsActive }">&#43;</div>
-                </div>
+                <div class="pricePerOne">{{ price }} &#36;</div>
+                <cart-card-btns   :inputquantity="inputquantity" :id="id" :week="week" @changecardinarray="changeQuantityInArr" />
                 <div class="separatorCard" data-v-478eddff=""></div>
                 <div class="totalPriceCard">{{ totalPrice }}$</div>
             </div>
@@ -46,13 +38,14 @@ import { RECIPES_ADD } from "../api/endpoints";
 
 export default {
     name: "CartCardComponent",
-    props: [ 'price', 'name', 'photo', 'description', 'week', 'quantity', 'key', 'id'],
-    emits: ['removecard'],
+    props: [ 'price', 'name', 'photo', 'description', 'week', 'quantity', 'id'],
+    emits: ['removecard', 'changequantity'],
     data() {
         return {
             countRecipy: this.quantity,
             isCardShowed: true,
-            isBtnsActive: true
+            isBtnsActive: true,
+            inputquantity: 0
         };
     },
     computed: {
@@ -63,7 +56,14 @@ export default {
     methods: {
         submitRemove() {
             this.$emit('removecard', {'week_id':this.week , 'id': this.id, 'quantity': 0});
+        },
+        changeQuantityInArr(item){
+            this.$emit('changequantity', item);
+            this.countRecipy = item.quantity;
         }
+    },
+    created() {
+        this.inputquantity = this.quantity;
     }
 };
 </script>
@@ -149,18 +149,6 @@ export default {
 
 .pricePerOne {
     padding-top: 2px;
-}
-
-.quantityThings {
-    border-right: 1px solid #fff;
-    display:flex;
-}
-
-.quantityInput {
-    max-width: 40px;
-    text-align: center;
-    border: 1px solid rgb(204, 204, 204);
-    max-height: 30px;
 }
 
 .separatorCard {
