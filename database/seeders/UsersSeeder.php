@@ -33,6 +33,7 @@ class UsersSeeder extends Seeder
                 "email" => 'user@user.ru',
                 "password" => Hash::make('12345'),
                 "is_admin" => false
+
             ],
             [
                 "name" => 'boss',
