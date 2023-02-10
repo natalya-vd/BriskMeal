@@ -50,10 +50,10 @@ class RecipeController extends Controller
         }
     }
 
-    public function show(RecipesQueryBuilder $recipesBuilder, $id)
+    public function show(RecipesQueryBuilder $recipesBuilder, $id, $week)
     {
         try {
-            $week_id = ['week_id' => $this->recipes['week_id']];
+            $week_id = ['week_id' => substr($week,-1)];
 
             return view('recipe')
                 ->with('week_id', $week_id)
