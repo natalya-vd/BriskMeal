@@ -1,6 +1,6 @@
 <template>
     <div class="mealCArd">
-        <a class="mealCArdInfo" :href="`/recipe/${+id}/week=${+week}`">
+        <a class="mealCArdInfo" :href="`/recipe/${+id}/week/${+week}`">
             <div class="mealCArdLinkBlock">
                 <img
                     class="meal-card__img"
