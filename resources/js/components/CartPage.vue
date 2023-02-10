@@ -48,9 +48,6 @@
 </template>
 
 <script>
-import {deleteResource, createResource} from "../api/api";
-import {RECIPES_REMOVE, RECIPES_ADD} from "../api/endpoints";
-
 export default {
     props: ["dataResponse"],
     data() {
@@ -81,15 +78,6 @@ export default {
         }
     },
     methods: {
-        async removeCardFromCart(item) {
-            console.log(item);
-            const data = await createResource({
-                endpoint: RECIPES_ADD,
-                resource: {id: item.id, week_id: item.week_id, quantity: item.quantity}
-            }).then(() => { console.log("OK")
-            }).catch(()=> { console.log("Bad")});
-         
-        },
         getPathOrder(cartId) {
             return this.plans != null ? `/order/${cartId}` : '/plans'
         },
@@ -109,12 +97,12 @@ export default {
             for (let i=0; i<this.carts.length; i++){
                 if(this.carts[i].week_attributes.week === item.week_id ){
                     this.carts[i].recipes = this.carts[i].recipes.filter(recip => recip.recipe.id !== item.id);
+                    this.checkIsCartEmpty(i);
                 }
             };
+           
         },
         changecardinarray(item){
-            console.log(item);
-
            for (let i=0; i<this.carts.length; i++){
                 for(let y=0; y<this.carts[i].recipes.length; y++){
                     if(this.carts[i].recipes[y].recipe.id === item.id){
@@ -122,13 +110,10 @@ export default {
                     }
                 }
             }
-
-          
+        },
+        checkIsCartEmpty(cart_id){
+            this.carts = this.carts.filter(cart => cart.recipes.length >0);
         }
-    },
-    mounted(){
-        console.log(this.plans);
-        console.log(this.carts);
     },
     watch: {
         carts: function (newCarts, oldCarts) {
