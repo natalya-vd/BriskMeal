@@ -59,6 +59,7 @@ export default {
     created() {
         this.carts = this.getData.carts;
         this.plans = this.getData.plan_user;
+        this.checkCartsForEmpty();
     },
     computed: {
         getData() {
@@ -113,11 +114,9 @@ export default {
         },
         checkIsCartEmpty(cart_id){
             this.carts = this.carts.filter(cart => cart.recipes.length >0);
-        }
-    },
-    watch: {
-        carts: function (newCarts, oldCarts) {
-            console.log(this.carts);
+        },
+        checkCartsForEmpty(){
+            this.carts = this.carts.filter(cart => cart.recipes !== undefined);
         }
     }
 };
