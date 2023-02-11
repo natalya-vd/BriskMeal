@@ -729,31 +729,6 @@ export default {
     position: relative;
 }
 
-/* .buttonWrapper::after {
-    display: flex;
-    z-index: 1;
-    top: 3px;
-    color: rgb(255, 255, 255);
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    left: calc(-1.5%);
-    content: "2";
-    position: absolute;
-    background-color: rgb(66, 105, 61);
-    border-radius: 4px;
-    width: 36.3333%;
-    height: 42px;
-    border-style: solid;
-    border-width: 1px;
-    transition: left 0.3s cubic-bezier(0, 0, 0.2, 1) 0s;
-    margin-left: -1px;
-    font-weight: bold;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-} */
-
 .blockTotalPrice {
     margin-top: 0px;
     width: 100%;
@@ -1154,7 +1129,12 @@ export default {
 
 @media only screen and (max-width: 768px) {
     .preferencesName {
-        font-size: 14px;
+        font-size: 12px;
+    }
+
+    .choosen {
+        width: 20px;
+        height: 20px;
     }
 }
 </style>

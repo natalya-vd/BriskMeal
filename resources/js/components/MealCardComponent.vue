@@ -11,18 +11,21 @@
                 />
             </div>
             <div class="meal-card__inner">
-
-                <div class="mealCArdInfoItem mealCArdInfoItemTitle" :title="title">
+                <div
+                    class="mealCArdInfoItem mealCArdInfoItemTitle"
+                    :title="title"
+                >
                     <span class="mealCArdInfoItemText">{{ title }}</span>
                 </div>
 
-                <div class="mealCArdInfoItem mealCArdInfoItemIngridients">{{ getIngredients }}</div>
+                <div class="mealCArdInfoItem mealCArdInfoItemIngridients">
+                    {{ getIngredients }}
+                </div>
 
                 <div class="mealCArdInfoItem mealCArdInfoItemTimePlace">
                     <span class="mealCArdInfoItemTime">{{ time }} min </span>
-                    <meal-plan :plans="plans"/>
+                    <meal-plan :plans="plans" />
                 </div>
-
             </div>
         </a>
 
@@ -30,33 +33,33 @@
             v-if="!isGuest(guest)"
             :id="id"
             :weekId="week"
-            :quantity-from-db="quantity">
+            :quantity-from-db="quantity"
+        >
         </buy-button>
-
     </div>
 </template>
 
 <script>
 import MealPlan from "./MealPlan.vue";
-import {isGuest} from "../helpers/common"
+import { isGuest } from "../helpers/common";
 
 export default {
     components: {
         MealPlan,
     },
     props: [
-        'id',
-        'time',
-        'title',
-        'ingredients',
-        'plans',
-        'photo',
-        'week',
-        'guest',
-        'quantity'
+        "id",
+        "time",
+        "title",
+        "ingredients",
+        "plans",
+        "photo",
+        "week",
+        "guest",
+        "quantity",
     ],
     setup() {
-        return {isGuest}
+        return { isGuest };
     },
     computed: {
         getIngredients() {
@@ -71,7 +74,7 @@ export default {
                 name: photo[0].name,
                 path: photo[0].full_path,
             };
-        }
+        },
     },
 };
 </script>
@@ -143,11 +146,21 @@ export default {
     text-align: left;
 }
 
-.mealCArdInfoItemTime {
-    margin-right: 12px;
-}
-
 .mealCArdInfoItemTimePlace {
     height: 24px;
+}
+
+@media only screen and (min-width: 0px) {
+    .mealCArdInfoItemTime {
+        margin-right: 6px;
+        font-size: 12px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .mealCArdInfoItemTime {
+        font-size: 14px;
+        margin-right: 12px;
+    }
 }
 </style>

@@ -9,7 +9,9 @@
                     <span>Total Price:</span>
                 </div>
                 <div class="resultedPrice">
-                    <span class="discountPrice">{{ getAmountRecipesInCart.toFixed(2) }} $</span>
+                    <span class="discountPrice"
+                        >{{ getAmountRecipesInCart.toFixed(2) }} $</span
+                    >
                 </div>
             </div>
         </div>
@@ -28,76 +30,92 @@
         />
         <div class="cartFooter">
             <div class="orderWrapper">
-                <span  class="errorQuantityRecipes me-3">
+                <span class="errorQuantityRecipes me-3">
                     Quantity recipes: {{ getQuantityRecipesInCart }}
                 </span>
                 <div>
-                    <div v-if=" isAddMoreShowed" class="addRecipyWrapper">
-                        <a href="/catalog" class="addRecipy"><span>Add More</span></a>
+                    <div v-if="isAddMoreShowed" class="addRecipyWrapper">
+                        <a href="/catalog" class="addRecipy"
+                            ><span>Add More</span></a
+                        >
                     </div>
                     <div v-else-if="isOrderingActive" class="addRecipyWrapper">
-                        <a :href="getPathOrder(cart.cart_id)" class="addRecipy">Place Order</a>
-                    </div> 
+                        <a :href="getPathOrder(cart.cart_id)" class="addRecipy"
+                            >Place Order</a
+                        >
+                    </div>
                     <div v-else class="addRecipyWrapper">
                         <a href="/plans" class="addRecipy">Change Plan</a>
-                    </div>    
+                    </div>
                 </div>
             </div>
-        </div> 
-    </div>       
+        </div>
+    </div>
 </template>
 
 <script>
-import {deleteResource, createResource} from "../api/api";
-import {RECIPES_REMOVE, RECIPES_ADD} from "../api/endpoints";
+import { deleteResource, createResource } from "../api/api";
+import { RECIPES_REMOVE, RECIPES_ADD } from "../api/endpoints";
 export default {
-    props: [ 'cart', 'maxquantityrecipes'],
-    emits: ['removecardfromarray', 'changecardinarray'],
+    props: ["cart", "maxquantityrecipes"],
+    emits: ["removecardfromarray", "changecardinarray"],
     computed: {
         getAmountRecipesInCart() {
             return this.cart.recipes?.reduce((prev, current) => {
-                return prev + current.quantity*this.cart.week_attributes.price_recipe
-            }, 0)
+                return (
+                    prev +
+                    current.quantity * this.cart.week_attributes.price_recipe
+                );
+            }, 0);
         },
         getQuantityRecipesInCart() {
             return this.cart.recipes?.reduce((prev, current) => {
-                return prev + current.quantity
-            }, 0)
+                return prev + current.quantity;
+            }, 0);
         },
-        isAddMoreShowed(){
-            if (this.getQuantityRecipesInCart < this.maxquantityrecipes){
-                return true
+        isAddMoreShowed() {
+            if (this.getQuantityRecipesInCart < this.maxquantityrecipes) {
+                return true;
             } else {
-                return false
+                return false;
             }
         },
-        isOrderingActive(){
-            if (this.getQuantityRecipesInCart === +this.maxquantityrecipes){
-                return true
+        isOrderingActive() {
+            if (this.getQuantityRecipesInCart === +this.maxquantityrecipes) {
+                return true;
             } else {
-                return false
+                return false;
             }
-        }
+        },
     },
     methods: {
         async removeCardFromCart(item) {
             const data = await createResource({
                 endpoint: RECIPES_ADD,
-                resource: {id: item.id, week_id: item.week_id, quantity: item.quantity}
-            }).then(() => { 
-                this.$emit('removecardfromarray', {'week_id':item.week_id , 'id': item.id, 'quantity': 0});
-            }).catch(
-                ()=> { console.log("Bad") }
-            );
-         
+                resource: {
+                    id: item.id,
+                    week_id: item.week_id,
+                    quantity: item.quantity,
+                },
+            })
+                .then(() => {
+                    this.$emit("removecardfromarray", {
+                        week_id: item.week_id,
+                        id: item.id,
+                        quantity: 0,
+                    });
+                })
+                .catch(() => {
+                    console.log("Bad");
+                });
         },
         getPathOrder(cartId) {
-            return `/order/${cartId}`
+            return `/order/${cartId}`;
         },
-        changeQuantityInCart(item){
-            this.$emit('changecardinarray', item);
-        }
-    }
+        changeQuantityInCart(item) {
+            this.$emit("changecardinarray", item);
+        },
+    },
 };
 </script>
 
@@ -167,7 +185,8 @@ export default {
     height: 15px;
     left: 50%;
     top: 0px;
-    border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(255, 255, 255) rgb(255, 255, 255);
+    border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(255, 255, 255)
+        rgb(255, 255, 255);
     border-width: 1px;
     border-style: solid;
     border-top-right-radius: 4px;
@@ -232,9 +251,8 @@ export default {
 
 .addRecipyWrapper {
     display: flex;
-    padding-top: 24px;
     justify-content: center;
-    margin: 14px 14px;
+    margin: 0px;
 }
 
 .addRecipy,
@@ -250,8 +268,7 @@ export default {
     transition-delay: 0s;
     font-weight: 500;
     font-family: sofia-pro, "Helvetica Neue", Arial, sans-serif;
-    font-size: 18px;
-    width: 100%;
+    width: 100px;
     text-decoration: none;
     text-transform: none;
     position: relative;
@@ -262,8 +279,7 @@ export default {
     border-color: rgb(66, 105, 61);
     box-shadow: none;
     border-radius: 4px;
-    padding-left: 24px;
-    padding-right: 24px;
+    font-size: 14px;
     transition-property: color, background, border, box-shadow, opacity !important;
 }
 
@@ -295,8 +311,6 @@ export default {
     justify-content: space-between;
     -webkit-box-align: center;
     align-items: center;
-    /*padding-top: 24px;
-    padding-bottom: 24px;*/
     height: 100%;
 }
 
@@ -339,23 +353,23 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin: 14px 14px;
+    margin: 0;
 }
 
-.fullPriceBlock{
+.fullPriceBlock {
     display: flex;
     justify-content: flex-end;
 }
 
-.weekLabel{
+.weekLabel {
     background-color: #339900;
     border-radius: 5px;
     color: white;
     padding: 2px 10px;
 }
-.cartFooter{
+.cartFooter {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 @media only screen and (min-width: 0px) {
@@ -375,16 +389,19 @@ export default {
 
     .addRecipyWrapper {
         justify-content: flex-end;
-        margin-right: 24px;
+        margin: 14px 14px;
     }
 
     .addRecipy,
     .order {
         width: 160px;
+        padding-left: 24px;
+        padding-right: 24px;
+        font-size: 18px;
     }
 
     .orderWrapper {
-        margin: 0;
+        margin: 14px 14px;
     }
 
     .totalPrice {
@@ -392,9 +409,10 @@ export default {
         justify-content: space-between;
         -webkit-box-align: center;
         align-items: center;
-        /*padding-top: 24px;
-        padding-bottom: 50px;*/
         height: 100%;
+    }
+    .cartFooter {
+        justify-content: flex-end;
     }
 }
 
