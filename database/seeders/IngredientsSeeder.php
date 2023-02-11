@@ -20,7 +20,7 @@ class IngredientsSeeder extends Seeder
 
     private function getData()
     {
-        $data = [];
+        $data = [ ];
         $count = 20;
         $count_unit = 5;
 
