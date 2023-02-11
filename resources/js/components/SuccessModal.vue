@@ -1,7 +1,7 @@
 <template>
-    <div class="sideBar" v-if="this.visiblilityModalSuccess">
-        <section class="sideBarSection">
-            <div class="sideBarHeader">
+    <div class="successBar" v-if="this.visiblilityModalSuccess">
+        <section class="successBarSection">
+            <div class="successBarHeader">
                 <a class="headerCrossBtn" @click="showModalSuccess">
                     <svg
                         class="headerCross"
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style>
-.sideBar {
+.successBar {
     position: fixed;
     inset: -10px 0px 0px;
     z-index: 109;
@@ -53,7 +53,7 @@ export default {
     transition: visibility 0ms ease 0ms, opacity 300ms ease 0ms;
 }
 
-.sideBarSection {
+.successBarSection {
     overflow: hidden;
     position: absolute;
     top: 10%;
@@ -68,7 +68,7 @@ export default {
     border-radius: 15px;
 }
 
-.sideBarHeader {
+.successBarHeader {
     display: flex;
     flex-direction: column;
     -webkit-box-align: center;
@@ -110,7 +110,7 @@ export default {
 }
 
 @media only screen and (min-width: 0px) {
-    .sideBar {
+    .successBar {
         position: fixed;
         inset: 0px;
         z-index: 109;
@@ -122,7 +122,7 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-    .sideBar {
+    .successBar {
         position: fixed;
         inset: -10px 0px 0px;
         z-index: 109;
@@ -132,7 +132,7 @@ export default {
         transition: visibility 0ms ease 0ms, opacity 300ms ease 0ms;
     }
 
-    .sideBarSection {
+    .successBarSection {
         padding: 1px 24px 24px;
     }
 
@@ -146,10 +146,7 @@ export default {
 }
 
 @media only screen and (min-width: 1200px) {
-    /* .sideBar {
-        display: none;
-    } */
-    .sideBarSection {
+    .successBarSection {
         padding-bottom: 32px;
         padding-top: 16px;
     }

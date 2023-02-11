@@ -1,14 +1,14 @@
 <template>
     <div class="cardCart" v-if="isCardShowed">
         <div class="cardBorder">
-            <img :src="photo" alt="" class="cardImage"/>
+            <img :src="photo" alt="" class="cardImage" />
             <div class="recipyInfo">
-                <div class="recipyTitle">
+                <div class="recipyTitle" :title="name">
                     <h4 class="recipyTitleText">
                         {{ name }}
                     </h4>
                 </div>
-                <div class="recipyDescription">
+                <div class="recipyDescription" :title="description">
                     <span class="recipyDescriptionText">
                         {{ description }}
                     </span>
@@ -17,9 +17,14 @@
             </div>
             <div class="priceQuantity">
                 <div class="pricePerOne">{{ price }} &#36;</div>
-                <cart-card-btns   :inputquantity="inputquantity" :id="id" :week="week" @changecardinarray="changeQuantityInArr" />
+                <cart-card-btns
+                    :inputquantity="inputquantity"
+                    :id="id"
+                    :week="week"
+                    @changecardinarray="changeQuantityInArr"
+                />
                 <div class="separatorCard" data-v-478eddff=""></div>
-                <div class="totalPriceCard">{{ totalPrice }}$</div>
+                <div class="totalPriceCard">{{ totalPrice }} &#36;</div>
             </div>
             <div class="cross" @click="submitRemove">
                 <svg viewBox="0 0 48 48" height="24" width="24">
@@ -33,38 +38,42 @@
 </template>
 
 <script>
-import { createResource} from "../api/api";
+import { createResource } from "../api/api";
 import { RECIPES_ADD } from "../api/endpoints";
 
 export default {
     name: "CartCardComponent",
-    props: [ 'price', 'name', 'photo', 'description', 'week', 'quantity', 'id'],
-    emits: ['removecard', 'changequantity'],
+    props: ["price", "name", "photo", "description", "week", "quantity", "id"],
+    emits: ["removecard", "changequantity"],
     data() {
         return {
             countRecipy: this.quantity,
             isCardShowed: true,
             isBtnsActive: true,
-            inputquantity: 0
+            inputquantity: 0,
         };
     },
     computed: {
         totalPrice() {
             return (this.price * this.countRecipy).toFixed(2);
-        }
+        },
     },
     methods: {
         submitRemove() {
-            this.$emit('removecard', {'week_id':this.week , 'id': this.id, 'quantity': 0});
+            this.$emit("removecard", {
+                week_id: this.week,
+                id: this.id,
+                quantity: 0,
+            });
         },
-        changeQuantityInArr(item){
-            this.$emit('changequantity', item);
+        changeQuantityInArr(item) {
+            this.$emit("changequantity", item);
             this.countRecipy = item.quantity;
-        }
+        },
     },
     created() {
         this.inputquantity = this.quantity;
-    }
+    },
 };
 </script>
 
@@ -89,10 +98,6 @@ export default {
     max-width: 700px;
 }
 
-.cardImage {
-    /* display: none; */
-}
-
 .recipyInfo {
     display: flex;
     flex-direction: column;
@@ -103,8 +108,8 @@ export default {
 
 .recipyTitle {
     display: flex;
-    margin-left: 16px;
-    text-align: left;
+    margin-left: 0px;
+    text-align: center;
     width: 170px;
 }
 
@@ -141,7 +146,6 @@ export default {
 
 .priceQuantity {
     display: flex;
-    justify-content: space-between;
     min-width: 200px;
     max-width: 200px;
     margin-top: 8px;
@@ -153,7 +157,6 @@ export default {
 
 .separatorCard {
     height: 28px;
-    /* border-top: 1px solid rgb(204, 204, 204); */
     border-left: 1px solid rgb(204, 204, 204);
 }
 
@@ -168,6 +171,9 @@ export default {
 }
 
 @media only screen and (min-width: 0px) {
+    .priceQuantity {
+        justify-content: space-evenly;
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -194,7 +200,9 @@ export default {
     }
 
     .recipyTitle {
-        width: 325px;
+        width: 100%;
+        text-align: left;
+        margin-left: 16px;
     }
 
     .recipyDescription {
@@ -202,8 +210,11 @@ export default {
     }
 
     .priceQuantity {
-        min-width: 150px;
-        max-width: 150px;
+        min-width: 165px;
+        max-width: 165px;
+        justify-content: space-between;
+        margin-right: 5px;
+        margin-left: 5px;
     }
 }
 

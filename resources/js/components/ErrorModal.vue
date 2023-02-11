@@ -1,7 +1,7 @@
 <template>
-    <div class="sideBar" v-if="this.visiblilityModalError">
-        <section class="sideBarSection">
-            <div class="sideBarHeader">
+    <div class="errorBar" v-if="this.visiblilityModalError">
+        <section class="errorBarSection">
+            <div class="errorBarHeader">
                 <a class="headerCrossBtn" @click="showModalError">
                     <svg
                         class="headerCross"
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style>
-.sideBar {
+.errorBar {
     position: fixed;
     inset: -10px 0px 0px;
     z-index: 109;
@@ -53,7 +53,7 @@ export default {
     transition: visibility 0ms ease 0ms, opacity 300ms ease 0ms;
 }
 
-.sideBarSection {
+.errorBarSection {
     overflow: hidden;
     position: absolute;
     top: 10%;
@@ -68,7 +68,7 @@ export default {
     border-radius: 15px;
 }
 
-.sideBarHeader {
+.errorBarHeader {
     display: flex;
     flex-direction: column;
     -webkit-box-align: center;
@@ -110,7 +110,7 @@ export default {
 }
 
 @media only screen and (min-width: 0px) {
-    .sideBar {
+    .errorBar {
         position: fixed;
         inset: 0px;
         z-index: 109;
@@ -122,7 +122,7 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-    .sideBar {
+    .errorBar {
         position: fixed;
         inset: -10px 0px 0px;
         z-index: 109;
@@ -132,7 +132,7 @@ export default {
         transition: visibility 0ms ease 0ms, opacity 300ms ease 0ms;
     }
 
-    .sideBarSection {
+    .errorBarSection {
         padding: 1px 24px 24px;
     }
 
@@ -146,10 +146,7 @@ export default {
 }
 
 @media only screen and (min-width: 1200px) {
-    /* .sideBar {
-        display: none;
-    } */
-    .sideBarSection {
+    .errorBarSection {
         padding-bottom: 32px;
         padding-top: 16px;
     }
