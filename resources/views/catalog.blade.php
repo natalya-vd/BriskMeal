@@ -17,6 +17,7 @@
             @foreach ($recipes['items'] as $recipe)
                 <div class="bm-catalog_meal_card_place">
                     <meal-card id="{{ $recipe['id'] }}"
+                               text="{{ $recipe['text'] }}"
                                time="{{ $recipe['cook_time'] }}"
                                title="{{ $recipe['name'] }}"
                                ingredients="{{$recipe['ingredients']}}"

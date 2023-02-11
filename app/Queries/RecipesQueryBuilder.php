@@ -28,7 +28,7 @@ final class RecipesQueryBuilder
             ->with('preferences')
             ->with('ingredients')
             ->with('photo')
-            ->get(['id', 'name', 'cook_time']);
+            ->get(['id', 'name', 'cook_time', 'recipe_text']);
 
         $dataResponse = [];
         foreach ($data as $value) {
@@ -48,6 +48,7 @@ final class RecipesQueryBuilder
             $dataResponse[] = [
                 'id' => $value->id,
                 'name' => $value->name,
+                'text' => $value->recipe_text,
                 'cook_time' => $value->cook_time,
                 'photo' => json_encode($photo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
                 'preferences' => json_encode($preferences, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),

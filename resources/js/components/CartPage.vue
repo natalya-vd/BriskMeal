@@ -58,6 +58,7 @@ export default {
     },
     created() {
         this.carts = this.getData.carts;
+        console.log(this.carts);
         this.plans = this.getData.plan_user;
         this.checkCartsForEmpty();
     },

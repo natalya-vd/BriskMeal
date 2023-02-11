@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="mealCArdInfoItem mealCArdInfoItemIngridients">
-                    {{ getIngredients }}
+                    {{ text }}
                 </div>
 
                 <div class="mealCArdInfoItem mealCArdInfoItemTimePlace">
@@ -57,6 +57,7 @@ export default {
         "week",
         "guest",
         "quantity",
+        "text"
     ],
     setup() {
         return { isGuest };
