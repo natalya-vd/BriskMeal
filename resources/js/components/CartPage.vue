@@ -34,9 +34,9 @@
                         </div>
                     </div>
                 </div>
-                <cart-component  
-                    v-for="cart in carts" 
-                    :cart="cart" 
+                <cart-component
+                    v-for="cart in carts"
+                    :cart="cart"
                     :key="cart.cart_id"
                     :maxquantityrecipes ="plans.max_quantity_recipes"
                     @removecardfromarray="removecardfromarray"
@@ -58,7 +58,6 @@ export default {
     },
     created() {
         this.carts = this.getData.carts;
-        console.log(this.carts);
         this.plans = this.getData.plan_user;
         this.checkCartsForEmpty();
     },
@@ -102,7 +101,7 @@ export default {
                     this.checkIsCartEmpty(i);
                 }
             };
-           
+
         },
         changecardinarray(item){
            for (let i=0; i<this.carts.length; i++){

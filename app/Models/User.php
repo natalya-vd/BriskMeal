@@ -62,6 +62,6 @@ class User extends Authenticatable
 
     public function getNotOrderedCarts()
     {
-        return Auth::user()->carts->where('is_ordered', false);
+        return Auth::user()->carts()->where('is_ordered', false)->get();
     }
 }
