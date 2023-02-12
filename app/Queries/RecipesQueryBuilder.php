@@ -87,6 +87,7 @@ final class RecipesQueryBuilder
 
         $dataResponse = [
             'id' => $recipe->id,
+            'text'=> $recipe->recipe_text,
             'name' => $recipe->name,
             'cook_time' => $recipe->cook_time,
             'description' => $recipe->description,

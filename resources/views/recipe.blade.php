@@ -9,6 +9,7 @@
         <div class="mealsDesk bm-recipe__wrapper">
             <recipy-title
                 title="{{$recipe['name']}}"
+                text="{{ $recipe['text'] }}"
                 ingredients="{{$recipe['ingredients']}}"
                 recipe-pdf="{{ $recipe['path_pdf'] }}">
             </recipy-title>
