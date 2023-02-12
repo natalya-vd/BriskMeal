@@ -127,7 +127,9 @@ export default {
     mounted() {
         this.getClosestDay();
         this.getFirstDate();
+        this.dayPicked = this.deliveryDays[0];
         this.getSecondDate();
+        this.setDeliveryDay();
     },
     methods: {
         onPickedWeekly(item) {
@@ -135,17 +137,18 @@ export default {
             this.getClosestDay();
             this.getFirstDate();
             this.getSecondDate();
+            this.setDeliveryDay();
         },
         onPickedDay(item) {
             this.dayPicked = item;
             this.getClosestDay();
             this.getFirstDate();
             this.getSecondDate();
+            this.setDeliveryDay();
         },
         getFirstDate() {
             let day = this.closestDay.getDate();
             let month = this.closestDay.getMonth() + 1;
-            let year = this.closestDay.getFullYear();
             const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
             const weeklyDay = days[this.closestDay.getDay()];
             const lastDayOfMonth = new Date(
@@ -161,17 +164,15 @@ export default {
             if (month < 10) {
                 result = `${weeklyDay} 0${month}/${day}`;
                 this.deliveryDays[0].date = result;
-                this.formValidation.delivery_day = `${year}-0${month}-${day}`;
             } else {
                 result = `${weeklyDay} ${month}/${day}`;
                 this.deliveryDays[0].date = result;
-                this.formValidation.delivery_day = `${year}-${month}-${day}`;
             }
             if (day > lastDayOfMonth) {
                 month = month + 1;
                 day = `0${day - lastDayOfMonth}`;
                 result = `${weeklyDay} 0${month}/${day}`;
-                this.formValidation.delivery_day = `${year}-0${month}-${day}`;
+
                 this.deliveryDays[0].date = result;
             }
             return this.deliveryDays;
@@ -179,7 +180,6 @@ export default {
         getSecondDate() {
             let day = this.closestDay.getDate() + 7;
             let month = this.closestDay.getMonth() + 1;
-            let year = this.closestDay.getFullYear();
             const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
             const weeklyDay = days[this.closestDay.getDay()];
             const lastDayOfMonth = new Date(
@@ -195,18 +195,15 @@ export default {
             if (month < 10) {
                 result = `${weeklyDay} 0${month}/${day}`;
                 this.deliveryDays[1].date = result;
-                this.formValidation.delivery_day = `${year}-0${month}-${day}`;
             } else {
                 result = `${weeklyDay} ${month}/${day}`;
                 this.deliveryDays[1].date = result;
-                this.formValidation.delivery_day = `${year}-${month}-${day}`;
             }
             if (day > lastDayOfMonth) {
                 month = month + 1;
                 day = `0${day - lastDayOfMonth}`;
                 result = `${weeklyDay} 0${month}/${day}`;
                 this.deliveryDays[1].date = result;
-                this.formValidation.delivery_day = `${year}-0${month}-${day}`;
             }
             return this.deliveryDays;
         },
@@ -218,33 +215,18 @@ export default {
             let choosenDay = new Date(
                 startDay.setDate(startDay.getDate() + this.weeklyPicked.id)
             );
-
-            // console.log(
-            //     new Date(
-            //         Date.parse(this.formValidation.active_weeks[0].last_week_day)
-            //     ).getDay()
-            // );
-            // console.log(currentDayIndex);
-
-            // let pickedDayIndex = this.weeklyPicked.id;
-            // let result = 0;
-            // let resultDate = new Date();
-            // // if (currentDayIndex < pickedDayIndex) {
-            // //     result = pickedDayIndex - currentDayIndex;
-            // // } else if (currentDayIndex > pickedDayIndex) {
-            // //     result = 7 + pickedDayIndex - currentDayIndex;
-            // // }
-            // resultDate.setDate(resultDate.getDate() + result);
             this.closestDay = choosenDay;
         },
-    },
-    // created() {
-    // },
-    updated() {},
 
-    // computed() {
-    //     console.log(this.delivery_instruction);
-    // },
+        setDeliveryDay() {
+            let day = +this.dayPicked.date.split(" ")[1].split("/")[1];
+            let month = +this.dayPicked.date.split(" ")[1].split("/")[0];
+            let year = this.closestDay.getFullYear();
+            day < 10 ? (day = `0${day}`) : day;
+            month < 10 ? (month = `0${month}`) : month;
+            this.formValidation.delivery_day = `${year}-${month}-${day}`;
+        },
+    },
 };
 </script>
 
