@@ -100,31 +100,6 @@
                 </div>
             </div>
         </form>
-
-        <form class="row" @submit.prevent="formSubmit">
-            <div class="col-md-12 grid-margin stretch-card mb-3">
-                <div class="card border-0">
-                    <div class="card-body">
-                        <h2 class="mb-3">Add a new working year</h2>
-                        <div class="row">
-                            <bm-input
-                                v-model="formDataYear.year"
-                                label="Enter year"
-                                input-id="year"
-                                required
-                                placeholder="count"
-                                class="form-group col-md-4"
-                            />
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="button btn btn-primary">
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
     </div>
 </main>
 </template>

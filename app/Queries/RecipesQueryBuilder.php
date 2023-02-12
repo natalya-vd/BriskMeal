@@ -21,8 +21,9 @@ final class RecipesQueryBuilder
         $this->model = Recipe::query();
     }
 
-    public function getRecipesById($recipes_id)
+    public function getRecipesById($recipes_id, $week_id)
     {
+        //dd($week_id);
         $data = $this->model
             ->whereIn('id', $recipes_id)
             ->with('preferences')
@@ -39,7 +40,11 @@ final class RecipesQueryBuilder
             $quantity = 0;
 
             if ($currentUser) {
-                $cart = $value->carts()->where('user_id', $currentUser->id)->get();
+                $cart = $value->carts()
+                    ->where('week_id', $week_id)
+                    ->where('user_id', $currentUser->id)
+                    ->get();
+                //$cart = $value->carts()->where('user_id', $currentUser->id)->get();
                 if ($cart->isNotEmpty()) {
                     $quantity = $cart[0]->pivot['quantity'];
                 }
