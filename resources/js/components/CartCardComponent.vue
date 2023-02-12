@@ -1,7 +1,9 @@
 <template>
     <div class="cardCart" v-if="isCardShowed">
         <div class="cardBorder">
-            <img :src="photo" alt="" class="cardImage" />
+            <a class="cardImage" :href="`/recipe/${+id}/week/${+week}`" :style="'background-image:url(' + photo + ');'">
+              
+            </a>
             <div class="recipyInfo">
                 <div class="recipyTitle" :title="name">
                     <h4 class="recipyTitleText">
@@ -78,6 +80,11 @@ export default {
 </script>
 
 <style scoped>
+ .cardImage {
+    background-size: auto 100%;
+    background-position-x: center;
+    }
+
 .cardCart {
     display: flex;
     width: 100%;

@@ -5,7 +5,7 @@
                 <h1 class="headTitle">{{ title }}</h1>
                 <div class="secondTitle">
                     <h3>
-                        {{ getIngredients }}
+                        {{ text }}
                         <div class="blockCopyPrint">
                             <button
                                 class="copyTitle"
@@ -75,7 +75,7 @@
 
 <script>
 export default {
-    props: ["title", "ingredients", "recipePdf"],
+    props: ["title", "ingredients", "recipePdf",  'text'],
 
     computed: {
         getIngredients() {
