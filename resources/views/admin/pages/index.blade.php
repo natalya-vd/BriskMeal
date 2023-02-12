@@ -16,7 +16,7 @@
 <main>
     <div class="card w-50 mx-auto my-5">
         <p class="card-body">
-            Тут будет дашборд
+            Welcome Admin!
         </p>
     </div>
 </main>

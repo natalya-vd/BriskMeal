@@ -35,7 +35,7 @@ class WeeksSeeder extends Seeder
                 "week_name" => $year . '-W' . "$i",
                 "first_week_day" => $date->startOfWeek()->format('Y-m-d'),
                 "last_week_day" => $date->endOfWeek()->format('Y-m-d'),
-                "active_week" => !!($i === 3 || $i === 4 || $i === 5),
+                "active_week" => !!($i === 7 || $i === 8 || $i === 9),
                 "price_recipe" => $price_recipe,
             ];
         }
