@@ -159,9 +159,7 @@ export default {
             planPrice: 0,
         };
     },
-    mounted() {
-        console.log(this.week);
-    },
+    mounted() {},
     methods: {
         async submitForm() {
             try {
@@ -202,7 +200,7 @@ export default {
         },
 
         getTotalPrice() {
-            return this.shippingPrice + this.getPlanPrice();
+            return (this.shippingPrice + this.getPlanPrice()).toFixed(2);
         },
     },
 };
