@@ -17,19 +17,21 @@
                             </div>
                         </div>
                     </dt>
-                    <dd><span class="planPrice">$103.92</span></dd>
+                    <dd>
+                        <span class="planPrice">${{ getPlanPrice() }}</span>
+                    </dd>
                 </dl>
                 <dl class="shippingBlock">
                     <dt class="shippingName">Standard Shipping</dt>
                     <dd>
-                        <span class="shippingPrice">$9.99</span>
+                        <span class="shippingPrice">${{ shippingPrice }}</span>
                     </dd>
                 </dl>
                 <dl class="priceBlock">
                     <dt>Total</dt>
                     <dd>
                         <span data-total-price="true" class="totalPrice"
-                            >$51.92</span
+                            >${{ getTotalPrice }}</span
                         >
                     </dd>
                 </dl>
@@ -147,15 +149,18 @@ export default {
         visiblilityModalError: Boolean,
         plan: Object,
         cartId: Number,
+        week: Object,
     },
     data() {
         return {
             // checkForm: null,
             disabledBtn: true,
+            shippingPrice: 9.99,
+            planPrice: 0,
         };
     },
     mounted() {
-        console.log("Delivery Component mounted.");
+        console.log(this.week);
     },
     methods: {
         async submitForm() {
@@ -182,6 +187,9 @@ export default {
                 console.log(e);
             }
         },
+        getPlanPrice() {
+            return this.plan.max_quantity_recipes * this.week.price_recipe;
+        },
     },
     computed: {
         isDisabled() {
@@ -191,6 +199,10 @@ export default {
         },
         getPreferences() {
             return this.plan.preferences.map((item) => item.name).join(", ");
+        },
+
+        getTotalPrice() {
+            return this.shippingPrice + this.getPlanPrice();
         },
     },
 };

@@ -26,6 +26,7 @@
                                 :visiblilityModalError="visiblilityModalError"
                                 :plan="getPlan"
                                 :cartId="getCartId"
+                                :week="getWeek"
                             ></order-page-aside>
                         </div>
                     </div>
@@ -147,6 +148,7 @@ export default {
             return JSON.parse(this.dataResponse).cart_id;
         },
         getWeek() {
+            console.log(JSON.parse(this.dataResponse).week);
             return JSON.parse(this.dataResponse).week;
         },
     },
