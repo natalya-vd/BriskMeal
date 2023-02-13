@@ -14,13 +14,13 @@
             class="caruselleDesk"
         >
             <swiper-slide
-                v-for="item in this.caruseldata"
+                v-for="item in caruseldata"
                 class="caruselleCard"
                 :key="item.photo.id"
                 :data-key="item.photo.id"
                 :style="'background-image:url(' + item.photo.full_path + ');'"
                 ><a
-                    :href="`/recipe/${item.photo.id}`"
+                    :href="`/recipe/${item.photo.id}/week/${+week}`"
                     class="caruselleCardLink"
                 >
                     <div class="caruselleCardTitle">{{ item.photo.name }}</div>
@@ -43,6 +43,7 @@ import "../../css/app.css";
 // import required modules
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 export default {
+    props: ["caruseldata", "week"],
     components: {
         Swiper,
         SwiperSlide,
@@ -53,7 +54,9 @@ export default {
         };
     },
 
-    props: ["caruseldata"],
+    mounted() {
+        console.log(this.week);
+    },
 };
 </script>
 

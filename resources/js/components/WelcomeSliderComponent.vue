@@ -6,7 +6,10 @@
             every week
         </h3>
         <template v-if="isSliderShowed">
-            <welcome-caruselle :caruseldata="getSecondJSON"></welcome-caruselle>
+            <welcome-caruselle
+                :caruseldata="getSecondJSON"
+                :week="week"
+            ></welcome-caruselle>
         </template>
         <template v-else>
             <welcome-tiles :caruseldata="getSecondJSON"></welcome-tiles>
@@ -20,7 +23,7 @@
 
 <script>
 export default {
-    props: ["recepies"],
+    props: ["recepies", "week"],
     data: () => ({
         myWidth: 1,
     }),
