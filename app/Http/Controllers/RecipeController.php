@@ -57,8 +57,7 @@ class RecipeController extends Controller
 
             return view('recipe')
                 ->with('week_id', $week_id)
-                ->with('recipe', $recipesBuilder->getOneRecipe($id));
-
+                ->with('recipe', $recipesBuilder->getOneRecipe($id, $week_id));
         } catch (ModelNotFoundException $e) {
             return back()->withError('error', $e->getMessage());
         }
