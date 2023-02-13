@@ -8,7 +8,7 @@
 <div class=" bm-catalog">
     <welcome-top></welcome-top>
     <just-3-steps></just-3-steps>
-    <welcome-slider recepies="{{ json_encode($recipes) }}"></welcome-slider>
+    <welcome-slider recepies="{{ json_encode($recipes) }}" week="{{$week}}"></welcome-slider>
     <welcome-feelgreat></welcome-feelgreat>
 </div>
 @endsection
