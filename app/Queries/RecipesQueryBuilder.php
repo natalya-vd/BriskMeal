@@ -43,6 +43,7 @@ final class RecipesQueryBuilder
                 $cart = $value->carts()
                     ->where('week_id', $week_id)
                     ->where('user_id', $currentUser->id)
+                    ->where('is_ordered', false)
                     ->get();
                 //$cart = $value->carts()->where('user_id', $currentUser->id)->get();
                 if ($cart->isNotEmpty()) {
@@ -65,7 +66,7 @@ final class RecipesQueryBuilder
         return $dataResponse;
     }
 
-    public function getOneRecipe($id)
+    public function getOneRecipe($id, $week_id)
     {
         $recipe = $this->model->find($id);
         $ingredients = $recipe->ingredientsForRecipe($id)->get();
@@ -77,7 +78,12 @@ final class RecipesQueryBuilder
         $quantity = 0;
 
         if ($currentUser) {
-            $cart = $recipe->carts()->where('user_id', $currentUser->id)->get();
+            $cart = $recipe->carts()
+                ->where('week_id', $week_id)
+                ->where('user_id', $currentUser->id)
+                ->where('is_ordered', false)
+                ->get();
+            // $cart = $recipe->carts()->where('user_id', $currentUser->id)->get();
             if ($cart->isNotEmpty()) {
                 $quantity = $cart[0]->pivot['quantity'];
             }
@@ -92,7 +98,7 @@ final class RecipesQueryBuilder
 
         $dataResponse = [
             'id' => $recipe->id,
-            'text'=> $recipe->recipe_text,
+            'text' => $recipe->recipe_text,
             'name' => $recipe->name,
             'cook_time' => $recipe->cook_time,
             'description' => $recipe->description,
