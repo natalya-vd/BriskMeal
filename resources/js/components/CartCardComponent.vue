@@ -1,9 +1,7 @@
 <template>
     <div class="cardCart" v-if="isCardShowed">
         <div class="cardBorder">
-            <a class="cardImage" :href="`/recipe/${+id}/week/${+week}`" :style="'background-image:url(' + photo + ');'">
-              
-            </a>
+            <img :src="photo" alt="" class="cardImage" />
             <div class="recipyInfo">
                 <div class="recipyTitle" :title="name">
                     <h4 class="recipyTitleText">
@@ -75,16 +73,12 @@ export default {
     },
     created() {
         this.inputquantity = this.quantity;
+        console.log(this.price);
     },
 };
 </script>
 
 <style scoped>
- .cardImage {
-    background-size: auto 100%;
-    background-position-x: center;
-    }
-
 .cardCart {
     display: flex;
     width: 100%;
@@ -207,7 +201,7 @@ export default {
     }
 
     .recipyTitle {
-        width: 100%;
+        width: 300px;
         text-align: left;
         margin-left: 16px;
     }
