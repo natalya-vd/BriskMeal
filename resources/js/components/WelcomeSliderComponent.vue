@@ -35,6 +35,7 @@ export default {
             const caruseldata = [];
             this.getFirstJSON.forEach(function (myEl) {
                 let newEl = {
+                    id: myEl.id,
                     name: myEl.name,
                     photo: JSON.parse(myEl.photo)[0],
                 };
@@ -58,6 +59,7 @@ export default {
     mounted() {
         this.updateWidth();
         window.addEventListener("resize", this.updateWidth);
+  
     },
 };
 </script>

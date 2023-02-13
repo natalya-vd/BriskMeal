@@ -55,7 +55,7 @@ export default {
     },
 
     mounted() {
-        console.log(this.week);
+       console.log(this.caruseldata);
     },
 };
 </script>

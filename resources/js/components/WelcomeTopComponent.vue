@@ -1,5 +1,5 @@
 <template>
-    <div class="welcomeTop">
+    <div class="welcomeTop" style="background-image: url('images/merged-menu-banner-sm.jpg')">
         <div class="welcomeTopBack container">
             <div class="welcomeTopInfo">
                 <h1>
@@ -43,7 +43,6 @@ export default {
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("images/merged-menu-banner-sm.jpg");
 }
 .welcomeTopBack {
     height: 100%;
