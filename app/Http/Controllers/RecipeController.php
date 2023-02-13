@@ -25,7 +25,7 @@ class RecipeController extends Controller
     {
         try {
             $recipesData = [
-                'items' => $builder_recipes->getRecipesById($this->recipes['recipes_id']),
+                'items' => $builder_recipes->getRecipesById($this->recipes['recipes_id'], $this->recipes['week_id']),
                 'week_id' => $this->recipes['week_id']
             ];
 
@@ -42,7 +42,7 @@ class RecipeController extends Controller
     {
         try {
             return view('welcome')
-                ->with('recipes', $builder_recipes->getRecipesById($this->recipes['recipes_id']))
+                ->with('recipes', $builder_recipes->getRecipesById($this->recipes['recipes_id'], $this->recipes['week_id']))
                 ->with('activeWeeks', $this->active_weeks->toJson())
                 ->with('week', $this->recipes['week_id']);
         } catch (ModelNotFoundException $e) {
