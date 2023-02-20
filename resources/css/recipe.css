@@ -1,0 +1,39 @@
+.bm-recipe {
+    display: flex;
+    flex-direction: column;
+}
+
+.bm-recipe__wrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    min-height: min(88vh, calc(100vh - 140px));
+}
+
+.recipyInfoBlock {
+    flex-direction: column;
+    margin-bottom: 24px;
+    display: flex;
+}
+
+.recipyMainBlock {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+@media only screen and (min-width: 1200px) {
+    /* .bm-recipe {
+        padding: 0;
+    } */
+
+    .recipyInfoBlock {
+        flex-direction: row;
+    }
+
+    .recipyMainBlock {
+        flex-basis: 70%;
+        max-width: 70%;
+        padding-right: 15px;
+    }
+}

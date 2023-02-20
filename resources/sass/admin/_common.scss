@@ -1,0 +1,63 @@
+@font-face {
+    font-family: "sofia-pro";
+    src: local("sofia-pro"), url("../../css/font/SofiaProMedium.woff2") format("woff2");
+    font-style: normal;
+    font-display: "swap";
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Source Sans Pro";
+    src: local("Source Sans Pro"),
+        url("../../css/font/SourceSansPro-Regular.ttf") format("woff2");
+    font-style: normal;
+    font-display: "swap";
+    font-weight: 400;
+}
+
+html,
+body {
+    font-family: $font-family-primary;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    height: 100%;
+}
+
+.admin-container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.page-body-wrapper {
+    min-height: calc(100vh - #{$navbar-height});
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: $navbar-height;
+
+    &.full-page-wrapper {
+        width: 100%;
+        min-height: 100vh;
+        padding-top: 0;
+    }
+}
+
+.main-panel {
+    transition: width $action-transition-duration $action-transition-timing-function, margin $action-transition-duration $action-transition-timing-function;
+    width: calc(100% - #{$sidebar-width-lg});
+    min-height: calc(100vh - #{$navbar-height});
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 991px) {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+.list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}

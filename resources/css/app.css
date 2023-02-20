@@ -1,0 +1,105 @@
+@font-face {
+    font-family: "sofia-pro";
+    src: local("sofia-pro"), url("./font/SofiaProMedium.woff2") format("woff2");
+    font-style: normal;
+    font-display: "swap";
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Source Sans Pro";
+    src: local("Source Sans Pro"),
+        url("./font/SourceSansPro-Regular.ttf") format("woff2");
+    font-style: normal;
+    font-display: "swap";
+    font-weight: 400;
+}
+
+html,
+body {
+    font-family: sofia-pro, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+}
+
+#app {
+    font-family: sofia-pro, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin: 0;
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    flex: 1 0 auto;
+}
+
+.header-substrate {
+    height: 80px;
+}
+
+header {
+    padding: 0 !important;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    background-color: white;
+    box-shadow: 0 1px 0 0 rgb(77 65 51 / 5%);
+    z-index: 105;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100% - 80px - 330px);
+}
+/* main {
+    flex: 1 0 auto;
+} */
+.footerBlock {
+    flex: 0 0 auto;
+}
+
+.swiper-pagination > .swiper-pagination-bullet {
+    background: var(--swiper-pagination-bullet-inactive-color, #fff);
+}
+
+.swiper-pagination > .swiper-pagination-bullet-active {
+    background: rgb(70, 167, 72);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    color: rgb(70, 167, 72) !important;
+    font-size: 20px !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    background: white;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+}

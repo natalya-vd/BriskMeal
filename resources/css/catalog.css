@@ -1,0 +1,34 @@
+.bm-catalog {
+    display: flex;
+    flex-direction: column;
+}
+
+.bm-catalog_filtersBlock {
+    width: 100%;
+}
+
+.bm-catalog__list {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: min(88vh, calc(100vh - 140px));
+}
+
+.bm-catalog_meal_card_place {
+    width: 386px;
+    height: 370px;
+    margin-bottom: 50px;
+    padding: 0 13px;
+}
+
+@media only screen and (max-width: 767px) {
+    .bm-catalog_meal_card_place {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 14px;
+    }
+}
